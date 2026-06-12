@@ -1,6 +1,7 @@
 import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
+export { formatDate } from "./format"
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog")
 const CREATIONS_DIR = path.join(process.cwd(), "content", "creations")
@@ -26,6 +27,9 @@ export type BlogMeta = {
   cover?: string
   author?: string
   rating?: number
+  pages?: number
+  genre?: string
+  readTime?: number
   draft?: boolean
 }
 
@@ -61,12 +65,6 @@ export type GraphData = { nodes: GraphNode[]; edges: GraphEdge[] }
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
-export const formatDate = (date: string): string =>
-  new Date(date).toLocaleDateString("en-US", {
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  })
 
 const normalizeDate = (raw: unknown): string => {
   if (raw instanceof Date) return raw.toISOString()
@@ -90,7 +88,10 @@ const fileToSlug = (f: string) =>
 
 // ── Blog ───────────────────────────────────────────────────────────────────
 
-const toBlogMeta = (slug: string, data: Record<string, unknown>): BlogMeta => ({
+export const estimateReadTime = (content: string): number =>
+  Math.max(1, Math.round(content.trim().split(/\s+/).length / 200))
+
+const toBlogMeta = (slug: string, data: Record<string, unknown>, content = ""): BlogMeta => ({
   slug,
   title: String(data.title ?? ""),
   description: String(data.description ?? "").trim(),
@@ -100,6 +101,9 @@ const toBlogMeta = (slug: string, data: Record<string, unknown>): BlogMeta => ({
   cover: data.cover ? String(data.cover) : undefined,
   author: data.author ? String(data.author) : undefined,
   rating: data.rating != null ? Number(data.rating) : undefined,
+  pages: data.pages ? Number(data.pages) : undefined,
+  genre: data.genre ? String(data.genre) : undefined,
+  readTime: content ? estimateReadTime(content) : undefined,
   draft: Boolean(data.draft),
 })
 
@@ -107,8 +111,8 @@ export const getAllBlogPosts = (): BlogMeta[] =>
   readDir(BLOG_DIR)
     .map((f) => {
       const slug = fileToSlug(f)
-      const { data } = matter(fs.readFileSync(path.join(BLOG_DIR, f), "utf8"))
-      return toBlogMeta(slug, data)
+      const { data, content } = matter(fs.readFileSync(path.join(BLOG_DIR, f), "utf8"))
+      return toBlogMeta(slug, data, content)
     })
     .filter((p) => !p.draft)
     .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt))
@@ -118,13 +122,13 @@ export const getBlogPost = (slug: string): Blog | null => {
     const file = path.join(BLOG_DIR, `${slug}${ext}`)
     if (fs.existsSync(file)) {
       const { data, content } = matter(fs.readFileSync(file, "utf8"))
-      return { ...toBlogMeta(slug, data), content }
+      return { ...toBlogMeta(slug, data, content), content }
     }
   }
   const indexFile = path.join(BLOG_DIR, slug, "index.md")
   if (fs.existsSync(indexFile)) {
     const { data, content } = matter(fs.readFileSync(indexFile, "utf8"))
-    return { ...toBlogMeta(slug, data), content }
+    return { ...toBlogMeta(slug, data, content), content }
   }
   return null
 }

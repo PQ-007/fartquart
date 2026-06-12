@@ -4,6 +4,8 @@ date: 2025-09-13
 label: book-review
 author: 斎藤 康毅
 rating: 5
+genre: Deep Learning
+pages: 318
 tags:
   - BookDeepLearning
   - Python

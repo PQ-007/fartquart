@@ -8,6 +8,7 @@ import { VideoPlayer } from "./VideoPlayer"
 import { useT } from "./LanguageProvider"
 import type { PostMeta } from "@/lib/posts"
 import type { BlogMeta, CreationMeta } from "@/lib/content"
+import { formatDate } from "@/lib/format"
 
 const CDN = "https://d4frua9bq45mo.cloudfront.net"
 const videoUrl = (mainVideo: string) => `${CDN}/${mainVideo}.mp4`
@@ -93,9 +94,12 @@ export const PostPreview = ({ type = "post", post }: PostPreviewProps) => {
             <h1>{blog.title}</h1>
             <p className={styles.description}>{blog.description}</p>
           </div>
-          <Link className={styles.link} href={`/blog/${blog.slug}`}>
-            <SlidingText text={t("ui.readPost")} arrow />
-          </Link>
+          <div className={styles.footer}>
+            <p className={styles.date}>{formatDate(blog.publishedAt)}</p>
+            <Link className={styles.link} href={`/blog/${blog.slug}`}>
+              <SlidingText text={t("ui.readPost")} arrow />
+            </Link>
+          </div>
         </div>
       </div>
     )

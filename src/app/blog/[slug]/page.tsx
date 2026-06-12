@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
@@ -43,6 +44,8 @@ const extractChapters = (content: string): Chapter[] => {
   return chapters
 }
 
+const NOTE_LABELS = ["lesson-note", "note", "book-review"] as const
+
 export default async function BlogPostPage({
   params,
 }: {
@@ -54,16 +57,23 @@ export default async function BlogPostPage({
   if (!post) notFound()
 
   const chapters = extractChapters(post.content)
+  const isNote = (NOTE_LABELS as readonly string[]).includes(post.label)
 
   return (
     <>
       <div className={styles.container}>
         <main className={styles.wrapper}>
           <article className={styles.article}>
+            <Link href={isNote ? "/notes" : "/blog"} className={styles.back}>
+              ← {isNote ? "Notes" : "Blog"}
+            </Link>
             <header className={styles.header}>
               <div className={styles.titleRow}>
                 <h1>{post.title}</h1>
-                <p>{formatDate(post.publishedAt)}</p>
+                <p className={styles.dateMeta}>
+                  {formatDate(post.publishedAt)}
+                  {post.readTime ? ` · ${post.readTime} min` : ""}
+                </p>
               </div>
               <div className={styles.tags}>
                 <Tag name={post.label} />
@@ -85,6 +95,20 @@ export default async function BlogPostPage({
                   />
                 </div>
               </div>
+            )}
+            {chapters.length > 0 && (
+              <details className={styles.mobileToc}>
+                <summary className={styles.mobileTocSummary}>
+                  Contents ({chapters.length})
+                </summary>
+                <ul className={styles.mobileTocList}>
+                  {chapters.map((c) => (
+                    <li key={c.id}>
+                      <a href={`#${c.id}`}>{c.title}</a>
+                    </li>
+                  ))}
+                </ul>
+              </details>
             )}
             <div className="post-content">
               <MDXRemote
