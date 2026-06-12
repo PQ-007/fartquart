@@ -1,0 +1,46 @@
+.outer {
+  position: relative;
+  display: block;
+  width: 100vw;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  background-color: var(--color-background);
+  padding: 120px var(--main-padding-sides) 40px;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--main-max-width);
+  gap: 48px;
+}
+
+.heading {
+  font-size: var(--font-4);
+  font-weight: 600;
+}
+
+.grid {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.empty {
+  color: var(--color-secondary);
+  font-size: var(--font-0);
+  padding: 40px 0;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    padding-top: 100px;
+  }
+}

@@ -26,9 +26,7 @@ export const PageVeil = ({ children }: { children: ReactNode }) => {
           onAnimationEnd={(e) => {
             if (e.target === e.currentTarget) setDone(true)
           }}
-        >
-          <div className={styles.edge} />
-        </div>
+        />
       )}
     </>
   )

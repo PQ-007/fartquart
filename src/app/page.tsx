@@ -3,15 +3,20 @@ import { TopBar } from "@/components/TopBar"
 import { PostPreview } from "@/components/PostPreview"
 import { Footer } from "@/components/Footer"
 import { HomeHero } from "@/components/HomeHero"
-import { getFeaturedContent } from "@/lib/content"
+import { HomeGraph } from "@/components/HomeGraph"
+import { getFeaturedContent, getGraphData } from "@/lib/content"
 
 export default function Home() {
   const { blogs, creations } = getFeaturedContent()
+  const graphData = getGraphData()
 
   return (
     <>
       <div className={styles.pageWrapper}>
         <section className={styles.sectionWrapper}>
+          <div className={styles.graphOverlay}>
+            <HomeGraph data={graphData} />
+          </div>
           <div className={styles.container}>
             <div className={styles.inner}>
               <TopBar />

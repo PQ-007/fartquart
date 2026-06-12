@@ -14,6 +14,7 @@ export type BlogLabel =
   | "contest"
   | "essay"
   | "note"
+  | "lesson-note"
 
 export type BlogMeta = {
   slug: string
@@ -46,7 +47,7 @@ export type TagCount = { tag: string; count: number }
 
 export type GraphNode = {
   id: string
-  type: "tag" | "blog" | "creation"
+  type: "tag" | "blog" | "creation" | "hub"
   label: string
   href: string
 }
@@ -71,8 +72,18 @@ const normalizeDate = (raw: unknown): string => {
 
 const readDir = (dir: string): string[] => {
   if (!fs.existsSync(dir)) return []
-  return fs.readdirSync(dir).filter((f) => f.endsWith(".md") || f.endsWith(".mdx"))
+  const entries = fs.readdirSync(dir, { withFileTypes: true })
+  const flat = entries
+    .filter((e) => e.isFile() && (e.name.endsWith(".md") || e.name.endsWith(".mdx")))
+    .map((e) => e.name)
+  const folderIndexes = entries
+    .filter((e) => e.isDirectory() && fs.existsSync(path.join(dir, e.name, "index.md")))
+    .map((e) => `${e.name}/index.md`)
+  return [...flat, ...folderIndexes]
 }
+
+const fileToSlug = (f: string) =>
+  f.includes("/") ? f.split("/")[0] : f.replace(/\.(md|mdx)$/, "")
 
 // ── Blog ───────────────────────────────────────────────────────────────────
 
@@ -90,7 +101,7 @@ const toBlogMeta = (slug: string, data: Record<string, unknown>): BlogMeta => ({
 export const getAllBlogPosts = (): BlogMeta[] =>
   readDir(BLOG_DIR)
     .map((f) => {
-      const slug = f.replace(/\.(md|mdx)$/, "")
+      const slug = fileToSlug(f)
       const { data } = matter(fs.readFileSync(path.join(BLOG_DIR, f), "utf8"))
       return toBlogMeta(slug, data)
     })
@@ -104,6 +115,11 @@ export const getBlogPost = (slug: string): Blog | null => {
       const { data, content } = matter(fs.readFileSync(file, "utf8"))
       return { ...toBlogMeta(slug, data), content }
     }
+  }
+  const indexFile = path.join(BLOG_DIR, slug, "index.md")
+  if (fs.existsSync(indexFile)) {
+    const { data, content } = matter(fs.readFileSync(indexFile, "utf8"))
+    return { ...toBlogMeta(slug, data), content }
   }
   return null
 }
@@ -128,7 +144,7 @@ const toCreationMeta = (slug: string, data: Record<string, unknown>): CreationMe
 export const getAllCreations = (): CreationMeta[] =>
   readDir(CREATIONS_DIR)
     .map((f) => {
-      const slug = f.replace(/\.(md|mdx)$/, "")
+      const slug = fileToSlug(f)
       const { data } = matter(fs.readFileSync(path.join(CREATIONS_DIR, f), "utf8"))
       return toCreationMeta(slug, data)
     })
@@ -257,5 +273,15 @@ export const getGraphData = (): GraphData => {
     ),
   ]
 
-  return { nodes, edges }
+  const hubNodes: GraphNode[] = [
+    { id: "hub:blog", type: "hub", label: "Blog", href: "/blog" },
+    { id: "hub:creations", type: "hub", label: "Creations", href: "/creations" },
+  ]
+
+  const hubEdges: GraphEdge[] = [
+    ...blogs.map((p) => ({ source: "hub:blog", target: `blog:${p.slug}` })),
+    ...creations.map((c) => ({ source: "hub:creations", target: `creation:${c.slug}` })),
+  ]
+
+  return { nodes: [...hubNodes, ...nodes], edges: [...edges, ...hubEdges] }
 }

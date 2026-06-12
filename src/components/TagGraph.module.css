@@ -35,8 +35,14 @@
   margin-right: 4px;
 }
 
+.dot[data-type="hub"] {
+  background: #3b82f6;
+  width: 10px;
+  height: 10px;
+}
+
 .dot[data-type="tag"] {
-  background: #818cf8;
+  background: #3b82f6;
 }
 
 .dot[data-type="blog"] {
@@ -47,8 +53,12 @@
   background: rgba(255, 255, 255, 0.55);
 }
 
+[data-theme="light"] .dot[data-type="hub"] {
+  background: #1d4ed8;
+}
+
 [data-theme="light"] .dot[data-type="tag"] {
-  background: #6d28d9;
+  background: #1d4ed8;
 }
 
 [data-theme="light"] .dot[data-type="blog"] {

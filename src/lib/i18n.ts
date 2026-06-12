@@ -5,7 +5,7 @@ export const localeLabels: Record<Locale, string> = { en: "EN", mn: "МН", ja: 
 
 const dict = {
   en: {
-    nav: { home: "Home", blog: "Blog", creations: "Creations", about: "About" },
+    nav: { home: "Home", blog: "Blog", notes: "Notes", creations: "Creations", about: "About" },
     ui: {
       allTags: "All Tags",
       readPost: "Read Post",
@@ -29,6 +29,7 @@ const dict = {
       contest: "Contest",
       essay: "Essay",
       note: "Note",
+      "lesson-note": "Lesson Note",
     },
     home: {
       intro:
@@ -39,12 +40,13 @@ const dict = {
       experience: "Experience",
     },
     creations: { heading: "Creations" },
-    graph: { tag: "tag", blog: "blog", creation: "creation" },
+    graph: { hub: "hub", tag: "tag", blog: "blog", creation: "creation" },
     tag: { item: "item", items: "items" },
+    settings: { title: "Settings", theme: "Theme", language: "Language", dark: "Dark", light: "Light" },
     notFound: { message: "This page could not be found.", back: "Back Home" },
   },
   mn: {
-    nav: { home: "Нүүр", blog: "Блог", creations: "Бүтээлүүд", about: "Миний тухай" },
+    nav: { home: "Нүүр", blog: "Блог", notes: "Тэмдэглэл", creations: "Бүтээлүүд", about: "Миний тухай" },
     ui: {
       allTags: "Бүх тэг",
       readPost: "Уншах",
@@ -68,6 +70,7 @@ const dict = {
       contest: "Уралдаан",
       essay: "Эссэ",
       note: "Тэмдэглэл",
+      "lesson-note": "Хичээлийн тэмдэглэл",
     },
     home: {
       intro:
@@ -78,12 +81,13 @@ const dict = {
       experience: "Туршлага",
     },
     creations: { heading: "Бүтээлүүд" },
-    graph: { tag: "тэг", blog: "блог", creation: "бүтээл" },
+    graph: { hub: "гол", tag: "тэг", blog: "блог", creation: "бүтээл" },
     tag: { item: "зүйл", items: "зүйл" },
+    settings: { title: "Тохиргоо", theme: "Гэрэл горим", language: "Хэл", dark: "Харанхуй", light: "Цайвар" },
     notFound: { message: "Хуудас олдсонгүй.", back: "Нүүр хуудас руу" },
   },
   ja: {
-    nav: { home: "ホーム", blog: "ブログ", creations: "制作物", about: "について" },
+    nav: { home: "ホーム", blog: "ブログ", notes: "ノート", creations: "制作物", about: "について" },
     ui: {
       allTags: "全タグ",
       readPost: "読む",
@@ -107,6 +111,7 @@ const dict = {
       contest: "コンテスト",
       essay: "エッセイ",
       note: "メモ",
+      "lesson-note": "授業ノート",
     },
     home: {
       intro:
@@ -117,8 +122,9 @@ const dict = {
       experience: "経歴",
     },
     creations: { heading: "制作物" },
-    graph: { tag: "タグ", blog: "ブログ", creation: "制作" },
+    graph: { hub: "ハブ", tag: "タグ", blog: "ブログ", creation: "制作" },
     tag: { item: "件", items: "件" },
+    settings: { title: "設定", theme: "テーマ", language: "言語", dark: "ダーク", light: "ライト" },
     notFound: { message: "ページが見つかりません。", back: "ホームへ" },
   },
 } as const

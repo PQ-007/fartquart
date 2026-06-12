@@ -2,40 +2,57 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useState } from "react"
+import { useState, useRef, useLayoutEffect } from "react"
 import styles from "./Nav.module.css"
-import { useTheme } from "./ThemeProvider"
-import { useT } from "./LanguageProvider"
+import { useLanguage, useT } from "./LanguageProvider"
 import { LanguageSwitcher } from "./LanguageSwitcher"
+import { SettingsPanel } from "./SettingsPanel"
 import { CloseIcon, GearIcon, MenuIcon } from "./icons"
 
-const HREFS = ["/", "/blog", "/creations", "/about"]
+const HREFS = ["/", "/blog", "/notes", "/creations", "/about"]
 
 const activeIndex = (pathname: string): number => {
   if (pathname === "/") return 0
   if (pathname.startsWith("/blog") || pathname.startsWith("/tags")) return 1
-  if (pathname.startsWith("/creations")) return 2
-  if (pathname.startsWith("/about")) return 3
+  if (pathname.startsWith("/notes")) return 2
+  if (pathname.startsWith("/creations")) return 3
+  if (pathname.startsWith("/about")) return 4
   return 0
 }
 
 export const Nav = () => {
   const pathname = usePathname()
-  const { theme, toggleTheme } = useTheme()
   const t = useT()
+  const { locale } = useLanguage()
   const [open, setOpen] = useState(false)
+  const [settingsOpen, setSettingsOpen] = useState(false)
   const active = activeIndex(pathname)
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([])
+  const [indStyle, setIndStyle] = useState<{ left: number; width: number }>({ left: 0, width: 0 })
 
-  const labels = [t("nav.home"), t("nav.blog"), t("nav.creations"), t("nav.about")]
+  const labels = [t("nav.home"), t("nav.blog"), t("nav.notes"), t("nav.creations"), t("nav.about")]
+
+  useLayoutEffect(() => {
+    const el = itemRefs.current[active]
+    if (el) {
+      setIndStyle({ left: el.offsetLeft, width: el.offsetWidth })
+    }
+  }, [active, locale])
 
   return (
     <>
+      {settingsOpen && <SettingsPanel onClose={() => setSettingsOpen(false)} />}
+
       <nav className={styles.outer}>
         <div className={styles.inner}>
           <section className={styles.itemsContainer}>
             <div className={styles.items}>
               {HREFS.map((href, i) => (
-                <div key={href} className={styles.item}>
+                <div
+                  key={href}
+                  className={styles.item}
+                  ref={(el) => { itemRefs.current[i] = el }}
+                >
                   <Link href={href}>
                     <p>{labels[i]}</p>
                   </Link>
@@ -43,18 +60,15 @@ export const Nav = () => {
               ))}
               <div
                 className={styles.background}
-                style={{ transform: `translateX(${active * 100}%)` }}
+                style={{ left: indStyle.left, width: indStyle.width }}
               />
-            </div>
-            <div className={styles.langSection}>
-              <div className={styles.divider} />
-              <LanguageSwitcher />
             </div>
             <div className={styles.settingsButton}>
               <div className={styles.divider} />
               <button
-                onClick={toggleTheme}
-                aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+                onClick={() => setSettingsOpen((s) => !s)}
+                aria-label="Open settings"
+                data-active={settingsOpen}
               >
                 <GearIcon />
               </button>
@@ -86,11 +100,11 @@ export const Nav = () => {
           <button
             className={styles.mobileTheme}
             onClick={() => {
-              toggleTheme()
+              setSettingsOpen(true)
               setOpen(false)
             }}
           >
-            <GearIcon /> {theme === "dark" ? t("ui.lightMode") : t("ui.darkMode")}
+            <GearIcon /> {t("settings.title")}
           </button>
         </div>
       </div>

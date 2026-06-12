@@ -14,30 +14,41 @@ type SimEdge = d3.SimulationLinkDatum<SimNode> & {
 }
 
 const NODE_RADIUS: Record<GraphNode["type"], number> = {
+  hub: 14,
   tag: 5,
   blog: 9,
   creation: 9,
 }
 
 const DARK_COLORS = {
-  tag: "#818cf8",
+  hub: "#3b82f6",
+  tag: "#3b82f6",
   blog: "rgba(255,255,255,0.85)",
   creation: "rgba(255,255,255,0.55)",
-  edge: "rgba(129,140,248,0.12)",
+  edge: "rgba(59,130,246,0.12)",
   label: "rgba(255,255,255,0.9)",
-  tagLabel: "#818cf8",
+  tagLabel: "#3b82f6",
 }
 
 const LIGHT_COLORS = {
-  tag: "#6d28d9",
+  hub: "#1d4ed8",
+  tag: "#1d4ed8",
   blog: "rgba(87,87,87,0.85)",
   creation: "rgba(87,87,87,0.55)",
-  edge: "rgba(109,40,217,0.15)",
+  edge: "rgba(29,78,216,0.15)",
   label: "rgba(87,87,87,0.9)",
-  tagLabel: "#6d28d9",
+  tagLabel: "#1d4ed8",
 }
 
-export const TagGraph = ({ data }: { data: GraphData }) => {
+export const TagGraph = ({
+  data,
+  hideOverlay = false,
+  className,
+}: {
+  data: GraphData
+  hideOverlay?: boolean
+  className?: string
+}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const router = useRouter()
   const t = useT()
@@ -65,6 +76,13 @@ export const TagGraph = ({ data }: { data: GraphData }) => {
       target: e.target as unknown as SimNode,
     }))
 
+    const minDim = Math.min(w, h)
+    const R_HUB  = minDim * 0.09
+    const R_CONT = minDim * 0.24
+    const R_TAG  = minDim * 0.42
+    const cx = w / 2
+    const cy = h / 2
+
     const sim = d3
       .forceSimulation(simNodes)
       .force(
@@ -72,11 +90,13 @@ export const TagGraph = ({ data }: { data: GraphData }) => {
         d3
           .forceLink<SimNode, SimEdge>(simEdges)
           .id((n) => n.id)
-          .distance(90)
-          .strength(0.5),
+          .distance(70)
+          .strength(0.4),
       )
-      .force("charge", d3.forceManyBody<SimNode>().strength(-150))
-      .force("center", d3.forceCenter(w / 2, h / 2))
+      .force("charge", d3.forceManyBody<SimNode>().strength(-120))
+      .force("radial-hub",  d3.forceRadial<SimNode>(R_HUB,  cx, cy).strength((n) => n.type === "hub"  ? 1.2 : 0))
+      .force("radial-tag",  d3.forceRadial<SimNode>(R_TAG,  cx, cy).strength((n) => n.type === "tag"  ? 0.8 : 0))
+      .force("radial-cont", d3.forceRadial<SimNode>(R_CONT, cx, cy).strength((n) => (n.type === "blog" || n.type === "creation") ? 0.5 : 0))
       .force(
         "collision",
         d3.forceCollide<SimNode>().radius((n) => NODE_RADIUS[n.type] + 5),
@@ -84,7 +104,7 @@ export const TagGraph = ({ data }: { data: GraphData }) => {
 
     // Pre-compute layout to stability
     sim.stop()
-    for (let i = 0; i < 300; i++) sim.tick()
+    for (let i = 0; i < 500; i++) sim.tick()
 
     // Pan / zoom state
     let panX = 0
@@ -142,9 +162,18 @@ export const TagGraph = ({ data }: { data: GraphData }) => {
       for (const n of simNodes) {
         if (n.x == null || n.y == null) continue
         const r = NODE_RADIUS[n.type]
+
+        if (n.type === "hub") {
+          ctx.beginPath()
+          ctx.arc(n.x, n.y, r + 5, 0, 2 * Math.PI)
+          ctx.strokeStyle = colors.hub + "44"
+          ctx.lineWidth = 1.5 / zoom
+          ctx.stroke()
+        }
+
         ctx.beginPath()
         ctx.arc(n.x, n.y, r, 0, 2 * Math.PI)
-        ctx.fillStyle = n === hovered ? colors.tag : colors[n.type]
+        ctx.fillStyle = n === hovered ? colors.hub : colors[n.type]
         ctx.fill()
       }
 
@@ -158,6 +187,16 @@ export const TagGraph = ({ data }: { data: GraphData }) => {
           ctx.fillText(n.label, n.x + NODE_RADIUS.tag + 3, n.y + 4 / zoom)
           ctx.globalAlpha = 1
         }
+      }
+
+      // Hub labels (always visible, bold)
+      ctx.font = `bold ${12 / zoom}px var(--font-neue, sans-serif)`
+      for (const n of simNodes) {
+        if (n.x == null || n.y == null || n.type !== "hub") continue
+        ctx.fillStyle = colors.hub
+        ctx.globalAlpha = 0.9
+        ctx.fillText(n.label, n.x + NODE_RADIUS.hub + 4, n.y + 5 / zoom)
+        ctx.globalAlpha = 1
       }
 
       // Hovered node label (full)
@@ -177,6 +216,7 @@ export const TagGraph = ({ data }: { data: GraphData }) => {
 
     // Event handlers
     const onWheel = (e: WheelEvent) => {
+      if (!e.ctrlKey && Math.abs(e.deltaY) > 40) return
       e.preventDefault()
       const rect = canvas.getBoundingClientRect()
       const mx = e.clientX - rect.left
@@ -302,14 +342,19 @@ export const TagGraph = ({ data }: { data: GraphData }) => {
   }, [buildGraph])
 
   return (
-    <div className={styles.wrapper}>
+    <div className={className ?? styles.wrapper}>
       <canvas ref={canvasRef} className={styles.canvas} />
-      <div className={styles.legend} aria-hidden="true">
-        <span className={styles.dot} data-type="tag" /> {t("graph.tag")}
-        <span className={styles.dot} data-type="blog" /> {t("graph.blog")}
-        <span className={styles.dot} data-type="creation" /> {t("graph.creation")}
-      </div>
-      <p className={styles.hint}>{t("ui.scrollHint")}</p>
+      {!hideOverlay && (
+        <>
+          <div className={styles.legend} aria-hidden="true">
+            <span className={styles.dot} data-type="hub" /> {t("graph.hub")}
+            <span className={styles.dot} data-type="tag" /> {t("graph.tag")}
+            <span className={styles.dot} data-type="blog" /> {t("graph.blog")}
+            <span className={styles.dot} data-type="creation" /> {t("graph.creation")}
+          </div>
+          <p className={styles.hint}>{t("ui.scrollHint")}</p>
+        </>
+      )}
     </div>
   )
 }
