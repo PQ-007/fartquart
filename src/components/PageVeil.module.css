@@ -1,0 +1,40 @@
+.veil {
+  position: fixed;
+  inset: 0;
+  z-index: 998; /* above page content, below the persistent navs */
+  background: var(--color-background, #000);
+  pointer-events: none;
+  animation: sweepUp 0.65s cubic-bezier(0.83, 0, 0.17, 1) 0.05s both;
+  will-change: transform;
+}
+
+.edge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 140px;
+  transform: translateY(100%);
+  background: linear-gradient(
+    to bottom,
+    var(--color-accent) 0px,
+    rgba(129, 140, 248, 0.22) 2px,
+    transparent 100%
+  );
+  opacity: 0.9;
+}
+
+@keyframes sweepUp {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-101%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .veil {
+    display: none;
+  }
+}

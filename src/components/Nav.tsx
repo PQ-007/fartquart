@@ -5,26 +5,28 @@ import { usePathname } from "next/navigation"
 import { useState } from "react"
 import styles from "./Nav.module.css"
 import { useTheme } from "./ThemeProvider"
+import { useT } from "./LanguageProvider"
+import { LanguageSwitcher } from "./LanguageSwitcher"
 import { CloseIcon, GearIcon, MenuIcon } from "./icons"
 
-const ITEMS = [
-  { label: "Home", href: "/" },
-  { label: "Posts", href: "/posts" },
-  { label: "About", href: "/about" },
-]
+const HREFS = ["/", "/blog", "/creations", "/about"]
 
 const activeIndex = (pathname: string): number => {
   if (pathname === "/") return 0
-  if (pathname.startsWith("/posts") || pathname.startsWith("/tags")) return 1
-  if (pathname.startsWith("/about")) return 2
+  if (pathname.startsWith("/blog") || pathname.startsWith("/tags")) return 1
+  if (pathname.startsWith("/creations")) return 2
+  if (pathname.startsWith("/about")) return 3
   return 0
 }
 
 export const Nav = () => {
   const pathname = usePathname()
   const { theme, toggleTheme } = useTheme()
+  const t = useT()
   const [open, setOpen] = useState(false)
   const active = activeIndex(pathname)
+
+  const labels = [t("nav.home"), t("nav.blog"), t("nav.creations"), t("nav.about")]
 
   return (
     <>
@@ -32,10 +34,10 @@ export const Nav = () => {
         <div className={styles.inner}>
           <section className={styles.itemsContainer}>
             <div className={styles.items}>
-              {ITEMS.map((item) => (
-                <div key={item.href} className={styles.item}>
-                  <Link href={item.href}>
-                    <p>{item.label}</p>
+              {HREFS.map((href, i) => (
+                <div key={href} className={styles.item}>
+                  <Link href={href}>
+                    <p>{labels[i]}</p>
                   </Link>
                 </div>
               ))}
@@ -43,6 +45,10 @@ export const Nav = () => {
                 className={styles.background}
                 style={{ transform: `translateX(${active * 100}%)` }}
               />
+            </div>
+            <div className={styles.langSection}>
+              <div className={styles.divider} />
+              <LanguageSwitcher />
             </div>
             <div className={styles.settingsButton}>
               <div className={styles.divider} />
@@ -71,11 +77,12 @@ export const Nav = () => {
           <CloseIcon />
         </button>
         <div className={styles.mobileLinks}>
-          {ITEMS.map((item) => (
-            <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>
-              <h1>{item.label}</h1>
+          {HREFS.map((href, i) => (
+            <Link key={href} href={href} onClick={() => setOpen(false)}>
+              <h1>{labels[i]}</h1>
             </Link>
           ))}
+          <LanguageSwitcher mobile />
           <button
             className={styles.mobileTheme}
             onClick={() => {
@@ -83,7 +90,7 @@ export const Nav = () => {
               setOpen(false)
             }}
           >
-            <GearIcon /> {theme === "dark" ? "Light" : "Dark"} Mode
+            <GearIcon /> {theme === "dark" ? t("ui.lightMode") : t("ui.darkMode")}
           </button>
         </div>
       </div>

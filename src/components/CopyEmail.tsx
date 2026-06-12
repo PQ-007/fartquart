@@ -3,9 +3,11 @@
 import { useState } from "react"
 import { SlidingText } from "./SlidingText"
 import styles from "./Footer.module.css"
+import { useT } from "./LanguageProvider"
 
 export const CopyEmail = ({ email }: { email: string }) => {
   const [copied, setCopied] = useState(false)
+  const t = useT()
 
   return (
     <div
@@ -18,7 +20,7 @@ export const CopyEmail = ({ email }: { email: string }) => {
     >
       <SlidingText text={email} />
       <span className={styles.copied} data-visible={copied}>
-        Copied!
+        {t("ui.copied")}
       </span>
     </div>
   )

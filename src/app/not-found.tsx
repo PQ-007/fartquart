@@ -1,7 +1,12 @@
+"use client"
+
 import Link from "next/link"
 import { SlidingText } from "@/components/SlidingText"
+import { useT } from "@/components/LanguageProvider"
 
 export default function NotFound() {
+  const t = useT()
+
   return (
     <div
       style={{
@@ -14,9 +19,9 @@ export default function NotFound() {
       }}
     >
       <h1 style={{ fontSize: "var(--font-6)", lineHeight: 1 }}>404</h1>
-      <p>This page could not be found.</p>
+      <p>{t("notFound.message")}</p>
       <Link href="/">
-        <SlidingText text="Back Home" arrow />
+        <SlidingText text={t("notFound.back")} arrow />
       </Link>
     </div>
   )

@@ -44,6 +44,7 @@
 .titleRow p {
   font-size: var(--font--1);
   color: rgba(var(--color-primary-rgb), 0.5);
+  white-space: nowrap;
 }
 
 .tags {
@@ -52,7 +53,7 @@
   flex-wrap: wrap;
 }
 
-.videoWrapper {
+.coverWrapper {
   width: 100%;
   border-radius: 15px;
   position: relative;
@@ -71,6 +72,10 @@
   z-index: 1;
   border: 1px solid hsla(0, 0%, 100%, 0.11);
   background: var(--project-background);
+}
+
+.coverImage {
+  object-fit: cover;
 }
 
 @media (max-width: 768px) {

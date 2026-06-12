@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
-import { Instrument_Serif, Inter, JetBrains_Mono } from "next/font/google"
+import { Instrument_Serif, Manrope, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/ThemeProvider"
+import { LanguageProvider } from "@/components/LanguageProvider"
 import { Background } from "@/components/Background"
 import { Nav } from "@/components/Nav"
 
@@ -12,9 +13,10 @@ const serif = Instrument_Serif({
   variable: "--font-serif",
 })
 
-const neue = Inter({
-  subsets: ["latin"],
+const neue = Manrope({
+  subsets: ["latin", "cyrillic"],
   variable: "--font-neue",
+  weight: ["400", "500", "600", "700"],
 })
 
 const jetbrains = JetBrains_Mono({
@@ -23,9 +25,11 @@ const jetbrains = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Josh Warren",
-  description:
-    "Hi! I'm Josh, a front-end engineer with a passion for creating engaging user experiences.",
+  title: {
+    default: "Bilguun",
+    template: "%s | Bilguun",
+  },
+  description: "A room for my thoughts, creations, and curiosities.",
 }
 
 export default function RootLayout({
@@ -37,9 +41,11 @@ export default function RootLayout({
         className={`${serif.variable} ${neue.variable} ${jetbrains.variable}`}
       >
         <ThemeProvider>
-          <Background />
-          {children}
-          <Nav />
+          <LanguageProvider>
+            <Background />
+            {children}
+            <Nav />
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

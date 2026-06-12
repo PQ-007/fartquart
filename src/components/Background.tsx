@@ -29,14 +29,14 @@ void main() {
   vec2 c2 = vec2(0.35 + 0.3 * cos(t * 0.6 + 2.0), 0.25 + 0.25 * sin(t * 0.8 + 1.0));
   vec2 c3 = vec2(1.25 + 0.3 * sin(t * 0.5 + 4.0), 0.2 + 0.3 * cos(t * 0.9 + 3.0));
 
-  vec3 purple = vec3(0.18, 0.10, 0.45);
-  vec3 indigo = vec3(0.05, 0.03, 0.30);
-  vec3 violet = vec3(0.30, 0.12, 0.42);
+  vec3 navy   = vec3(0.05, 0.08, 0.30);
+  vec3 indigo = vec3(0.10, 0.06, 0.40);
+  vec3 violet = vec3(0.15, 0.05, 0.35);
 
   vec3 color = vec3(0.0);
-  color += purple * blob(uv, c1, 0.85) * 0.9;
+  color += navy   * blob(uv, c1, 0.85) * 0.9;
   color += indigo * blob(uv, c2, 0.75) * 0.8;
-  color += violet * blob(uv, c3, 0.9) * 0.7;
+  color += violet * blob(uv, c3, 0.9)  * 0.7;
 
   // subtle grain to avoid banding
   float grain = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);
@@ -44,7 +44,7 @@ void main() {
 
   if (u_light > 0.5) {
     float lum = dot(color, vec3(0.333));
-    color = vec3(1.0) - lum * vec3(0.10, 0.16, 0.04);
+    color = vec3(1.0) - lum * vec3(0.06, 0.08, 0.18);
   }
 
   gl_FragColor = vec4(color, 1.0);

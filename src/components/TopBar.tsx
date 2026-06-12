@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import styles from "./TopBar.module.css"
 import { ClockIcon } from "./icons"
+import { useT } from "./LanguageProvider"
 
 const Clock = () => {
   const [time, setTime] = useState<string | null>(null)
@@ -14,7 +15,7 @@ const Clock = () => {
           hour: "2-digit",
           minute: "2-digit",
           hour12: false,
-          timeZone: "America/Los_Angeles",
+          timeZone: "Asia/Ulaanbaatar",
         }),
       )
     update()
@@ -26,7 +27,7 @@ const Clock = () => {
     <div className={styles.clock}>
       <ClockIcon />
       <p>
-        {time ?? "00:00"} <span>(PST)</span>
+        {time ?? "00:00"} <span>(UB)</span>
       </p>
     </div>
   )
@@ -34,17 +35,18 @@ const Clock = () => {
 
 const LastLocation = () => {
   const [location, setLocation] = useState<string | null>(null)
+  const t = useT()
 
   useEffect(() => {
     fetch("/api/last-visit")
       .then((res) => res.json())
       .then((data: { location: string }) => setLocation(data.location))
-      .catch(() => setLocation("California, USA"))
+      .catch(() => setLocation("Ulaanbaatar, MN"))
   }, [])
 
   return (
     <div className={styles.lastLocation}>
-      <p>Latest Visit</p>
+      <p>{t("ui.latestVisit")}</p>
       {location ? (
         <div className={styles.pill}>
           <p>{location}</p>

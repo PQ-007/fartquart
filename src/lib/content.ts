@@ -1,0 +1,261 @@
+import fs from "fs"
+import path from "path"
+import matter from "gray-matter"
+
+const BLOG_DIR = path.join(process.cwd(), "content", "blog")
+const CREATIONS_DIR = path.join(process.cwd(), "content", "creations")
+
+// ── Types ──────────────────────────────────────────────────────────────────
+
+export type BlogLabel =
+  | "book-review"
+  | "internship"
+  | "project-log"
+  | "contest"
+  | "essay"
+  | "note"
+
+export type BlogMeta = {
+  slug: string
+  title: string
+  description: string
+  label: BlogLabel
+  tags: string[]
+  publishedAt: string
+  cover?: string
+  draft?: boolean
+}
+
+export type Blog = BlogMeta & { content: string }
+
+export type CreationMeta = {
+  slug: string
+  title: string
+  description: string
+  tags: string[]
+  publishedAt: string
+  cover?: string
+  demo?: string
+  repo?: string
+  draft?: boolean
+}
+
+export type Creation = CreationMeta & { content: string }
+
+export type TagCount = { tag: string; count: number }
+
+export type GraphNode = {
+  id: string
+  type: "tag" | "blog" | "creation"
+  label: string
+  href: string
+}
+
+export type GraphEdge = { source: string; target: string }
+
+export type GraphData = { nodes: GraphNode[]; edges: GraphEdge[] }
+
+// ── Helpers ────────────────────────────────────────────────────────────────
+
+export const formatDate = (date: string): string =>
+  new Date(date).toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  })
+
+const normalizeDate = (raw: unknown): string => {
+  if (raw instanceof Date) return raw.toISOString()
+  return String(raw)
+}
+
+const readDir = (dir: string): string[] => {
+  if (!fs.existsSync(dir)) return []
+  return fs.readdirSync(dir).filter((f) => f.endsWith(".md") || f.endsWith(".mdx"))
+}
+
+// ── Blog ───────────────────────────────────────────────────────────────────
+
+const toBlogMeta = (slug: string, data: Record<string, unknown>): BlogMeta => ({
+  slug,
+  title: String(data.title ?? ""),
+  description: String(data.description ?? "").trim(),
+  label: (data.label as BlogLabel) ?? "note",
+  tags: Array.isArray(data.tags) ? (data.tags as string[]) : [],
+  publishedAt: normalizeDate(data.date ?? data.publishedAt ?? new Date()),
+  cover: data.cover ? String(data.cover) : undefined,
+  draft: Boolean(data.draft),
+})
+
+export const getAllBlogPosts = (): BlogMeta[] =>
+  readDir(BLOG_DIR)
+    .map((f) => {
+      const slug = f.replace(/\.(md|mdx)$/, "")
+      const { data } = matter(fs.readFileSync(path.join(BLOG_DIR, f), "utf8"))
+      return toBlogMeta(slug, data)
+    })
+    .filter((p) => !p.draft)
+    .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt))
+
+export const getBlogPost = (slug: string): Blog | null => {
+  for (const ext of [".md", ".mdx"]) {
+    const file = path.join(BLOG_DIR, `${slug}${ext}`)
+    if (fs.existsSync(file)) {
+      const { data, content } = matter(fs.readFileSync(file, "utf8"))
+      return { ...toBlogMeta(slug, data), content }
+    }
+  }
+  return null
+}
+
+export const getBlogPostsByTag = (tag: string): BlogMeta[] =>
+  getAllBlogPosts().filter((p) => p.label === tag || p.tags.includes(tag))
+
+// ── Creations ──────────────────────────────────────────────────────────────
+
+const toCreationMeta = (slug: string, data: Record<string, unknown>): CreationMeta => ({
+  slug,
+  title: String(data.title ?? ""),
+  description: String(data.description ?? "").trim(),
+  tags: Array.isArray(data.tags) ? (data.tags as string[]) : [],
+  publishedAt: normalizeDate(data.date ?? data.publishedAt ?? new Date()),
+  cover: data.cover ? String(data.cover) : undefined,
+  demo: data.demo ? String(data.demo) : undefined,
+  repo: data.repo ? String(data.repo) : undefined,
+  draft: Boolean(data.draft),
+})
+
+export const getAllCreations = (): CreationMeta[] =>
+  readDir(CREATIONS_DIR)
+    .map((f) => {
+      const slug = f.replace(/\.(md|mdx)$/, "")
+      const { data } = matter(fs.readFileSync(path.join(CREATIONS_DIR, f), "utf8"))
+      return toCreationMeta(slug, data)
+    })
+    .filter((c) => !c.draft)
+    .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt))
+
+export const getCreation = (slug: string): Creation | null => {
+  for (const ext of [".md", ".mdx"]) {
+    const file = path.join(CREATIONS_DIR, `${slug}${ext}`)
+    if (fs.existsSync(file)) {
+      const { data, content } = matter(fs.readFileSync(file, "utf8"))
+      return { ...toCreationMeta(slug, data), content }
+    }
+  }
+  return null
+}
+
+export const getCreationsByTag = (tag: string): CreationMeta[] =>
+  getAllCreations().filter((c) => c.tags.includes(tag))
+
+// ── Featured ───────────────────────────────────────────────────────────────
+
+export const getFeaturedContent = (): {
+  blogs: BlogMeta[]
+  creations: CreationMeta[]
+} => {
+  const featuredFile = path.join(process.cwd(), "content", "featured.json")
+  if (!fs.existsSync(featuredFile)) return { blogs: [], creations: [] }
+
+  const { blogs: blogSlugs = [], creations: creationSlugs = [] } = JSON.parse(
+    fs.readFileSync(featuredFile, "utf8"),
+  ) as { blogs: string[]; creations: string[] }
+
+  const allBlogs = getAllBlogPosts()
+  const allCreations = getAllCreations()
+
+  return {
+    blogs: blogSlugs
+      .map((s) => allBlogs.find((p) => p.slug === s))
+      .filter((p): p is BlogMeta => Boolean(p)),
+    creations: creationSlugs
+      .map((s) => allCreations.find((c) => c.slug === s))
+      .filter((c): c is CreationMeta => Boolean(c)),
+  }
+}
+
+// ── Tags ───────────────────────────────────────────────────────────────────
+
+export const getAllBlogTags = (): TagCount[] => {
+  const counts = new Map<string, number>()
+  for (const post of getAllBlogPosts()) {
+    for (const tag of [post.label, ...post.tags]) {
+      counts.set(tag, (counts.get(tag) ?? 0) + 1)
+    }
+  }
+  return [...counts.entries()].map(([tag, count]) => ({ tag, count }))
+}
+
+export const getAllCreationTags = (): TagCount[] => {
+  const counts = new Map<string, number>()
+  for (const creation of getAllCreations()) {
+    for (const tag of creation.tags) {
+      counts.set(tag, (counts.get(tag) ?? 0) + 1)
+    }
+  }
+  return [...counts.entries()].map(([tag, count]) => ({ tag, count }))
+}
+
+export const getAllTagsUnified = (): TagCount[] => {
+  const counts = new Map<string, number>()
+  for (const { tag, count } of [...getAllBlogTags(), ...getAllCreationTags()]) {
+    counts.set(tag, (counts.get(tag) ?? 0) + count)
+  }
+  return [...counts.entries()]
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag))
+}
+
+// ── Graph data for /tags Obsidian-style node graph ─────────────────────────
+
+export const getGraphData = (): GraphData => {
+  const blogs = getAllBlogPosts()
+  const creations = getAllCreations()
+
+  const tagSet = new Set<string>()
+  for (const p of blogs) {
+    for (const t of [p.label, ...p.tags]) tagSet.add(t)
+  }
+  for (const c of creations) {
+    for (const t of c.tags) tagSet.add(t)
+  }
+
+  const nodes: GraphNode[] = [
+    ...[...tagSet].map((tag) => ({
+      id: `tag:${tag}`,
+      type: "tag" as const,
+      label: tag,
+      href: `/tags/${encodeURIComponent(tag)}`,
+    })),
+    ...blogs.map((p) => ({
+      id: `blog:${p.slug}`,
+      type: "blog" as const,
+      label: p.title,
+      href: `/blog/${p.slug}`,
+    })),
+    ...creations.map((c) => ({
+      id: `creation:${c.slug}`,
+      type: "creation" as const,
+      label: c.title,
+      href: `/creations/${c.slug}`,
+    })),
+  ]
+
+  const edges: GraphEdge[] = [
+    ...blogs.flatMap((p) =>
+      [p.label, ...p.tags].map((tag) => ({
+        source: `blog:${p.slug}`,
+        target: `tag:${tag}`,
+      })),
+    ),
+    ...creations.flatMap((c) =>
+      c.tags.map((tag) => ({
+        source: `creation:${c.slug}`,
+        target: `tag:${tag}`,
+      })),
+    ),
+  ]
+
+  return { nodes, edges }
+}

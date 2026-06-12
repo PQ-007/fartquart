@@ -11,7 +11,7 @@ export type PostMeta = {
   category: "project" | "lab"
   tags: string[]
   publishedAt: string
-  mainVideo: string
+  mainVideo?: string
   demo?: string
   repo?: string
   draft?: boolean
@@ -39,7 +39,7 @@ const toMeta = (slug: string, data: Record<string, unknown>): PostMeta => ({
   publishedAt: data.publishedAt instanceof Date
     ? data.publishedAt.toISOString()
     : String(data.publishedAt),
-  mainVideo: String(data.mainVideo),
+  mainVideo: data.mainVideo ? String(data.mainVideo) : undefined,
   demo: data.demo ? String(data.demo) : undefined,
   repo: data.repo ? String(data.repo) : undefined,
   draft: Boolean(data.draft),

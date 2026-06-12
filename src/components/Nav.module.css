@@ -77,8 +77,39 @@
   left: 0;
   border: 1px solid rgba(var(--color-primary-rgb), 0.05);
   border-radius: 100px;
-  width: calc(100% / 3);
+  width: calc(100% / 4);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.langSection {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 8px;
+  margin-left: 4px;
+}
+
+.langBtn {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  opacity: 0.4;
+  transition: opacity 0.2s, color 0.2s;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  padding: 4px 3px;
+  line-height: 1;
+}
+
+.langBtn[data-active="true"] {
+  opacity: 1;
+  color: var(--color-accent);
+}
+
+.langBtn:hover {
+  opacity: 0.75;
 }
 
 .settingsButton {
@@ -86,7 +117,7 @@
   position: relative;
   height: 100%;
   gap: 15px;
-  margin-left: 10px;
+  margin-left: 4px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -181,13 +212,36 @@
   font-size: var(--font-4);
 }
 
+.mobileLang {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.mobileLangBtn {
+  font-size: var(--font-0);
+  font-weight: 600;
+  color: var(--color-primary);
+  opacity: 0.4;
+  transition: opacity 0.2s, color 0.2s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.mobileLangBtn[data-active="true"] {
+  opacity: 1;
+  color: var(--color-accent);
+}
+
 .mobileTheme {
   display: flex;
   align-items: center;
   gap: 12px;
   font-size: var(--font-0);
   color: var(--color-primary);
-  margin-top: 24px;
+  margin-top: 16px;
 }
 
 .mobileTheme svg {

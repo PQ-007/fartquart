@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import styles from "./Chapters.module.css"
 import { SlidingText } from "../SlidingText"
+import { useT } from "../LanguageProvider"
 
 export type Chapter = { id: string; title: string }
 
@@ -18,6 +19,7 @@ export const Chapters = ({
   const [activeId, setActiveId] = useState<string | null>(null)
   const [progress, setProgress] = useState(0)
   const listRef = useRef<HTMLUListElement>(null)
+  const t = useT()
 
   useEffect(() => {
     const onScroll = () => {
@@ -45,12 +47,12 @@ export const Chapters = ({
         <div className={styles.buttonWrapper}>
           {demo && (
             <a href={demo} rel="noopener noreferrer" target="_blank">
-              <SlidingText text="Live Demo" arrow />
+              <SlidingText text={t("ui.liveDemo")} arrow />
             </a>
           )}
           {repo && (
             <a href={repo} rel="noopener noreferrer" target="_blank">
-              <SlidingText text="Source Code" arrow />
+              <SlidingText text={t("ui.sourceCode")} arrow />
             </a>
           )}
         </div>
