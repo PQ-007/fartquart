@@ -17,7 +17,9 @@ const Stars = ({ rating }: { rating: number }) => {
       {Array.from({ length: empty }).map((_, i) => (
         <span key={`e${i}`} className={styles.starEmpty}>★</span>
       ))}
-      <span className={styles.ratingNum}>{rating % 1 === 0 ? rating.toFixed(0) : rating.toFixed(1)}</span>
+      <span className={styles.ratingNum}>
+        {rating % 1 === 0 ? rating.toFixed(0) : rating.toFixed(1)}
+      </span>
     </div>
   )
 }
@@ -39,6 +41,7 @@ export const BookCard = ({ post }: { post: BlogMeta }) => (
       <h3 className={styles.title}>{post.title}</h3>
       {post.author && <p className={styles.author}>{post.author}</p>}
       {post.rating != null && <Stars rating={post.rating} />}
+      {post.description && <p className={styles.description}>{post.description}</p>}
     </div>
   </Link>
 )

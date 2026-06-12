@@ -26,6 +26,24 @@
   font-weight: 600;
 }
 
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.sectionHeader {
+  padding-bottom: 4px;
+}
+
+.bookList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
 .grid {
   width: 100%;
   display: flex;

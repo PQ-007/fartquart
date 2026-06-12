@@ -7,12 +7,14 @@ import { Sandpack } from "./SandpackEmbed"
 import { MathBlock } from "./Math"
 import { ArrowTopRight } from "../icons"
 
-export const slugify = (text: string): string =>
-  text
+export const slugify = (text: string): string => {
+  const slug = text
     .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/[^\p{L}\p{N}\s-]/gu, "")
     .trim()
     .replace(/\s+/g, "-")
+  return slug || "section"
+}
 
 const textOf = (node: ReactNode): string => {
   if (typeof node === "string" || typeof node === "number") return String(node)

@@ -3,7 +3,6 @@
 import Link from "next/link"
 import styles from "@/app/blog/page.module.css"
 import { PostPreview } from "./PostPreview"
-import { BookCard } from "./BookCard"
 import { SlidingText } from "./SlidingText"
 import { Tag } from "./Tag"
 import { useT } from "./LanguageProvider"
@@ -15,7 +14,6 @@ const LABEL_ORDER: BlogLabel[] = [
   "project-log",
   "internship",
   "contest",
-  "book-review",
   "essay",
   "note",
   "lesson-note",
@@ -24,9 +22,11 @@ const LABEL_ORDER: BlogLabel[] = [
 export const BlogListing = ({ posts }: { posts: BlogMeta[] }) => {
   const t = useT()
 
+  const filtered = posts.filter((p) => p.label !== "book-review")
+
   const labels = [
-    ...LABEL_ORDER.filter((l) => posts.some((p) => p.label === l)),
-    ...[...new Set(posts.map((p) => p.label))].filter(
+    ...LABEL_ORDER.filter((l) => filtered.some((p) => p.label === l)),
+    ...[...new Set(filtered.map((p) => p.label))].filter(
       (l) => !LABEL_ORDER.includes(l as BlogLabel),
     ),
   ] as BlogLabel[]
@@ -43,23 +43,13 @@ export const BlogListing = ({ posts }: { posts: BlogMeta[] }) => {
                   <SlidingText text={t("ui.allTags")} arrow />
                 </Link>
               </header>
-              {label === "book-review" ? (
-                <div className={styles.bookGrid}>
-                  {posts
-                    .filter((p) => p.label === "book-review")
-                    .map((p) => (
-                      <BookCard key={p.slug} post={p} />
-                    ))}
-                </div>
-              ) : (
-                <section className={styles.posts}>
-                  {posts
-                    .filter((p) => p.label === label)
-                    .map((p) => (
-                      <PostPreview key={p.slug} type="blog" post={p} />
-                    ))}
-                </section>
-              )}
+              <section className={styles.posts}>
+                {filtered
+                  .filter((p) => p.label === label)
+                  .map((p) => (
+                    <PostPreview key={p.slug} type="blog" post={p} />
+                  ))}
+              </section>
               <div className={styles.divider} />
             </section>
           ))}

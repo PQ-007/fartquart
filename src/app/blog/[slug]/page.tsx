@@ -26,12 +26,19 @@ export const generateMetadata = async ({
 
 const extractChapters = (content: string): Chapter[] => {
   const chapters: Chapter[] = []
+  const seen = new Map<string, number>()
   let inCode = false
   for (const line of content.split("\n")) {
     if (line.trim().startsWith("```")) inCode = !inCode
     if (inCode) continue
     const match = /^##\s+(.+)$/.exec(line)
-    if (match) chapters.push({ id: slugify(match[1].trim()), title: match[1].trim() })
+    if (!match) continue
+    const title = match[1].trim()
+    const base = slugify(title)
+    const count = seen.get(base) ?? 0
+    seen.set(base, count + 1)
+    const id = count === 0 ? base : `${base}-${count}`
+    chapters.push({ id, title })
   }
   return chapters
 }
