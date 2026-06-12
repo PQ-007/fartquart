@@ -22,8 +22,7 @@ export default function Home() {
               <TopBar />
               <div className={styles.text}>
                 <div className={styles.name}>
-                  <h1>bilguun</h1>
-                  <h1 className={styles.lastName}>tushig</h1>
+                  <h1 className={styles.lastName}>Bilguuntushiq</h1>
                 </div>
                 <HomeHero />
               </div>

@@ -43,6 +43,7 @@ export default function RootLayout({
         <ThemeProvider>
           <LanguageProvider>
             <Background />
+            <div aria-hidden="true" className="grid-bg" />
             {children}
             <Nav />
           </LanguageProvider>

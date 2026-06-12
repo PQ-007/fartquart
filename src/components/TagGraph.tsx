@@ -216,7 +216,7 @@ export const TagGraph = ({
 
     // Event handlers
     const onWheel = (e: WheelEvent) => {
-      if (!e.ctrlKey && Math.abs(e.deltaY) > 40) return
+      if (!e.ctrlKey) return
       e.preventDefault()
       const rect = canvas.getBoundingClientRect()
       const mx = e.clientX - rect.left
