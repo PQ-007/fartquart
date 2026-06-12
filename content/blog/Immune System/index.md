@@ -1,6 +1,7 @@
 ---
 title: Immune System
-date:
+date: 2025-01-01
 tags:
-  - "#Biology/ImmuneSystem"
+  - Biology
+  - ImmuneSystem
 ---

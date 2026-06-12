@@ -95,6 +95,12 @@
   gap: 25px;
 }
 
+.more h4 {
+  font-size: var(--font--1);
+  font-weight: 400;
+  color: rgba(var(--color-primary-rgb), 0.5);
+}
+
 .dogs img {
   border-radius: 20px;
   width: clamp(220px, 40vw, 300px);

@@ -38,6 +38,7 @@ export type CreationMeta = {
   cover?: string
   demo?: string
   repo?: string
+  youtube?: string
   draft?: boolean
 }
 
@@ -138,6 +139,7 @@ const toCreationMeta = (slug: string, data: Record<string, unknown>): CreationMe
   cover: data.cover ? String(data.cover) : undefined,
   demo: data.demo ? String(data.demo) : undefined,
   repo: data.repo ? String(data.repo) : undefined,
+  youtube: data.youtube ? String(data.youtube) : undefined,
   draft: Boolean(data.draft),
 })
 

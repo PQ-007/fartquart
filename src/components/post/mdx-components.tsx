@@ -40,6 +40,18 @@ const ExternalLink = ({
   </a>
 )
 
+const YouTube = ({ id }: { id: string }) => (
+  <div style={{ position: "relative", width: "100%", paddingBottom: "56.25%", marginBottom: "24px" }}>
+    <iframe
+      src={`https://www.youtube.com/embed/${id}`}
+      title="YouTube video"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: "none", borderRadius: "12px" }}
+    />
+  </div>
+)
+
 export const mdxComponents: MDXComponents = {
   h2: heading("h2"),
   h3: heading("h3"),
@@ -49,4 +61,5 @@ export const mdxComponents: MDXComponents = {
   Tweet,
   Sandpack,
   Math: MathBlock,
+  YouTube,
 }

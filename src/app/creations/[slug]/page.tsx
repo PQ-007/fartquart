@@ -9,6 +9,11 @@ import { Chapters, type Chapter } from "@/components/post/Chapters"
 import { mdxComponents, slugify } from "@/components/post/mdx-components"
 import { formatDate, getAllCreations, getCreation } from "@/lib/content"
 
+const youtubeId = (str: string): string => {
+  const match = str.match(/(?:youtu\.be\/|[?&]v=)([A-Za-z0-9_-]{11})/)
+  return match ? match[1] : str
+}
+
 export const generateStaticParams = () =>
   getAllCreations().map((c) => ({ slug: c.slug }))
 
@@ -17,7 +22,8 @@ export const generateMetadata = async ({
 }: {
   params: Promise<{ slug: string }>
 }): Promise<Metadata> => {
-  const { slug } = await params
+  const { slug: encoded } = await params
+  const slug = decodeURIComponent(encoded)
   const creation = getCreation(slug)
   if (!creation) return {}
   return { title: creation.title, description: creation.description }
@@ -40,7 +46,8 @@ export default async function CreationPage({
 }: {
   params: Promise<{ slug: string }>
 }) {
-  const { slug } = await params
+  const { slug: encoded } = await params
+  const slug = decodeURIComponent(encoded)
   const creation = getCreation(slug)
   if (!creation) notFound()
 
@@ -64,7 +71,15 @@ export default async function CreationPage({
             </header>
             <div className={styles.mediaWrapper}>
               <div className={styles.lightBorder}>
-                {creation.cover ? (
+                {creation.youtube ? (
+                  <iframe
+                    src={`https://www.youtube.com/embed/${youtubeId(creation.youtube)}`}
+                    title={creation.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className={styles.youtube}
+                  />
+                ) : creation.cover ? (
                   <Image
                     src={creation.cover}
                     alt={creation.title}

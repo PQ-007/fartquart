@@ -17,7 +17,8 @@ export const generateMetadata = async ({
 }: {
   params: Promise<{ slug: string }>
 }): Promise<Metadata> => {
-  const { slug } = await params
+  const { slug: encoded } = await params
+  const slug = decodeURIComponent(encoded)
   const post = getBlogPost(slug)
   if (!post) return {}
   return { title: post.title, description: post.description }
@@ -40,7 +41,8 @@ export default async function BlogPostPage({
 }: {
   params: Promise<{ slug: string }>
 }) {
-  const { slug } = await params
+  const { slug: encoded } = await params
+  const slug = decodeURIComponent(encoded)
   const post = getBlogPost(slug)
   if (!post) notFound()
 

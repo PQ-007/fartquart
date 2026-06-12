@@ -1,9 +1,9 @@
 ---
-title: ゼロから作る Deep Learning №1
+title: ゼロから作る Deep Learning №2
 date: 2026-01-27
 tags:
-  - Book/DeapLearning1
-  - "#Python"
-  - "#JP"
+  - BookDeepLearning
+  - Python
+  - JP
 ---
 Гүн сургалтын талаар тэгээс нь эхлээд сурах номны хоёр дахь цуврал.  

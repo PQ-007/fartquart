@@ -12,6 +12,11 @@ import type { BlogMeta, CreationMeta } from "@/lib/content"
 const CDN = "https://d4frua9bq45mo.cloudfront.net"
 const videoUrl = (mainVideo: string) => `${CDN}/${mainVideo}.mp4`
 
+const youtubeId = (str: string): string => {
+  const match = str.match(/(?:youtu\.be\/|[?&]v=)([A-Za-z0-9_-]{11})/)
+  return match ? match[1] : str
+}
+
 type PostPreviewProps =
   | { type?: "post"; post: PostMeta }
   | { type: "blog"; post: BlogMeta }
@@ -20,39 +25,55 @@ type PostPreviewProps =
 const MediaSlot = ({
   mainVideo,
   cover,
+  youtube,
   href,
   label,
   viewText,
 }: {
   mainVideo?: string
   cover?: string
+  youtube?: string
   href: string
   label: string
   viewText: string
-}) => (
-  <div className={styles.videoWrapper}>
-    <div className={styles.lightBorder}>
-      <Link href={href} className={styles.videoLink}>
-        {mainVideo ? (
-          <VideoPlayer src={videoUrl(mainVideo)} />
-        ) : cover ? (
-          <Image
-            src={cover}
-            alt={label}
-            fill
-            sizes="(max-width: 900px) 100vw, 50vw"
-            className={styles.coverImage}
-          />
-        ) : (
-          <div className={styles.placeholder} />
-        )}
-        <section className={styles.overlay}>
-          <h3>{viewText}</h3>
-        </section>
-      </Link>
+}) => {
+  const ytThumb = youtube
+    ? `https://img.youtube.com/vi/${youtubeId(youtube)}/maxresdefault.jpg`
+    : undefined
+  return (
+    <div className={styles.videoWrapper}>
+      <div className={styles.lightBorder}>
+        <Link href={href} className={styles.videoLink}>
+          {mainVideo ? (
+            <VideoPlayer src={videoUrl(mainVideo)} />
+          ) : cover ? (
+            <Image
+              src={cover}
+              alt={label}
+              fill
+              sizes="(max-width: 900px) 100vw, 50vw"
+              className={styles.coverImage}
+            />
+          ) : ytThumb ? (
+            <Image
+              src={ytThumb}
+              alt={label}
+              fill
+              sizes="(max-width: 900px) 100vw, 50vw"
+              className={styles.coverImage}
+              unoptimized
+            />
+          ) : (
+            <div className={styles.placeholder} />
+          )}
+          <section className={styles.overlay}>
+            <h3>{viewText}</h3>
+          </section>
+        </Link>
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 export const PostPreview = ({ type = "post", post }: PostPreviewProps) => {
   const t = useT()
@@ -86,6 +107,7 @@ export const PostPreview = ({ type = "post", post }: PostPreviewProps) => {
       <div className={styles.container}>
         <MediaSlot
           cover={creation.cover}
+          youtube={creation.youtube}
           href={`/creations/${creation.slug}`}
           label={creation.title}
           viewText={t("ui.view")}

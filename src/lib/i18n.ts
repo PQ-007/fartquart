@@ -38,6 +38,7 @@ const dict = {
     about: {
       greeting: "Hello,",
       experience: "Experience",
+      more: "More",
     },
     creations: { heading: "Creations" },
     graph: { hub: "hub", tag: "tag", blog: "blog", creation: "creation" },
@@ -79,6 +80,7 @@ const dict = {
     about: {
       greeting: "Сайн уу,",
       experience: "Туршлага",
+      more: "Бусад",
     },
     creations: { heading: "Бүтээлүүд" },
     graph: { hub: "гол", tag: "тэг", blog: "блог", creation: "бүтээл" },
@@ -120,6 +122,7 @@ const dict = {
     about: {
       greeting: "こんにちは、",
       experience: "経歴",
+      more: "その他",
     },
     creations: { heading: "制作物" },
     graph: { hub: "ハブ", tag: "タグ", blog: "ブログ", creation: "制作" },
