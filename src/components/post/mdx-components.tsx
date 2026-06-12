@@ -40,6 +40,17 @@ const ExternalLink = ({
   </a>
 )
 
+const Video = ({ src }: { src: string }) => (
+  <video
+    controls
+    playsInline
+    style={{ width: "100%", borderRadius: "12px", display: "block", margin: "16px 0" }}
+  >
+    <source src={src} type="video/mp4" />
+    <source src={src} type="video/mp4; codecs=hvc1" />
+  </video>
+)
+
 const YouTube = ({ id }: { id: string }) => (
   <div style={{ position: "relative", width: "100%", paddingBottom: "56.25%", marginBottom: "24px" }}>
     <iframe
@@ -62,4 +73,5 @@ export const mdxComponents: MDXComponents = {
   Sandpack,
   Math: MathBlock,
   YouTube,
+  Video,
 }

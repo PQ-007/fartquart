@@ -2,6 +2,7 @@
 title: "Internship №1 — Susano"
 description: Susano дахь CAD болон C#/.NET хэрэглэсэн дадлагын тэмдэглэл.
 label: internship
+cover: /images/susano-internship/susano-internship-cover.jpg
 tags:
   - Internship
   - CAD
@@ -22,9 +23,9 @@ draft: false
 
 ### Даалгавар
 
-Эхний долоо хоногт өгсөн даалгавар бол n×m координатын системд байрлах "x" ширхэг цэгийг дотроо агуулсан хамгийн бага талбайтай тэгш өнцөгтийг зурах даалгавар байсан. ( Windows Forms App ашиглан UI гарган C# хэл дээр гүйцэтгэх )
+Эхний долоо хоногт өгсөн даалгавар бол n×m координатын системд байрлах "x" ширхэг цэгийг дотроо агуулсан хамгийн бага талбайтай тэгш өнцөгтийг зурах даалгавар байсан. (Windows Forms App ашиглан UI гарган C# хэл дээр гүйцэтгэх )
 
-![image.png](https://i.imgur.com/tjXxazb.png)
+![Даалгавар](/images/susano-internship/susano-problem1.1.png)
 
 1. Үүсгэх цэгийн тоог оруулан random товчийг дарахад picturebox дотор random байршилтай цэгүүдийг дүрслэнэ.
     
@@ -35,7 +36,7 @@ draft: false
 4. (**Нэмэлт: minPolygon товч**)бүх цэгийг дотроо багтаасан боломжит хамгийн бага талбай бүхий олон өнцөгтийг олох
     
 
-![image.png](https://i.imgur.com/XebuAYX.png)
+![Гүйцэтгэл](/images/susano-internship/susano-problem1.2.png)
 
 ---
 
@@ -56,7 +57,7 @@ draft: false
 - Нийтэд эдгээрийг тооцоолонгоо харьцуулах давталт хэрэгтэй.
     
 
-Дээрх зүйлсийг хайж явахад энэ бодлогын шийдлийг танилцуулсан ﻿[Best Fit Rectangles](http://datagenetics.com/blog/march12014/index.html) гэх нийтлэл олсон. Энэхүү нийтэлд ашиглаж буй арга зам нь ерөнхийдөө :
+Дээрх зүйлсийг хайж явахад энэ бодлогын шийдлийг танилцуулсан [Best Fit Rectangles](http://datagenetics.com/blog/march12014/index.html) гэх нийтлэл олсон. Энэхүү нийтэлд ашиглаж буй арга зам нь ерөнхийдөө :
 
 1. Convex Hull ашиглан хүрээлж буй хамгийн захын цэгүүдийг олох
     
@@ -74,7 +75,7 @@ draft: false
 
 ### Demo
 
-![image.png](https://i.imgur.com/mzPT08w.png)
+<Video src="/videos/susano-problem1-solution.mp4" />
 
 ### Ойлгож сурсан зүйлс
 
@@ -95,10 +96,10 @@ draft: false
 
 **Ашиглах эх сурвалж:**
 
-- ﻿[www.autodesk.co.jp/support/technical/article/caas/tsarticles/tsarticles/JPN/ts/6kRFCS0mCalWLwAOpP9pNT.html](https://www.autodesk.co.jp/support/technical/article/caas/tsarticles/tsarticles/JPN/ts/6kRFCS0mCalWLwAOpP9pNT.html)
+- [www.autodesk.co.jp/support/technical/article/caas/tsarticles/tsarticles/JPN/ts/6kRFCS0mCalWLwAOpP9pNT.html](https://www.autodesk.co.jp/support/technical/article/caas/tsarticles/tsarticles/JPN/ts/6kRFCS0mCalWLwAOpP9pNT.html)
     
 
-![image.png](https://i.imgur.com/jzsOglK.png)
+![AutoCAD grid даалгавар](/images/susano-internship/susano-problem2.png)
 
 ### Шийдэл
 
@@ -113,13 +114,13 @@ draft: false
 
 ### Flowchart
 
-![Figure 1](https://i.imgur.com/EgEKs21.png)
+![Flowchart](/images/susano-internship/susano-problem2-solution-diagram.png)
 
 ### Demo
 
-![image.png](https://i.imgur.com/tuqQGYV.png)
+![Demo 1](/images/susano-internship/susano-problem2-solution1.png)
 
-![image.png](https://i.imgur.com/zrRpHlc.png)
+![Demo 2](/images/susano-internship/susano-problem2-solution2.png)
 
 ### Ойлгож сурсан зүйлс
 
@@ -144,7 +145,7 @@ draft: false
 
 **Ашиглах эх сурвалж:**
 
-- ﻿[www.autodesk.co.jp/support/technical/article/caas/tsarticles/tsarticles/JPN/ts/6kRFCS0mCalWLwAOpP9pNT.html](https://www.autodesk.co.jp/support/technical/article/caas/tsarticles/tsarticles/JPN/ts/6kRFCS0mCalWLwAOpP9pNT.html)
+- [www.autodesk.co.jp/support/technical/article/caas/tsarticles/tsarticles/JPN/ts/6kRFCS0mCalWLwAOpP9pNT.html](https://www.autodesk.co.jp/support/technical/article/caas/tsarticles/tsarticles/JPN/ts/6kRFCS0mCalWLwAOpP9pNT.html)
     
 
 ### Шийдэл
@@ -170,8 +171,8 @@ draft: false
 
 ### Demo
 
-![image.png](https://i.imgur.com/AvYsbgv.png)
+![APS Web viewer 1](/images/susano-internship/susano-web0.png)
 
-![image.png](https://i.imgur.com/tWpMYD0.png)
+![APS Web viewer 2](/images/susano-internship/susano-web1.png)
 
-![image.png](https://i.imgur.com/f0grb5R.png)
+![APS Web viewer 3](/images/susano-internship/susano-web2.png)

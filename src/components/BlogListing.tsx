@@ -3,6 +3,7 @@
 import Link from "next/link"
 import styles from "@/app/blog/page.module.css"
 import { PostPreview } from "./PostPreview"
+import { BookCard } from "./BookCard"
 import { SlidingText } from "./SlidingText"
 import { Tag } from "./Tag"
 import { useT } from "./LanguageProvider"
@@ -42,13 +43,23 @@ export const BlogListing = ({ posts }: { posts: BlogMeta[] }) => {
                   <SlidingText text={t("ui.allTags")} arrow />
                 </Link>
               </header>
-              <section className={styles.posts}>
-                {posts
-                  .filter((p) => p.label === label)
-                  .map((p) => (
-                    <PostPreview key={p.slug} type="blog" post={p} />
-                  ))}
-              </section>
+              {label === "book-review" ? (
+                <div className={styles.bookGrid}>
+                  {posts
+                    .filter((p) => p.label === "book-review")
+                    .map((p) => (
+                      <BookCard key={p.slug} post={p} />
+                    ))}
+                </div>
+              ) : (
+                <section className={styles.posts}>
+                  {posts
+                    .filter((p) => p.label === label)
+                    .map((p) => (
+                      <PostPreview key={p.slug} type="blog" post={p} />
+                    ))}
+                </section>
+              )}
               <div className={styles.divider} />
             </section>
           ))}

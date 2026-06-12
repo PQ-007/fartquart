@@ -24,6 +24,8 @@ export type BlogMeta = {
   tags: string[]
   publishedAt: string
   cover?: string
+  author?: string
+  rating?: number
   draft?: boolean
 }
 
@@ -96,6 +98,8 @@ const toBlogMeta = (slug: string, data: Record<string, unknown>): BlogMeta => ({
   tags: Array.isArray(data.tags) ? (data.tags as string[]) : [],
   publishedAt: normalizeDate(data.date ?? data.publishedAt ?? new Date()),
   cover: data.cover ? String(data.cover) : undefined,
+  author: data.author ? String(data.author) : undefined,
+  rating: data.rating != null ? Number(data.rating) : undefined,
   draft: Boolean(data.draft),
 })
 

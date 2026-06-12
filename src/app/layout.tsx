@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/ThemeProvider"
 import { LanguageProvider } from "@/components/LanguageProvider"
 import { Background } from "@/components/Background"
 import { Nav } from "@/components/Nav"
+import { PostImageLightbox } from "@/components/post/PostImageLightbox"
 
 const serif = Fraunces({
   subsets: ["latin"],
@@ -46,6 +47,7 @@ export default function RootLayout({
             <div aria-hidden="true" className="grid-bg" />
             {children}
             <Nav />
+            <PostImageLightbox />
           </LanguageProvider>
         </ThemeProvider>
       </body>

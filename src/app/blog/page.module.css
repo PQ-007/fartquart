@@ -53,8 +53,19 @@
   );
 }
 
+.bookGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 28px 20px;
+  width: 100%;
+}
+
 @media (max-width: 768px) {
   .wrapper {
     padding-top: 100px;
+  }
+  .bookGrid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 20px 14px;
   }
 }

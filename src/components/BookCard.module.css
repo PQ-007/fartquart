@@ -1,0 +1,115 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-decoration: none;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+.cover {
+  aspect-ratio: 2 / 3;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow:
+    4px 6px 20px rgba(0, 0, 0, 0.45),
+    -2px 0 4px rgba(0, 0, 0, 0.2);
+  background: rgba(var(--color-primary-rgb), 0.05);
+  flex-shrink: 0;
+}
+
+.cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  background: linear-gradient(
+    145deg,
+    rgba(59, 130, 246, 0.25) 0%,
+    rgba(59, 130, 246, 0.08) 100%
+  );
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  text-align: center;
+}
+
+.placeholderTitle {
+  font-size: var(--font--2);
+  font-weight: 600;
+  color: var(--color-primary);
+  line-height: 1.4;
+}
+
+.placeholderAuthor {
+  font-size: var(--font--3);
+  color: rgba(var(--color-primary-rgb), 0.45);
+  line-height: 1.3;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.title {
+  font-size: var(--font--1);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--color-primary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.author {
+  font-size: var(--font--2);
+  color: rgba(var(--color-primary-rgb), 0.5);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  margin-top: 2px;
+}
+
+.starFull {
+  color: #f59e0b;
+  font-size: 12px;
+}
+
+.starHalf {
+  color: #f59e0b;
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+.starEmpty {
+  color: rgba(var(--color-primary-rgb), 0.15);
+  font-size: 12px;
+}
+
+.ratingNum {
+  font-size: var(--font--3);
+  color: rgba(var(--color-primary-rgb), 0.4);
+  margin-left: 4px;
+}
