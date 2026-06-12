@@ -1,0 +1,94 @@
+.wrapper {
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  top: 40px;
+  display: flex;
+}
+
+.lastLocation {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+
+.lastLocation p {
+  font-size: var(--font--2);
+}
+
+.pill {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border: 1px solid rgba(var(--color-primary-rgb), 0.15);
+  padding: 5px 15px;
+  border-radius: 100px;
+}
+
+.pillLoading {
+  width: 150px;
+  height: 33px;
+  border-radius: 100px;
+  animation: shimmer 1.8s linear infinite forwards;
+  background: linear-gradient(
+    to right,
+    var(--color-loading-background-1) 8%,
+    var(--color-loading-background-2) 38%,
+    var(--color-loading-background-1) 54%
+  );
+  background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.clock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  gap: 6px;
+}
+
+[data-theme="light"] .clock {
+  background-color: var(--white-65);
+  padding: 6px 10px;
+  border-radius: 100px;
+}
+
+.clock > p {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font--1);
+  color: var(--color-secondary);
+}
+
+.clock > p span {
+  font-size: inherit;
+  color: var(--color-secondary);
+  opacity: 0.5;
+}
+
+.clock svg {
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  fill: var(--color-secondary);
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    top: 80px;
+  }
+}

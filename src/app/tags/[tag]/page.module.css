@@ -1,0 +1,34 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: var(--main-max-width);
+  margin: 0 auto;
+  padding: 160px var(--main-padding-sides) 0;
+  background: var(--color-background);
+  min-height: 50vh;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header p {
+  font-size: var(--font--1);
+  color: rgba(var(--color-primary-rgb), 0.5);
+}
+
+.allTags {
+  margin-left: auto;
+}
+
+.posts {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-top: 20px;
+}

@@ -1,0 +1,22 @@
+.tag {
+  background: var(--project-tags-background);
+  border-radius: 100px;
+  padding: 6px 16px;
+  width: fit-content;
+  transition: filter 0.3s;
+}
+
+a .tag:hover {
+  filter: brightness(1.4);
+}
+
+.tag p {
+  color: var(--project-tags-font);
+  font-size: var(--font--2);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.count {
+  opacity: 0.6;
+}

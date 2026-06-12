@@ -1,0 +1,11 @@
+.block {
+  display: flex;
+  justify-content: center;
+  margin: 24px 0;
+  font-size: var(--font-1);
+  color: var(--color-primary);
+}
+
+.inline {
+  color: var(--color-primary);
+}

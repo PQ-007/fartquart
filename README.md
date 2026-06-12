@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# joshw.io replica
 
-## Getting Started
+A full Next.js (App Router) replica of [joshw.io](https://www.joshw.io/) — Josh Warren's portfolio.
 
-First, run the development server:
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # development on http://localhost:3000
+npm run build    # production build (all pages prerendered)
+npm start        # serve the production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Pages
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Route | Description |
+| --- | --- |
+| `/` | Hero (fixed, mix-blend-difference) + featured project previews |
+| `/posts` | All posts grouped by `#project` / `#lab` |
+| `/posts/[slug]` | 7 full MDX articles (chess, doodleverse, node-graph, scribble-ai, movie-app, recoil-devtools, dial) |
+| `/about` | Bio, experience timeline, dog photo |
+| `/tags` | All tags with post counts |
+| `/tags/[tag]` | Posts filtered by tag |
+| `/api/last-visit` | Stores/returns the previous visitor's geolocation (shown in the "Latest Visit" pill) |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Features
 
-## Learn More
+- **Content**: the original post MDX (from [joshwrn/portfolio-posts](https://github.com/joshwrn/portfolio-posts)) rendered with `next-mdx-remote` — custom `CodeSnippet`, `CloudImage`, `Tweet`, `Sandpack`, and `Math` (KaTeX) components
+- **Code highlighting**: shiki with the Tokyo Night theme, line numbers, copy buttons
+- **Interactive sandboxes**: real `@codesandbox/sandpack-react` embeds in the dial / node-graph posts
+- **Design**: the site's original CSS custom properties, animated WebGL gradient background, sliding-letter hover buttons, floating pill nav with active indicator, dark/light theme toggle (persisted), chapters scroll-spy sidebar with reading progress, live PST clock, shimmer loading states
+- Project videos are served from the original CloudFront CDN
 
-To learn more about Next.js, take a look at the following resources:
+## Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `content/posts/*.mdx` — post content + frontmatter
+- `src/lib/posts.ts` — content loading/tag aggregation
+- `src/components/` — shared UI (`Nav`, `Footer`, `PostPreview`, `Background`, …)
+- `src/components/post/` — MDX building blocks

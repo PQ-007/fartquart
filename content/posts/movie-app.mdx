@@ -1,0 +1,148 @@
+---
+title: Movies App
+description: A social movie app that allows users to search for movies, view movie details, and look at the cast & crew. 
+category: project
+tags: ['next.js', 'movies', 'tmdb']
+publishedAt: 2023-04-18
+mainVideo: 'projects/movie-app/movie-app-main-video'
+demo: 'http://social-movie-app.vercel.app/'
+repo: 'https://github.com/joshwrn/movie-app'
+---
+
+## Motivation
+
+I wanted to learn more about Next.js and SSR (Server Side Rendering) so I decided to build a social movie app. I used the TMDB API and React Query to fetch the data.
+
+Unfortunately, I never got around to adding the social features, and the app is using the older version of Next.js. So I'm only going to talk about some of the UI components I built.
+
+---
+
+## Components
+
+### Color Extraction
+
+I wanted each movie's page to use the poster's main colors as accents. I used the [react-color-extractor](https://www.npmjs.com/package/react-color-extractor) library to achieve this.
+
+To get the colors, I used the `ColorExtractor` component and passed in the image source. The `getColors` function returns an array of colors, which I then used to set the state.
+
+<CodeSnippet
+  language="tsx"
+  code={`<ColorExtractor
+  src={getPosterImage(\`w92\`, movie.poster_path)}
+  getColors={(colors: string[]) => setColor(colors)}
+/>`}
+showLineNumbers={false}
+/>
+
+I then used the colors to set multiple components' background colors.
+
+<CloudImage
+  path="projects/movie-app/color-extractor.png"
+  alt={`Some of the components using the extracted colors. In this case the extracted colors are a light and dark orange.`}
+  subText={`Some of the components using the extracted colors. In this case the extracted colors are a light and dark orange.`}
+  width={2000}
+  height={1000}
+/>
+
+---
+
+### Circle Progress Bar
+
+I wanted to show the user's rating for a movie in a visually appealing way. So I created a circle progress bar that fills up based on the rating.
+
+The `Circle` component that takes in the radius, stroke, progress, and accent colors as props. It then calculates the circumference and stroke dash offset based on the progress. The circle itself is just an SVG element.
+
+<CodeSnippet
+  language="tsx"
+  title="Circle.tsx"
+  code={`import type { FC } from 'react'
+import React, { useMemo } from 'react'
+
+import styled from 'styled-components'
+
+interface Props {
+  radius: number
+  stroke: number
+  progress: number
+  accentColors: string[]
+}
+
+const CircularProgress: FC<Props> = ({
+  radius,
+  stroke,
+  progress,
+  accentColors,
+}) => {
+  const normalizedRadius = useMemo(() => radius - stroke / 2, [radius, stroke])
+  const circumference = useMemo(
+    () => normalizedRadius * 2 * Math.PI,
+    [normalizedRadius]
+  )
+  const strokeDashOffset = useMemo(
+    () => circumference - (progress / 100) * circumference,
+    [circumference, progress]
+  )
+
+  const gradientId = \`movie-rating-gradient-\${accentColors[0]}-\${accentColors[1]}\`
+
+  return (
+    <svg height={radius * 2} width={radius * 2}>
+      <defs>
+        <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor={accentColors[1]} />
+          <stop offset="100%" stopColor={accentColors[0]} />
+        </linearGradient>
+      </defs>
+      <BackgroundCircle
+        fill="transparent"
+        strokeWidth={stroke}
+        strokeDasharray={circumference + \` \` + circumference}
+        stroke-width={stroke}
+        r={normalizedRadius > 0 ? normalizedRadius : 0}
+        cx={radius}
+        cy={radius}
+        strokeDashoffset={0}
+      />
+      <Circle
+        fill="transparent"
+        strokeWidth={stroke}
+        strokeDasharray={circumference + \` \` + circumference}
+        stroke-width={stroke}
+        stroke={\`url(#\${gradientId})\`}
+        r={normalizedRadius > 0 ? normalizedRadius : 0}
+        cx={radius}
+        cy={radius}
+        strokeDashoffset={strokeDashOffset}
+        strokeLinecap="round"
+      />
+    </svg>
+  )
+}
+
+const Circle = styled.circle\`
+  transition: stroke-dashoffset 1s;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+\`
+
+const BackgroundCircle = styled(Circle)\`
+  stroke: var(--circle-background);
+\`
+
+export default CircularProgress`}
+/>
+
+<CloudImage
+  path="projects/movie-app/circle-component.png"
+  alt={`Some examples of the circle progress bar used in different components.`}
+  subText={`Some examples of the circle progress bar used in different components.`}
+  width={2000}
+  height={1000}
+/>
+
+---
+
+## Conclusion
+
+I learned a lot about SSR and Next.js while building this app. I also got to experiment with some interesting UI components. I don't plan on ever finishing the site, but I'm happy with what I learned from it.
+

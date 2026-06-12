@@ -1,0 +1,33 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  max-width: var(--main-max-width);
+  margin: 0 auto;
+  padding: 160px var(--main-padding-sides) 0;
+  background: var(--color-background);
+  min-height: 50vh;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.header h1 {
+  font-size: var(--font-5);
+  line-height: 1;
+}
+
+.header p {
+  font-size: var(--font-0);
+  max-width: 600px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}

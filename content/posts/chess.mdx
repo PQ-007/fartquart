@@ -1,0 +1,301 @@
+---
+title: Chess
+description: An online multiplayer 3D chess game built with React Three Fiber, Socket.IO, and Zustand. Share your code to play with friends. 
+category: project
+tags: ['socket.io', 'three.js', 'chess']
+publishedAt: 2023-06-23
+mainVideo: 'projects/chess/chess-main-video'
+demo: 'https://chess-in-3d.herokuapp.com/'
+repo: 'https://github.com/joshwrn/3d-chess'
+---
+
+## Motivation
+
+At this point in my life, I know myself pretty well. I knew if I set out to create a new board game from scratch it would end up taking me weeks or even months to finish. That's why I decided I to recreate a game instead. Chess was the obvious answer because it's straight forward, and logically easy to code.
+
+---
+
+## Logic
+
+The first thing I did was create all of the logic for the board. Maybe I could have used some 3rd party library but where's the fun in that? Plus I wanted to make sure I understood everything that was happening.
+
+By the end of the day I had a functioning (sort of) game of chess. I was confident that I was ready to move things to the world of *3D*.
+
+{/* {{ INSERT Sandpack demo of the 2d chessboard here }}  */}
+
+---
+
+## React Three Fiber
+
+### The pieces
+
+Now that I was ready to porting things over to Three.js I headed to [Sketchfab](https://sketchfab.com) and downloaded the 3D chess piece models. I have a very basic understanding of how to use Blender so I definitely couldn't model the pieces myself. However there was one minor setback to downloading them -- all the pieces were together in one file. So before I could use them, I had to separate each piece into it's own `.glb` file and update their origin points. Updating the origin points was necessary so that each models `(0, 0)` point was at the bottom-center (aka the point that will be touching the board). 
+
+<Sandpack
+customSetup={{dependencies: {
+    "loader-utils": "3.2.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "@react-three/fiber": "8.16.1",
+    "three": "0.163.0",
+    "@react-three/drei": "9.103.0",
+    "@types/three": "0.163.0",
+    "three-stdlib": "2.29.6"
+  },
+  devDependencies: {
+    "@types/react": "18.2.38",
+    "@types/react-dom": "18.2.15",
+    "typescript": "4.4.4"
+  }}}
+  files={{'App.tsx': `import "./styles.css";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Environment, Float } from "@react-three/drei";
+
+import React, { useRef } from "react";
+import type { FC } from "react";
+
+import { useGLTF } from "@react-three/drei";
+import type * as THREE from "three";
+import type { GLTF } from "three-stdlib";
+
+const pawnModelLink = \`https://res.cloudinary.com/db4ddmnhg/image/upload/v1711831584/pawn_i5xedq.glb\`;
+const envLink =
+  "https://res.cloudinary.com/db4ddmnhg/raw/upload/v1711831485/dawn_aukpla.hdr";
+
+type GLTFResult = GLTF & {
+  nodes: {
+    Object001: THREE.Mesh;
+  };
+  materials: {
+    [\`Object001_mtl.003\`]: THREE.MeshStandardMaterial;
+  };
+};
+
+export const PawnModel: FC = () => {
+  const ref = useRef(null);
+  const { nodes } = useGLTF(pawnModelLink) as unknown as GLTFResult;
+  return <mesh ref={ref} attach="geometry" {...nodes.Object001.geometry} />;
+};
+
+useGLTF.preload(pawnModelLink);
+
+export const PieceMaterial: FC<
+  JSX.IntrinsicElements[\`meshPhysicalMaterial\`]
+> = ({ color, ...props }) => {
+  return (
+    <meshPhysicalMaterial
+      reflectivity={4}
+      color={color === \`white\` ? \`#d9d9d9\` : \`#7c7c7c\`}
+      emissive={\`#000000\`}
+      metalness={1}
+      roughness={0.5}
+      attach="material"
+      envMapIntensity={0.2}
+      transparent={true}
+      {...props}
+    />
+  );
+};
+
+export default function App() {
+  const [color, setColor] = React.useState(\`white\`);
+  return (
+    <div className="App">
+      <Canvas shadows camera={{ position: [0, 0, 6], fov: 50 }}>
+        <Environment files={envLink} />
+        <OrbitControls
+          maxDistance={25}
+          minDistance={7}
+          enableZoom={false}
+          enablePan={false}
+        />
+        <pointLight
+          shadow-mapSize={[2048, 2048]}
+          castShadow
+          position={[0, 2, -5]}
+          intensity={0.65}
+          color="#ffe0ec"
+        />
+        <hemisphereLight
+          intensity={0.5}
+          color="#ffa4a4"
+          groundColor="#d886b7"
+        />
+        <group position={[0, -1, 0]}>
+          <Float speed={7} rotationIntensity={0} floatIntensity={1}>
+            <mesh
+              receiveShadow
+              scale={0.01}
+              position={[0, 0, 0]}
+              onClick={() => setColor(color === \`white\` ? \`black\` : \`white\`)}
+              onPointerEnter={() => {
+                document.body.style.cursor = \`pointer\`;
+              }}
+              onPointerLeave={() => {
+                document.body.style.cursor = \`default\`;
+              }}
+            >
+              <PawnModel />
+              <PieceMaterial color={color} />
+            </mesh>
+          </Float>
+        </group>
+      </Canvas>
+    </div>
+  );
+}
+`,
+'styles.css': `.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #1d1d1d;
+  background: linear-gradient(180deg, #000000, #242424);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}`
+}}
+/>
+
+### The Board
+
+The board itself was very easy to implement. I created it by mapping through an array and rendering 64 individual cubes. This way it was easy to check which cube the player had selected.
+
+<CodeSnippet
+  title="Creating the board"
+  language="tsx"
+  code={`<group key={\`$\{j}-$\{i}\`}>
+  <TileComponent
+    color={bg}
+    position={[j, 0.25, i]}
+    onClick={handleClick}
+    canMoveHere={canMoveHere?.newPosition ?? null}
+  />
+  <MeshWrapper key={pieceId} {...props}>
+    {tile.piece?.type === \`pawn\` && <PawnModel />}
+    {tile.piece?.type === \`rook\` && <RookComponent />}
+    {tile.piece?.type === \`knight\` && <KnightComponent />}
+    {tile.piece?.type === \`bishop\` && <BishopComponent />}
+    {tile.piece?.type === \`queen\` && <QueenComponent />}
+    {tile.piece?.type === \`king\` && <KingComponent />}
+  </MeshWrapper>
+</group>`}
+/>
+
+### Making it Pretty
+
+Now that everything was working as intended I wanted to make the experience a bit more polished. I love lighting effects so I used a red point light to mark the piece that was currently selected. It was functional and looked pretty nice.
+
+{/* {{ INSERT demo of light with on/off switch }} */}
+
+I also added more ambient lighting and updated the textures. I was going to set the game inside of a skybox but opted for a gradient background instead. I did however use a cubemap of a sunset to give the 3d models more realistic reflections. This is also what gave them the purple/pink tint.
+
+<CloudImage path="projects/chess/dawn_aukpla_jnb2by.jpg" alt={`The environment image I used. It's the "dawn" preset in the Environment component under "pmndrs/drei."`} subText={`The environment image I used. It's the "dawn" preset in the Environment component under "pmndrs/drei."`} width={1024} height={512} />
+
+### Animations
+
+There are two good libraries for handling animations in R3F. The first is [Framer Motion 3D](https://www.framer.com/motion/three-introduction/), and the second is [React Spring](https://www.react-spring.dev/). I started off by using Framer because I'd used it in the past but partway through I actually starting doing a lot of the animations with React Spring instead. I feel like React Spring's API is just slightly easier to use.
+
+<CodeSnippet 
+  title="Using React Spring"
+  language="tsx"
+  code={`const { opacity } = useSpring({ opacity: pieceIsBeingReplaced ? 0 : 1 })`}
+showLineNumbers={false}
+/>
+
+Using React Spring I added animations to everything from moving the pieces to the color of the tiles changing when you click on them.
+
+---
+
+## Multiplayer
+
+I hadn't had the chance to use [Socket.IO](https://socket.io/) yet, so I was excited to try it out. Real-time interactions between users seemed really cool.
+
+It was actually easy to set it up because of Next.js's "pages router". All I needed to do was create one `socket.ts` file under `src/pages/api`. 
+
+> **WARNING:** Sadly, with the new "app router" I'm not sure if it's still possible to use Socket.IO with Next.js. So take that into consideration if you're planning on using sockets. Using Socket.IO also means that you cannot use Vercel to deploy since it uses edge functions to serve the site instead of a dedicated server. I had to use Heroku to host the site but you could also use Fly.io or Render.
+
+### Events
+
+Obviously, I needed to allow players to join their own rooms unless I only wanted everyone playing together on one board. If I did it like that, things could be... chaotic. 
+
+<CodeSnippet
+  title="joinRoom.ts"
+  language="typescript"
+  code={`
+import type { JoinRoomClient } from '@/components/GameCreation'
+import type { Color } from '@/logic/pieces'
+import type { MyServer, MySocket, playerJoinedServer } from '@/pages/api/socket'
+
+export const joinRoom = (socket: MySocket, io: MyServer): void => {
+  socket.on(\`joinRoom\`, (data: JoinRoomClient) => {
+    const { room, username } = data
+
+    const playerCount = io.sockets.adapter.rooms.get(data.room)?.size || 0
+    if (playerCount === 2) {
+      socket.emit(\`newError\`, \`Room is full\`)
+      return
+    }
+
+    socket.join(room)
+    const color: Color = playerCount === 1 ? \`black\` : \`white\`
+    const props: playerJoinedServer = { room, username, color, playerCount }
+    io.sockets.in(room).emit(\`playerJoined\`, props)
+  })
+}`}
+/>
+
+I also created Socket.io events for making moves, moving the player's camera, fetching players in a room, and sending messages.
+
+### State
+
+I opted to use [Zustand](https://docs.pmnd.rs/zustand/getting-started/introduction) for state management. It's listed on the R3F homepage as "Bear necessities for state management in React." If you wanted a more atomic approach to state management you could use [Jotai](https://jotai.org/docs/introduction) or [Atom.io](https://atom.io.fyi).  
+
+One of the great things about Zustand  is the ability to get state outside of react. It's as simple as
+
+<CodeSnippet
+  code={`const { id, username } = usePlayerState.getState()`}
+  language="typescript"
+  title="Getting state outside of react"
+  showLineNumbers={false}
+/>
+
+
+> **NOTE:** This is important when you need to fetch state inside of socket events on the client.
+
+---
+
+## Conclusion
+
+This was a really fun project it and it took me less than one week to complete. I'd recommend creating random one off projects just for fun. You end up learning a lot and have something to show off at the end!
+
+Also, the creator of React Three Fiber, saw my project and tweeted about it. I thought that was pretty cool.
+
+<Tweet
+  content={`a beautiful multiplayer chess game written in react and powered by @nextjs. i think @joshwrn is the author. he posted the github link in the reddit thread.`}
+  user={{
+    username: '0xca0a',
+    name: "☄︎",
+    isVerified: true,
+    avatar: "https://pbs.twimg.com/profile_images/1362053856247623680/q23Y_71D_400x400.jpg"
+  }}
+  image={{
+    src: "https://pbs.twimg.com/ext_tw_video_thumb/1637902793372581888/pu/img/DP6_DrNMnNFUyNNK?format=jpg&name=medium",
+    alt: "A screenshot of the chess game.",
+    width: 1200,
+    height: 675,
+    isVideo: true
+  }}
+  date={"12:49 PM · Mar 20, 2023"}
+  link="1637904263539044354"
+  likes={292}
+  retweets={22}
+ />

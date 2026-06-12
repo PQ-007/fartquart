@@ -1,0 +1,135 @@
+.wrapper {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+  padding: 150px var(--main-padding-sides) 60px;
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.background[data-gradient="true"]::after {
+  content: "";
+  top: 0;
+  position: absolute;
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(180deg, var(--color-background) 0%, transparent 100%);
+  z-index: -1;
+}
+
+.background[data-bg="true"] {
+  background: var(--color-background);
+}
+
+.inner {
+  width: 100%;
+  max-width: var(--main-max-width);
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  align-items: flex-end;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact h4 {
+  font-size: var(--font--1);
+  font-weight: 400;
+  color: rgba(var(--color-primary-rgb), 0.5);
+}
+
+.contact :global(.sliding-text) {
+  font-size: 20px;
+}
+
+.copy {
+  position: relative;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.copied {
+  position: absolute;
+  left: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--font--2);
+  color: var(--color-accent);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.copied[data-visible="true"] {
+  opacity: 1;
+}
+
+.socials {
+  grid-column-start: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom > p {
+  display: flex;
+  font-size: 16px;
+}
+
+.bottom > p:nth-of-type(2) {
+  justify-content: center;
+}
+
+.bottom > p:last-of-type {
+  justify-content: flex-end;
+}
+
+@media (max-width: 600px) {
+  .top {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .socials {
+    grid-column-start: 1;
+    align-items: flex-start;
+  }
+  .bottom {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .bottom > p:nth-of-type(2),
+  .bottom > p:last-of-type {
+    justify-content: flex-start;
+  }
+}

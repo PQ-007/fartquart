@@ -1,0 +1,61 @@
+.chapters {
+  position: relative;
+  width: 280px;
+  flex-shrink: 0;
+}
+
+.inner {
+  position: sticky;
+  top: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-left: 30px;
+}
+
+.buttonWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.slider {
+  width: 100%;
+  height: 1px;
+  background: var(--color-divider);
+  position: relative;
+  overflow: visible;
+}
+
+.sliderFill {
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent);
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.list li a {
+  font-size: var(--font--1);
+  color: rgba(var(--color-primary-rgb), 0.5);
+  transition: color 0.3s;
+}
+
+.list li[data-active="true"] a,
+.list li a:hover {
+  color: var(--color-primary);
+}
+
+@media (max-width: 1200px) {
+  .chapters {
+    display: none;
+  }
+}
