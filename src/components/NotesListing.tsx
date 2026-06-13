@@ -10,7 +10,7 @@ import type { BlogMeta } from "@/lib/content"
 export const NotesListing = ({ posts }: { posts: BlogMeta[] }) => {
   const t = useT()
 
-  const books = posts.filter((p) => p.label === "book-review")
+  const books = posts.filter((p) => p.label === "book-note")
   const lessonNotes = posts.filter((p) => p.label === "lesson-note")
   const notes = posts.filter((p) => p.label === "note")
 
@@ -39,7 +39,7 @@ export const NotesListing = ({ posts }: { posts: BlogMeta[] }) => {
           {books.length > 0 && (
             <section className={styles.section}>
               <div className={styles.sectionHeader}>
-                <Tag name={t("blog.book-review")} />
+                <Tag name={t("blog.book-note")} />
                 <span className={styles.count}>{books.length}</span>
               </div>
               <div className={styles.bookList}>

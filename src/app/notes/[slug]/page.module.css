@@ -21,6 +21,7 @@
   margin: 0 auto;
 }
 
+/* Standard note header */
 .header {
   display: flex;
   flex-direction: column;
@@ -53,113 +54,126 @@
   flex-wrap: wrap;
 }
 
-/* ── Book review Goodreads-style header ──────────────────────────────────── */
-
-.bookReviewHeader {
+/* Book note header */
+.bookNoteHeader {
   display: flex;
-  gap: 32px;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 24px;
   margin-bottom: 40px;
 }
 
-.bookCover {
-  width: 160px;
+.bookNoteTop {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.bookNoteCover {
+  width: 80px;
   flex-shrink: 0;
   aspect-ratio: 2 / 3;
-  border-radius: 8px;
+  border-radius: 6px;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
 
-.bookCoverPlaceholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
-  text-align: center;
-  writing-mode: vertical-rl;
-}
-
-.bookCoverPlaceholder span {
-  font-size: var(--font--1);
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.bookInfo {
+.bookNoteInfo {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
-.bookTitle {
+.bookNoteTitle {
   font-size: var(--font-3);
   line-height: 1.15;
 }
 
-.bookAuthor {
-  font-size: var(--font-0);
-  color: rgba(var(--color-primary-rgb), 0.55);
+.bookNoteAuthor {
+  font-size: var(--font--1);
+  color: rgba(var(--color-primary-rgb), 0.5);
 }
 
-.bookStars {
+.bookNoteTags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+/* Star rating */
+.stars {
   display: flex;
   align-items: center;
   gap: 2px;
 }
-
 .starFull { color: #f59e0b; font-size: var(--font-0); }
 .starHalf { color: #f59e0b; font-size: var(--font-0); opacity: 0.6; }
 .starEmpty { color: rgba(var(--color-primary-rgb), 0.2); font-size: var(--font-0); }
 .ratingNum {
   font-size: var(--font--1);
-  color: rgba(var(--color-primary-rgb), 0.5);
+  color: rgba(var(--color-primary-rgb), 0.45);
   margin-left: 6px;
 }
 
-.bookMeta {
+/* Chapter list */
+.chapterList {
   display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  border: 1px solid var(--color-divider);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-.bookGenre {
+.chapterListHeading {
   font-size: var(--font--2);
-  background: rgba(59, 130, 246, 0.12);
-  color: rgba(96, 165, 250, 0.9);
-  border-radius: 4px;
-  padding: 2px 8px;
-}
-
-.bookPages {
-  font-size: var(--font--2);
-  color: rgba(var(--color-primary-rgb), 0.4);
-}
-
-.bookDate {
-  font-size: var(--font--2);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: rgba(var(--color-primary-rgb), 0.35);
+  padding: 14px 20px 10px;
+  border-bottom: 1px solid var(--color-divider);
 }
 
-@media (max-width: 600px) {
-  .bookReviewHeader {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .bookCover {
-    width: 120px;
-  }
-  .bookMeta {
-    justify-content: center;
-  }
+.chapterItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-divider);
+  transition: background 0.15s;
 }
 
+.chapterItem:last-child {
+  border-bottom: none;
+}
+
+.chapterItem:hover {
+  background: rgba(var(--color-primary-rgb), 0.04);
+}
+
+.chapterNum {
+  font-size: var(--font--2);
+  color: rgba(var(--color-primary-rgb), 0.3);
+  width: 20px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.chapterTitle {
+  font-size: var(--font-0);
+  color: var(--color-primary);
+  transition: color 0.15s;
+}
+
+.chapterItem:hover .chapterTitle {
+  color: var(--color-accent);
+}
+
+/* Cover image */
 .coverWrapper {
   width: 100%;
   border-radius: 15px;
@@ -185,7 +199,7 @@
   object-fit: cover;
 }
 
-/* Mobile table of contents */
+/* Mobile ToC */
 .mobileToc {
   display: none;
   border: 1px solid var(--color-divider);
@@ -234,5 +248,13 @@
 @media (max-width: 768px) {
   .container {
     padding-top: 110px;
+  }
+  .bookNoteTop {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .bookNoteCover {
+    width: 100px;
   }
 }

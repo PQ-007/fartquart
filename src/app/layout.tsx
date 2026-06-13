@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Fraunces, Manrope, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
+import "katex/dist/katex.min.css"
 import { ThemeProvider } from "@/components/ThemeProvider"
 import { LanguageProvider } from "@/components/LanguageProvider"
 import { Background } from "@/components/Background"

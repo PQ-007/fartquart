@@ -1,7 +1,7 @@
 ---
 title: ゼロから作る Deep Learning №2
 date: 2026-01-27
-label: book-review
+label: book-note
 author: 斎藤 康毅
 rating: 5
 genre: Deep Learning

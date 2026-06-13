@@ -1,5 +1,4 @@
 import Image from "next/image"
-import Link from "next/link"
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
@@ -10,9 +9,14 @@ import { Chapters, type Chapter } from "@/components/post/Chapters"
 import { mdxComponents, slugify } from "@/components/post/mdx-components"
 import { formatDate, getAllBlogPosts, getBlogPost } from "@/lib/content"
 import { ReadingProgress } from "@/components/ReadingProgress"
+import { mdxOptions, sanitizeMdx } from "@/lib/mdx-options"
+
+const BLOG_LABELS = ["internship", "project-log", "contest", "essay", "book-review"] as const
 
 export const generateStaticParams = () =>
-  getAllBlogPosts().map((p) => ({ slug: p.slug }))
+  getAllBlogPosts()
+    .filter((p) => (BLOG_LABELS as readonly string[]).includes(p.label))
+    .map((p) => ({ slug: p.slug }))
 
 export const generateMetadata = async ({
   params,
@@ -45,7 +49,19 @@ const extractChapters = (content: string): Chapter[] => {
   return chapters
 }
 
-const NOTE_LABELS = ["lesson-note", "note", "book-review"] as const
+const Stars = ({ rating }: { rating: number }) => {
+  const full = Math.floor(rating)
+  const half = rating - full >= 0.5 ? 1 : 0
+  const empty = 5 - full - half
+  return (
+    <div className={styles.bookStars}>
+      {Array.from({ length: full }).map((_, i) => <span key={`f${i}`} className={styles.starFull}>★</span>)}
+      {half ? <span className={styles.starHalf}>★</span> : null}
+      {Array.from({ length: empty }).map((_, i) => <span key={`e${i}`} className={styles.starEmpty}>★</span>)}
+      <span className={styles.ratingNum}>{rating % 1 === 0 ? rating.toFixed(0) : rating.toFixed(1)}</span>
+    </div>
+  )
+}
 
 export default async function BlogPostPage({
   params,
@@ -58,7 +74,7 @@ export default async function BlogPostPage({
   if (!post) notFound()
 
   const chapters = extractChapters(post.content)
-  const isNote = (NOTE_LABELS as readonly string[]).includes(post.label)
+  const isBookReview = post.label === "book-review"
 
   return (
     <>
@@ -66,25 +82,64 @@ export default async function BlogPostPage({
       <div className={styles.container}>
         <main className={styles.wrapper}>
           <article className={styles.article}>
-            <Link href={isNote ? "/notes" : "/blog"} className={styles.back}>
-              ← {isNote ? "Notes" : "Blog"}
-            </Link>
             <header className={styles.header}>
-              <div className={styles.titleRow}>
-                <h1>{post.title}</h1>
-                <p className={styles.dateMeta}>
-                  {formatDate(post.publishedAt)}
-                  {post.readTime ? ` · ${post.readTime} min` : ""}
-                </p>
-              </div>
-              <div className={styles.tags}>
-                <Tag name={post.label} />
-                {post.tags.map((tag) => (
-                  <Tag key={tag} name={tag} href={`/tags/${encodeURIComponent(tag)}`} />
-                ))}
-              </div>
+              {isBookReview ? (
+                <div className={styles.bookReviewHeader}>
+                  <div className={styles.bookCover}>
+                    {post.cover ? (
+                      <Image
+                        src={post.cover}
+                        alt={post.title}
+                        fill
+                        sizes="160px"
+                        style={{ objectFit: "cover" }}
+                        priority
+                      />
+                    ) : (
+                      <div className={styles.bookCoverPlaceholder} style={{ background: "#0f1f3d" }}>
+                        <span>{post.title}</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className={styles.bookInfo}>
+                    <h1 className={styles.bookTitle}>{post.title}</h1>
+                    {post.author && <p className={styles.bookAuthor}>{post.author}</p>}
+                    {post.rating != null && <Stars rating={post.rating} />}
+                    <div className={styles.bookMeta}>
+                      {post.genre && <span className={styles.bookGenre}>{post.genre}</span>}
+                      {post.pages && <span className={styles.bookPages}>{post.pages}p</span>}
+                    </div>
+                    <p className={styles.bookDate}>
+                      {formatDate(post.publishedAt)}
+                      {post.readTime ? ` · ${post.readTime} min read` : ""}
+                    </p>
+                    <div className={styles.tags}>
+                      <Tag name={post.label} />
+                      {post.tags.map((tag) => (
+                        <Tag key={tag} name={tag} href={`/tags/${encodeURIComponent(tag)}`} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <div className={styles.titleRow}>
+                    <h1>{post.title}</h1>
+                    <p className={styles.dateMeta}>
+                      {formatDate(post.publishedAt)}
+                      {post.readTime ? ` · ${post.readTime} min` : ""}
+                    </p>
+                  </div>
+                  <div className={styles.tags}>
+                    <Tag name={post.label} />
+                    {post.tags.map((tag) => (
+                      <Tag key={tag} name={tag} href={`/tags/${encodeURIComponent(tag)}`} />
+                    ))}
+                  </div>
+                </>
+              )}
             </header>
-            {post.cover && (
+            {!isBookReview && post.cover && (
               <div className={styles.coverWrapper}>
                 <div className={styles.lightBorder}>
                   <Image
@@ -114,13 +169,9 @@ export default async function BlogPostPage({
             )}
             <div className="post-content">
               <MDXRemote
-                source={post.content}
+                source={sanitizeMdx(post.content)}
                 components={mdxComponents}
-                options={{
-                  blockJS: false,
-                  blockDangerousJS: false,
-                  mdxOptions: { useDynamicImport: true },
-                }}
+                options={mdxOptions}
               />
             </div>
           </article>

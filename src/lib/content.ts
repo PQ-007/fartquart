@@ -12,12 +12,15 @@ const CREATIONS_DIR = path.join(process.cwd(), "content", "creations")
 
 export type BlogLabel =
   | "book-review"
+  | "book-note"
   | "internship"
   | "project-log"
   | "contest"
   | "essay"
   | "note"
   | "lesson-note"
+
+export type NewWord = { word: string; definition?: string }
 
 export type BlogMeta = {
   slug: string
@@ -32,6 +35,7 @@ export type BlogMeta = {
   pages?: number
   genre?: string
   readTime?: number
+  newWords?: NewWord[]
   draft?: boolean
 }
 
@@ -90,6 +94,24 @@ const fileToSlug = (f: string) =>
 
 // ── Blog ───────────────────────────────────────────────────────────────────
 
+const parseNewWords = (raw: unknown): NewWord[] | undefined => {
+  if (!Array.isArray(raw) || raw.length === 0) return undefined
+  return raw.map((item) => {
+    if (typeof item === "string") {
+      const colon = item.indexOf(":")
+      if (colon > 0) {
+        return { word: item.slice(0, colon).trim(), definition: item.slice(colon + 1).trim() }
+      }
+      return { word: item.trim() }
+    }
+    const obj = item as Record<string, unknown>
+    return {
+      word: String(obj.word ?? ""),
+      definition: obj.definition ? String(obj.definition) : undefined,
+    }
+  })
+}
+
 export const estimateReadTime = (content: string): number =>
   Math.max(1, Math.round(content.trim().split(/\s+/).length / 200))
 
@@ -106,6 +128,7 @@ const toBlogMeta = (slug: string, data: Record<string, unknown>, content = ""): 
   pages: data.pages ? Number(data.pages) : undefined,
   genre: data.genre ? String(data.genre) : undefined,
   readTime: content ? estimateReadTime(content) : undefined,
+  newWords: parseNewWords(data["new-word"]),
   draft: Boolean(data.draft),
 })
 
@@ -140,6 +163,28 @@ export const getBlogPost = (slug: string): Blog | null => {
 
 export const getBlogPostsByTag = (tag: string): BlogMeta[] =>
   getAllBlogPosts().filter((p) => p.label === tag || p.tags.includes(tag))
+
+export const getBookNoteChapters = (bookSlug: string): { slug: string; title: string }[] => {
+  const dir = path.join(NOTES_DIR, bookSlug)
+  if (!fs.existsSync(dir)) return []
+  return fs
+    .readdirSync(dir)
+    .filter((f) => f.endsWith(".md") && f !== "index.md")
+    .sort()
+    .flatMap((f) => {
+      const chSlug = f.replace(/\.md$/, "")
+      const { data } = matter(fs.readFileSync(path.join(dir, f), "utf8"))
+      if (data.draft) return []
+      return [{ slug: chSlug, title: String(data.title ?? chSlug) }]
+    })
+}
+
+export const getBookChapter = (bookSlug: string, chapterSlug: string): Blog | null => {
+  const file = path.join(NOTES_DIR, bookSlug, `${chapterSlug}.md`)
+  if (!fs.existsSync(file)) return null
+  const { data, content } = matter(fs.readFileSync(file, "utf8"))
+  return { ...toBlogMeta(chapterSlug, data, content), content }
+}
 
 // ── Creations ──────────────────────────────────────────────────────────────
 

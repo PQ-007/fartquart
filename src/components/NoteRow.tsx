@@ -7,7 +7,7 @@ import { formatDate } from "@/lib/format"
 import type { BlogMeta } from "@/lib/content"
 
 export const NoteRow = ({ post }: { post: BlogMeta }) => (
-  <Link href={`/blog/${encodeURIComponent(post.slug)}`} className={styles.row}>
+  <Link href={`/notes/${encodeURIComponent(post.slug)}`} className={styles.row}>
     <div className={styles.top}>
       <span className={styles.title}>{post.title}</span>
       <span className={styles.meta}>
@@ -18,7 +18,7 @@ export const NoteRow = ({ post }: { post: BlogMeta }) => (
     {post.tags.length > 0 && (
       <div className={styles.tags}>
         {post.tags.map((t) => (
-          <Tag key={t} name={t} href={`/tags/${encodeURIComponent(t)}`} />
+          <Tag key={t} name={t} />
         ))}
       </div>
     )}

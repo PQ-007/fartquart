@@ -4,7 +4,7 @@ import { PostPreview } from "@/components/PostPreview"
 import { Footer } from "@/components/Footer"
 import { HomeHero } from "@/components/HomeHero"
 import { HomeGraph } from "@/components/HomeGraph"
-import { LatestFeed } from "@/components/LatestFeed"
+import { ActivityFeed } from "@/components/ActivityFeed"
 import { getFeaturedContent, getGraphData, getAllBlogPosts } from "@/lib/content"
 
 export default function Home() {
@@ -48,7 +48,7 @@ export default function Home() {
           <div className={styles.divider} />
           <div className={styles.projectsInnerWrapper}>
             <div className={styles.projectsInner}>
-              <LatestFeed posts={latestPosts} />
+              <ActivityFeed posts={latestPosts} />
             </div>
           </div>
         </div>

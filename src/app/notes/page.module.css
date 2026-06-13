@@ -46,10 +46,16 @@
 }
 
 .bookList {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
   width: 100%;
+}
+
+@media (max-width: 700px) {
+  .bookList {
+    grid-template-columns: 1fr;
+  }
 }
 
 .noteList {

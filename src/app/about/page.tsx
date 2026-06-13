@@ -31,17 +31,9 @@ export default function AboutPage() {
           </div>
           <div className={styles.intro}>
             <h1>{t("about.greeting")}</h1>
-            <p>
-              I&rsquo;m <span>Bilguun</span>, a software engineer from Ulaanbaatar, Mongolia.
-            </p>
-            <p>
-              I build web and mobile apps — with a particular interest in creative interfaces,
-              3D graphics, and tools that feel alive to use.
-            </p>
-            <p>
-              Currently learning Japanese and building <em>Ivo</em>, a dictionary and flashcard
-              app designed to stay out of the way.
-            </p>
+            <p>{t("about.bio1")}</p>
+            <p>{t("about.bio2")}</p>
+            <p>{t("about.bio3")}</p>
           </div>
         </section>
         {EXPERIENCE.length > 0 && (
@@ -61,11 +53,18 @@ export default function AboutPage() {
         <section className={styles.more}>
           <h4>{t("about.more")}</h4>
           <p>
-            I also write about programming, language learning, and other random stuff on{" "}
-            <a href="https://bilguun.dev" target="_blank" rel="noopener noreferrer">
-              my personal blog
-            </a>
-            . If you want to chat or collaborate on something, feel free to reach out!
+            {t("about.moreBody").split(t("about.blogLink")).map((part, i, arr) =>
+              i < arr.length - 1 ? (
+                <span key={i}>
+                  {part}
+                  <a href="https://bilguun.dev" target="_blank" rel="noopener noreferrer">
+                    {t("about.blogLink")}
+                  </a>
+                </span>
+              ) : (
+                <span key={i}>{part}</span>
+              )
+            )}
           </p>
         </section>
       </div>

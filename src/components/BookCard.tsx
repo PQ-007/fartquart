@@ -29,8 +29,13 @@ const Stars = ({ rating }: { rating: number }) => {
   )
 }
 
-export const BookCard = ({ post }: { post: BlogMeta }) => (
-  <Link href={`/blog/${encodeURIComponent(post.slug)}`} className={styles.card}>
+export const BookCard = ({ post }: { post: BlogMeta }) => {
+  const href =
+    post.label === "book-note"
+      ? `/notes/${encodeURIComponent(post.slug)}`
+      : `/blog/${encodeURIComponent(post.slug)}`
+  return (
+  <Link href={href} className={styles.card}>
     <div className={styles.cover}>
       {post.cover ? (
         // eslint-disable-next-line @next/next/no-img-element
@@ -55,4 +60,5 @@ export const BookCard = ({ post }: { post: BlogMeta }) => (
       {post.description && <p className={styles.description}>{post.description}</p>}
     </div>
   </Link>
-)
+  )
+}
