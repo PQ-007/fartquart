@@ -1,0 +1,227 @@
+---
+title: DoodleVerse
+description: A real-time 3d drawing game that allows users to draw on a shared canvas. Built with React Three Fiber and Socket.IO.
+category: project
+tags: ['canvas', 'socket.io', 'three.js']
+publishedAt: 2023-08-03
+mainVideo: 'projects/doodleverse/doodleverse-main-video'
+demo: 'http://doodleverse.joshw.io/'
+repo: 'https://github.com/joshwrn/DoodleVerse'
+---
+
+## Motivation
+
+I wanted to code something that allowed users to be creative together in a shared space. I took inspiration from Reddit's r/place and created DoodleVerse. Unlike r/place I don't have millions of users, so I added a 3D element to make it more interesting. I also didn't need to worry about the same scale of abuse, so I allowed users to draw on the canvas without any restrictions.
+
+<CloudImage path="projects/doodleverse/place.png" alt={`Reddit r/place 2023`} subText={`Reddit r/place 2023`} width={1920} height={1280} />
+
+---
+
+## The Canvas
+
+### Setting Up
+
+Initially I wasn't sure how I was going to approach drawing on a 3d canvas. I thought I might have to create a custom shader, but while researching I found out I could actually use a normal canvas element as a texture in React Three Fiber!
+
+It's as simple as using the `canvasTexture` component and passing in the canvas element as the `image`.
+
+```tsx
+<mesh
+  receiveShadow
+  castShadow
+  ref={ref}
+>
+  <boxGeometry />
+  {imageLoaded && (
+    <meshStandardMaterial metalness={0} roughness={0.1}>
+      <canvasTexture attach="map" ref={textureRef} image={domNode} />
+    </meshStandardMaterial>
+  )}
+</mesh>
+```
+
+Here's how you can connect the 2d canvas with a ref.
+
+```tsx
+export const Canvas: FC = () => {
+  const [canvasNode, setCanvasNode] = useState<HTMLCanvasElement | null>(null)
+  const onRefChange = useCallback((node: HTMLCanvasElement) => {
+    setCanvasNode(node)
+  }, [])
+
+  return (
+    <>
+      <canvas ref={onRefChange} />
+      <Board canvasNode={canvasNode} />
+    </>
+  )
+}
+
+```
+
+{/* add sandbox here with canvas drawing and texture */}
+
+---
+
+### Drawing
+
+Next I needed to figure out how I was going to convert a point in 3d space to a point on the 2d canvas element. I needed the resolution to be much higher than the 3d canvas, so I could have a detailed drawing. I decided to use a ratio of 20, so for every 20 pixels on the 2d canvas, there would be 1 unit on the 3d canvas. 
+
+I also lined the canvas up in 3d space so that `0,0` on the 3d canvas would be the bottom left of the 2d canvas.
+
+```tsx
+export const CANVAS_TO_BOARD_RATIO = 20
+export const CANVAS_RESOLUTION = {
+  width: 3000,
+  height: 1000,
+}
+
+export const BOARD_DIMENSIONS = {
+  width: CANVAS_RESOLUTION.width / CANVAS_TO_BOARD_RATIO,
+  height: CANVAS_RESOLUTION.height / CANVAS_TO_BOARD_RATIO,
+}
+
+const convertVector3ToCanvasCoords = ({ point }: { point: Vector3 }) => {
+  const x2d = point.x * CANVAS_TO_BOARD_RATIO
+  const y2d = point.y * CANVAS_TO_BOARD_RATIO
+  const currentPosition = {
+    x: CANVAS_RESOLUTION.width - x2d,
+    y: CANVAS_RESOLUTION.height - y2d,
+  }
+  return currentPosition
+}
+
+```
+
+From there you just need to pass in a raycaster to get the point in 3d space before converting it to a 2d point.
+
+```tsx
+const MAX_DISTANCE_FROM_BOARD = 200
+
+const raycaster = new THREE.Raycaster(
+  new THREE.Vector3(),
+  new THREE.Vector3(0, 0, 1),
+  0,
+  MAX_DISTANCE_FROM_BOARD
+)
+
+useFrame(() => {
+  if (textureRef.current) {
+    textureRef.current.needsUpdate = true
+  }
+  if (ref) {
+    raycaster.setFromCamera(mouse, camera)
+    const ray = raycaster.intersectObject(ref.current!)[0]
+    if (!ray) {
+      onLeave()
+      return
+    }
+    const { distance, point } = ray
+    setDistance(distance)
+    currentPositionRef.current = convertVector3ToCanvasCoords({ point })
+  }
+})
+```
+
+---
+
+## Socket.IO
+
+I used Socket.IO to allow users to draw on the canvas in real-time. Sending brush strokes to the server and then broadcasting them to all connected clients was the easy part. What was difficult was saving the state of the canvas and sending it to new users when they connected. 
+
+I didn't want to send every single brush stroke to new users, so I decided to use a library called `node-canvas` to draw the strokes on the server and then send the image data to the client. 
+
+### Loading the Canvas
+
+First, I get the latest canvas data from the database and draw it on the canvas.
+
+```tsx
+import { MyServer, MySocket } from '@/pages/api/socket'
+import { Canvas, loadImage } from 'canvas'
+import { Db } from 'mongodb'
+
+export const LoadCanvas = async (
+  socket: MySocket,
+  io: MyServer,
+  canvas: Canvas,
+  db: Db
+) => {
+  let data = canvas.toDataURL()
+  const ctx = canvas.getContext('2d')
+  if (io.engine.clientsCount === 1) {
+    const latest = await db
+      .collection('mural-collection')
+      .find({})
+      .sort({ date: -1 })
+      .limit(1)
+      .toArray()
+    if (latest[0]) {
+      data = latest[0].data
+      loadImage(data).then((image) => {
+        ctx.drawImage(image, 0, 0)
+      })
+    }
+  }
+  socket.emit(\
+```
+
+After the canvas is loaded, I send the image data to the client. This is how I use the canvas data sent from the server to draw on the client's canvas.
+
+```tsx
+export const loadCanvas = (
+  socket: ClientSocket,
+  domNode: HTMLCanvasElement
+) => {
+  const { setImageLoaded } = useImageLoadedStore.getState()
+  socket.on('loadCanvas', (data) => {
+    const img = new Image()
+    img.onload = () => {
+      const ctx = domNode.getContext('2d')
+      if (!ctx) {
+        throw new Error(\
+```
+
+---
+
+### Sending Brush Strokes
+
+Every time a user makes a brush stroke, I send the data to the server.
+
+```tsx
+socket.emit(\
+```
+
+The server then draws the brush stroke on the node canvas and I broadcast that brush stroke to all connected clients.
+
+```tsx
+export const makeBrushStroke = (
+  socket: MySocket,
+  io: MyServer,
+  ctx: CanvasRenderingContext2D
+): void => {
+  socket.on(\
+```
+
+On the client side, I listen for the brush stroke event and draw the stroke on the canvas. It is almost the same as the server code, but I check if the user id matches the current user before drawing the stroke.
+
+```tsx
+export const makeBrushStroke = (
+  socket: ClientSocket,
+  userId: string,
+  domNode: HTMLCanvasElement
+) => {
+  socket.on('makeBrushStroke', (data) => {
+    if (data.userId !== userId) {
+      const ctx = domNode?.getContext('2d')
+      const { brushStroke } = data
+      if (ctx) {
+        ctx.beginPath()
+        ctx.lineWidth = brushStroke.brushSize
+        ctx.lineCap = \
+```
+
+---
+
+## Conclusion
+
+DoodleVerse was a fun project to work on. I learned a lot about using 2d canvases as textures in React Three Fiber and how to use node-canvas to draw on the server. I think this is my favorite project so far!

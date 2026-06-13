@@ -170,26 +170,9 @@ export default function App() {
 
 The board itself was very easy to implement. I created it by mapping through an array and rendering 64 individual cubes. This way it was easy to check which cube the player had selected.
 
-<CodeSnippet
-  title="Creating the board"
-  language="tsx"
-  code={`<group key={\`$\{j}-$\{i}\`}>
-  <TileComponent
-    color={bg}
-    position={[j, 0.25, i]}
-    onClick={handleClick}
-    canMoveHere={canMoveHere?.newPosition ?? null}
-  />
-  <MeshWrapper key={pieceId} {...props}>
-    {tile.piece?.type === \`pawn\` && <PawnModel />}
-    {tile.piece?.type === \`rook\` && <RookComponent />}
-    {tile.piece?.type === \`knight\` && <KnightComponent />}
-    {tile.piece?.type === \`bishop\` && <BishopComponent />}
-    {tile.piece?.type === \`queen\` && <QueenComponent />}
-    {tile.piece?.type === \`king\` && <KingComponent />}
-  </MeshWrapper>
-</group>`}
-/>
+```tsx
+<group key={\
+```
 
 ### Making it Pretty
 
@@ -205,12 +188,9 @@ I also added more ambient lighting and updated the textures. I was going to set 
 
 There are two good libraries for handling animations in R3F. The first is [Framer Motion 3D](https://www.framer.com/motion/three-introduction/), and the second is [React Spring](https://www.react-spring.dev/). I started off by using Framer because I'd used it in the past but partway through I actually starting doing a lot of the animations with React Spring instead. I feel like React Spring's API is just slightly easier to use.
 
-<CodeSnippet 
-  title="Using React Spring"
-  language="tsx"
-  code={`const { opacity } = useSpring({ opacity: pieceIsBeingReplaced ? 0 : 1 })`}
-showLineNumbers={false}
-/>
+```tsx
+const { opacity } = useSpring({ opacity: pieceIsBeingReplaced ? 0 : 1 })
+```
 
 Using React Spring I added animations to everything from moving the pieces to the color of the tiles changing when you click on them.
 
@@ -228,31 +208,14 @@ It was actually easy to set it up because of Next.js's "pages router". All I nee
 
 Obviously, I needed to allow players to join their own rooms unless I only wanted everyone playing together on one board. If I did it like that, things could be... chaotic. 
 
-<CodeSnippet
-  title="joinRoom.ts"
-  language="typescript"
-  code={`
+```typescript
 import type { JoinRoomClient } from '@/components/GameCreation'
 import type { Color } from '@/logic/pieces'
 import type { MyServer, MySocket, playerJoinedServer } from '@/pages/api/socket'
 
 export const joinRoom = (socket: MySocket, io: MyServer): void => {
-  socket.on(\`joinRoom\`, (data: JoinRoomClient) => {
-    const { room, username } = data
-
-    const playerCount = io.sockets.adapter.rooms.get(data.room)?.size || 0
-    if (playerCount === 2) {
-      socket.emit(\`newError\`, \`Room is full\`)
-      return
-    }
-
-    socket.join(room)
-    const color: Color = playerCount === 1 ? \`black\` : \`white\`
-    const props: playerJoinedServer = { room, username, color, playerCount }
-    io.sockets.in(room).emit(\`playerJoined\`, props)
-  })
-}`}
-/>
+  socket.on(\
+```
 
 I also created Socket.io events for making moves, moving the player's camera, fetching players in a room, and sending messages.
 
@@ -262,12 +225,9 @@ I opted to use [Zustand](https://docs.pmnd.rs/zustand/getting-started/introducti
 
 One of the great things about Zustand  is the ability to get state outside of react. It's as simple as
 
-<CodeSnippet
-  code={`const { id, username } = usePlayerState.getState()`}
-  language="typescript"
-  title="Getting state outside of react"
-  showLineNumbers={false}
-/>
+```typescript
+const { id, username } = usePlayerState.getState()
+```
 
 
 > **NOTE:** This is important when you need to fetch state inside of socket events on the client.

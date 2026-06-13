@@ -5,7 +5,7 @@ let highlighterPromise: Promise<Highlighter> | null = null
 export const getHighlighter = (): Promise<Highlighter> => {
   highlighterPromise ??= createHighlighter({
     themes: ["tokyo-night"],
-    langs: ["tsx", "ts", "jsx", "js", "css", "html", "json", "bash", "text"],
+    langs: ["tsx", "ts", "jsx", "js", "css", "html", "json", "bash", "python", "rust", "go", "java", "c", "cpp", "text"],
   })
   return highlighterPromise
 }

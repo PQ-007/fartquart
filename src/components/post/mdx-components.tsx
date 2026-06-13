@@ -1,5 +1,6 @@
 import type { ComponentPropsWithoutRef, ReactNode } from "react"
 import type { MDXComponents } from "mdx/types"
+import { CodeBlock } from "./CodeBlock"
 import { CodeSnippet } from "./CodeSnippet"
 import { CloudImage } from "./CloudImage"
 import { Tweet } from "./Tweet"
@@ -70,6 +71,7 @@ export const mdxComponents: MDXComponents = {
   h2: heading("h2"),
   h3: heading("h3"),
   a: ExternalLink,
+  pre: CodeBlock,
   CodeSnippet,
   CloudImage,
   Tweet,

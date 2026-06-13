@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Script from "next/script"
 import { Fraunces, Manrope, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import "katex/dist/katex.min.css"
@@ -42,6 +43,13 @@ export default function RootLayout({
       <body
         className={`${serif.variable} ${neue.variable} ${jetbrains.variable}`}
       >
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()`,
+          }}
+        />
         <ThemeProvider>
           <LanguageProvider>
             <Background />
