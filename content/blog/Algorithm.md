@@ -1,7 +1,7 @@
 ---
 title: Алгоритм гэж юу вэ?
 description: Компьютерын алгоритм хүний нийгэмд хэрхэн нөлөөлж буй, ажиллах зарчим, түүхийн тухай.
-label: lesson-note
+label: article
 tags:
   - Algorithm
   - ComputerScience

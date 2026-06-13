@@ -29,7 +29,7 @@ const dict = {
       "project-log": "Project Log",
       contest: "Contest",
       essay: "Essay",
-      note: "Note",
+      article: "Article",
       "lesson-note": "Lesson Note",
     },
     home: {
@@ -77,7 +77,7 @@ const dict = {
       "project-log": "Төслийн тэмдэглэл",
       contest: "Уралдаан",
       essay: "Эссэ",
-      note: "Тэмдэглэл",
+      article: "Нийтлэл",
       "lesson-note": "Хичээлийн тэмдэглэл",
     },
     home: {
@@ -125,7 +125,7 @@ const dict = {
       "project-log": "プロジェクト",
       contest: "コンテスト",
       essay: "エッセイ",
-      note: "メモ",
+      article: "記事",
       "lesson-note": "授業ノート",
     },
     home: {

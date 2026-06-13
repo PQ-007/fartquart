@@ -17,7 +17,7 @@ export type BlogLabel =
   | "project-log"
   | "contest"
   | "essay"
-  | "note"
+  | "article"
   | "lesson-note"
 
 export type NewWord = { word: string; definition?: string }
@@ -119,7 +119,7 @@ const toBlogMeta = (slug: string, data: Record<string, unknown>, content = ""): 
   slug,
   title: String(data.title ?? ""),
   description: String(data.description ?? "").trim(),
-  label: (data.label as BlogLabel) ?? "note",
+  label: (data.label as BlogLabel) ?? "article",
   tags: Array.isArray(data.tags) ? (data.tags as string[]) : [],
   publishedAt: normalizeDate(data.date ?? data.publishedAt ?? new Date()),
   cover: data.cover ? String(data.cover) : undefined,

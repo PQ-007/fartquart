@@ -7,7 +7,6 @@ tags:
   - Backtracking
   - GameDev
 date: 2026-05-07
-language: mn
 draft: false
 ---
 ## Танилцуулга

@@ -8,15 +8,14 @@ import { Tag } from "./Tag"
 import { useT } from "./LanguageProvider"
 import type { BlogMeta } from "@/lib/content"
 
-type BlogLabel = "book-review" | "internship" | "project-log" | "contest" | "essay" | "note" | "lesson-note"
+type BlogLabel = "book-review" | "internship" | "project-log" | "contest" | "essay" | "article"
 
 const LABEL_ORDER: BlogLabel[] = [
   "project-log",
   "internship",
   "contest",
   "essay",
-  "note",
-  "lesson-note",
+  "article",
 ]
 
 export const BlogListing = ({ posts }: { posts: BlogMeta[] }) => {

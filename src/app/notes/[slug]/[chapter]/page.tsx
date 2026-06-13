@@ -22,7 +22,7 @@ const extractLinks = (content: string) => {
 }
 
 export const generateStaticParams = async () => {
-  const bookNotes = getAllBlogPosts().filter((p) => p.label === "book-note")
+  const bookNotes = getAllBlogPosts().filter((p) => p.label === "book-note" || p.label === "lesson-note")
   return bookNotes.flatMap((book) =>
     getBookNoteChapters(book.slug).map((ch) => ({
       slug: book.slug,

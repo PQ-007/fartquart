@@ -5,8 +5,7 @@ tags:
   - Algorithm
   - How
 draft: true
-language:
-  - mn
+label: article
 ---
 ![[Pasted image 20260325194219.png]]
 

@@ -12,7 +12,8 @@ import { formatDate, getAllBlogPosts, getBlogPost, getBookNoteChapters } from "@
 import { ReadingProgress } from "@/components/ReadingProgress"
 import { mdxOptions, sanitizeMdx } from "@/lib/mdx-options"
 
-const NOTE_LABELS = ["lesson-note", "note", "book-note"] as const
+const NOTE_LABELS = ["lesson-note", "book-note"] as const
+const DIRECTORY_LABELS = ["book-note", "lesson-note"]
 
 export const generateStaticParams = () =>
   getAllBlogPosts()
@@ -74,7 +75,7 @@ export default async function NoteSlugPage({
   const post = getBlogPost(slug)
   if (!post) notFound()
 
-  const isBookNote = post.label === "book-note"
+  const isBookNote = DIRECTORY_LABELS.includes(post.label)
   const bookChapters = isBookNote ? getBookNoteChapters(slug) : []
   const tocChapters = extractChapters(post.content)
 

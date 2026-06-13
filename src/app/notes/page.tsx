@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: "Notes" }
 
 export default function NotesPage() {
   const posts = getAllBlogPosts().filter(
-    (p) => p.label === "lesson-note" || p.label === "note" || p.label === "book-note",
+    (p) => p.label === "lesson-note" || p.label === "book-note",
   )
   return (
     <>
