@@ -1,8 +1,8 @@
 ---
-title: "Internship №1 — Susano"
+title: Internship №1 — Susano
 description: Susano дахь CAD болон C#/.NET хэрэглэсэн дадлагын тэмдэглэл.
 label: internship
-cover: /images/susano-internship/susano-internship-cover.jpg
+cover: resources/images/susano-internship/susano-internship-cover.jpg
 tags:
   - Internship
   - CAD
@@ -26,7 +26,7 @@ draft: false
 
 Эхний долоо хоногт өгсөн даалгавар бол n×m координатын системд байрлах "x" ширхэг цэгийг дотроо агуулсан хамгийн бага талбайтай тэгш өнцөгтийг зурах даалгавар байсан. (Windows Forms App ашиглан UI гарган C# хэл дээр гүйцэтгэх )
 
-![Даалгавар](/images/susano-internship/susano-problem1.1.png)
+![Даалгавар](resources/images/susano-internship/susano-problem1.1.png)
 
 1. Үүсгэх цэгийн тоог оруулан random товчийг дарахад picturebox дотор random байршилтай цэгүүдийг дүрслэнэ.
     
@@ -37,7 +37,7 @@ draft: false
 4. (**Нэмэлт: minPolygon товч**)бүх цэгийг дотроо багтаасан боломжит хамгийн бага талбай бүхий олон өнцөгтийг олох
     
 
-![Гүйцэтгэл](/images/susano-internship/susano-problem1.2.png)
+![Гүйцэтгэл](resources/images/susano-internship/susano-problem1.2.png)
 
 ---
 
@@ -100,7 +100,7 @@ draft: false
 - [www.autodesk.co.jp/support/technical/article/caas/tsarticles/tsarticles/JPN/ts/6kRFCS0mCalWLwAOpP9pNT.html](https://www.autodesk.co.jp/support/technical/article/caas/tsarticles/tsarticles/JPN/ts/6kRFCS0mCalWLwAOpP9pNT.html)
     
 
-![AutoCAD grid даалгавар](/images/susano-internship/susano-problem2.png)
+![AutoCAD grid даалгавар](resources/images/susano-internship/susano-problem2.png)
 
 ### Шийдэл
 
@@ -115,13 +115,13 @@ draft: false
 
 ### Flowchart
 
-![Flowchart](/images/susano-internship/susano-problem2-solution-diagram.png)
+![Flowchart](resources/images/susano-internship/susano-problem2-solution-diagram.png)
 
 ### Demo
 
-![Demo 1](/images/susano-internship/susano-problem2-solution1.png)
+![Demo 1](resources/images/susano-internship/susano-problem2-solution1.png)
 
-![Demo 2](/images/susano-internship/susano-problem2-solution2.png)
+![Demo 2](resources/images/susano-internship/susano-problem2-solution2.png)
 
 ### Ойлгож сурсан зүйлс
 
@@ -172,8 +172,8 @@ draft: false
 
 ### Demo
 
-![APS Web viewer 1](/images/susano-internship/susano-web0.png)
+![APS Web viewer 1](resources/images/susano-internship/susano-web0.png)
 
-![APS Web viewer 2](/images/susano-internship/susano-web1.png)
+![APS Web viewer 2](resources/images/susano-internship/susano-web1.png)
 
-![APS Web viewer 3](/images/susano-internship/susano-web2.png)
+![APS Web viewer 3](resources/images/susano-internship/susano-web2.png)
