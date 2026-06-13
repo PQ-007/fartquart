@@ -1,4 +1,7 @@
 import Image from "next/image"
+
+const coverUrl = (cover: string) => cover.startsWith("http") ? cover : `/${cover}`
+const isGif = (url: string) => url.toLowerCase().endsWith(".gif")
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
@@ -88,12 +91,13 @@ export default async function BlogPostPage({
                   <div className={styles.bookCover}>
                     {post.cover ? (
                       <Image
-                        src={post.cover}
+                        src={coverUrl(post.cover)}
                         alt={post.title}
                         fill
                         sizes="160px"
                         style={{ objectFit: "cover" }}
                         priority
+                        unoptimized={isGif(post.cover)}
                       />
                     ) : (
                       <div className={styles.bookCoverPlaceholder} style={{ background: "#0f1f3d" }}>
@@ -143,12 +147,13 @@ export default async function BlogPostPage({
               <div className={styles.coverWrapper}>
                 <div className={styles.lightBorder}>
                   <Image
-                    src={post.cover}
+                    src={coverUrl(post.cover)}
                     alt={post.title}
                     fill
                     sizes="(max-width: 768px) 100vw, 800px"
                     className={styles.coverImage}
                     priority
+                    unoptimized={isGif(post.cover)}
                   />
                 </div>
               </div>

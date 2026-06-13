@@ -9,6 +9,8 @@ const SPINE_BG = ["#0f1f3d", "#1e0f3d", "#0f2d1e", "#2d1a00", "#2d0f0f", "#1a0f2
 const spineColor = (title: string) =>
   SPINE_BG[[...title].reduce((a, c) => a + c.charCodeAt(0), 0) % SPINE_BG.length]
 
+const coverUrl = (cover: string) => cover.startsWith("http") ? cover : `/${cover}`
+
 const Stars = ({ rating }: { rating: number }) => {
   const full = Math.floor(rating)
   const half = rating - full >= 0.5 ? 1 : 0
@@ -39,7 +41,7 @@ export const BookCard = ({ post }: { post: BlogMeta }) => {
     <div className={styles.cover}>
       {post.cover ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={post.cover} alt={post.title} />
+        <img src={coverUrl(post.cover)} alt={post.title} />
       ) : (
         <div className={styles.spine} style={{ background: spineColor(post.title) }}>
           <span className={styles.spineTitle}>{post.title}</span>

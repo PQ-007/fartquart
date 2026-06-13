@@ -1,4 +1,7 @@
 import Image from "next/image"
+
+const coverUrl = (cover: string) => cover.startsWith("http") ? cover : `/${cover}`
+const isGif = (url: string) => url.toLowerCase().endsWith(".gif")
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
@@ -81,7 +84,7 @@ export default async function CreationPage({
                   />
                 ) : creation.cover ? (
                   <Image
-                    src={creation.cover}
+                    src={coverUrl(creation.cover)}
                     alt={creation.title}
                     fill
                     sizes="(max-width: 768px) 100vw, 800px"

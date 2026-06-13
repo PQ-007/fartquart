@@ -1,4 +1,7 @@
 import Image from "next/image"
+
+const coverUrl = (cover: string) => cover.startsWith("http") ? cover : `/${cover}`
+const isGif = (url: string) => url.toLowerCase().endsWith(".gif")
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
@@ -91,7 +94,7 @@ export default async function NoteSlugPage({
                   <div className={styles.bookNoteTop}>
                     {post.cover && (
                       <div className={styles.bookNoteCover}>
-                        <Image src={post.cover} alt={post.title} fill sizes="80px" style={{ objectFit: "cover" }} />
+                        <Image src={coverUrl(post.cover)} alt={post.title} fill sizes="80px" style={{ objectFit: "cover" }} unoptimized={isGif(post.cover)} />
                       </div>
                     )}
                     <div className={styles.bookNoteInfo}>

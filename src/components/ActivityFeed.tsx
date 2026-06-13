@@ -9,7 +9,10 @@ interface Props {
   posts: BlogMeta[]
 }
 
-const NOTE_LABELS = ["note", "lesson-note", "book-note"]
+const coverUrl = (cover: string) => cover.startsWith("http") ? cover : `/${cover}`
+const isGif = (url: string) => url.toLowerCase().endsWith(".gif")
+
+const NOTE_LABELS = ["lesson-note", "book-note"]
 
 const GRADIENTS = [
   "linear-gradient(135deg, #0f1f3d, #1e3a5f)",
@@ -36,11 +39,12 @@ export const ActivityFeed = ({ posts }: Props) => (
             <div className={styles.cover}>
               {post.cover ? (
                 <Image
-                  src={post.cover}
+                  src={coverUrl(post.cover)}
                   alt={post.title}
                   fill
                   sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw"
                   style={{ objectFit: "cover" }}
+                  unoptimized={isGif(post.cover)}
                 />
               ) : (
                 <div

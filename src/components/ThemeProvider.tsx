@@ -26,6 +26,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     if (stored === "light" || stored === "dark") {
       setTheme(stored)
       document.documentElement.setAttribute("data-theme", stored)
+      document.cookie = `theme=${stored};path=/;max-age=31536000`
     }
   }, [])
 
@@ -33,6 +34,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     setTheme((prev) => {
       const next = prev === "dark" ? "light" : "dark"
       localStorage.setItem("theme", next)
+      document.cookie = `theme=${next};path=/;max-age=31536000`
       document.documentElement.setAttribute("data-theme", next)
       return next
     })

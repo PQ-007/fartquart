@@ -4,8 +4,9 @@ import matter from "gray-matter"
 export { formatDate } from "./format"
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog")
-const NOTES_DIR = path.join(process.cwd(), "content", "notes")
-const ALL_BLOG_DIRS = [BLOG_DIR, NOTES_DIR]
+const BOOK_NOTES_DIR = path.join(process.cwd(), "content", "book-notes")
+const LESSON_NOTES_DIR = path.join(process.cwd(), "content", "lesson-notes")
+const ALL_BLOG_DIRS = [BLOG_DIR, BOOK_NOTES_DIR, LESSON_NOTES_DIR]
 const CREATIONS_DIR = path.join(process.cwd(), "content", "creations")
 
 // ── Types ──────────────────────────────────────────────────────────────────
@@ -164,9 +165,19 @@ export const getBlogPost = (slug: string): Blog | null => {
 export const getBlogPostsByTag = (tag: string): BlogMeta[] =>
   getAllBlogPosts().filter((p) => p.label === tag || p.tags.includes(tag))
 
+const NOTE_DIRS = [BOOK_NOTES_DIR, LESSON_NOTES_DIR]
+
+const findNoteDir = (bookSlug: string): string | null => {
+  for (const base of NOTE_DIRS) {
+    const dir = path.join(base, bookSlug)
+    if (fs.existsSync(dir)) return dir
+  }
+  return null
+}
+
 export const getBookNoteChapters = (bookSlug: string): { slug: string; title: string }[] => {
-  const dir = path.join(NOTES_DIR, bookSlug)
-  if (!fs.existsSync(dir)) return []
+  const dir = findNoteDir(bookSlug)
+  if (!dir) return []
   return fs
     .readdirSync(dir)
     .filter((f) => f.endsWith(".md") && f !== "index.md")
@@ -180,7 +191,9 @@ export const getBookNoteChapters = (bookSlug: string): { slug: string; title: st
 }
 
 export const getBookChapter = (bookSlug: string, chapterSlug: string): Blog | null => {
-  const file = path.join(NOTES_DIR, bookSlug, `${chapterSlug}.md`)
+  const dir = findNoteDir(bookSlug)
+  if (!dir) return null
+  const file = path.join(dir, `${chapterSlug}.md`)
   if (!fs.existsSync(file)) return null
   const { data, content } = matter(fs.readFileSync(file, "utf8"))
   return { ...toBlogMeta(chapterSlug, data, content), content }

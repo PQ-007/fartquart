@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import Script from "next/script"
+import { cookies } from "next/headers"
 import { Fraunces, Manrope, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import "katex/dist/katex.min.css"
@@ -35,21 +35,17 @@ export const metadata: Metadata = {
   description: "A room for my thoughts, creations, and curiosities.",
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const cookieStore = await cookies()
+  const theme = cookieStore.get("theme")?.value === "light" ? "light" : "dark"
+
   return (
-    <html lang="en" data-theme="dark" suppressHydrationWarning>
+    <html lang="en" data-theme={theme} suppressHydrationWarning>
       <body
         className={`${serif.variable} ${neue.variable} ${jetbrains.variable}`}
       >
-        <Script
-          id="theme-init"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()`,
-          }}
-        />
         <ThemeProvider>
           <LanguageProvider>
             <Background />
