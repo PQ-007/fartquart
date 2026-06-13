@@ -4,19 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "6cbcb62a098f569c",
+        "id": "b5e8f1b172444424",
         "type": "tabs",
         "children": [
           {
-            "id": "9a516c6c10809a2f",
+            "id": "0ee8f65bcbb4ad30",
             "type": "leaf",
             "state": {
-              "type": "image",
-              "state": {
-                "file": "resources/images/shinagawa-internship/co-graph5.jpg"
-              },
-              "icon": "lucide-image",
-              "title": "co-graph5"
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           }
         ]
@@ -137,13 +135,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "resources/images/shinagawa-internship/co-graph5.jpg",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of co-graph5"
+              "title": "Outline"
             }
           },
           {
@@ -179,14 +176,14 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "9a516c6c10809a2f",
+  "active": "2658e34e1852a6c5",
   "lastOpenFiles": [
+    "resources/images/shinagawa-internship/co-graph5.jpg",
     "resources/images/shinagawa-internship/co-graph4.jpg",
     "resources/images/shinagawa-internship/tokyo-station.jpg",
     "resources/images/shinagawa-internship/tsh-0.jpg",
     "resources/images/shinagawa-internship/unicorn-gundam.jpg",
     "resources/images/shinagawa-internship/tsh-cobol.jpg",
-    "resources/images/shinagawa-internship/co-graph5.jpg",
     "resources/images/shinagawa-internship/IMG_1245 1.jpg",
     "resources/images/shinagawa-internship/IMG_0722 1.jpg",
     "resources/images/shinagawa-internship/co-graph0.jpg",

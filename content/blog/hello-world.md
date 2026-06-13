@@ -1,7 +1,7 @@
 ---
 title: Hello, World.
 description: Нээлтийн пост — энэ сайт юу болох, яагаад хийсэн тухай.
-label: note
+label: article
 tags: [meta]
 date: 2026-06-11
 draft: false
