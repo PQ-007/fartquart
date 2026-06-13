@@ -4,11 +4,13 @@ import { PostPreview } from "@/components/PostPreview"
 import { Footer } from "@/components/Footer"
 import { HomeHero } from "@/components/HomeHero"
 import { HomeGraph } from "@/components/HomeGraph"
-import { getFeaturedContent, getGraphData } from "@/lib/content"
+import { LatestFeed } from "@/components/LatestFeed"
+import { getFeaturedContent, getGraphData, getAllBlogPosts } from "@/lib/content"
 
 export default function Home() {
   const { blogs, creations } = getFeaturedContent()
   const graphData = getGraphData()
+  const latestPosts = getAllBlogPosts().slice(0, 8)
 
   return (
     <>
@@ -44,6 +46,11 @@ export default function Home() {
             </div>
           </div>
           <div className={styles.divider} />
+          <div className={styles.projectsInnerWrapper}>
+            <div className={styles.projectsInner}>
+              <LatestFeed posts={latestPosts} />
+            </div>
+          </div>
         </div>
       </div>
       <Footer background />

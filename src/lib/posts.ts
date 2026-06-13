@@ -1,6 +1,7 @@
 import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
+export { formatDate } from "./format"
 
 export const CDN = "https://d4frua9bq45mo.cloudfront.net"
 
@@ -23,12 +24,6 @@ const POSTS_DIR = path.join(process.cwd(), "content", "posts")
 
 export const videoUrl = (mainVideo: string): string => `${CDN}/${mainVideo}.mp4`
 
-export const formatDate = (date: string): string =>
-  new Date(date).toLocaleDateString("en-US", {
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  }).replace(" ", ", ")
 
 const toMeta = (slug: string, data: Record<string, unknown>): PostMeta => ({
   slug,

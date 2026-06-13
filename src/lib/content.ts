@@ -4,6 +4,8 @@ import matter from "gray-matter"
 export { formatDate } from "./format"
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog")
+const NOTES_DIR = path.join(process.cwd(), "content", "notes")
+const ALL_BLOG_DIRS = [BLOG_DIR, NOTES_DIR]
 const CREATIONS_DIR = path.join(process.cwd(), "content", "creations")
 
 // ── Types ──────────────────────────────────────────────────────────────────
@@ -108,27 +110,30 @@ const toBlogMeta = (slug: string, data: Record<string, unknown>, content = ""): 
 })
 
 export const getAllBlogPosts = (): BlogMeta[] =>
-  readDir(BLOG_DIR)
-    .map((f) => {
+  ALL_BLOG_DIRS.flatMap((dir) =>
+    readDir(dir).map((f) => {
       const slug = fileToSlug(f)
-      const { data, content } = matter(fs.readFileSync(path.join(BLOG_DIR, f), "utf8"))
+      const { data, content } = matter(fs.readFileSync(path.join(dir, f), "utf8"))
       return toBlogMeta(slug, data, content)
     })
-    .filter((p) => !p.draft)
-    .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt))
+  )
+  .filter((p) => !p.draft)
+  .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt))
 
 export const getBlogPost = (slug: string): Blog | null => {
-  for (const ext of [".md", ".mdx"]) {
-    const file = path.join(BLOG_DIR, `${slug}${ext}`)
-    if (fs.existsSync(file)) {
-      const { data, content } = matter(fs.readFileSync(file, "utf8"))
+  for (const dir of ALL_BLOG_DIRS) {
+    for (const ext of [".md", ".mdx"]) {
+      const file = path.join(dir, `${slug}${ext}`)
+      if (fs.existsSync(file)) {
+        const { data, content } = matter(fs.readFileSync(file, "utf8"))
+        return { ...toBlogMeta(slug, data, content), content }
+      }
+    }
+    const indexFile = path.join(dir, slug, "index.md")
+    if (fs.existsSync(indexFile)) {
+      const { data, content } = matter(fs.readFileSync(indexFile, "utf8"))
       return { ...toBlogMeta(slug, data, content), content }
     }
-  }
-  const indexFile = path.join(BLOG_DIR, slug, "index.md")
-  if (fs.existsSync(indexFile)) {
-    const { data, content } = matter(fs.readFileSync(indexFile, "utf8"))
-    return { ...toBlogMeta(slug, data, content), content }
   }
   return null
 }

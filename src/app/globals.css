@@ -230,11 +230,11 @@ code {
 
 /* ----- post article content ----- */
 .post-content h2 {
-  font-size: var(--font-3);
+  font-size: var(--font-2);
   margin: 48px 0 16px;
 }
 .post-content h3 {
-  font-size: var(--font-2);
+  font-size: var(--font-1);
   margin: 36px 0 12px;
 }
 .post-content p {

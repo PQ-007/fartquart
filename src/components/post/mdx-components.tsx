@@ -6,6 +6,7 @@ import { Tweet } from "./Tweet"
 import { Sandpack } from "./SandpackEmbed"
 import { MathBlock } from "./Math"
 import { ArrowTopRight } from "../icons"
+import { AnchorHeading } from "./AnchorHeading"
 
 export const slugify = (text: string): string => {
   const slug = text
@@ -28,7 +29,7 @@ const textOf = (node: ReactNode): string => {
 const heading =
   (Tag: "h2" | "h3") =>
   ({ children }: { children?: ReactNode }) => (
-    <Tag id={slugify(textOf(children))}>{children}</Tag>
+    <AnchorHeading tag={Tag} id={slugify(textOf(children))}>{children}</AnchorHeading>
   )
 
 const ExternalLink = ({

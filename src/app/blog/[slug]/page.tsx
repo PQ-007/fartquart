@@ -9,6 +9,7 @@ import { Tag } from "@/components/Tag"
 import { Chapters, type Chapter } from "@/components/post/Chapters"
 import { mdxComponents, slugify } from "@/components/post/mdx-components"
 import { formatDate, getAllBlogPosts, getBlogPost } from "@/lib/content"
+import { ReadingProgress } from "@/components/ReadingProgress"
 
 export const generateStaticParams = () =>
   getAllBlogPosts().map((p) => ({ slug: p.slug }))
@@ -61,6 +62,7 @@ export default async function BlogPostPage({
 
   return (
     <>
+      <ReadingProgress />
       <div className={styles.container}>
         <main className={styles.wrapper}>
           <article className={styles.article}>

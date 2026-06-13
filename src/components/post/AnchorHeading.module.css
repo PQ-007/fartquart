@@ -1,0 +1,23 @@
+.heading {
+  position: relative;
+}
+
+.anchor {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 0.75em;
+  color: rgba(var(--color-primary-rgb), 0.25);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s;
+  vertical-align: middle;
+}
+
+.heading:hover .anchor,
+.heading:focus-within .anchor {
+  opacity: 1;
+}
+
+.anchor:hover {
+  color: var(--color-accent);
+}
