@@ -21,6 +21,10 @@ const dict = {
       scrollHint: "scroll to zoom · drag to pan · click to open",
       lightMode: "Light Mode",
       darkMode: "Dark Mode",
+      related: "Related",
+      newWords: "New Words",
+      review: "Review",
+      reveal: "Tap to reveal",
     },
     blog: {
       "book-review": "Book Review",
@@ -69,6 +73,10 @@ const dict = {
       scrollHint: "гүйлгэж томруул · чирж нүүлгэ · дар нээ",
       lightMode: "Цайвар горим",
       darkMode: "Харанхуй горим",
+      related: "Холбоотой",
+      newWords: "Шинэ үгс",
+      review: "Давтах",
+      reveal: "Дарж харах",
     },
     blog: {
       "book-review": "Номын сэтгэгдэл",
@@ -117,6 +125,10 @@ const dict = {
       scrollHint: "スクロールで拡大・ドラッグで移動・クリックで開く",
       lightMode: "ライトモード",
       darkMode: "ダークモード",
+      related: "関連記事",
+      newWords: "新しい単語",
+      review: "復習",
+      reveal: "タップして表示",
     },
     blog: {
       "book-review": "書評",

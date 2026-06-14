@@ -3,8 +3,10 @@ import fs from "fs"
 import path from "path"
 import os from "os"
 
-const STORE = path.join(os.tmpdir(), "joshw-replica-last-visit.json")
-const FALLBACK = "California, USA"
+// Best-effort persistence: os.tmpdir() is ephemeral and resets on each deploy.
+// That's acceptable for this "last visitor location" easter egg — no DB needed.
+const STORE = path.join(os.tmpdir(), "bilguun-last-visit.json")
+const FALLBACK = "Ulaanbaatar, MN"
 
 type Visit = { location: string; at: number }
 

@@ -1,7 +1,4 @@
 import Image from "next/image"
-
-const coverUrl = (cover: string) => cover.startsWith("http") ? cover : `/${cover}`
-const isGif = (url: string) => url.toLowerCase().endsWith(".gif")
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
@@ -11,6 +8,8 @@ import { Tag } from "@/components/Tag"
 import { Chapters, type Chapter } from "@/components/post/Chapters"
 import { mdxComponents, slugify } from "@/components/post/mdx-components"
 import { formatDate, getAllCreations, getCreation } from "@/lib/content"
+import { coverUrl } from "@/lib/url"
+import { buildPostMetadata } from "@/lib/seo"
 
 const youtubeId = (str: string): string => {
   const match = str.match(/(?:youtu\.be\/|[?&]v=)([A-Za-z0-9_-]{11})/)
@@ -29,7 +28,7 @@ export const generateMetadata = async ({
   const slug = decodeURIComponent(encoded)
   const creation = getCreation(slug)
   if (!creation) return {}
-  return { title: creation.title, description: creation.description }
+  return buildPostMetadata(creation, "creations")
 }
 
 const extractChapters = (content: string): Chapter[] => {

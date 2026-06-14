@@ -2,14 +2,13 @@
 
 import Link from "next/link"
 import styles from "./BookCard.module.css"
+import { coverUrl } from "@/lib/url"
 import type { BlogMeta } from "@/lib/content"
 
 const SPINE_BG = ["#0f1f3d", "#1e0f3d", "#0f2d1e", "#2d1a00", "#2d0f0f", "#1a0f2d"]
 
 const spineColor = (title: string) =>
   SPINE_BG[[...title].reduce((a, c) => a + c.charCodeAt(0), 0) % SPINE_BG.length]
-
-const coverUrl = (cover: string) => cover.startsWith("http") ? cover : `/${cover}`
 
 const Stars = ({ rating }: { rating: number }) => {
   const full = Math.floor(rating)

@@ -8,6 +8,7 @@ import { LanguageProvider } from "@/components/LanguageProvider"
 import { Background } from "@/components/Background"
 import { Nav } from "@/components/Nav"
 import { PostImageLightbox } from "@/components/post/PostImageLightbox"
+import { SITE_URL, SITE_NAME, SITE_DESC, DEFAULT_OG_IMAGE } from "@/lib/site"
 
 const serif = Fraunces({
   subsets: ["latin"],
@@ -28,11 +29,31 @@ const jetbrains = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Bilguun",
-    template: "%s | Bilguun",
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
   },
-  description: "A room for my thoughts, creations, and curiosities.",
+  description: SITE_DESC,
+  alternates: {
+    canonical: "/",
+    types: { "application/rss+xml": "/feed.xml" },
+  },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: SITE_DESC,
+    url: SITE_URL,
+    locale: "en_US",
+    images: [DEFAULT_OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_NAME,
+    description: SITE_DESC,
+    images: [DEFAULT_OG_IMAGE],
+  },
 }
 
 export default async function RootLayout({

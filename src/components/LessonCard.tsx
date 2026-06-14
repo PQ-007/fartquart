@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import styles from "./LessonCard.module.css"
+import { coverUrl, isGif } from "@/lib/url"
 import type { BlogMeta } from "@/lib/content"
 
 const GRADIENTS = [
@@ -16,9 +17,6 @@ const GRADIENTS = [
 
 const gradientFor = (slug: string) =>
   GRADIENTS[[...slug].reduce((a, c) => a + c.charCodeAt(0), 0) % GRADIENTS.length]
-
-const coverUrl = (cover: string) => cover.startsWith("http") ? cover : `/${cover}`
-const isGif = (url: string) => url.toLowerCase().endsWith(".gif")
 
 export const LessonCard = ({ post }: { post: BlogMeta }) => {
   const href = `/notes/${encodeURIComponent(post.slug)}`

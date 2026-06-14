@@ -1,0 +1,12 @@
+.outer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 72px var(--main-padding-sides);
+  background: var(--color-background);
+}
+
+.inner {
+  width: 100%;
+  max-width: 1200px;
+}

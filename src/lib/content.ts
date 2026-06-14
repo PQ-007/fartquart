@@ -165,6 +165,32 @@ export const getBlogPost = (slug: string): Blog | null => {
 export const getBlogPostsByTag = (tag: string): BlogMeta[] =>
   getAllBlogPosts().filter((p) => p.label === tag || p.tags.includes(tag))
 
+/**
+ * Posts most related to `slug`, ranked by shared tags (label counts as a tag),
+ * tie-broken by recency. Excludes the post itself.
+ */
+export const getRelatedPosts = (slug: string, limit = 3): BlogMeta[] => {
+  const all = getAllBlogPosts()
+  const current = all.find((p) => p.slug === slug)
+  if (!current) return []
+  const currentTags = new Set([current.label, ...current.tags])
+
+  return all
+    .filter((p) => p.slug !== slug)
+    .map((p) => ({
+      post: p,
+      score: [p.label, ...p.tags].filter((t) => currentTags.has(t)).length,
+    }))
+    .filter((x) => x.score > 0)
+    .sort(
+      (a, b) =>
+        b.score - a.score ||
+        +new Date(b.post.publishedAt) - +new Date(a.post.publishedAt),
+    )
+    .slice(0, limit)
+    .map((x) => x.post)
+}
+
 const NOTE_DIRS = [BOOK_NOTES_DIR, LESSON_NOTES_DIR]
 
 const findNoteDir = (bookSlug: string): string | null => {

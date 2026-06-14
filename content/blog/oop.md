@@ -1,7 +1,7 @@
 ---
-title: Object Oriented Programming
+title: " Объект Хандлагат Програмчлал"
 description: OOP-ын үндсэн дөрвөн ойлголт болон Python хэл дээрх хэрэглээ.
-label: lesson-note
+label: article
 date: 2025-06-13
 draft: false
 tags:

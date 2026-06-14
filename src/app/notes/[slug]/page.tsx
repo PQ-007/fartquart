@@ -1,7 +1,4 @@
 import Image from "next/image"
-
-const coverUrl = (cover: string) => cover.startsWith("http") ? cover : `/${cover}`
-const isGif = (url: string) => url.toLowerCase().endsWith(".gif")
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
@@ -11,9 +8,13 @@ import { Footer } from "@/components/Footer"
 import { Tag } from "@/components/Tag"
 import { Chapters, type Chapter } from "@/components/post/Chapters"
 import { mdxComponents, slugify } from "@/components/post/mdx-components"
-import { formatDate, getAllBlogPosts, getBlogPost, getBookNoteChapters } from "@/lib/content"
+import { formatDate, getAllBlogPosts, getBlogPost, getBookNoteChapters, getRelatedPosts } from "@/lib/content"
 import { ReadingProgress } from "@/components/ReadingProgress"
+import { RelatedPosts } from "@/components/RelatedPosts"
+import { JsonLd } from "@/components/JsonLd"
 import { mdxOptions, sanitizeMdx } from "@/lib/mdx-options"
+import { coverUrl, isGif } from "@/lib/url"
+import { buildPostMetadata, articleJsonLd } from "@/lib/seo"
 
 const NOTE_LABELS = ["lesson-note", "book-note"] as const
 
@@ -42,7 +43,7 @@ export const generateMetadata = async ({
   const slug = decodeURIComponent(encoded)
   const post = getBlogPost(slug)
   if (!post) return {}
-  return { title: post.title, description: post.description }
+  return buildPostMetadata(post, "notes")
 }
 
 const extractChapters = (content: string): Chapter[] => {
@@ -92,9 +93,11 @@ export default async function NoteSlugPage({
   const isBookNote = post.label === "book-note"
   const chapters = (isLessonNote || isBookNote) ? getBookNoteChapters(slug) : []
   const tocChapters = extractChapters(post.content)
+  const related = getRelatedPosts(slug)
 
   return (
     <>
+      <JsonLd data={articleJsonLd(post, "notes")} />
       <ReadingProgress />
       <div className={styles.container}>
         <main className={styles.wrapper}>
@@ -246,6 +249,7 @@ export default async function NoteSlugPage({
           {!isLessonNote && !isBookNote && <Chapters chapters={tocChapters} />}
         </main>
       </div>
+      <RelatedPosts posts={related} />
       <Footer />
     </>
   )

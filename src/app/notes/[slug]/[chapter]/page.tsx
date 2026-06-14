@@ -10,6 +10,7 @@ import { ReadingProgress } from "@/components/ReadingProgress"
 import { ChapterSidebar } from "@/components/post/ChapterSidebar"
 import { getAllBlogPosts, getBookChapter, getBookNoteChapters } from "@/lib/content"
 import { mdxOptions, sanitizeMdx } from "@/lib/mdx-options"
+import { absoluteUrl, SITE_NAME, DEFAULT_OG_IMAGE } from "@/lib/site"
 
 const extractLinks = (content: string) => {
   const links: { text: string; url: string }[] = []
@@ -37,9 +38,29 @@ export const generateMetadata = async ({
   params: Promise<{ slug: string; chapter: string }>
 }): Promise<Metadata> => {
   const { slug, chapter } = await params
-  const post = getBookChapter(decodeURIComponent(slug), decodeURIComponent(chapter))
+  const bookSlug = decodeURIComponent(slug)
+  const post = getBookChapter(bookSlug, decodeURIComponent(chapter))
   if (!post) return {}
-  return { title: post.title }
+  const url = absoluteUrl(`/notes/${encodeURIComponent(bookSlug)}/${encodeURIComponent(post.slug)}`)
+  return {
+    title: post.title,
+    description: post.description || `${post.title} — ${bookSlug}`,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.description,
+      url,
+      siteName: SITE_NAME,
+      images: [DEFAULT_OG_IMAGE],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: [DEFAULT_OG_IMAGE],
+    },
+  }
 }
 
 const extractChapters = (content: string): Chapter[] => {

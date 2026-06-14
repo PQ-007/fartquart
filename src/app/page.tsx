@@ -5,7 +5,9 @@ import { Footer } from "@/components/Footer"
 import { HomeHero } from "@/components/HomeHero"
 import { HomeGraph } from "@/components/HomeGraph"
 import { ActivityFeed } from "@/components/ActivityFeed"
+import { JsonLd } from "@/components/JsonLd"
 import { getFeaturedContent, getGraphData, getAllBlogPosts } from "@/lib/content"
+import { siteJsonLd } from "@/lib/seo"
 
 export default function Home() {
   const { blogs, creations } = getFeaturedContent()
@@ -14,6 +16,7 @@ export default function Home() {
 
   return (
     <>
+      <JsonLd data={siteJsonLd()} />
       <div className={styles.pageWrapper}>
         <section className={styles.sectionWrapper}>
           <div className={styles.graphOverlay}>

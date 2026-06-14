@@ -3,16 +3,12 @@ import Link from "next/link"
 import type { BlogMeta } from "@/lib/content"
 import { formatDate } from "@/lib/format"
 import { Tag } from "@/components/Tag"
+import { coverUrl, isGif, postPath } from "@/lib/url"
 import styles from "./ActivityFeed.module.css"
 
 interface Props {
   posts: BlogMeta[]
 }
-
-const coverUrl = (cover: string) => cover.startsWith("http") ? cover : `/${cover}`
-const isGif = (url: string) => url.toLowerCase().endsWith(".gif")
-
-const NOTE_LABELS = ["lesson-note", "book-note"]
 
 const GRADIENTS = [
   "linear-gradient(135deg, #0f1f3d, #1e3a5f)",
@@ -31,9 +27,7 @@ export const ActivityFeed = ({ posts }: Props) => (
     <h2 className={styles.heading}>Latest</h2>
     <div className={styles.grid}>
       {posts.map((post) => {
-        const href = NOTE_LABELS.includes(post.label)
-          ? `/notes/${encodeURIComponent(post.slug)}`
-          : `/blog/${encodeURIComponent(post.slug)}`
+        const href = postPath(post.slug, post.label)
         return (
           <Link key={post.slug} href={href} className={styles.card}>
             <div className={styles.cover}>

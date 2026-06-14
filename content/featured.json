@@ -1,4 +1,4 @@
 {
-  "blogs": ["hello-world", "about-me"]
-
+  "blogs": ["hello-world"],
+  "creations": ["sudoku-solver-and-generator"]
 }

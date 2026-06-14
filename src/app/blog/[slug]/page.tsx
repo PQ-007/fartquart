@@ -1,7 +1,4 @@
 import Image from "next/image"
-
-const coverUrl = (cover: string) => cover.startsWith("http") ? cover : `/${cover}`
-const isGif = (url: string) => url.toLowerCase().endsWith(".gif")
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
@@ -10,9 +7,13 @@ import { Footer } from "@/components/Footer"
 import { Tag } from "@/components/Tag"
 import { Chapters, type Chapter } from "@/components/post/Chapters"
 import { mdxComponents, slugify } from "@/components/post/mdx-components"
-import { formatDate, getAllBlogPosts, getBlogPost } from "@/lib/content"
+import { formatDate, getAllBlogPosts, getBlogPost, getRelatedPosts } from "@/lib/content"
 import { ReadingProgress } from "@/components/ReadingProgress"
+import { RelatedPosts } from "@/components/RelatedPosts"
+import { JsonLd } from "@/components/JsonLd"
 import { mdxOptions, sanitizeMdx } from "@/lib/mdx-options"
+import { coverUrl, isGif } from "@/lib/url"
+import { buildPostMetadata, articleJsonLd } from "@/lib/seo"
 
 const BLOG_LABELS = ["internship", "project-log", "contest", "essay", "book-review"] as const
 
@@ -30,7 +31,7 @@ export const generateMetadata = async ({
   const slug = decodeURIComponent(encoded)
   const post = getBlogPost(slug)
   if (!post) return {}
-  return { title: post.title, description: post.description }
+  return buildPostMetadata(post, "blog")
 }
 
 const extractChapters = (content: string): Chapter[] => {
@@ -78,9 +79,11 @@ export default async function BlogPostPage({
 
   const chapters = extractChapters(post.content)
   const isBookReview = post.label === "book-review"
+  const related = getRelatedPosts(slug)
 
   return (
     <>
+      <JsonLd data={articleJsonLd(post, "blog")} />
       <ReadingProgress />
       <div className={styles.container}>
         <main className={styles.wrapper}>
@@ -183,6 +186,7 @@ export default async function BlogPostPage({
           <Chapters chapters={chapters} />
         </main>
       </div>
+      <RelatedPosts posts={related} />
       <Footer />
     </>
   )

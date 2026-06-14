@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "resources/templates/Year Rewind Template.md",
+                "file": "blog/essay-1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Year Rewind Template"
+              "title": "essay-1"
             }
           },
           {
@@ -188,7 +188,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "resources/templates/Year Rewind Template.md",
+                "file": "blog/essay-1.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -198,7 +198,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Year Rewind Template"
+              "title": "Backlinks for essay-1"
             }
           },
           {
@@ -207,12 +207,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "resources/templates/Year Rewind Template.md",
+                "file": "blog/essay-1.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Year Rewind Template"
+              "title": "Outgoing links from essay-1"
             }
           }
         ],
@@ -238,8 +238,23 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "4dfd1ae5b0a4e55d",
+  "active": "5f813c45b3ec71eb",
   "lastOpenFiles": [
+    "blog/search-enginie.md",
+    "blog/math-and-computer.md",
+    "blog/oop.md",
+    "blog/devlog-ivo.md",
+    "blog/internship-tsh.md",
+    "blog/internship-co-graph.md",
+    "blog/internship-susano.md",
+    "blog/internship-alten-japan.md",
+    "blog/algorithm.md",
+    "lesson-notes/DSA/index.md",
+    "lesson-notes/Data Structures/index.md",
+    "lesson-notes/DSA/Abstraction.md",
+    "resources/templates/Year Rewind Template.md",
+    "blog/about-me.md",
+    "featured.json.tmp.684.2bfd4d6dbf3e",
     "blog/Algorithm.md.tmp.684.a4835af0d5d2",
     "templates/lesson-note/01 lesson-name.md.tmp.684.e84f035d474a",
     "templates/lesson-note/index.md.tmp.684.bb3b76559781",
@@ -250,14 +265,10 @@
     "templates/contest.md.tmp.684.90ab0bc67148",
     "templates/project-log.md.tmp.684.c748cb1a48cc",
     "templates/internship.md.tmp.684.b3a180ccb072",
-    "templates/essay.md.tmp.684.4b347bac0f1b",
-    "templates/article.md.tmp.684.bdba3642686c",
     "resources/templates/Post Template.md",
     "resources/templates/Lesson Note Template.md",
     "resources/templates/Index Template.md",
     "blog/hello-world.md",
-    "blog/about-me.md",
-    "blog/Internship №2 Co-graph.md",
     "templates/lesson-note/01 lesson-name.md",
     "templates/lesson-note/index.md",
     "templates/book-note/1章 chapter-name.md",
@@ -265,17 +276,6 @@
     "templates/book-review.md",
     "templates/contest.md",
     "templates/project-log.md",
-    "templates/internship.md",
-    "templates/essay.md",
-    "templates/article.md",
-    "lesson-notes/Object Oriented Programming/Inheritance.md",
-    "lesson-notes/Data Structures/index.md",
-    "lesson-notes/Blender/index.md",
-    "lesson-notes/Object Oriented Programming/index.md",
-    "lesson-notes/Object Oriented Programming/Polymorphism.md",
-    "lesson-notes/Object Oriented Programming/Abstraction.md",
-    "lesson-notes/Object Oriented Programming/Encapsulation.md",
-    "book-notes/Immune System/index.md",
     "resources/images/book-covers/immune-system.jpg",
     "resources/images/book-covers/dna-towa.jpg",
     "resources/images/book-covers/zero-karadp2.jpg",

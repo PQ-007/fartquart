@@ -9,11 +9,10 @@ import { useT } from "./LanguageProvider"
 import type { PostMeta } from "@/lib/posts"
 import type { BlogMeta, CreationMeta } from "@/lib/content"
 import { formatDate } from "@/lib/format"
+import { coverUrl, isGif } from "@/lib/url"
 
 const CDN = "https://d4frua9bq45mo.cloudfront.net"
 const videoUrl = (mainVideo: string) => `${CDN}/${mainVideo}.mp4`
-const coverUrl = (cover: string) => cover.startsWith("http") ? cover : `/${cover}`
-const isGif = (url: string) => url.toLowerCase().endsWith(".gif")
 
 const youtubeId = (str: string): string => {
   const match = str.match(/(?:youtu\.be\/|[?&]v=)([A-Za-z0-9_-]{11})/)

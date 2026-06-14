@@ -16,9 +16,15 @@ export async function GET(
   { params }: { params: Promise<{ path: string[] }> },
 ) {
   const { path: segments } = await params
-  const filePath = path.join(process.cwd(), "content", "resources", ...segments)
+  const baseDir = path.join(process.cwd(), "content", "resources")
+  const filePath = path.resolve(baseDir, ...segments)
 
-  if (!fs.existsSync(filePath)) {
+  // Guard against path traversal (e.g. encoded "../") escaping the resources dir.
+  if (filePath !== baseDir && !filePath.startsWith(baseDir + path.sep)) {
+    return new Response("Forbidden", { status: 403 })
+  }
+
+  if (!fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) {
     return new Response("Not found", { status: 404 })
   }
 

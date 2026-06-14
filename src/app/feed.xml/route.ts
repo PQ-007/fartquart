@@ -1,8 +1,9 @@
 import { getAllBlogPosts } from "@/lib/content"
+import { SITE_URL, SITE_NAME, SITE_DESC } from "@/lib/site"
+import { postPath } from "@/lib/url"
 
-const SITE_URL = "https://bilguun.me"
-const SITE_TITLE = "Bilguun"
-const SITE_DESCRIPTION = "A room for my thoughts, creations, and curiosities."
+const SITE_TITLE = SITE_NAME
+const SITE_DESCRIPTION = SITE_DESC
 
 function escape(str: string) {
   return str
@@ -17,7 +18,7 @@ export async function GET() {
 
   const items = posts
     .map((p) => {
-      const url = `${SITE_URL}/blog/${encodeURIComponent(p.slug)}`
+      const url = `${SITE_URL}${postPath(p.slug, p.label)}`
       const date = new Date(p.publishedAt).toUTCString()
       return `    <item>
       <title>${escape(p.title)}</title>

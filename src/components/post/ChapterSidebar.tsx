@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react"
 import styles from "./ChapterSidebar.module.css"
 import type { Chapter } from "./Chapters"
 import type { NewWord } from "@/lib/content"
+import { VocabReview } from "./VocabReview"
 
 interface Source {
   text: string
@@ -62,19 +63,7 @@ export const ChapterSidebar = ({ bookSlug, bookHref, chapters, newWords, sources
           </ul>
         )}
 
-        {newWords && newWords.length > 0 && (
-          <section className={styles.section}>
-            <p className={styles.sectionLabel}>New Words</p>
-            <ul className={styles.wordList}>
-              {newWords.map((w) => (
-                <li key={w.word}>
-                  <span className={styles.word}>{w.word}</span>
-                  {w.definition && <span className={styles.definition}>{w.definition}</span>}
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
+        {newWords && newWords.length > 0 && <VocabReview words={newWords} />}
 
         {sources && sources.length > 0 && (
           <section className={styles.section}>
