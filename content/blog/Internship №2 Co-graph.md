@@ -8,7 +8,7 @@ tags:
   - Streamlit
 date: 2025-10-01
 draft: false
-cover: resources/images/shinagawa-internship/gundam-base.jpeg
+cover: resources/images/shinagawa-internship/gundam-base.jpg
 ---
 
 # Introduction

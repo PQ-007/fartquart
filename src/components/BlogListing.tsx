@@ -11,11 +11,11 @@ import type { BlogMeta } from "@/lib/content"
 type BlogLabel = "book-review" | "internship" | "project-log" | "contest" | "essay" | "article"
 
 const LABEL_ORDER: BlogLabel[] = [
+  "article",
+  "essay",
   "project-log",
   "internship",
   "contest",
-  "essay",
-  "article",
 ]
 
 export const BlogListing = ({ posts }: { posts: BlogMeta[] }) => {

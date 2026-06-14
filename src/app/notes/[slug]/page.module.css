@@ -173,30 +173,101 @@
   color: var(--color-accent);
 }
 
-/* Cover image */
-.coverWrapper {
-  width: 100%;
-  border-radius: 15px;
+/* Lesson-note index */
+.lessonCover {
   position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 28px;
+  background: #0e0e0e;
+}
+
+.lessonPlaceholder {
+  width: 100%;
+  height: 100%;
+}
+
+.lessonHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.lessonMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lessonTitle {
+  font-size: var(--font-4);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.lessonDescription {
+  font-size: var(--font-0);
+  color: rgba(var(--color-primary-rgb), 0.55);
+  line-height: 1.6;
+}
+
+.lessonList {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-divider);
+  border-radius: 12px;
+  overflow: hidden;
   margin-bottom: 48px;
 }
 
-.lightBorder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  border-radius: 15px;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  z-index: 1;
-  border: 1px solid hsla(0, 0%, 100%, 0.11);
-  background: var(--project-background);
+.lessonListHeading {
+  font-size: var(--font--2);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(var(--color-primary-rgb), 0.35);
+  padding: 14px 20px 10px;
+  border-bottom: 1px solid var(--color-divider);
 }
 
-.coverImage {
-  object-fit: cover;
+.lessonItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-divider);
+  transition: background 0.15s;
+}
+
+.lessonItem:last-child {
+  border-bottom: none;
+}
+
+.lessonItem:hover {
+  background: rgba(var(--color-primary-rgb), 0.04);
+}
+
+.lessonNum {
+  font-size: var(--font--1);
+  font-weight: 600;
+  color: rgba(var(--color-primary-rgb), 0.25);
+  font-variant-numeric: tabular-nums;
+  width: 24px;
+  flex-shrink: 0;
+}
+
+.lessonItemTitle {
+  font-size: var(--font-0);
+  color: var(--color-primary);
+  transition: color 0.15s;
+}
+
+.lessonItem:hover .lessonItemTitle {
+  color: var(--color-accent);
 }
 
 /* Mobile ToC */

@@ -2,6 +2,7 @@
 
 import styles from "@/app/notes/page.module.css"
 import { BookCard } from "./BookCard"
+import { LessonCard } from "./LessonCard"
 import { Tag } from "./Tag"
 import { useT } from "./LanguageProvider"
 import type { BlogMeta } from "@/lib/content"
@@ -55,9 +56,9 @@ export const NotesListing = ({ posts }: { posts: BlogMeta[] }) => {
                   <Tag name={t("blog.lesson-note")} />
                   <span className={styles.count}>{lessons.length}</span>
                 </div>
-                <div className={styles.bookList}>
+                <div className={styles.lessonList}>
                   {lessons.map((p) => (
-                    <BookCard key={p.slug} post={p} />
+                    <LessonCard key={p.slug} post={p} />
                   ))}
                 </div>
               </section>

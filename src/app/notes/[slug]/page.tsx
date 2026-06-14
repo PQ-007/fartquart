@@ -16,7 +16,17 @@ import { ReadingProgress } from "@/components/ReadingProgress"
 import { mdxOptions, sanitizeMdx } from "@/lib/mdx-options"
 
 const NOTE_LABELS = ["lesson-note", "book-note"] as const
-const DIRECTORY_LABELS = ["book-note", "lesson-note"]
+
+const GRADIENTS = [
+  "linear-gradient(135deg, #0f1f3d, #1e3a5f)",
+  "linear-gradient(135deg, #1e0f3d, #3d1a6e)",
+  "linear-gradient(135deg, #0f2d1e, #1a5c3a)",
+  "linear-gradient(135deg, #2d1a00, #5c3a00)",
+  "linear-gradient(135deg, #2d0f0f, #5c1a1a)",
+  "linear-gradient(135deg, #1a1a2d, #2d2d5c)",
+]
+const gradientFor = (slug: string) =>
+  GRADIENTS[[...slug].reduce((a, c) => a + c.charCodeAt(0), 0) % GRADIENTS.length]
 
 export const generateStaticParams = () =>
   getAllBlogPosts()
@@ -78,8 +88,9 @@ export default async function NoteSlugPage({
   const post = getBlogPost(slug)
   if (!post) notFound()
 
-  const isBookNote = DIRECTORY_LABELS.includes(post.label)
-  const bookChapters = isBookNote ? getBookNoteChapters(slug) : []
+  const isLessonNote = post.label === "lesson-note"
+  const isBookNote = post.label === "book-note"
+  const chapters = (isLessonNote || isBookNote) ? getBookNoteChapters(slug) : []
   const tocChapters = extractChapters(post.content)
 
   return (
@@ -88,7 +99,62 @@ export default async function NoteSlugPage({
       <div className={styles.container}>
         <main className={styles.wrapper}>
           <article className={styles.article}>
-            {isBookNote ? (
+
+            {isLessonNote ? (
+              <>
+                <div className={styles.lessonCover}>
+                  {post.cover ? (
+                    <Image
+                      src={coverUrl(post.cover)}
+                      alt={post.title}
+                      fill
+                      sizes="(max-width: 900px) 100vw, 800px"
+                      style={{ objectFit: "cover" }}
+                      unoptimized={isGif(post.cover)}
+                    />
+                  ) : (
+                    <div
+                      className={styles.lessonPlaceholder}
+                      style={{ background: gradientFor(slug) }}
+                    />
+                  )}
+                </div>
+                <header className={styles.lessonHeader}>
+                  <div className={styles.lessonMeta}>
+                    <Tag name={post.label} />
+                    <span className={styles.dateMeta}>{formatDate(post.publishedAt)}</span>
+                  </div>
+                  <h1 className={styles.lessonTitle}>{post.title}</h1>
+                  {post.description && (
+                    <p className={styles.lessonDescription}>{post.description}</p>
+                  )}
+                </header>
+                {chapters.length > 0 && (
+                  <nav className={styles.lessonList}>
+                    <p className={styles.lessonListHeading}>Lessons</p>
+                    {chapters.map((ch, i) => (
+                      <Link
+                        key={ch.slug}
+                        href={`/notes/${encodeURIComponent(slug)}/${encodeURIComponent(ch.slug)}`}
+                        className={styles.lessonItem}
+                      >
+                        <span className={styles.lessonNum}>{String(i + 1).padStart(2, "0")}</span>
+                        <span className={styles.lessonItemTitle}>{ch.title}</span>
+                      </Link>
+                    ))}
+                  </nav>
+                )}
+                {post.content.trim() && (
+                  <div className="post-content">
+                    <MDXRemote
+                      source={sanitizeMdx(post.content)}
+                      components={mdxComponents}
+                      options={mdxOptions}
+                    />
+                  </div>
+                )}
+              </>
+            ) : isBookNote ? (
               <>
                 <header className={styles.bookNoteHeader}>
                   <div className={styles.bookNoteTop}>
@@ -109,10 +175,10 @@ export default async function NoteSlugPage({
                       </div>
                     </div>
                   </div>
-                  {bookChapters.length > 0 && (
+                  {chapters.length > 0 && (
                     <nav className={styles.chapterList}>
                       <p className={styles.chapterListHeading}>Chapters</p>
-                      {bookChapters.map((ch, i) => (
+                      {chapters.map((ch, i) => (
                         <Link
                           key={ch.slug}
                           href={`/notes/${encodeURIComponent(slug)}/${encodeURIComponent(ch.slug)}`}
@@ -175,8 +241,9 @@ export default async function NoteSlugPage({
                 </div>
               </>
             )}
+
           </article>
-          {!isBookNote && <Chapters chapters={tocChapters} />}
+          {!isLessonNote && !isBookNote && <Chapters chapters={tocChapters} />}
         </main>
       </div>
       <Footer />

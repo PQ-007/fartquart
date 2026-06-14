@@ -64,6 +64,25 @@
   width: 100%;
 }
 
+.lessonList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .lessonList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .lessonList {
+    grid-template-columns: 1fr;
+  }
+}
+
 .sectionDivider {
   width: 100%;
   height: 1px;

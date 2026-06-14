@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lesson-notes/Blender/index.md",
+                "file": "resources/templates/Year Rewind Template.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "Year Rewind Template"
             }
           },
           {
@@ -188,7 +188,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "lesson-notes/Blender/index.md",
+                "file": "resources/templates/Year Rewind Template.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -198,7 +198,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for index"
+              "title": "Backlinks for Year Rewind Template"
             }
           },
           {
@@ -207,12 +207,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "lesson-notes/Blender/index.md",
+                "file": "resources/templates/Year Rewind Template.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from index"
+              "title": "Outgoing links from Year Rewind Template"
             }
           }
         ],
@@ -238,53 +238,53 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "5f813c45b3ec71eb",
+  "active": "4dfd1ae5b0a4e55d",
   "lastOpenFiles": [
-    "lesson-notes/Object Oriented Programming/index.md",
-    "lesson-notes/Blender/index.md",
-    "lesson-notes/Data Structures/index.md",
-    "lesson-notes/Blender",
+    "blog/Algorithm.md.tmp.684.a4835af0d5d2",
+    "templates/lesson-note/01 lesson-name.md.tmp.684.e84f035d474a",
+    "templates/lesson-note/index.md.tmp.684.bb3b76559781",
+    "templates/book-note/01 chapter-name.md",
+    "templates/book-note/01 chapter-name.md.tmp.684.e57ff86a17cb",
+    "templates/book-note/index.md.tmp.684.43ebe309e3e5",
+    "templates/book-review.md.tmp.684.45cbaced5164",
+    "templates/contest.md.tmp.684.90ab0bc67148",
+    "templates/project-log.md.tmp.684.c748cb1a48cc",
+    "templates/internship.md.tmp.684.b3a180ccb072",
+    "templates/essay.md.tmp.684.4b347bac0f1b",
+    "templates/article.md.tmp.684.bdba3642686c",
+    "resources/templates/Post Template.md",
+    "resources/templates/Lesson Note Template.md",
+    "resources/templates/Index Template.md",
+    "blog/hello-world.md",
+    "blog/about-me.md",
+    "blog/Internship №2 Co-graph.md",
+    "templates/lesson-note/01 lesson-name.md",
+    "templates/lesson-note/index.md",
+    "templates/book-note/1章 chapter-name.md",
+    "templates/book-note/index.md",
+    "templates/book-review.md",
+    "templates/contest.md",
+    "templates/project-log.md",
+    "templates/internship.md",
+    "templates/essay.md",
+    "templates/article.md",
     "lesson-notes/Object Oriented Programming/Inheritance.md",
+    "lesson-notes/Data Structures/index.md",
+    "lesson-notes/Blender/index.md",
+    "lesson-notes/Object Oriented Programming/index.md",
     "lesson-notes/Object Oriented Programming/Polymorphism.md",
     "lesson-notes/Object Oriented Programming/Abstraction.md",
     "lesson-notes/Object Oriented Programming/Encapsulation.md",
     "book-notes/Immune System/index.md",
-    "book-notes/DNAとは何だろう/index.md",
     "resources/images/book-covers/immune-system.jpg",
     "resources/images/book-covers/dna-towa.jpg",
-    "book-notes/ゼロから作る Deep Learning 2/index.md",
-    "book-notes/ゼロから作る Deep Learning 1/index.md",
     "resources/images/book-covers/zero-karadp2.jpg",
     "resources/images/book-covers/picture_large978-4-87311-758-4.jpeg",
     "resources/images/book-covers/zero-karadp1.jpg",
-    "blog/Internship №3 Tokyo System House.md",
-    "blog/Internship №2 Co-graph.md",
     "resources/images/book-covers/zero-karadp1.jpeg",
-    "blog/index.md",
-    "resources/images/book-covers",
-    "blog/Algorithm.md",
     "resources/images/default-cover0.png",
     "resources/images/default-cover.png",
     "resources/images/shinagawa-internship/dinner.jpg",
-    "resources/images/profile.png",
-    "blog/Internship №0 ALTEN Japan.md",
-    "blog/Internship №1 Susano.md",
-    "blog/Хиймэл оюун хичээлийн явцын шалгалт.md",
-    "blog/Математик ба компьютер.md",
-    "blog/Search Engine.md",
-    "resources/images/random",
-    "resources/images/naprock-procon/20231016_104916.mp4",
-    "resources/images/naprock-procon/Messenger_creation_B46810E9-4CE6-4243-B639-D80C49F1EFD4.mp4",
-    "resources/images/naprock-procon/Messenger_creation_0D3B85ED-F8D2-4C13-8B64-5DC09881B6BA.mp4",
-    "resources/images/naprock-procon/Messenger_creation_36B75079-F0AA-4937-AEEE-5C181A3E5855.mp4",
-    "resources/images/naprock-procon/Messenger_creation_AFD5BD4A-672B-4308-B858-E4995B4045FD.mp4",
-    "resources/images/naprock-procon/Messenger_creation_99A0C9CD-B54E-4413-8DEE-ED1ABD14D11D.mp4",
-    "resources/images/shinagawa-internship/IMG_5844.heic",
-    "resources/images/Untitled.md",
-    "blog/Devlog №0〔Ivo〕.md",
-    "Агуулгын удирдамж.md",
-    "blog/Designing Data-Intensive Applications.md",
-    "blog/hello-world.md",
-    "blog/Clean Code.md"
+    "resources/images/profile.png"
   ]
 }
