@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/essay-1.md",
+                "file": "blog/internship-co-graph.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "essay-1"
+              "title": "internship-co-graph"
             }
           },
           {
@@ -188,7 +188,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "blog/essay-1.md",
+                "file": "blog/internship-co-graph.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -198,7 +198,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for essay-1"
+              "title": "Backlinks for internship-co-graph"
             }
           },
           {
@@ -207,12 +207,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "blog/essay-1.md",
+                "file": "blog/internship-co-graph.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from essay-1"
+              "title": "Outgoing links from internship-co-graph"
             }
           }
         ],
@@ -240,6 +240,7 @@
   },
   "active": "5f813c45b3ec71eb",
   "lastOpenFiles": [
+    "blog/essay-1.md",
     "blog/search-enginie.md",
     "blog/math-and-computer.md",
     "blog/oop.md",
@@ -275,7 +276,6 @@
     "templates/book-note/index.md",
     "templates/book-review.md",
     "templates/contest.md",
-    "templates/project-log.md",
     "resources/images/book-covers/immune-system.jpg",
     "resources/images/book-covers/dna-towa.jpg",
     "resources/images/book-covers/zero-karadp2.jpg",
