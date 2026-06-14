@@ -11,14 +11,20 @@
             "id": "5f813c45b3ec71eb",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "kanban",
               "state": {
-                "file": "blog/internship-co-graph.md",
-                "mode": "source",
-                "source": false
+                "file": "private/Прогресс/2026/Нийтлэлүүд.md",
+                "kanbanViewState": {
+                  "kanban-plugin": "board",
+                  "list-collapse": [
+                    false,
+                    false,
+                    false
+                  ]
+                }
               },
-              "icon": "lucide-file",
-              "title": "internship-co-graph"
+              "icon": "lucide-trello",
+              "title": "Нийтлэлүүд"
             }
           },
           {
@@ -188,7 +194,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "blog/internship-co-graph.md",
+                "file": "private/Прогресс/2026/Нийтлэлүүд.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -198,7 +204,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for internship-co-graph"
+              "title": "Backlinks for Нийтлэлүүд"
             }
           },
           {
@@ -207,12 +213,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "blog/internship-co-graph.md",
+                "file": "private/Прогресс/2026/Нийтлэлүүд.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from internship-co-graph"
+              "title": "Outgoing links from Нийтлэлүүд"
             }
           }
         ],
@@ -240,13 +246,21 @@
   },
   "active": "5f813c45b3ec71eb",
   "lastOpenFiles": [
+    "private/Прогресс/2026/Хичээлийн тэмдэглэл.md",
+    "templates/README.md",
+    "templates/README.md.tmp.684.f7e4a1ce00c1",
+    "Агуулгын удирдамж.md.tmp.684.9aa7faffb87a",
+    "templates/book-note/1章 chapter-name.md.tmp.684.7a09d8457616",
+    "private/Прогресс/2026/Номын тэмдэглэлүүд.md",
+    "private/Прогресс/2026/Видеонууд.md",
+    "private/Прогресс/2026/Нийтлэлүүд.md",
+    "blog/internship-co-graph.md",
     "blog/essay-1.md",
     "blog/search-enginie.md",
     "blog/math-and-computer.md",
     "blog/oop.md",
     "blog/devlog-ivo.md",
     "blog/internship-tsh.md",
-    "blog/internship-co-graph.md",
     "blog/internship-susano.md",
     "blog/internship-alten-japan.md",
     "blog/algorithm.md",
@@ -263,19 +277,11 @@
     "templates/book-note/01 chapter-name.md.tmp.684.e57ff86a17cb",
     "templates/book-note/index.md.tmp.684.43ebe309e3e5",
     "templates/book-review.md.tmp.684.45cbaced5164",
-    "templates/contest.md.tmp.684.90ab0bc67148",
-    "templates/project-log.md.tmp.684.c748cb1a48cc",
-    "templates/internship.md.tmp.684.b3a180ccb072",
     "resources/templates/Post Template.md",
     "resources/templates/Lesson Note Template.md",
     "resources/templates/Index Template.md",
     "blog/hello-world.md",
     "templates/lesson-note/01 lesson-name.md",
-    "templates/lesson-note/index.md",
-    "templates/book-note/1章 chapter-name.md",
-    "templates/book-note/index.md",
-    "templates/book-review.md",
-    "templates/contest.md",
     "resources/images/book-covers/immune-system.jpg",
     "resources/images/book-covers/dna-towa.jpg",
     "resources/images/book-covers/zero-karadp2.jpg",
