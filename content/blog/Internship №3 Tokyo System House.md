@@ -10,6 +10,7 @@ draft: false
 language:
   - mn
 cover: resources/images/shinagawa-internship/tokyo-station.jpg
+cssclasses:
 ---
 
 (Удахгүй нэмэгдэнэ)

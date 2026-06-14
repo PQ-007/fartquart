@@ -10,5 +10,6 @@ tags:
   - BookDeepLearning
   - Python
   - JP
+cover: resources/images/book-covers/zero-karadp2.jpg
 ---
 Гүн сургалтын талаар тэгээс нь эхлээд сурах номны хоёр дахь цуврал.  

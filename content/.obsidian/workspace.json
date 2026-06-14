@@ -8,45 +8,44 @@
         "type": "tabs",
         "children": [
           {
-            "id": "0ee8f65bcbb4ad30",
-            "type": "leaf",
-            "state": {
-              "type": "image",
-              "state": {
-                "file": "resources/images/alten-japan-internship/cover.jpg"
-              },
-              "icon": "lucide-image",
-              "title": "cover"
-            }
-          },
-          {
-            "id": "51df918eb7c69fbe",
-            "type": "leaf",
-            "state": {
-              "type": "image",
-              "state": {
-                "file": "resources/images/shinagawa-internship/unicorn-gundam.jpg"
-              },
-              "icon": "lucide-image",
-              "title": "unicorn-gundam"
-            }
-          },
-          {
-            "id": "6e8a83a58c6495d7",
+            "id": "5f813c45b3ec71eb",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/Internship №3 Tokyo System House.md",
+                "file": "lesson-notes/Blender/index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Internship №3 Tokyo System House"
+              "title": "index"
+            }
+          },
+          {
+            "id": "a0bdfacf0c8362ff",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "resources/images/book-covers/zero-karadp1.jpg"
+              },
+              "icon": "lucide-image",
+              "title": "zero-karadp1"
+            }
+          },
+          {
+            "id": "d201b76bff9f0ec7",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "resources/images/book-covers/zero-karadp2.jpg"
+              },
+              "icon": "lucide-image",
+              "title": "zero-karadp2"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -182,6 +181,39 @@
               "icon": "git-pull-request",
               "title": "Source Control"
             }
+          },
+          {
+            "id": "00fcf2e309adbc7d",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "lesson-notes/Blender/index.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for index"
+            }
+          },
+          {
+            "id": "b12990dde3572557",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "lesson-notes/Blender/index.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from index"
+            }
           }
         ],
         "currentTab": 3
@@ -206,19 +238,40 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "4dfd1ae5b0a4e55d",
+  "active": "5f813c45b3ec71eb",
   "lastOpenFiles": [
-    "resources/images/shinagawa-internship/20250707_162857.jpg",
-    "resources/images/shinagawa-internship/20250709_184503.jpg",
-    "resources/images/shinagawa-internship/20250710_085114.jpg",
-    "resources/images/shinagawa-internship/20250712_173641.jpg",
-    "resources/images/shinagawa-internship/20250717_232642.jpg",
-    "resources/images/shinagawa-internship/20250721_172854.jpg",
-    "resources/images/random/20241110_140236.jpg",
-    "resources/images/random/20241110_140256.jpg",
-    "resources/images/random/20250222_100420.jpg",
-    "resources/images/random/20250222_100424.jpg",
-    "resources/images/random/20250222_100427.jpg",
+    "lesson-notes/Object Oriented Programming/index.md",
+    "lesson-notes/Blender/index.md",
+    "lesson-notes/Data Structures/index.md",
+    "lesson-notes/Blender",
+    "lesson-notes/Object Oriented Programming/Inheritance.md",
+    "lesson-notes/Object Oriented Programming/Polymorphism.md",
+    "lesson-notes/Object Oriented Programming/Abstraction.md",
+    "lesson-notes/Object Oriented Programming/Encapsulation.md",
+    "book-notes/Immune System/index.md",
+    "book-notes/DNAとは何だろう/index.md",
+    "resources/images/book-covers/immune-system.jpg",
+    "resources/images/book-covers/dna-towa.jpg",
+    "book-notes/ゼロから作る Deep Learning 2/index.md",
+    "book-notes/ゼロから作る Deep Learning 1/index.md",
+    "resources/images/book-covers/zero-karadp2.jpg",
+    "resources/images/book-covers/picture_large978-4-87311-758-4.jpeg",
+    "resources/images/book-covers/zero-karadp1.jpg",
+    "blog/Internship №3 Tokyo System House.md",
+    "blog/Internship №2 Co-graph.md",
+    "resources/images/book-covers/zero-karadp1.jpeg",
+    "blog/index.md",
+    "resources/images/book-covers",
+    "blog/Algorithm.md",
+    "resources/images/default-cover0.png",
+    "resources/images/default-cover.png",
+    "resources/images/shinagawa-internship/dinner.jpg",
+    "resources/images/profile.png",
+    "blog/Internship №0 ALTEN Japan.md",
+    "blog/Internship №1 Susano.md",
+    "blog/Хиймэл оюун хичээлийн явцын шалгалт.md",
+    "blog/Математик ба компьютер.md",
+    "blog/Search Engine.md",
     "resources/images/random",
     "resources/images/naprock-procon/20231016_104916.mp4",
     "resources/images/naprock-procon/Messenger_creation_B46810E9-4CE6-4243-B639-D80C49F1EFD4.mp4",
@@ -226,33 +279,12 @@
     "resources/images/naprock-procon/Messenger_creation_36B75079-F0AA-4937-AEEE-5C181A3E5855.mp4",
     "resources/images/naprock-procon/Messenger_creation_AFD5BD4A-672B-4308-B858-E4995B4045FD.mp4",
     "resources/images/naprock-procon/Messenger_creation_99A0C9CD-B54E-4413-8DEE-ED1ABD14D11D.mp4",
-    "blog/Internship №3 Tokyo System House.md",
     "resources/images/shinagawa-internship/IMG_5844.heic",
-    "resources/images/naprock-procon",
     "resources/images/Untitled.md",
-    "blog/Internship №2 Co-graph.md",
-    "blog/Internship №0 ALTEN Japan.md",
     "blog/Devlog №0〔Ivo〕.md",
     "Агуулгын удирдамж.md",
     "blog/Designing Data-Intensive Applications.md",
     "blog/hello-world.md",
-    "blog/Математик ба компьютер.md",
-    "blog/Хиймэл оюун хичээлийн явцын шалгалт.md",
-    "blog/Algorithm.md",
-    "blog/Clean Code.md",
-    "blog/Internship №1 Susano.md",
-    "lesson-notes/Object Oriented Programming/index.md",
-    "lesson-notes/Object Oriented Programming",
-    "lesson-notes/Data Structures/index.md",
-    "creations/ivo.md",
-    "creations/first-creation.md",
-    "book-notes/Untitled.md",
-    "blog/Search Engine.md",
-    "blog/The Pragmatic Programmer.md",
-    "Untitled.md",
-    "creations/sudoku-solver-and-generator/index.md",
-    "blog/Untitled.md",
-    "blog/Data Structures.md",
-    "book-notes/ゼロから作る Deep Learning 1/2章 パーセプトロン.md"
+    "blog/Clean Code.md"
   ]
 }
