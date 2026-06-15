@@ -1,6 +1,7 @@
-export const formatDate = (date: string): string =>
-  new Date(date).toLocaleDateString("en-US", {
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  })
+export const formatDate = (date: string): string => {
+  const d = new Date(date)
+  const year = d.getUTCFullYear()
+  const month = String(d.getUTCMonth() + 1).padStart(2, "0")
+  const day = String(d.getUTCDate()).padStart(2, "0")
+  return `${year}-${month}-${day}`
+}
