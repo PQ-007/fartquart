@@ -33,12 +33,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lesson-notes/n1/Untitled.md",
+                "file": "lesson-notes/n1/1st-day.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Untitled"
+              "title": "1st-day"
             }
           }
         ]
@@ -234,12 +234,12 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "2156b1b7dae52731",
+  "active": "84ffbe294d868938",
   "lastOpenFiles": [
+    "lesson-notes/n1/1st-day.md",
     "lesson-notes/blender/index.md",
     "resources/images/book-covers/zero-karadp2.jpg",
     "resources/images/book-covers/zero-karadp1.jpg",
-    "lesson-notes/n1/Untitled.md",
     "lesson-notes/n1/index.md",
     "lesson-notes/dsa/Polymorphism.md",
     "lesson-notes/dsa/Inheritance.md",
