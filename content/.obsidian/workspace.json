@@ -13,12 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/hello-world.md",
+                "file": "lesson-notes/dsa/Polymorphism.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "hello-world"
+              "title": "Polymorphism"
+            }
+          },
+          {
+            "id": "84ffbe294d868938",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "lesson-notes/n1/index.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "index"
             }
           },
           {
@@ -45,7 +59,8 @@
               "title": "zero-karadp2"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -238,8 +253,17 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "2658e34e1852a6c5",
+  "active": "84ffbe294d868938",
   "lastOpenFiles": [
+    "lesson-notes/blender/index.md",
+    "lesson-notes/n1/index.md",
+    "lesson-notes/dsa/Polymorphism.md",
+    "lesson-notes/dsa/Inheritance.md",
+    "lesson-notes/dsa/Encapsulation.md",
+    "lesson-notes/dsa/Abstraction.md",
+    "lesson-notes/dsa/index.md",
+    "blog/hello-world.md",
+    "lesson-notes/n1",
     "blog/essay-1.md",
     "blog/devlog-ivo.md",
     "blog/algorithm.md",
@@ -258,7 +282,6 @@
     "templates/internship.md.tmp.794.20818d8acd17",
     "templates/project-log.md.tmp.794.8b65fa5d9d4c",
     "templates/essay.md.tmp.794.4481beb3b03d",
-    "templates/article.md.tmp.794.7c0ac81c3766",
     "private/Прогресс/2026/Нийтлэлүүд.md",
     "private/Прогресс/2026/Хичээлийн тэмдэглэл.md",
     "templates/README.md",
@@ -268,14 +291,6 @@
     "blog/search-enginie.md",
     "blog/math-and-computer.md",
     "blog/internship-tsh.md",
-    "blog/internship-susano.md",
-    "blog/internship-alten-japan.md",
-    "lesson-notes/DSA/index.md",
-    "lesson-notes/Data Structures/index.md",
-    "lesson-notes/DSA/Abstraction.md",
-    "resources/templates/Year Rewind Template.md",
-    "blog/about-me.md",
-    "templates/book-note/01 chapter-name.md",
     "resources/images/book-covers/immune-system.jpg",
     "resources/images/book-covers/dna-towa.jpg",
     "resources/images/book-covers/zero-karadp2.jpg",
