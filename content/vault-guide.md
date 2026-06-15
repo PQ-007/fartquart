@@ -1,5 +1,5 @@
 ---
-title: Агуулгын удирдамж
+title: Vault Guide
 date: 2026-06-14
 label: article
 description: Сайтад агуулга нэмэх бүрэн заавар — директор, label, frontmatter, MDX компонент, ном ба хичээлийн тэмдэглэл.
