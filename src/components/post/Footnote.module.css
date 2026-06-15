@@ -1,0 +1,70 @@
+.footnote {
+  position: relative;
+  display: inline;
+}
+
+.marker {
+  font-size: 0.72em;
+  vertical-align: super;
+  line-height: 0;
+  color: var(--color-accent);
+  font-weight: 700;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0 1px;
+  font-family: inherit;
+}
+
+.marker::before {
+  content: "[";
+}
+.marker::after {
+  content: "]";
+}
+
+.marker:hover {
+  text-decoration: underline;
+}
+
+.popover {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 8px);
+  transform: translateX(-50%) translateY(4px);
+  width: max-content;
+  max-width: min(320px, 80vw);
+  background: var(--color-dropdown-list, #141414);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-divider);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: var(--font--2);
+  line-height: 1.55;
+  font-weight: 400;
+  color: var(--color-secondary);
+  text-align: left;
+  white-space: normal;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  z-index: 50;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  pointer-events: none;
+}
+
+.footnote:hover .popover,
+.popover[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+/* The footnote text is rendered as MDX — flatten its block spacing. */
+.popover p {
+  margin: 0;
+}
+.popover p + p {
+  margin-top: 8px;
+}

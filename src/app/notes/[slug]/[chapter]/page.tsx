@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
@@ -11,6 +12,7 @@ import { ChapterSidebar } from "@/components/post/ChapterSidebar"
 import { getAllBlogPosts, getBookChapter, getBookNoteChapters } from "@/lib/content"
 import { mdxOptions, sanitizeMdx } from "@/lib/mdx-options"
 import { absoluteUrl, SITE_NAME, DEFAULT_OG_IMAGE } from "@/lib/site"
+import { coverUrl, isGif } from "@/lib/url"
 
 const extractLinks = (content: string) => {
   const links: { text: string; url: string }[] = []
@@ -113,6 +115,19 @@ export default async function BookChapterPage({
                 <h1>{post.title}</h1>
               </div>
             </header>
+            {post.cover && (
+              <div className={styles.cover}>
+                <Image
+                  src={coverUrl(post.cover)}
+                  alt={post.title}
+                  fill
+                  sizes="(max-width: 900px) 100vw, 800px"
+                  style={{ objectFit: "cover" }}
+                  priority
+                  unoptimized={isGif(post.cover)}
+                />
+              </div>
+            )}
             {tocChapters.length > 0 && (
               <details className={styles.mobileToc}>
                 <summary className={styles.mobileTocSummary}>

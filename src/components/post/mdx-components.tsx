@@ -8,6 +8,7 @@ import { Sandpack } from "./SandpackEmbed"
 import { MathBlock } from "./Math"
 import { ArrowTopRight } from "../icons"
 import { AnchorHeading } from "./AnchorHeading"
+import { Footnote } from "./Footnote"
 
 export const slugify = (text: string): string => {
   const slug = text
@@ -79,4 +80,5 @@ export const mdxComponents: MDXComponents = {
   Math: MathBlock,
   YouTube,
   Video,
+  Footnote,
 }

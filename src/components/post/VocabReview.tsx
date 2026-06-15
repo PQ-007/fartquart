@@ -73,7 +73,7 @@ export const VocabReview = ({ words }: { words: NewWord[] }) => {
       ) : (
         <ul className={sidebar.wordList}>
           {words.map((w, i) => (
-            <li key={w.word}>
+            <li key={`${w.word}-${i}`}>
               {w.definition ? (
                 <button
                   type="button"

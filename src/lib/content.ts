@@ -97,20 +97,24 @@ const fileToSlug = (f: string) =>
 
 const parseNewWords = (raw: unknown): NewWord[] | undefined => {
   if (!Array.isArray(raw) || raw.length === 0) return undefined
-  return raw.map((item) => {
-    if (typeof item === "string") {
-      const colon = item.indexOf(":")
-      if (colon > 0) {
-        return { word: item.slice(0, colon).trim(), definition: item.slice(colon + 1).trim() }
+  const words = raw
+    .map((item) => {
+      if (typeof item === "string") {
+        const colon = item.indexOf(":")
+        if (colon > 0) {
+          return { word: item.slice(0, colon).trim(), definition: item.slice(colon + 1).trim() }
+        }
+        return { word: item.trim() }
       }
-      return { word: item.trim() }
-    }
-    const obj = item as Record<string, unknown>
-    return {
-      word: String(obj.word ?? ""),
-      definition: obj.definition ? String(obj.definition) : undefined,
-    }
-  })
+      const obj = item as Record<string, unknown>
+      return {
+        word: String(obj.word ?? "").trim(),
+        definition: obj.definition ? String(obj.definition).trim() : undefined,
+      }
+    })
+    // Drop blank entries (e.g. the empty new-word block left in a template).
+    .filter((w) => w.word.length > 0)
+  return words.length > 0 ? words : undefined
 }
 
 export const estimateReadTime = (content: string): number =>
