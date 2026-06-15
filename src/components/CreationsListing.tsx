@@ -12,7 +12,6 @@ export const CreationsListing = ({ creations }: { creations: CreationMeta[] }) =
     <div className={styles.outer}>
       <div className={styles.wrapper}>
         <div className={styles.inner}>
-          <h1 className={styles.heading}>{t("creations.heading")}</h1>
           <section className={styles.grid}>
             {creations.map((c) => (
               <PostPreview key={c.slug} type="creation" post={c} />

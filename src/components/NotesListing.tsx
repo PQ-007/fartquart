@@ -32,7 +32,7 @@ export const NotesListing = ({ posts }: { posts: BlogMeta[] }) => {
     <div className={styles.outer}>
       <div className={styles.wrapper}>
         <div className={styles.inner}>
-          <h1 className={styles.heading}>{t("nav.notes")}</h1>
+         
 
           {books.length > 0 && (
             <section className={styles.section}>

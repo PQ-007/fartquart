@@ -56,7 +56,7 @@ export const ChapterSidebar = ({ bookSlug, bookHref, chapters, newWords, sources
         {chapters.length > 0 && (
           <ul ref={listRef} className={styles.list}>
             {chapters.map((ch) => (
-              <li key={ch.id} data-active={activeId === ch.id}>
+              <li key={ch.id} data-active={activeId === ch.id} data-level={ch.level}>
                 <a href={`#${ch.id}`}>{ch.title}</a>
               </li>
             ))}

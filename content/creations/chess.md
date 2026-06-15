@@ -1,13 +1,16 @@
 ---
-draft: true
+draft: false
 title: Шатар
-description: An online multiplayer 3D chess game built with React Three Fiber, Socket.IO, and Zustand. Share your code to play with friends. 
+description: An online multiplayer 3D chess game built with React Three Fiber, Socket.IO, and Zustand. Share your code to play with friends.
 category: project
-tags: ['socket.io', 'three.js', 'chess']
+tags:
+  - chess
+  - threejs
+  - socketio
 publishedAt: 2023-06-23
-mainVideo: 'projects/chess/chess-main-video'
-demo: 'https://chess-in-3d.herokuapp.com/'
-repo: 'https://github.com/joshwrn/3d-chess'
+mainVideo: projects/chess/chess-main-video
+demo: https://chess-in-3d.herokuapp.com/
+repo: https://github.com/joshwrn/3d-chess
 ---
 
 ## Motivation
@@ -154,8 +157,8 @@ export default function App() {
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background-color: #1d1d1d;
-  background: linear-gradient(180deg, #000000, #242424);
+  background-color: \#1d1d1d;
+  background: linear-gradient(180deg, \#000000, \#242424);
 }
 
 * {

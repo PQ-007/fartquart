@@ -4,8 +4,9 @@ import { useEffect, useRef, useState } from "react"
 import styles from "./Chapters.module.css"
 import { SlidingText } from "../SlidingText"
 import { useT } from "../LanguageProvider"
+import type { Chapter } from "@/lib/toc"
 
-export type Chapter = { id: string; title: string }
+export type { Chapter }
 
 export const Chapters = ({
   chapters,
@@ -64,7 +65,11 @@ export const Chapters = ({
         </div>
         <ul ref={listRef} className={styles.list}>
           {chapters.map((chapter) => (
-            <li key={chapter.id} data-active={activeId === chapter.id}>
+            <li
+              key={chapter.id}
+              data-active={activeId === chapter.id}
+              data-level={chapter.level}
+            >
               <a href={`#${chapter.id}`}>{chapter.title}</a>
             </li>
           ))}

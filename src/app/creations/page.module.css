@@ -10,7 +10,7 @@
   width: 100%;
   position: relative;
   background-color: var(--color-background);
-  padding: 80px var(--main-padding-sides) 0;
+  padding: 135px var(--main-padding-sides) 0;
 }
 
 .inner {

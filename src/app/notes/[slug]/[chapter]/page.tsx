@@ -5,9 +5,8 @@ import type { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import styles from "./page.module.css"
 import { Footer } from "@/components/Footer"
-import { mdxComponents, slugify } from "@/components/post/mdx-components"
-import type { Chapter } from "@/components/post/Chapters"
-import { ReadingProgress } from "@/components/ReadingProgress"
+import { mdxComponents } from "@/components/post/mdx-components"
+import { extractChapters } from "@/lib/toc"
 import { ChapterSidebar } from "@/components/post/ChapterSidebar"
 import { getAllBlogPosts, getBookChapter, getBookNoteChapters } from "@/lib/content"
 import { mdxOptions, sanitizeMdx } from "@/lib/mdx-options"
@@ -65,25 +64,6 @@ export const generateMetadata = async ({
   }
 }
 
-const extractChapters = (content: string): Chapter[] => {
-  const chapters: Chapter[] = []
-  const seen = new Map<string, number>()
-  let inCode = false
-  for (const line of content.split("\n")) {
-    if (line.trim().startsWith("```")) inCode = !inCode
-    if (inCode) continue
-    const match = /^##\s+(.+)$/.exec(line)
-    if (!match) continue
-    const title = match[1].trim()
-    const base = slugify(title)
-    const count = seen.get(base) ?? 0
-    seen.set(base, count + 1)
-    const id = count === 0 ? base : `${base}-${count}`
-    chapters.push({ id, title })
-  }
-  return chapters
-}
-
 export default async function BookChapterPage({
   params,
 }: {
@@ -106,7 +86,6 @@ export default async function BookChapterPage({
 
   return (
     <>
-      <ReadingProgress />
       <div className={styles.container}>
         <main className={styles.wrapper}>
           <article className={styles.article}>
@@ -135,7 +114,7 @@ export default async function BookChapterPage({
                 </summary>
                 <ul className={styles.mobileTocList}>
                   {tocChapters.map((c) => (
-                    <li key={c.id}>
+                    <li key={c.id} data-level={c.level}>
                       <a href={`#${c.id}`}>{c.title}</a>
                     </li>
                   ))}

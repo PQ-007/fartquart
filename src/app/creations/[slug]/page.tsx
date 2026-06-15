@@ -5,8 +5,9 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import styles from "./page.module.css"
 import { Footer } from "@/components/Footer"
 import { Tag } from "@/components/Tag"
-import { Chapters, type Chapter } from "@/components/post/Chapters"
-import { mdxComponents, slugify } from "@/components/post/mdx-components"
+import { Chapters } from "@/components/post/Chapters"
+import { mdxComponents } from "@/components/post/mdx-components"
+import { extractChapters } from "@/lib/toc"
 import { formatDate, getAllCreations, getCreation } from "@/lib/content"
 import { coverUrl } from "@/lib/url"
 import { buildPostMetadata } from "@/lib/seo"
@@ -29,18 +30,6 @@ export const generateMetadata = async ({
   const creation = getCreation(slug)
   if (!creation) return {}
   return buildPostMetadata(creation, "creations")
-}
-
-const extractChapters = (content: string): Chapter[] => {
-  const chapters: Chapter[] = []
-  let inCode = false
-  for (const line of content.split("\n")) {
-    if (line.trim().startsWith("```")) inCode = !inCode
-    if (inCode) continue
-    const match = /^##\s+(.+)$/.exec(line)
-    if (match) chapters.push({ id: slugify(match[1].trim()), title: match[1].trim() })
-  }
-  return chapters
 }
 
 export default async function CreationPage({

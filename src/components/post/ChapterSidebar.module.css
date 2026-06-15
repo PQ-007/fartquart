@@ -65,6 +65,16 @@
   text-decoration: none;
 }
 
+/* Nested sub-headings (### → level 3) sit indented and a touch smaller. */
+.list li[data-level="3"] {
+  padding-left: 16px;
+}
+
+.list li[data-level="3"] a {
+  font-size: var(--font--2);
+  color: rgba(var(--color-primary-rgb), 0.4);
+}
+
 .list li[data-active="true"] a,
 .list li a:hover {
   color: var(--color-primary);
