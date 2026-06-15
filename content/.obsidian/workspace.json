@@ -22,6 +22,20 @@
             }
           },
           {
+            "id": "f744399dfe2eed84",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "book-notes/ゼロから作る Deep Learning 1/4章 ニューラルネットワークの学習.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "4章 ニューラルネットワークの学習"
+            }
+          },
+          {
             "id": "e5327fb7570f380f",
             "type": "leaf",
             "state": {
@@ -57,7 +71,7 @@
               "state": {
                 "file": "book-notes/ゼロから作る Deep Learning 1/2章 パーセプトロン.md",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
               "title": "2章 パーセプトロン"
@@ -71,14 +85,14 @@
               "state": {
                 "file": "book-notes/ゼロから作る Deep Learning 1/3章 ニューラルネットワーク.md",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
               "title": "3章 ニューラルネットワーク"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -273,7 +287,7 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "e6dbddda1e47ac44",
+  "active": "f744399dfe2eed84",
   "lastOpenFiles": [
     "book-notes/ゼロから作る Deep Learning 1/1章 Python 入門.md",
     "book-notes/ゼロから作る Deep Learning 1/2章 パーセプトロン.md",

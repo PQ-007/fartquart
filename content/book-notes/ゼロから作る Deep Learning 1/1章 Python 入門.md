@@ -4,7 +4,6 @@ date: 2025-09-13
 new-word:
   - word: 動的型付き言語 
     definition: dynamic typed language 
-  - 
 draft: false
 ---
 ## Python とは
