@@ -1,6 +1,6 @@
 // Shared helpers for normalizing frontmatter cover paths.
-// Frontmatter covers are either absolute URLs or vault-relative
-// paths like "resources/images/foo.jpg" served by /resources/[...path].
+// Frontmatter covers are either absolute URLs or vault-relative paths like
+// "resources/images/foo.jpg", served from public/ (synced by scripts/copy-resources).
 
 export const coverUrl = (cover: string): string =>
   cover.startsWith("http") ? cover : `/${cover}`

@@ -20,20 +20,6 @@
             }
           },
           {
-            "id": "7e33c34edc8754d4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "blog/internship-alten-japan.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "internship-alten-japan"
-            }
-          },
-          {
             "id": "0b98a4fc86d54c08",
             "type": "leaf",
             "state": {
@@ -94,7 +80,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -214,13 +200,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "blog/internship-alten-japan.md",
+                "file": "private/Прогресс/2026/Нийтлэлүүд.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of internship-alten-japan"
+              "title": "Outline of Нийтлэлүүд"
             }
           },
           {
@@ -289,14 +275,14 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "2658e34e1852a6c5",
+  "active": "e6dbddda1e47ac44",
   "lastOpenFiles": [
+    "blog/internship-alten-japan.md",
     "resources/images/alten-japan-internship/window.jpg",
     "resources/images/alten-japan-internship/cover.jpg",
     "resources/images/alten-japan-internship/state-machine.png",
     "resources/images/alten-japan-internship/source-code.png",
     "resources/images/alten-japan-internship/code-flowchart.png",
-    "blog/internship-alten-japan.md",
     "resources/images/alten-japan-internship/V.png",
     "resources/images/alten-japan-internship/presentation.jpg",
     "resources/images/alten-japan-internship/umi-ie.jpg",
@@ -311,7 +297,6 @@
     "resources/images/alten-japan-internship/push-button.png",
     "resources/videos/10-даралт.mp4",
     "resources/videos/alten-japan-internship.mp4",
-    "resources/images/alten-japan-internship/work0.jpg",
     "blog/internship-tsh.md",
     "templates/internship.md",
     "book-notes/ゼロから作る Deep Learning 1/index.md",
