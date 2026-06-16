@@ -1,6 +1,6 @@
 ---
-draft: false
 title: Шатар
+draft: false
 description: An online multiplayer 3D chess game built with React Three Fiber, Socket.IO, and Zustand. Share your code to play with friends.
 category: project
 tags:
@@ -12,7 +12,7 @@ mainVideo: projects/chess/chess-main-video
 demo: https://chess-in-3d.herokuapp.com/
 repo: https://github.com/joshwrn/3d-chess
 ---
-
+>**There is no magic—just abstraction layers built on top of one another.**
 ## Motivation
 
 At this point in my life, I know myself pretty well. I knew if I set out to create a new board game from scratch it would end up taking me weeks or even months to finish. That's why I decided I to recreate a game instead. Chess was the obvious answer because it's straight forward, and logically easy to code.

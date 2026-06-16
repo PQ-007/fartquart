@@ -1,10 +1,10 @@
 ---
 title: Internship №3 — Tokyo System House
-description: Tokyo System House дахь .NET болон C# хэрэглэсэн дадлагын тэмдэглэл.
+description: Tokyo System House дахь хэрэглэсэн дадлагын тэмдэглэл.
 label: internship
 tags:
-  - Internship
-  - CsharpDotNet
+  - internship
+  - cobol
 date: 2026-01-20
 draft: false
 language:

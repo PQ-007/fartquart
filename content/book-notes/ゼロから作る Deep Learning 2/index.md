@@ -8,8 +8,8 @@ genre: Deep Learning
 pages: 458
 tags:
   - BookDeepLearning
-  - Python
   - JP
+  - python
 cover: resources/images/book-covers/zero-karadp2.jpg
 ---
 Гүн сургалтын талаар тэгээс нь эхлээд сурах номны хоёр дахь цуврал.  
