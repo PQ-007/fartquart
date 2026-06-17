@@ -37,6 +37,7 @@ export type BlogMeta = {
   genre?: string
   readTime?: number
   newWords?: NewWord[]
+  music?: string
   draft?: boolean
 }
 
@@ -134,6 +135,7 @@ const toBlogMeta = (slug: string, data: Record<string, unknown>, content = ""): 
   genre: data.genre ? String(data.genre) : undefined,
   readTime: content ? estimateReadTime(content) : undefined,
   newWords: parseNewWords(data["new-word"]),
+  music: data.music ? String(data.music) : undefined,
   draft: Boolean(data.draft),
 })
 

@@ -11,6 +11,7 @@ import { extractChapters } from "@/lib/toc"
 import { formatDate, getAllBlogPosts, getBlogPost, getRelatedPosts } from "@/lib/content"
 import { RelatedPosts } from "@/components/RelatedPosts"
 import { JsonLd } from "@/components/JsonLd"
+import { MusicPlayer } from "@/components/MusicPlayer"
 import { mdxOptions, sanitizeMdx } from "@/lib/mdx-options"
 import { coverUrl, isGif } from "@/lib/url"
 import { buildPostMetadata, articleJsonLd } from "@/lib/seo"
@@ -65,6 +66,7 @@ export default async function BlogPostPage({
   return (
     <>
       <JsonLd data={articleJsonLd(post, "blog")} />
+      {post.music && <MusicPlayer src={post.music} />}
       <div className={styles.container}>
         <main className={styles.wrapper}>
           <article className={styles.article}>

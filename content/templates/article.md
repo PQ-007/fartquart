@@ -6,6 +6,7 @@ description:                              # 1–2 sentences — shown on cards, 
 tags:                                     # One per line; each becomes a node in the /tags graph (case-sensitive)
   - 
 cover: resources/images/folder/cover.jpg  # Optional. Put the image in content/resources/images/; .gif ok; delete this line if none
+music:                                    # Optional background track — a YouTube link or an audio file (resources/audio/song.mp3). Delete if none
 draft: true                               # true = hidden while writing; set false to publish
 ---
 

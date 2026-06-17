@@ -9,6 +9,7 @@ tags:
   - state-machine
 language: mn
 cover: resources/images/alten-japan-internship/cover.jpg
+music:
 ---
 
 

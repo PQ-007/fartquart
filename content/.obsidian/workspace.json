@@ -276,8 +276,10 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "2156b1b7dae52731",
+  "active": "2658e34e1852a6c5",
   "lastOpenFiles": [
+    "blog/__music-test.md",
+    "templates/article.md.tmp.888.f6da6428f7cb",
     "blog/internship-co-graph.md",
     "blog/internship-alten-japan.md",
     "resources/videos/robot-hand.mp4",
@@ -321,7 +323,6 @@
     "templates/article.md",
     "vault-guide.md",
     "lesson-notes/n1",
-    "templates/lesson-note/01 lesson-name.md.tmp.794.090ac8a4e985",
-    "templates/lesson-note/index.md.tmp.794.53cda5d7f0f1"
+    "templates/lesson-note/01 lesson-name.md.tmp.794.090ac8a4e985"
   ]
 }

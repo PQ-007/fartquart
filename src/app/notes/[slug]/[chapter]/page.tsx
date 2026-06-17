@@ -8,6 +8,7 @@ import { Footer } from "@/components/Footer"
 import { mdxComponents } from "@/components/post/mdx-components"
 import { extractChapters } from "@/lib/toc"
 import { ChapterSidebar } from "@/components/post/ChapterSidebar"
+import { MusicPlayer } from "@/components/MusicPlayer"
 import { getAllBlogPosts, getBookChapter, getBookNoteChapters } from "@/lib/content"
 import { mdxOptions, sanitizeMdx } from "@/lib/mdx-options"
 import { absoluteUrl, SITE_NAME, DEFAULT_OG_IMAGE } from "@/lib/site"
@@ -86,6 +87,7 @@ export default async function BookChapterPage({
 
   return (
     <>
+      {post.music && <MusicPlayer src={post.music} />}
       <div className={styles.container}>
         <main className={styles.wrapper}>
           <article className={styles.article}>
