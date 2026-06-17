@@ -9,6 +9,7 @@ import { Background } from "@/components/Background"
 import { Nav } from "@/components/Nav"
 import { PostImageLightbox } from "@/components/post/PostImageLightbox"
 import { SITE_URL, SITE_NAME, SITE_DESC, DEFAULT_OG_IMAGE } from "@/lib/site"
+import { defaultLocale as DEFAULT_LOCALE, locales as LOCALES, type Locale } from "@/lib/i18n"
 
 const serif = Fraunces({
   subsets: ["latin"],
@@ -61,14 +62,18 @@ export default async function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const cookieStore = await cookies()
   const theme = cookieStore.get("theme")?.value === "light" ? "light" : "dark"
+  const cookieLocale = cookieStore.get("locale")?.value
+  const locale = (LOCALES as readonly string[]).includes(cookieLocale ?? "")
+    ? (cookieLocale as Locale)
+    : DEFAULT_LOCALE
 
   return (
-    <html lang="en" data-theme={theme} suppressHydrationWarning>
+    <html lang={locale} data-theme={theme} data-lang={locale} suppressHydrationWarning>
       <body
         className={`${serif.variable} ${neue.variable} ${jetbrains.variable}`}
       >
         <ThemeProvider>
-          <LanguageProvider>
+          <LanguageProvider initialLocale={locale}>
             <Background />
             <div aria-hidden="true" className="grid-bg" />
             {children}

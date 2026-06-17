@@ -1,7 +1,7 @@
 export type Locale = "en" | "mn" | "ja"
 export const defaultLocale: Locale = "en"
 export const locales: Locale[] = ["en", "mn", "ja"]
-export const localeLabels: Record<Locale, string> = { en: "EN", mn: "МН", ja: "日" }
+export const localeLabels: Record<Locale, string> = { en: "ENGLISH", mn: "МОНГОЛ", ja: "日本語" }
 
 const dict = {
   en: {
@@ -25,6 +25,7 @@ const dict = {
       newWords: "New Words",
       review: "Review",
       reveal: "Tap to reveal",
+      readIn: "Also in",
     },
     blog: {
       "book-review": "Book Review",
@@ -77,6 +78,7 @@ const dict = {
       newWords: "Шинэ үгс",
       review: "Давтах",
       reveal: "Дарж харах",
+      readIn: "Өөр хэлээр",
     },
     blog: {
       "book-review": "Номын сэтгэгдэл",
@@ -129,6 +131,7 @@ const dict = {
       newWords: "新しい単語",
       review: "復習",
       reveal: "タップして表示",
+      readIn: "他の言語",
     },
     blog: {
       "book-review": "書評",

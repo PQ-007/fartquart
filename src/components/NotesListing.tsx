@@ -4,14 +4,17 @@ import styles from "@/app/notes/page.module.css"
 import { BookCard } from "./BookCard"
 import { LessonCard } from "./LessonCard"
 import { Tag } from "./Tag"
-import { useT } from "./LanguageProvider"
+import { useT, useLanguage } from "./LanguageProvider"
+import { collapseTranslations } from "@/lib/translations"
 import type { BlogMeta } from "@/lib/content"
 
 export const NotesListing = ({ posts }: { posts: BlogMeta[] }) => {
   const t = useT()
+  const { locale } = useLanguage()
 
-  const books = posts.filter((p) => p.label === "book-note")
-  const lessons = posts.filter((p) => p.label === "lesson-note")
+  const collapsed = collapseTranslations(posts, locale)
+  const books = collapsed.filter((p) => p.label === "book-note")
+  const lessons = collapsed.filter((p) => p.label === "lesson-note")
 
   if (posts.length === 0) {
     return (

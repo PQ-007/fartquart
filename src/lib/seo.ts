@@ -1,7 +1,17 @@
 import type { Metadata } from "next"
 import type { BlogMeta, CreationMeta } from "./content"
 import { absoluteUrl, AUTHOR, SITE_NAME, SITE_URL, SITE_DESC, DEFAULT_OG_IMAGE } from "./site"
-import { coverUrl } from "./url"
+import { coverUrl, postPath } from "./url"
+
+/** hreflang map for a translation group, for `alternates.languages`. */
+export const hreflangMap = (
+  siblings: BlogMeta[],
+): Record<string, string> | undefined => {
+  const entries = siblings
+    .filter((s) => s.lang)
+    .map((s) => [s.lang as string, absoluteUrl(postPath(s.slug, s.label))] as const)
+  return entries.length ? Object.fromEntries(entries) : undefined
+}
 
 type Shareable = BlogMeta | CreationMeta
 
@@ -16,6 +26,7 @@ type Shareable = BlogMeta | CreationMeta
 export const buildPostMetadata = (
   post: Shareable,
   pathPrefix: "blog" | "notes" | "creations",
+  languages?: Record<string, string>,
 ): Metadata => {
   const url = absoluteUrl(`/${pathPrefix}/${post.slug}`)
   // Always set images explicitly: cover when present, branded card otherwise.
@@ -26,7 +37,7 @@ export const buildPostMetadata = (
   return {
     title: post.title,
     description: post.description,
-    alternates: { canonical: url },
+    alternates: { canonical: url, ...(languages ? { languages } : {}) },
     openGraph: {
       type: "article",
       title: post.title,

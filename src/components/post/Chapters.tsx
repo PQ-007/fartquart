@@ -3,8 +3,10 @@
 import { useEffect, useRef, useState } from "react"
 import styles from "./Chapters.module.css"
 import { SlidingText } from "../SlidingText"
+import { TranslationSwitcher } from "../TranslationSwitcher"
 import { useT } from "../LanguageProvider"
 import type { Chapter } from "@/lib/toc"
+import type { BlogMeta } from "@/lib/content"
 
 export type { Chapter }
 
@@ -12,10 +14,14 @@ export const Chapters = ({
   chapters,
   demo,
   repo,
+  siblings,
+  currentSlug,
 }: {
   chapters: Chapter[]
   demo?: string
   repo?: string
+  siblings?: BlogMeta[]
+  currentSlug?: string
 }) => {
   const [activeId, setActiveId] = useState<string | null>(null)
   const [progress, setProgress] = useState(0)
@@ -45,6 +51,9 @@ export const Chapters = ({
   return (
     <aside className={styles.chapters}>
       <div className={styles.inner}>
+        {siblings && currentSlug && (
+          <TranslationSwitcher siblings={siblings} currentSlug={currentSlug} />
+        )}
         <div className={styles.buttonWrapper}>
           {demo && (
             <a href={demo} rel="noopener noreferrer" target="_blank">

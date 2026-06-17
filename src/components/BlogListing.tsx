@@ -5,7 +5,8 @@ import styles from "@/app/blog/page.module.css"
 import { PostPreview } from "./PostPreview"
 import { SlidingText } from "./SlidingText"
 import { Tag } from "./Tag"
-import { useT } from "./LanguageProvider"
+import { useT, useLanguage } from "./LanguageProvider"
+import { collapseTranslations } from "@/lib/translations"
 import type { BlogMeta } from "@/lib/content"
 
 type BlogLabel = "book-review" | "internship" | "project-log" | "contest" | "essay" | "article"
@@ -20,8 +21,11 @@ const LABEL_ORDER: BlogLabel[] = [
 
 export const BlogListing = ({ posts }: { posts: BlogMeta[] }) => {
   const t = useT()
+  const { locale } = useLanguage()
 
-  const filtered = posts.filter((p) => p.label !== "book-review")
+  const filtered = collapseTranslations(posts, locale).filter(
+    (p) => p.label !== "book-review",
+  )
 
   const labels = [
     ...LABEL_ORDER.filter((l) => filtered.some((p) => p.label === l)),

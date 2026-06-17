@@ -8,13 +8,13 @@ import { Tag } from "@/components/Tag"
 import { Chapters } from "@/components/post/Chapters"
 import { mdxComponents } from "@/components/post/mdx-components"
 import { extractChapters } from "@/lib/toc"
-import { formatDate, getAllBlogPosts, getBlogPost, getRelatedPosts } from "@/lib/content"
+import { formatDate, getAllBlogPosts, getBlogPost, getRelatedPosts, getTranslationSiblings } from "@/lib/content"
 import { RelatedPosts } from "@/components/RelatedPosts"
 import { JsonLd } from "@/components/JsonLd"
 import { MusicPlayer } from "@/components/MusicPlayer"
 import { mdxOptions, sanitizeMdx } from "@/lib/mdx-options"
 import { coverUrl, isGif } from "@/lib/url"
-import { buildPostMetadata, articleJsonLd } from "@/lib/seo"
+import { buildPostMetadata, articleJsonLd, hreflangMap } from "@/lib/seo"
 
 const BLOG_LABELS = ["internship", "project-log", "contest", "essay", "book-review"] as const
 
@@ -32,7 +32,7 @@ export const generateMetadata = async ({
   const slug = decodeURIComponent(encoded)
   const post = getBlogPost(slug)
   if (!post) return {}
-  return buildPostMetadata(post, "blog")
+  return buildPostMetadata(post, "blog", hreflangMap(getTranslationSiblings(slug)))
 }
 
 const Stars = ({ rating }: { rating: number }) => {
@@ -62,6 +62,7 @@ export default async function BlogPostPage({
   const chapters = extractChapters(post.content)
   const isBookReview = post.label === "book-review"
   const related = getRelatedPosts(slug)
+  const siblings = getTranslationSiblings(slug)
 
   return (
     <>
@@ -165,7 +166,7 @@ export default async function BlogPostPage({
               />
             </div>
           </article>
-          <Chapters chapters={chapters} />
+          <Chapters chapters={chapters} siblings={siblings} currentSlug={slug} />
         </main>
       </div>
       <RelatedPosts posts={related} />

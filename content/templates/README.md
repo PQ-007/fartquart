@@ -31,8 +31,30 @@ For folder types, rename the folder to the book/course title; keep `index.md` an
 | `rating` | book-review, book-note | 1–5, decimals allowed (e.g. `4.5`). |
 | `genre`, `pages` | book-review, book-note | Shown in the book header. |
 | `new-word` | chapter / lesson files | Vocabulary list → flip-to-reveal review widget in the sidebar. |
+| `music` | optional | Background track — a YouTube link or an audio file (`resources/audio/song.mp3`). |
+| `lang` | optional | Post language: `en` / `mn` / `ja`. Only needed when you write translations. |
+| `translation-key` | optional | Shared key linking translations of the same post (see below). |
 
 `read time` is computed automatically from word count — don't set it.
+
+## Translations
+
+To publish a post in more than one language, make **one file per language** and give them the **same `translation-key`** plus their own `lang`:
+
+```yaml
+# my-trip.md
+title: My Trip to Tokyo
+lang: en
+translation-key: tokyo-trip
+```
+```yaml
+# токио-аялал.md
+title: Токио аялал
+lang: mn
+translation-key: tokyo-trip
+```
+
+The site then shows **one card** per group (the variant matching the reader's language, falling back to the original), and a small **"Also in: EN · МН"** switcher on the post linking the versions. Search engines get `hreflang` tags automatically. Posts without a `translation-key` are standalone — nothing changes.
 
 ## `new-word` format
 

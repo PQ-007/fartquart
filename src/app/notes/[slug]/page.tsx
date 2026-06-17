@@ -9,13 +9,14 @@ import { Tag } from "@/components/Tag"
 import { Chapters } from "@/components/post/Chapters"
 import { mdxComponents } from "@/components/post/mdx-components"
 import { extractChapters } from "@/lib/toc"
-import { formatDate, getAllBlogPosts, getBlogPost, getBookNoteChapters, getRelatedPosts } from "@/lib/content"
+import { formatDate, getAllBlogPosts, getBlogPost, getBookNoteChapters, getRelatedPosts, getTranslationSiblings } from "@/lib/content"
 import { RelatedPosts } from "@/components/RelatedPosts"
 import { JsonLd } from "@/components/JsonLd"
 import { MusicPlayer } from "@/components/MusicPlayer"
+import { TranslationSwitcher } from "@/components/TranslationSwitcher"
 import { mdxOptions, sanitizeMdx } from "@/lib/mdx-options"
 import { coverUrl, isGif } from "@/lib/url"
-import { buildPostMetadata, articleJsonLd } from "@/lib/seo"
+import { buildPostMetadata, articleJsonLd, hreflangMap } from "@/lib/seo"
 
 const NOTE_LABELS = ["lesson-note", "book-note"] as const
 
@@ -44,7 +45,7 @@ export const generateMetadata = async ({
   const slug = decodeURIComponent(encoded)
   const post = getBlogPost(slug)
   if (!post) return {}
-  return buildPostMetadata(post, "notes")
+  return buildPostMetadata(post, "notes", hreflangMap(getTranslationSiblings(slug)))
 }
 
 
@@ -77,6 +78,7 @@ export default async function NoteSlugPage({
   const chapters = (isLessonNote || isBookNote) ? getBookNoteChapters(slug) : []
   const tocChapters = extractChapters(post.content)
   const related = getRelatedPosts(slug)
+  const siblings = getTranslationSiblings(slug)
 
   return (
     <>
@@ -85,6 +87,11 @@ export default async function NoteSlugPage({
       <div className={styles.container}>
         <main className={styles.wrapper}>
           <article className={styles.article}>
+            {siblings.length > 0 && (isLessonNote || isBookNote) && (
+              <div style={{ marginBottom: 20 }}>
+                <TranslationSwitcher siblings={siblings} currentSlug={slug} />
+              </div>
+            )}
 
             {isLessonNote ? (
               <>
@@ -229,7 +236,9 @@ export default async function NoteSlugPage({
             )}
 
           </article>
-          {!isLessonNote && !isBookNote && <Chapters chapters={tocChapters} />}
+          {!isLessonNote && !isBookNote && (
+            <Chapters chapters={tocChapters} siblings={siblings} currentSlug={slug} />
+          )}
         </main>
       </div>
       <RelatedPosts posts={related} />

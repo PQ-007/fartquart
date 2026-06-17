@@ -6,7 +6,8 @@ import type { BlogMeta } from "@/lib/content"
 import { formatDate } from "@/lib/format"
 import { coverUrl, isGif, postPath } from "@/lib/url"
 import { Tag } from "@/components/Tag"
-import { useT } from "@/components/LanguageProvider"
+import { useT, useLanguage } from "@/components/LanguageProvider"
+import { collapseTranslations } from "@/lib/translations"
 import card from "./ActivityFeed.module.css"
 import styles from "./RelatedPosts.module.css"
 
@@ -23,14 +24,16 @@ const gradientFor = (slug: string) =>
 
 export const RelatedPosts = ({ posts }: { posts: BlogMeta[] }) => {
   const t = useT()
+  const { locale } = useLanguage()
   if (posts.length === 0) return null
+  const shown = collapseTranslations(posts, locale)
 
   return (
     <section className={styles.outer}>
       <div className={styles.inner}>
         <h2 className={card.heading}>{t("ui.related")}</h2>
         <div className={card.grid}>
-          {posts.map((post) => (
+          {shown.map((post) => (
             <Link key={post.slug} href={postPath(post.slug, post.label)} className={card.card}>
               <div className={card.cover}>
                 {post.cover ? (

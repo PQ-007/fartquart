@@ -1,6 +1,8 @@
 import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
+import { defaultLocale } from "./i18n"
+import { localizePost, collapseTranslations } from "./translations"
 export { formatDate } from "./format"
 
 const CONTENT_DIR = path.join(process.cwd(), "content")
@@ -59,6 +61,8 @@ export type BlogMeta = {
   readTime?: number
   newWords?: NewWord[]
   music?: string
+  lang?: string
+  translationKey?: string
   draft?: boolean
 }
 
@@ -157,6 +161,12 @@ const toBlogMeta = (slug: string, data: Record<string, unknown>, content = ""): 
   readTime: content ? estimateReadTime(content) : undefined,
   newWords: parseNewWords(data["new-word"]),
   music: data.music ? String(data.music) : undefined,
+  lang: data.lang ? String(data.lang) : undefined,
+  translationKey: data["translation-key"]
+    ? String(data["translation-key"])
+    : data.translationKey
+      ? String(data.translationKey)
+      : undefined,
   draft: Boolean(data.draft),
 })
 
@@ -193,8 +203,20 @@ export const getBlogPostsByTag = (tag: string): BlogMeta[] =>
   getAllBlogPosts().filter((p) => p.label === tag || p.tags.includes(tag))
 
 /**
+ * All language variants of a post (including itself), grouped by `translationKey`.
+ * Returns [] when the post has no translations.
+ */
+export const getTranslationSiblings = (slug: string): BlogMeta[] => {
+  const all = getAllBlogPosts()
+  const post = all.find((p) => p.slug === slug)
+  if (!post?.translationKey) return []
+  const group = all.filter((p) => p.translationKey === post.translationKey)
+  return group.length > 1 ? group : []
+}
+
+/**
  * Posts most related to `slug`, ranked by shared tags (label counts as a tag),
- * tie-broken by recency. Excludes the post itself.
+ * tie-broken by recency. Excludes the post itself and its other-language variants.
  */
 export const getRelatedPosts = (slug: string, limit = 3): BlogMeta[] => {
   const all = getAllBlogPosts()
@@ -203,7 +225,11 @@ export const getRelatedPosts = (slug: string, limit = 3): BlogMeta[] => {
   const currentTags = new Set([current.label, ...current.tags])
 
   return all
-    .filter((p) => p.slug !== slug)
+    .filter(
+      (p) =>
+        p.slug !== slug &&
+        !(current.translationKey && p.translationKey === current.translationKey),
+    )
     .map((p) => ({
       post: p,
       score: [p.label, ...p.tags].filter((t) => currentTags.has(t)).length,
@@ -293,7 +319,9 @@ export const getCreationsByTag = (tag: string): CreationMeta[] =>
 
 // ── Featured ───────────────────────────────────────────────────────────────
 
-export const getFeaturedContent = (): {
+export const getFeaturedContent = (
+  locale: string = defaultLocale,
+): {
   blogs: BlogMeta[]
   creations: CreationMeta[]
 } => {
@@ -308,9 +336,12 @@ export const getFeaturedContent = (): {
   const allCreations = getAllCreations()
 
   return {
+    // A featured slug may point at any language variant — show the one matching
+    // the active locale (falls back to original/default).
     blogs: blogSlugs
       .map((s) => allBlogs.find((p) => p.slug === s))
-      .filter((p): p is BlogMeta => Boolean(p)),
+      .filter((p): p is BlogMeta => Boolean(p))
+      .map((p) => localizePost(p, allBlogs, locale)),
     creations: creationSlugs
       .map((s) => allCreations.find((c) => c.slug === s))
       .filter((c): c is CreationMeta => Boolean(c)),
@@ -351,8 +382,8 @@ export const getAllTagsUnified = (): TagCount[] => {
 
 // ── Graph data for /tags Obsidian-style node graph ─────────────────────────
 
-export const getGraphData = (): GraphData => {
-  const blogs = getAllBlogPosts()
+export const getGraphData = (locale: string = defaultLocale): GraphData => {
+  const blogs = collapseTranslations(getAllBlogPosts(), locale)
   const creations = getAllCreations()
 
   const tagSet = new Set<string>()

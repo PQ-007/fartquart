@@ -7,6 +7,8 @@ tags:                                     # One per line; each becomes a node in
   - 
 cover: resources/images/folder/cover.jpg  # Optional. Put the image in content/resources/images/; .gif ok; delete this line if none
 music:                                    # Optional background track — a YouTube link or an audio file (resources/audio/song.mp3). Delete if none
+lang:                                     # Optional. This post's language: en | mn | ja. Only needed if you write translations
+translation-key:                          # Optional. Same key on each translation links them (shows a language switcher). Delete if none
 draft: true                               # true = hidden while writing; set false to publish
 ---
 

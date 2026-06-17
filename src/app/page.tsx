@@ -8,11 +8,14 @@ import { ActivityFeed } from "@/components/ActivityFeed"
 import { JsonLd } from "@/components/JsonLd"
 import { getFeaturedContent, getGraphData, getAllBlogPosts } from "@/lib/content"
 import { siteJsonLd } from "@/lib/seo"
+import { collapseTranslations } from "@/lib/translations"
+import { getServerLocale } from "@/lib/locale"
 
-export default function Home() {
-  const { blogs, creations } = getFeaturedContent()
-  const graphData = getGraphData()
-  const latestPosts = getAllBlogPosts().slice(0, 8)
+export default async function Home() {
+  const locale = await getServerLocale()
+  const { blogs, creations } = getFeaturedContent(locale)
+  const graphData = getGraphData(locale)
+  const latestPosts = collapseTranslations(getAllBlogPosts(), locale).slice(0, 8)
 
   return (
     <>
