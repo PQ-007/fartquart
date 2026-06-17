@@ -11,10 +11,14 @@
             "id": "e7a7b303c61786dc",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "4000-private/Зорилгууд/2026 оны зорилго.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "2026 оны зорилго"
             }
           }
         ]
@@ -215,6 +219,8 @@
   },
   "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "4000-private/Зорилгууд/2026 оны зорилго.md",
+    "4000-private/Untitled",
     "Home.md",
     "0000-blog/oop.md",
     "0000-blog/algorithm.md",
@@ -258,8 +264,6 @@
     "2000-book-notes/ゼロから作る Deep Learning 1/4章 ニューラルネットワークの学習.md",
     "2000-book-notes/ゼロから作る Deep Learning 1/1章 Python 入門.md",
     "creations/recoil-devtools.md",
-    "creations/movie-app.md",
-    "templates/book-note/chapter-name.md",
-    "3000-lesson-notes/n1"
+    "creations/movie-app.md"
   ]
 }
