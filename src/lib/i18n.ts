@@ -155,7 +155,7 @@ const dict = {
       blog: "ブログ",
       notes: "ノート",
       creations: "制作物",
-      about: "について",
+      about: "私について",
     },
     ui: {
       allTags: "全タグ",

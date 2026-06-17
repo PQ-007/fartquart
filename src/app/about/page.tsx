@@ -22,7 +22,7 @@ export default function AboutPage() {
           <div className={styles.side}>
             <div className={styles.profile}>
               <Image
-                src="/images/profile.png"
+                src="/resources/images/profile.png"
                 alt="Bilguun"
                 width={300}
                 height={300}

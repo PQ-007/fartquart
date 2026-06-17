@@ -10,6 +10,6 @@ tags:
   - BookDeepLearning
   - JP
   - python
-cover: resources/images/book-covers/zero-karadp1.jpg
+cover: resources/images/book/zero-karadp1.jpg
 ---
 Гүн сургалтын талаар тэгээс нь эхлээд сурах номны эхний цуврал.  Энэхүү ном нь  Python-гаар сурах гүн сургалтын онол болон бодит хэрэглээг тайлбарладаг
