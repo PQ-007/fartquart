@@ -20,7 +20,7 @@ export const NotesListing = ({ posts }: { posts: BlogMeta[] }) => {
           <div className={styles.inner}>
             <h1 className={styles.heading}>{t("nav.notes")}</h1>
             <p className={styles.empty}>
-              Drop folders with <code>index.md</code> into <code>content/notes/</code>
+              Drop folders with <code>index.md</code> into the book-notes or lesson-notes directory
             </p>
           </div>
         </div>

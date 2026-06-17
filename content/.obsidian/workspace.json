@@ -1,84 +1,20 @@
 {
   "main": {
-    "id": "31f72defea21fad7",
+    "id": "5324373015726ba8",
     "type": "split",
     "children": [
       {
-        "id": "94fbc26d16b3319d",
+        "id": "4509724f8bf84da7",
         "type": "tabs",
         "children": [
           {
-            "id": "2156b1b7dae52731",
+            "id": "e7a7b303c61786dc",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "blog/internship-alten-japan.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "internship-alten-japan"
-            }
-          },
-          {
-            "id": "0b98a4fc86d54c08",
-            "type": "leaf",
-            "state": {
-              "type": "image",
-              "state": {
-                "file": "resources/images/alten-japan-internship/umi-ie.jpg"
-              },
-              "icon": "lucide-image",
-              "title": "umi-ie"
-            }
-          },
-          {
-            "id": "ab2a29b125e8148f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "blog/internship-susano.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "internship-susano"
-            }
-          },
-          {
-            "id": "e6dbddda1e47ac44",
-            "type": "leaf",
-            "state": {
-              "type": "kanban",
-              "state": {
-                "file": "private/Прогресс/2026/Нийтлэлүүд.md",
-                "kanbanViewState": {
-                  "kanban-plugin": "board",
-                  "list-collapse": [
-                    false,
-                    false,
-                    false
-                  ]
-                }
-              },
-              "icon": "lucide-trello",
-              "title": "Нийтлэлүүд"
-            }
-          },
-          {
-            "id": "5e2275d633c9a787",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "book-notes/ゼロから作る Deep Learning 1/3章 ニューラルネットワーク.md",
-                "mode": "source",
-                "source": true
-              },
-              "icon": "lucide-file",
-              "title": "3章 ニューラルネットワーク"
+              "title": "New tab"
             }
           }
         ]
@@ -114,7 +50,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#DotNet",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -273,20 +209,25 @@
       "bases:Create new base": false,
       "obsidian-kanban:Create new board": false,
       "templater-obsidian:Templater": false,
-      "obsidian-excalidraw-plugin:New drawing": false
+      "obsidian-excalidraw-plugin:New drawing": false,
+      "homepage:Open homepage": false
     }
   },
-  "active": "2658e34e1852a6c5",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "Home.md",
+    "0000-blog/oop.md",
+    "0000-blog/algorithm.md",
+    "4000-private/Прогресс/2026/Нийтлэлүүд.md",
+    "0000-blog/internship-alten-japan.md",
+    "archieve",
     "blog/__music-test.md",
     "templates/article.md.tmp.888.f6da6428f7cb",
-    "blog/internship-co-graph.md",
-    "blog/internship-alten-japan.md",
+    "0000-blog/internship-co-graph.md",
     "resources/videos/robot-hand.mp4",
     "resources/videos/susano-problem1-solution.mp4",
     "resources/videos/alten-japan-job.mp4",
-    "blog/internship-susano.md",
-    "private/Прогресс/2026/Нийтлэлүүд.md",
+    "0000-blog/internship-susano.md",
     "resources/images/alten-japan-internship/window.jpg",
     "resources/images/alten-japan-internship/cover.jpg",
     "resources/images/alten-japan-internship/state-machine.png",
@@ -300,29 +241,25 @@
     "resources/images/alten-japan-internship/push-button.png",
     "resources/videos/10-даралт.mp4",
     "resources/videos/alten-japan-internship.mp4",
-    "blog/internship-tsh.md",
+    "0000-blog/internship-tsh.md",
     "templates/internship.md",
-    "book-notes/ゼロから作る Deep Learning 1/index.md",
-    "book-notes/ゼロから作る Deep Learning 2/index.md",
-    "private/tomore/idea.md",
-    "creations/chess.md",
-    "private/tomore",
+    "2000-book-notes/ゼロから作る Deep Learning 1/index.md",
+    "2000-book-notes/ゼロから作る Deep Learning 2/index.md",
+    "4000-private/tomore/idea.md",
+    "1000-creations/chess.md",
+    "4000-private/tomore",
     "creations/scribble-ai.md",
     "creations/node-graph.md",
     "creations/first-creation.md",
     "creations/doodleverse.md",
-    "creations/sudoku-solver-generator.md",
+    "1000-creations/sudoku-solver-generator.md",
     "creations/dial.md",
-    "book-notes/ゼロから作る Deep Learning 1/2章 パーセプトロン.md",
-    "book-notes/ゼロから作る Deep Learning 1/4章 ニューラルネットワークの学習.md",
-    "book-notes/ゼロから作る Deep Learning 1/1章 Python 入門.md",
+    "2000-book-notes/ゼロから作る Deep Learning 1/2章 パーセプトロン.md",
+    "2000-book-notes/ゼロから作る Deep Learning 1/4章 ニューラルネットワークの学習.md",
+    "2000-book-notes/ゼロから作る Deep Learning 1/1章 Python 入門.md",
     "creations/recoil-devtools.md",
     "creations/movie-app.md",
     "templates/book-note/chapter-name.md",
-    "book-notes/ゼロから作る Deep Learning 1/3章 ニューラルネットワーク.md",
-    "templates/article.md",
-    "vault-guide.md",
-    "lesson-notes/n1",
-    "templates/lesson-note/01 lesson-name.md.tmp.794.090ac8a4e985"
+    "3000-lesson-notes/n1"
   ]
 }

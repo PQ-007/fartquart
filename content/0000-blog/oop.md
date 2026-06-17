@@ -147,7 +147,7 @@ my_bike.move() # Өвлөгдсөн метод my_bike.honk()
 ~~~python
 class BankAccount:  
  def **init**(self):  
- self.**balance = 1000 # Хувийн (private) хувьсагч  
+ self.**balance = 100 # Хувийн (private) хувьсагч  
  def deposit(self, amount):  
  self.**balance += amount  
  print(f"Данс: {self.**balance}")  

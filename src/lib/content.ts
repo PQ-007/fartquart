@@ -3,11 +3,32 @@ import path from "path"
 import matter from "gray-matter"
 export { formatDate } from "./format"
 
-const BLOG_DIR = path.join(process.cwd(), "content", "blog")
-const BOOK_NOTES_DIR = path.join(process.cwd(), "content", "book-notes")
-const LESSON_NOTES_DIR = path.join(process.cwd(), "content", "lesson-notes")
+const CONTENT_DIR = path.join(process.cwd(), "content")
+
+// Resolve a content category folder by name, tolerating an optional ordering
+// prefix like "000-" / "002_" (so "blog" matches "000-blog"). Falls back to the
+// bare name if nothing matches.
+const contentDir = (name: string): string => {
+  try {
+    const match = fs
+      .readdirSync(CONTENT_DIR, { withFileTypes: true })
+      .find(
+        (e) =>
+          e.isDirectory() &&
+          (e.name === name || e.name.replace(/^\d+[-_]/, "") === name),
+      )
+    if (match) return path.join(CONTENT_DIR, match.name)
+  } catch {
+    // content dir missing — fall through
+  }
+  return path.join(CONTENT_DIR, name)
+}
+
+const BLOG_DIR = contentDir("blog")
+const BOOK_NOTES_DIR = contentDir("book-notes")
+const LESSON_NOTES_DIR = contentDir("lesson-notes")
 const ALL_BLOG_DIRS = [BLOG_DIR, BOOK_NOTES_DIR, LESSON_NOTES_DIR]
-const CREATIONS_DIR = path.join(process.cwd(), "content", "creations")
+const CREATIONS_DIR = contentDir("creations")
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
