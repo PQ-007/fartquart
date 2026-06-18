@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "0000-blog/hello-world-ja.md",
+                "file": "0000-blog/Untitled.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "hello-world-ja"
+              "title": "Untitled"
             }
           }
         ]
@@ -213,16 +213,17 @@
       "bases:Create new base": false,
       "obsidian-kanban:Create new board": false,
       "templater-obsidian:Templater": false,
-      "obsidian-excalidraw-plugin:New drawing": false,
-      "homepage:Open homepage": false
+      "obsidian-excalidraw-plugin:New drawing": false
     }
   },
   "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "0000-blog/internship-alten-japan.md",
+    "0000-blog/Untitled.md",
+    "0000-blog/hello-world-ja.md",
     "0000-blog/hello-world-en.md",
     "0000-blog/hello-world.md",
     "archieve/Nyuugaku/Асуулт хариулт.md",
-    "0000-blog/hello-world-ja.md",
     "4000-private/Зорилгууд/2026 оны зорилго.md",
     "0000-blog/hello-world-ja.md.tmp.711.d83d38862afa",
     "0000-blog/hello-world-en.md.tmp.711.aab201306c91",
@@ -235,7 +236,6 @@
     "0000-blog/oop.md",
     "0000-blog/algorithm.md",
     "4000-private/Прогресс/2026/Нийтлэлүүд.md",
-    "0000-blog/internship-alten-japan.md",
     "archieve",
     "blog/__music-test.md",
     "templates/article.md.tmp.888.f6da6428f7cb",
@@ -263,7 +263,6 @@
     "creations/scribble-ai.md",
     "creations/node-graph.md",
     "creations/first-creation.md",
-    "creations/doodleverse.md",
-    "1000-creations/sudoku-solver-generator.md"
+    "creations/doodleverse.md"
   ]
 }
