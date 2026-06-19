@@ -135,30 +135,37 @@
   height: 100%;
 }
 
-.settingsButton > button {
+.settingsButton > button,
+.settingsButton > a {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 32px;
   height: 32px;
   border-radius: 100%;
+  color: var(--color-primary);
   transition: background-color 0.3s, transform 0.5s ease;
 }
 
-.settingsButton > button:hover {
+.settingsButton > button:hover,
+.settingsButton > a:hover {
   background-color: rgba(var(--color-primary-rgb), 0.1);
+}
+
+/* Only the gear spins on hover. */
+.settingsButton > button.gear:hover {
   transform: rotate(60deg);
 }
 
-.settingsButton > button[data-active="true"] {
+.settingsButton > button.gear[data-active="true"] {
   background-color: rgba(var(--color-primary-rgb), 0.12);
   transform: rotate(90deg);
 }
 
 .settingsButton svg {
-  fill: var(--color-primary);
-  width: 23px;
-  height: 23px;
+  color: var(--color-primary);
+  width: 20px;
+  height: 20px;
 }
 
 /* ---- mobile ---- */

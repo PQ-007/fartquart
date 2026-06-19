@@ -7,7 +7,7 @@ import styles from "./Nav.module.css"
 import { useLanguage, useT } from "./LanguageProvider"
 import { LanguageSwitcher } from "./LanguageSwitcher"
 import { SettingsPanel } from "./SettingsPanel"
-import { CloseIcon, GearIcon, MenuIcon, SearchIcon } from "./icons"
+import { Search, Settings, Share2, Menu, X } from "lucide-react"
 
 const openSearch = () => window.dispatchEvent(new Event("open-search"))
 
@@ -68,14 +68,18 @@ export const Nav = () => {
             <div className={styles.settingsButton}>
               <div className={styles.divider} />
               <button onClick={openSearch} aria-label={t("ui.search")}>
-                <SearchIcon />
+                <Search />
               </button>
+              <Link href="/tags" aria-label={t("ui.allTags")}>
+                <Share2 />
+              </Link>
               <button
+                className={styles.gear}
                 onClick={() => setSettingsOpen((s) => !s)}
                 aria-label="Open settings"
                 data-active={settingsOpen}
               >
-                <GearIcon />
+                <Settings />
               </button>
             </div>
           </section>
@@ -84,7 +88,7 @@ export const Nav = () => {
 
       <nav className={styles.mobileNav} data-open={open}>
         <button onClick={() => setOpen(true)} aria-label="Open menu">
-          <MenuIcon />
+          <Menu />
         </button>
       </nav>
       <div className={styles.mobileMenu} data-open={open}>
@@ -93,7 +97,7 @@ export const Nav = () => {
           onClick={() => setOpen(false)}
           aria-label="Close menu"
         >
-          <CloseIcon />
+          <X />
         </button>
         <div className={styles.mobileLinks}>
           {HREFS.map((href, i) => (
@@ -109,8 +113,15 @@ export const Nav = () => {
               setOpen(false)
             }}
           >
-            <SearchIcon /> {t("ui.search")}
+            <Search /> {t("ui.search")}
           </button>
+          <Link
+            href="/tags"
+            className={styles.mobileTheme}
+            onClick={() => setOpen(false)}
+          >
+            <Share2 /> {t("ui.allTags")}
+          </Link>
           <button
             className={styles.mobileTheme}
             onClick={() => {
@@ -118,7 +129,7 @@ export const Nav = () => {
               setOpen(false)
             }}
           >
-            <GearIcon /> {t("settings.title")}
+            <Settings /> {t("settings.title")}
           </button>
         </div>
       </div>

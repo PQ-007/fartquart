@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react"
 import { useRouter } from "next/navigation"
+import { Search } from "lucide-react"
 import { useLanguage, useT } from "./LanguageProvider"
 import { localeLabels, type Locale } from "@/lib/i18n"
 import { searchPosts, type SearchHit } from "@/lib/search"
@@ -126,7 +127,7 @@ export const SearchModal = () => {
     <div className={styles.overlay} onClick={close}>
       <div className={styles.panel} onClick={(e) => e.stopPropagation()} onKeyDown={onKeyDown}>
         <div className={styles.inputRow}>
-          <span className={styles.searchIcon} aria-hidden>⌕</span>
+          <Search className={styles.searchIcon} size={20} aria-hidden />
           <input
             ref={inputRef}
             className={styles.input}
