@@ -37,6 +37,10 @@ const dict = {
       review: "Review",
       reveal: "Tap to reveal",
       readIn: "Also in",
+      search: "Search",
+      searchPlaceholder: "Search posts, notes, creations…",
+      searchEmpty: "No results",
+      searchHint: "↑↓ to navigate · ↵ to open · esc to close",
     },
     blog: {
       "book-review": "Book Review",
@@ -107,6 +111,10 @@ const dict = {
       review: "Давтах",
       reveal: "Дарж харах",
       readIn: "Өөр хэлээр",
+      search: "Хайх",
+      searchPlaceholder: "Пост, тэмдэглэл, бүтээл хайх…",
+      searchEmpty: "Үр дүн алга",
+      searchHint: "↑↓ сонгох · ↵ нээх · esc хаах",
     },
     blog: {
       "book-review": "Номын сэтгэгдэл",
@@ -177,6 +185,10 @@ const dict = {
       review: "復習",
       reveal: "タップして表示",
       readIn: "他の言語",
+      search: "検索",
+      searchPlaceholder: "記事・ノート・制作物を検索…",
+      searchEmpty: "結果なし",
+      searchHint: "↑↓ で移動 · ↵ で開く · esc で閉じる",
     },
     blog: {
       "book-review": "書評",

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "0000-blog/Untitled.md",
+                "file": "0000-blog/essay-2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Untitled"
+              "title": "essay-2"
             }
           }
         ]
@@ -216,10 +216,12 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "e7a7b303c61786dc",
+  "active": "2504bcca15056da1",
   "lastOpenFiles": [
-    "0000-blog/internship-alten-japan.md",
+    "0000-blog/essay-2.md",
     "0000-blog/Untitled.md",
+    "0000-blog/math-and-computer.md",
+    "0000-blog/internship-alten-japan.md",
     "0000-blog/hello-world-ja.md",
     "0000-blog/hello-world-en.md",
     "0000-blog/hello-world.md",
@@ -261,8 +263,6 @@
     "4000-private/tomore/idea.md",
     "1000-creations/chess.md",
     "creations/scribble-ai.md",
-    "creations/node-graph.md",
-    "creations/first-creation.md",
-    "creations/doodleverse.md"
+    "creations/node-graph.md"
   ]
 }

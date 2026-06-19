@@ -7,7 +7,9 @@ import styles from "./Nav.module.css"
 import { useLanguage, useT } from "./LanguageProvider"
 import { LanguageSwitcher } from "./LanguageSwitcher"
 import { SettingsPanel } from "./SettingsPanel"
-import { CloseIcon, GearIcon, MenuIcon } from "./icons"
+import { CloseIcon, GearIcon, MenuIcon, SearchIcon } from "./icons"
+
+const openSearch = () => window.dispatchEvent(new Event("open-search"))
 
 const HREFS = ["/", "/blog", "/notes", "/creations", "/about"]
 
@@ -65,6 +67,9 @@ export const Nav = () => {
             </div>
             <div className={styles.settingsButton}>
               <div className={styles.divider} />
+              <button onClick={openSearch} aria-label={t("ui.search")}>
+                <SearchIcon />
+              </button>
               <button
                 onClick={() => setSettingsOpen((s) => !s)}
                 aria-label="Open settings"
@@ -97,6 +102,15 @@ export const Nav = () => {
             </Link>
           ))}
           <LanguageSwitcher mobile />
+          <button
+            className={styles.mobileTheme}
+            onClick={() => {
+              openSearch()
+              setOpen(false)
+            }}
+          >
+            <SearchIcon /> {t("ui.search")}
+          </button>
           <button
             className={styles.mobileTheme}
             onClick={() => {

@@ -53,12 +53,24 @@ How the logic resolves which version to show:
 
 The active locale is read from a `locale` cookie server-side ([`src/lib/locale.ts`](src/lib/locale.ts)); the root layout seeds `LanguageProvider` with it so server render and client agree (no flash). Client listings re-collapse live when you switch language; the home page and graph update on the next load. Core logic: [`src/lib/translations.ts`](src/lib/translations.ts) (`collapseTranslations`, `localizePost`, `pickVariant`) with `lang`/`translation-key` parsed in [`src/lib/content.ts`](src/lib/content.ts) (`getTranslationSiblings`).
 
+## Search
+
+Press **⌘K / Ctrl+K** (or `/`, or the Nav magnifier) for a full-text command palette over every post, note, chapter, and creation.
+
+- **Index** — built at build time from the same `content.ts` data and served as a static asset at [`/search-index.json`](src/app/search-index.json/route.ts) (`force-static`, like `/og`). The browser fetches it once and builds the index in-memory. Zero serverless cost; nothing extra in the function bundles.
+- **Multilingual** — tokenized with the built-in `Intl.Segmenter`, so **Japanese** (no spaces) and **Mongolian** search correctly, not just English. The same tokenizer runs over documents and queries.
+- **Locale-aware** — a translated post appears once, in the reader's language (same collapse rule as the listings).
+- **Swap seam** — all querying goes through `searchPosts()` in [`src/lib/search.ts`](src/lib/search.ts). Client-side MiniSearch is the right call up to ~a few thousand posts; beyond that, reimplement just that function against a server index (e.g. SQLite FTS5 / Turso) — the ⌘K UI doesn't change.
+
+Files: [`src/lib/search-index.ts`](src/lib/search-index.ts) (records + Markdown→text), [`src/lib/search.ts`](src/lib/search.ts) (tokenizer, index, `searchPosts`), [`src/components/SearchModal.tsx`](src/components/SearchModal.tsx) (palette UI).
+
 ## Features
 
 - **Content pipeline** — `gray-matter` frontmatter + `next-mdx-remote` RSC; custom MDX components: `CodeBlock` (Shiki, Tokyo Night), `CloudImage`, `Tweet`, `Sandpack`, `Math` (KaTeX), `YouTube`, `Video`
 - **Code blocks** — fenced blocks auto-highlight; an info string with a filename (` ```Character.py `) shows the filename as a label and infers the language from the extension
 - **i18n** — English / Mongolian / Japanese UI, switchable live ([`src/lib/i18n.ts`](src/lib/i18n.ts), `LanguageProvider`)
 - **Content translations** — multiple language versions per post via `translation-key`; listings collapse to the reader's language with fallback, per-post "Also in" switcher, `hreflang` (see [Translations](#translations))
+- **Full-text search** — ⌘K command palette over all posts/notes/chapters/creations; client-side MiniSearch, CJK-aware (see [Search](#search))
 - **Theme** — dark/light, set server-side from a cookie so there's no flash on reload
 - **Tag graph** — an Obsidian-style force-directed graph of tags ↔ posts ↔ creations at `/tags` (d3)
 - **Reading UX** — reading-progress bar, scroll-spy chapters sidebar, mobile ToC, related posts, copy-link-to-heading

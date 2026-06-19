@@ -8,6 +8,7 @@ import { LanguageProvider } from "@/components/LanguageProvider"
 import { Background } from "@/components/Background"
 import { Nav } from "@/components/Nav"
 import { PostImageLightbox } from "@/components/post/PostImageLightbox"
+import { SearchModal } from "@/components/SearchModal"
 import { SITE_URL, SITE_NAME, SITE_DESC, DEFAULT_OG_IMAGE } from "@/lib/site"
 import { defaultLocale as DEFAULT_LOCALE, locales as LOCALES, type Locale } from "@/lib/i18n"
 
@@ -78,6 +79,7 @@ export default async function RootLayout({
             <div aria-hidden="true" className="grid-bg" />
             {children}
             <Nav />
+            <SearchModal />
             <PostImageLightbox />
           </LanguageProvider>
         </ThemeProvider>
