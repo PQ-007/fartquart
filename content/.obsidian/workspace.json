@@ -11,21 +11,14 @@
             "id": "e7a7b303c61786dc",
             "type": "leaf",
             "state": {
-              "type": "kanban",
+              "type": "markdown",
               "state": {
-                "file": "4000-private/Прогресс/2026/Видеонууд.md",
-                "kanbanViewState": {
-                  "kanban-plugin": "board",
-                  "list-collapse": [
-                    false,
-                    false,
-                    false,
-                    false
-                  ]
-                }
+                "file": "archieve/Nyuugaku/長岡技術科学大学 志望調書.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-trello",
-              "title": "Видеонууд"
+              "icon": "lucide-file",
+              "title": "長岡技術科学大学 志望調書"
             }
           }
         ]
@@ -225,8 +218,15 @@
   },
   "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
-    "4000-private/Прогресс/2026/Нийтлэлүүд.md",
+    "archieve/Nyuugaku/志望動機.md",
+    "archieve/yasuda-fund/志望理由書.md",
+    "1000-creations/hanko.md",
+    "archieve/yasuda-fund",
+    "0000-blog/devlog-ivo.md",
+    "1000-creations/sudoku-solver-generator.md",
+    "1000-creations/ivo.md",
     "4000-private/Прогресс/2026/Видеонууд.md",
+    "4000-private/Прогресс/2026/Нийтлэлүүд.md",
     "0000-blog/essay-2.md",
     "0000-blog/Untitled.md",
     "0000-blog/math-and-computer.md",
@@ -252,7 +252,6 @@
     "0000-blog/internship-co-graph.md",
     "resources/videos/robot-hand.mp4",
     "resources/videos/susano-problem1-solution.mp4",
-    "resources/videos/alten-japan-job.mp4",
     "0000-blog/internship-susano.md",
     "resources/images/alten-japan-internship/window.jpg",
     "resources/images/alten-japan-internship/cover.jpg",
@@ -264,12 +263,6 @@
     "resources/images/alten-japan-internship/umi-ie.jpg",
     "resources/videos/Screenshot 2026-06-16 at 23-00-22 push button crosswalk japanese schema - Google Хайлт.png",
     "resources/images/alten-japan-internship/push-button.png",
-    "0000-blog/internship-tsh.md",
-    "templates/internship.md",
-    "2000-book-notes/ゼロから作る Deep Learning 1/index.md",
-    "2000-book-notes/ゼロから作る Deep Learning 2/index.md",
-    "4000-private/tomore/idea.md",
-    "1000-creations/chess.md",
-    "creations/scribble-ai.md"
+    "0000-blog/internship-tsh.md"
   ]
 }
