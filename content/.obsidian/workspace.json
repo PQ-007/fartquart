@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "archieve/Nyuugaku/長岡技術科学大学 志望調書.md",
+                "file": "archieve/yasuda-fund/志望理由書.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "長岡技術科学大学 志望調書"
+              "title": "志望理由書"
             }
           }
         ]
@@ -219,6 +219,7 @@
   "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
     "archieve/Nyuugaku/志望動機.md",
+    "archieve/Nyuugaku/長岡技術科学大学 志望調書.md",
     "archieve/yasuda-fund/志望理由書.md",
     "1000-creations/hanko.md",
     "archieve/yasuda-fund",
@@ -262,7 +263,6 @@
     "resources/images/alten-japan-internship/presentation.jpg",
     "resources/images/alten-japan-internship/umi-ie.jpg",
     "resources/videos/Screenshot 2026-06-16 at 23-00-22 push button crosswalk japanese schema - Google Хайлт.png",
-    "resources/images/alten-japan-internship/push-button.png",
-    "0000-blog/internship-tsh.md"
+    "resources/images/alten-japan-internship/push-button.png"
   ]
 }
