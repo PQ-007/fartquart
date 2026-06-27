@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "4509724f8bf84da7",
+        "id": "e0f0d59b126fe4f3",
         "type": "tabs",
         "children": [
           {
-            "id": "e7a7b303c61786dc",
+            "id": "c0920871b35acb16",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "archieve/yasuda-fund/志望理由書.md",
-                "mode": "source",
-                "source": false
+                "file": "1000-creations/hanko.md",
+                "mode": "preview",
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "志望理由書"
+              "title": "hanko"
             }
           }
         ]
@@ -54,7 +54,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:supabase",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -75,7 +75,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "0d5a23e7498a6f81",
@@ -216,11 +217,13 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "e7a7b303c61786dc",
+  "active": "c0920871b35acb16",
   "lastOpenFiles": [
+    "2000-book-notes/ゼロから作る Deep Learning 1/1章 Python 入門.md",
+    "0000-blog/kosen-grad.md",
+    "archieve/yasuda-fund/志望理由書.md",
     "archieve/Nyuugaku/志望動機.md",
     "archieve/Nyuugaku/長岡技術科学大学 志望調書.md",
-    "archieve/yasuda-fund/志望理由書.md",
     "1000-creations/hanko.md",
     "archieve/yasuda-fund",
     "0000-blog/devlog-ivo.md",
@@ -229,7 +232,6 @@
     "4000-private/Прогресс/2026/Видеонууд.md",
     "4000-private/Прогресс/2026/Нийтлэлүүд.md",
     "0000-blog/essay-2.md",
-    "0000-blog/Untitled.md",
     "0000-blog/math-and-computer.md",
     "0000-blog/internship-alten-japan.md",
     "0000-blog/hello-world-ja.md",
@@ -253,7 +255,6 @@
     "0000-blog/internship-co-graph.md",
     "resources/videos/robot-hand.mp4",
     "resources/videos/susano-problem1-solution.mp4",
-    "0000-blog/internship-susano.md",
     "resources/images/alten-japan-internship/window.jpg",
     "resources/images/alten-japan-internship/cover.jpg",
     "resources/images/alten-japan-internship/state-machine.png",

@@ -7,9 +7,8 @@ tags:
   - reflection
 cover: resources/images/folder/cover.jpg
 music:
-lang:
+lang: mn
 translation-key:
 draft: true
 ---
-
 Төгсөлт
