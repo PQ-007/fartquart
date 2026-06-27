@@ -11,8 +11,8 @@ tags:
 publishedAt: 2026-06-21
 demo: https://hanko-amber.vercel.app
 repo: https://github.com/PQ-007/hanko
+cover: resources/images/hanko-cover.png
 ---
-
 ## Сэдэл
 
 Би япон хэл сурахдаа 10ten Japanese Reader өргөтгөлийг байнга ашигладаг — текст
