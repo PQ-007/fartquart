@@ -2,9 +2,10 @@
 title: Python 入門
 date: 2025-09-13
 new-word:
-  - word: 動的型付き言語 
-    definition: dynamic typed language 
+  - word: 動的型付き言語
+    definition: dynamic typed language
 draft: false
+cover: https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExODIzeXdra2FxaWc0eTVuanNmeWF4aGs0MTRka2ZycXU4bmo5NmVuMSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/coxQHKASG60HrHtvkt/giphy.gif
 ---
 ## Python とは
 

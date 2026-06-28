@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1000-creations/hanko.md",
+                "file": "1000-creations/chess.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "hanko"
+              "title": "chess"
             }
           }
         ]
@@ -218,9 +218,9 @@
   },
   "active": "c0920871b35acb16",
   "lastOpenFiles": [
-    "resources/images/hanko-cover.png",
-    "1000-creations/hanko.md",
     "2000-book-notes/ゼロから作る Deep Learning 1/1章 Python 入門.md",
+    "1000-creations/hanko.md",
+    "resources/images/hanko-cover.png",
     "0000-blog/kosen-grad.md",
     "archieve/yasuda-fund/志望理由書.md",
     "archieve/Nyuugaku/志望動機.md",

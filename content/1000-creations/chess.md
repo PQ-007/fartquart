@@ -1,6 +1,6 @@
 ---
 title: Шатар
-draft: false
+draft: true
 description: An online multiplayer 3D chess game built with React Three Fiber, Socket.IO, and Zustand. Share your code to play with friends.
 category: project
 tags:
