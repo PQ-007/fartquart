@@ -1,7 +1,10 @@
 ---
 title: Ivo
 description: A Japanese dictionary and flashcard app for learners who want to stay in flow — clean, offline-first, and built around spaced repetition.
-tags: [mobile, swift, ios, japanese]
+tags:
+  - mobile
+  - japanese
+  - flutter
 date: 2026-06-01
 draft: false
 ---
