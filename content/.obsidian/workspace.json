@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "e0f0d59b126fe4f3",
+        "id": "abb03fcd036975fb",
         "type": "tabs",
         "children": [
           {
-            "id": "c0920871b35acb16",
+            "id": "6c84a1450329c1a7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "archieve/yasuda-fund/Untitled.md",
+                "file": "archieve/toji-project/Untitled.md",
                 "mode": "source",
                 "source": false
               },
@@ -216,10 +216,14 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "c0920871b35acb16",
+  "active": "6c84a1450329c1a7",
   "lastOpenFiles": [
-    "archieve/Nyuugaku/Асуулт хариулт.md",
+    "3000-lesson-notes/blender/index.md",
+    "archieve/toji-project/Untitled.md",
+    "archieve/toji-project",
+    "3000-lesson-notes/n1/index.md",
     "archieve/yasuda-fund/Untitled.md",
+    "archieve/Nyuugaku/Асуулт хариулт.md",
     "archieve/yasuda-fund/志望理由書.md",
     "4000-private/Дүгнэлтүүд/2026 оны дүгнэлт.md",
     "4000-private/Зорилгууд/2026 оны зорилго.md",
@@ -244,9 +248,6 @@
     "archieve/yasuda-fund",
     "0000-blog/devlog-ivo.md",
     "4000-private/Прогресс/2026/Видеонууд.md",
-    "0000-blog/math-and-computer.md",
-    "0000-blog/internship-alten-japan.md",
-    "0000-blog/hello-world-ja.md",
     "0000-blog/hello-world-ja.md.tmp.711.d83d38862afa",
     "0000-blog/hello-world-en.md.tmp.711.aab201306c91",
     "0000-blog/hello-world.md.tmp.711.de4d0c495b95",
@@ -254,7 +255,6 @@
     "4000-private/Untitled",
     "archieve",
     "templates/article.md.tmp.888.f6da6428f7cb",
-    "resources/videos/robot-hand.mp4",
     "resources/images/alten-japan-internship/window.jpg",
     "resources/images/alten-japan-internship/cover.jpg",
     "resources/images/alten-japan-internship/state-machine.png",
