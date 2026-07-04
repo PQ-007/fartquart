@@ -6,7 +6,9 @@ tags:
   - internship
   - python
   - streamlit
-date: 2025-10-01
+createdAt: 2025-10-01
+publishedAt: 2025-10-01
+updatedAt:
 draft: false
 cover: resources/images/shinagawa-internship/gundam-base.jpg
 ---

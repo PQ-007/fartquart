@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import styles from "./Chapters.module.css"
 import { SlidingText } from "../SlidingText"
@@ -7,8 +8,11 @@ import { TranslationSwitcher } from "../TranslationSwitcher"
 import { useT } from "../LanguageProvider"
 import type { Chapter } from "@/lib/toc"
 import type { BlogMeta } from "@/lib/content"
+import { CREATION_CATEGORY_LABEL, type CreationCategory } from "@/lib/categories"
 
 export type { Chapter }
+
+export type LogEntry = { slug: string; title: string }
 
 export const Chapters = ({
   chapters,
@@ -16,12 +20,18 @@ export const Chapters = ({
   repo,
   siblings,
   currentSlug,
+  logs,
+  logCategory,
+  creationSlug,
 }: {
   chapters: Chapter[]
   demo?: string
   repo?: string
   siblings?: BlogMeta[]
   currentSlug?: string
+  logs?: LogEntry[]
+  logCategory?: CreationCategory
+  creationSlug?: string
 }) => {
   const [activeId, setActiveId] = useState<string | null>(null)
   const [progress, setProgress] = useState(0)
@@ -66,23 +76,46 @@ export const Chapters = ({
             </a>
           )}
         </div>
-        <div className={styles.slider}>
-          <div
-            className={styles.sliderFill}
-            style={{ transform: `scaleX(${progress})` }}
-          />
-        </div>
-        <ul ref={listRef} className={styles.list}>
-          {chapters.map((chapter) => (
-            <li
-              key={chapter.id}
-              data-active={activeId === chapter.id}
-              data-level={chapter.level}
-            >
-              <a href={`#${chapter.id}`}>{chapter.title}</a>
-            </li>
-          ))}
-        </ul>
+        {chapters.length > 0 && (
+          <div className={styles.tocRow}>
+            <div className={styles.slider}>
+              <div
+                className={styles.sliderFill}
+                style={{ transform: `scaleY(${progress})` }}
+              />
+            </div>
+            <ul ref={listRef} className={styles.list}>
+              {chapters.map((chapter) => (
+                <li
+                  key={chapter.id}
+                  data-active={activeId === chapter.id}
+                  data-level={chapter.level}
+                >
+                  <a href={`#${chapter.id}`}>{chapter.title}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {logs && logs.length > 0 && creationSlug && (
+          <div className={styles.logsSection}>
+            <div className={styles.logsHeading}>
+              <p>Project Log</p>
+              {logCategory && (
+                <span className={styles.logsCategory}>{CREATION_CATEGORY_LABEL[logCategory]}</span>
+              )}
+            </div>
+            <ul className={styles.logsList}>
+              {logs.map((entry) => (
+                <li key={entry.slug}>
+                  <Link href={`/creations/${encodeURIComponent(creationSlug)}/log/${encodeURIComponent(entry.slug)}`}>
+                    {entry.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </aside>
   )

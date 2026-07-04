@@ -1,6 +1,8 @@
 ---
 title: Data Structure and Algorithms
-date: 2026-04-01
+createdAt: 2026-04-01
+publishedAt: 2026-04-01
+updatedAt:
 label: lesson-note
 description: DSA re-try
 tags:

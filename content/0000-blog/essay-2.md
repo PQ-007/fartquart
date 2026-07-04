@@ -1,6 +1,8 @@
 ---
 title: Хангалттай мэдээлэл хэнд ч байдаггүй
-date: 2026-06-19
+createdAt: 2026-06-19
+publishedAt: 2026-06-19
+updatedAt:
 label: essay
 description: Хүн анх өөрийн биетэй л эхлэдэг
 tags:

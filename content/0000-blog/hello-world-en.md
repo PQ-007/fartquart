@@ -4,7 +4,9 @@ description: The opening post — what this site is and why I made it.
 label: article
 tags:
   - meta
-date: 2026-06-11
+createdAt: 2026-06-11
+publishedAt: 2026-06-11
+updatedAt:
 lang: en
 translation-key: hello-world
 draft: false

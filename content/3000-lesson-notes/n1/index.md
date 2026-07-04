@@ -1,6 +1,8 @@
 ---
 title: N1
-date: 2026-06-15
+createdAt: 2026-06-15
+publishedAt: 2026-06-15
+updatedAt:
 label: lesson-note
 description: N1-ийн шалгалтын бэлтгэл
 tags:

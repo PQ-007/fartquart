@@ -5,7 +5,9 @@ label: internship
 tags:
   - internship
   - cobol
-date: 2026-01-20
+createdAt: 2026-01-20
+publishedAt: 2026-01-20
+updatedAt:
 draft: false
 language:
   - mn

@@ -4,7 +4,9 @@ description: Нээлтийн пост — энэ сайт юу болох, яа
 label: article
 tags:
   - meta
-date: 2026-06-11
+createdAt: 2026-06-11
+publishedAt: 2026-06-11
+updatedAt:
 lang: mn
 translation-key: hello-world
 draft: false

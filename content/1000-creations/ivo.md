@@ -5,7 +5,9 @@ tags:
   - mobile
   - japanese
   - flutter
-date: 2026-06-01
+createdAt: 2026-06-01
+publishedAt: 2026-06-01
+updatedAt:
 draft: false
 ---
 

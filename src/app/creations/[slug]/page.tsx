@@ -6,7 +6,6 @@ import styles from "./page.module.css"
 import { Footer } from "@/components/Footer"
 import { Tag } from "@/components/Tag"
 import { Chapters } from "@/components/post/Chapters"
-import { ProjectLogSection } from "@/components/ProjectLogSection"
 import { mdxComponents } from "@/components/post/mdx-components"
 import { extractChapters } from "@/lib/toc"
 import type { Blog } from "@/lib/content"
@@ -116,12 +115,16 @@ export default async function CreationPage({
               />
             </div>
           </article>
-          <Chapters chapters={chapters} demo={creation.demo} repo={creation.repo} />
+          <Chapters
+            chapters={chapters}
+            demo={creation.demo}
+            repo={creation.repo}
+            logs={logChapters}
+            logCategory={log?.category}
+            creationSlug={slug}
+          />
         </main>
       </div>
-      {log && logChapters.length > 0 && (
-        <ProjectLogSection creationSlug={slug} log={log} chapters={logChapters} />
-      )}
       <Footer />
     </>
   )

@@ -1,6 +1,8 @@
 ---
 title: Blender
-date: 2026-06-06
+createdAt: 2026-06-06
+publishedAt: 2026-06-06
+updatedAt:
 label: lesson-note
 description: blender жоурнэе
 tags:

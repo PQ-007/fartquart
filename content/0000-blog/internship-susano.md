@@ -7,7 +7,9 @@ tags:
   - internship
   - Csharp
   - DotNet
-date: 2025-07-04
+createdAt: 2025-07-04
+publishedAt: 2025-07-04
+updatedAt:
 language: mn
 draft: false
 ---

@@ -1,7 +1,9 @@
 ---
 title: 02 — Өгөгдлийн бүтэц
 cover: resources/images/dsa-cover.png
-date: 2026-01-01
+createdAt: 2026-01-01
+publishedAt: 2026-01-01
+updatedAt:
 new-word:
   - word:
     definition:

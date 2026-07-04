@@ -6,7 +6,7 @@ publishedAt: 2026-06-14
 updatedAt:
 cover: resources/images/covers/spinning-donut.gif
 label: project-log
-category: project
+category: software
 tags:
   - MobileApp
   - Dictionary

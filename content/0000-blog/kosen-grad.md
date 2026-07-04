@@ -1,6 +1,8 @@
 ---
 title: Төгсөлт ба Эхлэл
-date: 2026-06-18
+createdAt: 2026-06-18
+publishedAt: 2026-06-18
+updatedAt:
 label: article
 description: 5 жилийн төгсгөлд 20 насны эхлэлд
 tags:

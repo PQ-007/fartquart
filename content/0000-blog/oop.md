@@ -2,7 +2,9 @@
 title: " Объект Хандлагат Програмчлал"
 description: OOP-ын үндсэн дөрвөн ойлголт болон Python хэл дээрх хэрэглээ.
 label: article
-date: 2025-06-13
+createdAt: 2025-06-13
+publishedAt: 2025-06-13
+updatedAt:
 draft: false
 tags:
   - OOP

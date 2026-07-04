@@ -1,6 +1,8 @@
 ---
 title: — Эхний өдөр
-date: 2026-06-15
+createdAt: 2026-06-15
+publishedAt: 2026-06-15
+updatedAt:
 new-word:
   - word:
     definition:

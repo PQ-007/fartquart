@@ -4,6 +4,8 @@ import matter from "gray-matter"
 import { defaultLocale } from "./i18n"
 import { localizePost, collapseTranslations } from "./translations"
 export { formatDate } from "./format"
+export type { CreationCategory } from "./categories"
+import type { CreationCategory } from "./categories"
 
 const CONTENT_DIR = path.join(process.cwd(), "content")
 
@@ -67,7 +69,7 @@ export type BlogMeta = {
   lang?: string
   translationKey?: string
   draft?: boolean
-  category?: "project" | "lab"
+  category?: CreationCategory
   projectNickname?: string
 }
 
@@ -86,6 +88,7 @@ export type CreationMeta = {
   repo?: string
   youtube?: string
   draft?: boolean
+  category?: CreationCategory
 }
 
 export type Creation = CreationMeta & { content: string }
@@ -308,7 +311,12 @@ const toCreationMeta = (slug: string, data: Record<string, unknown>): CreationMe
   repo: data.repo ? String(data.repo) : undefined,
   youtube: data.youtube ? String(data.youtube) : undefined,
   draft: Boolean(data.draft),
+  category: data.category ? (String(data.category) as CreationMeta["category"]) : undefined,
 })
+
+/** A creation's own `category`, falling back to its attached project-log's `category`. */
+const creationCategoryOf = (c: CreationMeta): CreationMeta["category"] =>
+  c.category ?? getProjectLog(c.slug)?.category
 
 export const getAllCreations = (): CreationMeta[] =>
   readDir(CREATIONS_DIR)
@@ -318,6 +326,7 @@ export const getAllCreations = (): CreationMeta[] =>
       return toCreationMeta(slug, data)
     })
     .filter((c) => !c.draft)
+    .map((c) => ({ ...c, category: creationCategoryOf(c) }))
     .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt))
 
 export const getCreation = (slug: string): Creation | null => {
@@ -325,7 +334,8 @@ export const getCreation = (slug: string): Creation | null => {
     const file = path.join(CREATIONS_DIR, `${slug}${ext}`)
     if (fs.existsSync(file)) {
       const { data, content } = matter(fs.readFileSync(file, "utf8"))
-      return { ...toCreationMeta(slug, data), content }
+      const meta = toCreationMeta(slug, data)
+      return { ...meta, category: creationCategoryOf(meta), content }
     }
   }
   return null

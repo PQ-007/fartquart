@@ -1,14 +1,16 @@
 ---
 title: Hanko
 description: 10ten Japanese Reader-тэй хамт ажилладаг япон үг цээжлэх browser extension ба Next.js + Supabase дагалдах вэбсайт. Уншиж байхдаа үгээ багцдаа хадгалаад, монгол орчуулгатайгаар Anki руу экспортолно.
-category: project
+category: web
 tags:
   - supabase
   - browser-extension
   - anki
   - japanese
   - nextjs
+createdAt: 2026-06-21
 publishedAt: 2026-06-21
+updatedAt:
 demo: https://hanko-amber.vercel.app
 repo: https://github.com/PQ-007/hanko
 cover: resources/images/hanko-cover.png

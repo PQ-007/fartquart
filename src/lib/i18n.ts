@@ -18,6 +18,7 @@ const dict = {
       about: "About",
     },
     ui: {
+      all: "All",
       allTags: "All Tags",
       readPost: "Read Post",
       viewCreation: "View Creation",
@@ -92,6 +93,7 @@ const dict = {
       about: "Миний тухай",
     },
     ui: {
+      all: "Бүгд",
       allTags: "Бүх тэг",
       readPost: "Унших",
       viewCreation: "Харах",
@@ -166,6 +168,7 @@ const dict = {
       about: "私について",
     },
     ui: {
+      all: "すべて",
       allTags: "全タグ",
       readPost: "読む",
       viewCreation: "見る",

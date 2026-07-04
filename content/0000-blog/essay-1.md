@@ -7,7 +7,8 @@ language:
 tags:
   - AI
   - Thought
-date: 2026-04-09
+createdAt: 2026-04-09
+publishedAt: 2026-04-09
 updatedAt: 2026-07-04
 draft: false
 cover: https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExeXc0c2d4amhyaGd2aHJtaXhhOGxzc3pzNjAxd25tdWd1MTJrZG44YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JC7og7gnjwCrS323BN/giphy.gif

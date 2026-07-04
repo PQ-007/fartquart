@@ -35,7 +35,7 @@ A project build log doesn't get its own page — its `project-nickname` field mu
 | `author` | book-review, book-note | Author name. |
 | `rating` | book-review, book-note | 1–5, decimals allowed (e.g. `4.5`). |
 | `genre`, `pages` | book-review, book-note | Shown in the book header. |
-| `category` | project-note index | `project` or `lab` — shown as a pill on the project log. |
+| `category` | creations, project-note index | One of `hardware`, `software`, `web`, `3dmodel`, `game`, `robot`, `iot` — shown as a pill and drives the filter on `/creations`. A project-log's `category` is inherited by its creation if the creation itself doesn't set one. |
 | `project-nickname` | project-note index | Must equal the slug of the creation this log attaches to. |
 | `new-word` | chapter / lesson files | Vocabulary list → flip-to-reveal review widget in the sidebar. |
 | `music` | optional | Background track — a YouTube link or an audio file (`resources/audio/song.mp3`). |

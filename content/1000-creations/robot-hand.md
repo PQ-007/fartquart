@@ -1,6 +1,8 @@
 ---
 title:                                    # Project name (+ milestone if useful, e.g. "Ivo — v0.2")
-date: 2026-01-01                          # YYYY-MM-DD — controls ordering (newest first)
+createdAt: 2026-01-01                          # YYYY-MM-DD — controls ordering (newest first)
+publishedAt: 2026-01-01                          # YYYY-MM-DD — controls ordering (newest first)
+updatedAt:
 label: project-log                        # Keep as "project-log" → appears on /blog
 description:                              # 1–2 sentences — what changed / what this update covers
 tags:                                     # One per line; each becomes a node in the /tags graph (case-sensitive)

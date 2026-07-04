@@ -3,7 +3,9 @@ title: Internship №0 — ALTEN Japan
 description: ALTEN Japan дахь дадлагын тэмдэглэл.
 label: internship
 draft: false
-date: 2024-08-30
+createdAt: 2024-08-30
+publishedAt: 2024-08-30
+updatedAt:
 tags:
   - internship
   - state-machine

@@ -4,7 +4,9 @@ description: 最初の投稿 — このサイトが何で、なぜ作ったの�
 label: article
 tags:
   - meta
-date: 2026-06-11
+createdAt: 2026-06-11
+publishedAt: 2026-06-11
+updatedAt:
 lang: ja
 translation-key: hello-world
 draft: false
