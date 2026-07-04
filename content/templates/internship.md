@@ -1,10 +1,10 @@
 ---
-title: Internship №N — Company Name
-date: 2026-01-01
-label: internship
+title: Internship №n — Company Name
 description:
-tags:
+date: 2026-01-01
 cover: resources/images/folder/cover.jpg
+label: internship
+tags:
 draft: true
 ---
 
