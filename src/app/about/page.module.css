@@ -30,6 +30,11 @@
   background-repeat: no-repeat;
 }
 
+:global(html[data-theme="light"]) .heroBanner {
+  background-color: #dce3ea;
+  background-image: url("/resources/images/covers/about-me-cover-light.jpg");
+}
+
 .heroOverlay {
   position: absolute;
   inset: 0;
