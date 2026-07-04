@@ -5,14 +5,85 @@
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  padding: 160px var(--main-padding-sides) 0;
+  padding: 60px var(--main-padding-sides) 0;
   background: var(--color-background);
+}
+
+/* Steam-profile-style hero banner: a full-bleed cover image behind the
+   profile/intro, with a periodic lightning flash as a nod to White Scars.
+   Fixed dark overlay regardless of site theme, so it always pops. */
+.heroBanner {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 160px var(--main-padding-sides) 60px;
+  background-color: #08101f;
+  background-image: url("/resources/images/covers/about-me-cover.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(5, 9, 18, 0.35) 0%,
+    rgba(5, 9, 18, 0.55) 55%,
+    rgba(5, 9, 18, 0.9) 100%
+  );
+}
+
+.lightning {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #eaf2ff;
+  opacity: 0;
+  mix-blend-mode: overlay;
+  animation: flash 7s infinite;
+}
+
+@keyframes flash {
+  0%, 91%, 94%, 100% { opacity: 0; }
+  92% { opacity: 0.55; }
+  92.5% { opacity: 0.12; }
+  93% { opacity: 0.4; }
+  93.5% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightning {
+    animation: none;
+  }
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .about {
   display: flex;
   gap: 50px;
   align-items: center;
+  color: #eef3ff;
+}
+
+.about h1,
+.about p {
+  color: inherit;
 }
 
 .side {
@@ -20,9 +91,10 @@
 }
 
 .profile img {
-  border-radius: 20px;
-  width: clamp(180px, 25vw, 300px);
+  border-radius: 50%;
+  width: clamp(180px, 20vw, 300px);
   height: auto;
+  object-fit: cover;
 }
 
 .intro {
@@ -108,6 +180,10 @@
 }
 
 @media (max-width: 700px) {
+  .heroBanner {
+    padding: 110px 24px 40px;
+  }
+
   .about {
     flex-direction: column;
     align-items: flex-start;

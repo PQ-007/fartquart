@@ -11,14 +11,12 @@
             "id": "db1f3dc5dd9793ad",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "1000-creations/hanko.md",
-                "mode": "source",
-                "source": false
+                "file": "resources/images/covers/about-me-cover.jpg"
               },
-              "icon": "lucide-file",
-              "title": "hanko"
+              "icon": "lucide-image",
+              "title": "about-me-cover"
             }
           }
         ]
@@ -216,8 +214,10 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "2658e34e1852a6c5",
+  "active": "4dfd1ae5b0a4e55d",
   "lastOpenFiles": [
+    "1000-creations/hanko.md",
+    "resources/images/covers/about-me-cover.jpg",
     "templates/README.md.tmp.37013.fc7305bb4c82",
     "1000-creations/sudoku-solver-generator.md.tmp.37013.2a71d6627139",
     "1500-project-notes/ivo-log/index.md.tmp.37013.99e0695aaf6a",
@@ -230,7 +230,6 @@
     "1500-project-notes/ivo-log/02-devlog-1.md",
     "1500-project-notes/ivo-log/02-devlog-1.md.tmp.37013.665182b4dec2",
     "1500-project-notes/ivo-log/01-devlog-0.md",
-    "1500-project-notes/ivo-log/01-devlog-0.md.tmp.37013.d6321920d49e",
     "1500-project-notes/ivo-log/index.md",
     "templates/project-note/project-log.md",
     "1500-project-notes/chess-log/01-first-move.md",
@@ -262,7 +261,6 @@
     "resources/images/hanko-cover.png",
     "resources/images/alten-japan-internship/window.jpg",
     "resources/images/alten-japan-internship/cover.jpg",
-    "resources/images/alten-japan-internship/state-machine.png",
-    "resources/images/alten-japan-internship/source-code.png"
+    "resources/images/alten-japan-internship/state-machine.png"
   ]
 }

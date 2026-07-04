@@ -17,25 +17,31 @@ export default function AboutPage() {
 
   return (
     <>
-      <div className={styles.wrapper}>
-        <section className={styles.about}>
-          <div className={styles.side}>
-            <div className={styles.profile}>
-              <Image
-                src="/resources/images/profile.png"
-                alt="Bilguun"
-                width={300}
-                height={300}
-              />
+      <section className={styles.heroBanner}>
+        <div className={styles.heroOverlay} />
+        <div className={styles.lightning} />
+        <div className={styles.heroInner}>
+          <div className={styles.about}>
+            <div className={styles.side}>
+              <div className={styles.profile}>
+                <Image
+                  src="/resources/images/profile.png"
+                  alt="Bilguun"
+                  width={300}
+                  height={300}
+                />
+              </div>
+            </div>
+            <div className={styles.intro}>
+              <h1>{t("about.greeting")}</h1>
+              <p>{t("about.bio1")}</p>
+              <p>{t("about.bio2")}</p>
+              <p>{t("about.bio3")}</p>
             </div>
           </div>
-          <div className={styles.intro}>
-            <h1>{t("about.greeting")}</h1>
-            <p>{t("about.bio1")}</p>
-            <p>{t("about.bio2")}</p>
-            <p>{t("about.bio3")}</p>
-          </div>
-        </section>
+        </div>
+      </section>
+      <div className={styles.wrapper}>
         {EXPERIENCE.length > 0 && (
           <section className={styles.section}>
             <div className={styles.divider} />
