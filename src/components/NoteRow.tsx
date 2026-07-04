@@ -13,6 +13,7 @@ export const NoteRow = ({ post }: { post: BlogMeta }) => (
       <span className={styles.meta}>
         {formatDate(post.publishedAt)}
         {post.readTime ? ` · ${post.readTime} min` : ""}
+        {post.updatedAt ? ` · Updated ${formatDate(post.updatedAt)}` : ""}
       </span>
     </div>
     {post.tags.length > 0 && (

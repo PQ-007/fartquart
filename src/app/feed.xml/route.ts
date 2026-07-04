@@ -14,7 +14,13 @@ function escape(str: string) {
 }
 
 export async function GET() {
-  const posts = getAllBlogPosts().slice(0, 20)
+  const allPosts = getAllBlogPosts()
+  const posts = allPosts.slice(0, 20)
+
+  const lastBuildDate = allPosts.reduce(
+    (latest, p) => Math.max(latest, +new Date(p.updatedAt ?? p.publishedAt)),
+    0,
+  )
 
   const items = posts
     .map((p) => {
@@ -38,7 +44,7 @@ export async function GET() {
     <description>${escape(SITE_DESCRIPTION)}</description>
     <language>en</language>
     <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    <lastBuildDate>${(lastBuildDate ? new Date(lastBuildDate) : new Date()).toUTCString()}</lastBuildDate>
 ${items}
   </channel>
 </rss>`

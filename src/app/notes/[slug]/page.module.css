@@ -48,6 +48,10 @@
   white-space: nowrap;
 }
 
+.updatedBadge {
+  color: rgba(var(--color-primary-rgb), 0.35);
+}
+
 .tags {
   display: flex;
   gap: 10px;

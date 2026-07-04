@@ -5,6 +5,9 @@ import {
   getCreation,
   getBookNoteChapters,
   getBookChapter,
+  getProjectLog,
+  getProjectLogChapters,
+  getProjectLogChapter,
 } from "./content"
 import { postPath, NOTE_LABELS } from "./url"
 
@@ -88,16 +91,34 @@ export const buildSearchRecords = (): SearchRecord[] => {
   for (const meta of getAllCreations()) {
     const creation = getCreation(meta.slug)
     if (!creation) continue
+    const log = getProjectLog(meta.slug)
     records.push({
       id: `creation:${creation.slug}`,
       type: "creation",
       title: creation.title,
       description: creation.description,
-      body: stripToText(creation.content).slice(0, MAX_BODY),
+      body: stripToText(creation.content + (log ? `\n${log.content}` : "")).slice(0, MAX_BODY),
       tags: creation.tags,
       url: `/creations/${encodeURIComponent(creation.slug)}`,
       cover: creation.cover,
     })
+
+    if (log) {
+      for (const ch of getProjectLogChapters(meta.slug)) {
+        const chapter = getProjectLogChapter(meta.slug, ch.slug)
+        if (!chapter) continue
+        records.push({
+          id: `chapter:${meta.slug}:${ch.slug}`,
+          type: "chapter",
+          title: chapter.title,
+          parentTitle: creation.title,
+          description: "",
+          body: stripToText(chapter.content).slice(0, MAX_BODY),
+          tags: chapter.tags,
+          url: `/creations/${encodeURIComponent(meta.slug)}/log/${encodeURIComponent(ch.slug)}`,
+        })
+      }
+    }
   }
 
   return records

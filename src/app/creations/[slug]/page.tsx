@@ -6,9 +6,18 @@ import styles from "./page.module.css"
 import { Footer } from "@/components/Footer"
 import { Tag } from "@/components/Tag"
 import { Chapters } from "@/components/post/Chapters"
+import { ProjectLogSection } from "@/components/ProjectLogSection"
 import { mdxComponents } from "@/components/post/mdx-components"
 import { extractChapters } from "@/lib/toc"
-import { formatDate, getAllCreations, getCreation } from "@/lib/content"
+import type { Blog } from "@/lib/content"
+import {
+  formatDate,
+  getAllCreations,
+  getCreation,
+  getProjectLog,
+  getProjectLogChapter,
+  getProjectLogChapters,
+} from "@/lib/content"
 import { coverUrl } from "@/lib/url"
 import { buildPostMetadata } from "@/lib/seo"
 
@@ -43,6 +52,12 @@ export default async function CreationPage({
   if (!creation) notFound()
 
   const chapters = extractChapters(creation.content)
+  const log = getProjectLog(slug)
+  const logChapters = log
+    ? getProjectLogChapters(slug)
+        .map((ch) => getProjectLogChapter(slug, ch.slug))
+        .filter((c): c is Blog => Boolean(c))
+    : []
 
   return (
     <>
@@ -52,7 +67,12 @@ export default async function CreationPage({
             <header className={styles.header}>
               <div className={styles.titleRow}>
                 <h1>{creation.title}</h1>
-                <p>{formatDate(creation.publishedAt)}</p>
+                <p>
+                  {formatDate(creation.publishedAt)}
+                  {creation.updatedAt && (
+                    <span className={styles.updatedBadge}> · Updated {formatDate(creation.updatedAt)}</span>
+                  )}
+                </p>
               </div>
               <div className={styles.tags}>
                 {creation.tags.map((tag) => (
@@ -99,6 +119,9 @@ export default async function CreationPage({
           <Chapters chapters={chapters} demo={creation.demo} repo={creation.repo} />
         </main>
       </div>
+      {log && logChapters.length > 0 && (
+        <ProjectLogSection creationSlug={slug} log={log} chapters={logChapters} />
+      )}
       <Footer />
     </>
   )

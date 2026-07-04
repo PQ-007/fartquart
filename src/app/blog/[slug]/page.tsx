@@ -16,7 +16,7 @@ import { mdxOptions, sanitizeMdx } from "@/lib/mdx-options"
 import { coverUrl, isGif } from "@/lib/url"
 import { buildPostMetadata, articleJsonLd, hreflangMap } from "@/lib/seo"
 
-const BLOG_LABELS = ["internship", "project-log", "contest", "essay", "book-review"] as const
+const BLOG_LABELS = ["internship", "contest", "essay", "book-review"] as const
 
 export const generateStaticParams = () =>
   getAllBlogPosts()
@@ -102,6 +102,9 @@ export default async function BlogPostPage({
                     <p className={styles.bookDate}>
                       {formatDate(post.publishedAt)}
                       {post.readTime ? ` · ${post.readTime} min read` : ""}
+                      {post.updatedAt && (
+                        <span className={styles.updatedBadge}> · Updated {formatDate(post.updatedAt)}</span>
+                      )}
                     </p>
                     <div className={styles.tags}>
                       <Tag name={post.label} />
@@ -118,6 +121,9 @@ export default async function BlogPostPage({
                     <p className={styles.dateMeta}>
                       {formatDate(post.publishedAt)}
                       {post.readTime ? ` · ${post.readTime} min` : ""}
+                      {post.updatedAt && (
+                        <span className={styles.updatedBadge}> · Updated {formatDate(post.updatedAt)}</span>
+                      )}
                     </p>
                   </div>
                   <div className={styles.tags}>

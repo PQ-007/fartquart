@@ -1,7 +1,9 @@
 ---
 title:
 description:
-date: 2026-01-01
+createdAt: 2026-07-04
+publishedAt:
+updatedAt:
 cover: resources/images/covers/spinning-donut.gif
 label: project-log
 category:

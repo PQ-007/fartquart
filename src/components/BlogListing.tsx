@@ -9,12 +9,11 @@ import { useT, useLanguage } from "./LanguageProvider"
 import { collapseTranslations } from "@/lib/translations"
 import type { BlogMeta } from "@/lib/content"
 
-type BlogLabel = "book-review" | "internship" | "project-log" | "contest" | "essay" | "article"
+type BlogLabel = "book-review" | "internship" | "contest" | "essay" | "article"
 
 const LABEL_ORDER: BlogLabel[] = [
   "article",
   "essay",
-  "project-log",
   "internship",
   "contest",
 ]

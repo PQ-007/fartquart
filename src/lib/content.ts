@@ -31,6 +31,7 @@ const BOOK_NOTES_DIR = contentDir("book-notes")
 const LESSON_NOTES_DIR = contentDir("lesson-notes")
 const ALL_BLOG_DIRS = [BLOG_DIR, BOOK_NOTES_DIR, LESSON_NOTES_DIR]
 const CREATIONS_DIR = contentDir("creations")
+const PROJECT_NOTES_DIR = contentDir("project-notes")
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -52,7 +53,9 @@ export type BlogMeta = {
   description: string
   label: BlogLabel
   tags: string[]
+  createdAt?: string
   publishedAt: string
+  updatedAt?: string
   cover?: string
   author?: string
   rating?: number
@@ -64,6 +67,8 @@ export type BlogMeta = {
   lang?: string
   translationKey?: string
   draft?: boolean
+  category?: "project" | "lab"
+  projectNickname?: string
 }
 
 export type Blog = BlogMeta & { content: string }
@@ -73,7 +78,9 @@ export type CreationMeta = {
   title: string
   description: string
   tags: string[]
+  createdAt?: string
   publishedAt: string
+  updatedAt?: string
   cover?: string
   demo?: string
   repo?: string
@@ -152,7 +159,9 @@ const toBlogMeta = (slug: string, data: Record<string, unknown>, content = ""): 
   description: String(data.description ?? "").trim(),
   label: (data.label as BlogLabel) ?? "article",
   tags: Array.isArray(data.tags) ? (data.tags as string[]) : [],
-  publishedAt: normalizeDate(data.date ?? data.publishedAt ?? new Date()),
+  createdAt: data.createdAt ? normalizeDate(data.createdAt) : undefined,
+  publishedAt: normalizeDate(data.publishedAt ?? data.date ?? data.createdAt ?? new Date()),
+  updatedAt: data.updatedAt ? normalizeDate(data.updatedAt) : undefined,
   cover: data.cover ? String(data.cover) : undefined,
   author: data.author ? String(data.author) : undefined,
   rating: data.rating != null ? Number(data.rating) : undefined,
@@ -168,6 +177,12 @@ const toBlogMeta = (slug: string, data: Record<string, unknown>, content = ""): 
       ? String(data.translationKey)
       : undefined,
   draft: Boolean(data.draft),
+  category: data.category ? (String(data.category) as BlogMeta["category"]) : undefined,
+  projectNickname: data["project-nickname"]
+    ? String(data["project-nickname"])
+    : data.projectNickname
+      ? String(data.projectNickname)
+      : undefined,
 })
 
 export const getAllBlogPosts = (): BlogMeta[] =>
@@ -285,7 +300,9 @@ const toCreationMeta = (slug: string, data: Record<string, unknown>): CreationMe
   title: String(data.title ?? ""),
   description: String(data.description ?? "").trim(),
   tags: Array.isArray(data.tags) ? (data.tags as string[]) : [],
-  publishedAt: normalizeDate(data.date ?? data.publishedAt ?? new Date()),
+  createdAt: data.createdAt ? normalizeDate(data.createdAt) : undefined,
+  publishedAt: normalizeDate(data.publishedAt ?? data.date ?? data.createdAt ?? new Date()),
+  updatedAt: data.updatedAt ? normalizeDate(data.updatedAt) : undefined,
   cover: data.cover ? String(data.cover) : undefined,
   demo: data.demo ? String(data.demo) : undefined,
   repo: data.repo ? String(data.repo) : undefined,
@@ -315,7 +332,67 @@ export const getCreation = (slug: string): Creation | null => {
 }
 
 export const getCreationsByTag = (tag: string): CreationMeta[] =>
-  getAllCreations().filter((c) => c.tags.includes(tag))
+  getAllCreations().filter((c) => creationTagsOf(c).includes(tag))
+
+// ── Project logs ─────────────────────────────────────────────────────────────
+// A project-log is a chaptered folder (index.md + entry files) that attaches to
+// a creation via a `project-nickname` field matching the creation's slug —
+// it lives outside ALL_BLOG_DIRS so it never appears on /blog directly.
+
+const findProjectLogDir = (creationSlug: string): string | null => {
+  if (!fs.existsSync(PROJECT_NOTES_DIR)) return null
+  const dirs = fs
+    .readdirSync(PROJECT_NOTES_DIR, { withFileTypes: true })
+    .filter((e) => e.isDirectory())
+  for (const d of dirs) {
+    const indexFile = path.join(PROJECT_NOTES_DIR, d.name, "index.md")
+    if (!fs.existsSync(indexFile)) continue
+    const { data } = matter(fs.readFileSync(indexFile, "utf8"))
+    const nickname = data["project-nickname"] ?? data.projectNickname
+    if (nickname && String(nickname) === creationSlug) {
+      return path.join(PROJECT_NOTES_DIR, d.name)
+    }
+  }
+  return null
+}
+
+export const getProjectLog = (creationSlug: string): Blog | null => {
+  const dir = findProjectLogDir(creationSlug)
+  if (!dir) return null
+  const { data, content } = matter(fs.readFileSync(path.join(dir, "index.md"), "utf8"))
+  if (data.draft) return null
+  return { ...toBlogMeta(path.basename(dir), data, content), content }
+}
+
+export const getProjectLogChapters = (creationSlug: string): { slug: string; title: string }[] => {
+  const dir = findProjectLogDir(creationSlug)
+  if (!dir) return []
+  return fs
+    .readdirSync(dir)
+    .filter((f) => f.endsWith(".md") && f !== "index.md")
+    .sort()
+    .flatMap((f) => {
+      const chSlug = f.replace(/\.md$/, "")
+      const { data } = matter(fs.readFileSync(path.join(dir, f), "utf8"))
+      if (data.draft) return []
+      return [{ slug: chSlug, title: String(data.title ?? chSlug) }]
+    })
+}
+
+export const getProjectLogChapter = (creationSlug: string, chapterSlug: string): Blog | null => {
+  const dir = findProjectLogDir(creationSlug)
+  if (!dir) return null
+  const file = path.join(dir, `${chapterSlug}.md`)
+  if (!fs.existsSync(file)) return null
+  const { data, content } = matter(fs.readFileSync(file, "utf8"))
+  return { ...toBlogMeta(chapterSlug, data, content), content }
+}
+
+/** A creation's own tags plus its attached project-log's tags, if any. */
+const creationTagsOf = (c: CreationMeta): string[] => {
+  const log = getProjectLog(c.slug)
+  return [...new Set([...c.tags, ...(log?.tags ?? [])])]
+}
 
 // ── Featured ───────────────────────────────────────────────────────────────
 
@@ -363,7 +440,7 @@ export const getAllBlogTags = (): TagCount[] => {
 export const getAllCreationTags = (): TagCount[] => {
   const counts = new Map<string, number>()
   for (const creation of getAllCreations()) {
-    for (const tag of creation.tags) {
+    for (const tag of creationTagsOf(creation)) {
       counts.set(tag, (counts.get(tag) ?? 0) + 1)
     }
   }
@@ -391,7 +468,7 @@ export const getGraphData = (locale: string = defaultLocale): GraphData => {
     for (const t of [p.label, ...p.tags]) tagSet.add(t)
   }
   for (const c of creations) {
-    for (const t of c.tags) tagSet.add(t)
+    for (const t of creationTagsOf(c)) tagSet.add(t)
   }
 
   const nodes: GraphNode[] = [
@@ -423,7 +500,7 @@ export const getGraphData = (locale: string = defaultLocale): GraphData => {
       })),
     ),
     ...creations.flatMap((c) =>
-      c.tags.map((tag) => ({
+      creationTagsOf(c).map((tag) => ({
         source: `creation:${c.slug}`,
         target: `tag:${tag}`,
       })),

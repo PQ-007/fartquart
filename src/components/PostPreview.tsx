@@ -97,7 +97,12 @@ export const PostPreview = ({ type = "post", post }: PostPreviewProps) => {
             <p className={styles.description}>{blog.description}</p>
           </div>
           <div className={styles.footer}>
-            <p className={styles.date}>{formatDate(blog.publishedAt)}</p>
+            <p className={styles.date}>
+              {formatDate(blog.publishedAt)}
+              {blog.updatedAt && (
+                <span className={styles.updatedBadge}> · Updated {formatDate(blog.updatedAt)}</span>
+              )}
+            </p>
             <Link className={styles.link} href={`/blog/${blog.slug}`}>
               <SlidingText text={t("ui.readPost")} arrow />
             </Link>

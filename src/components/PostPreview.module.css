@@ -111,6 +111,10 @@
   color: rgba(var(--color-primary-rgb), 0.3);
 }
 
+.updatedBadge {
+  color: rgba(var(--color-primary-rgb), 0.22);
+}
+
 .link {
   height: fit-content;
 }

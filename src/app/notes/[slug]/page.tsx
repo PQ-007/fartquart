@@ -115,7 +115,12 @@ export default async function NoteSlugPage({
                 <header className={styles.lessonHeader}>
                   <div className={styles.lessonMeta}>
                     <Tag name={post.label} />
-                    <span className={styles.dateMeta}>{formatDate(post.publishedAt)}</span>
+                    <span className={styles.dateMeta}>
+                      {formatDate(post.publishedAt)}
+                      {post.updatedAt && (
+                        <span className={styles.updatedBadge}> · Updated {formatDate(post.updatedAt)}</span>
+                      )}
+                    </span>
                   </div>
                   <h1 className={styles.lessonTitle}>{post.title}</h1>
                   {post.description && (

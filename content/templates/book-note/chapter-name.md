@@ -1,6 +1,8 @@
 ---
 title: — Chapter Name
-date: 2026-01-01
+createdAt: 2026-07-04
+publishedAt:
+updatedAt:
 new-word:
   - word:
     definition:

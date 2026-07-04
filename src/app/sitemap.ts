@@ -4,6 +4,8 @@ import {
   getAllCreations,
   getBookNoteChapters,
   getAllTagsUnified,
+  getProjectLog,
+  getProjectLogChapters,
 } from "@/lib/content"
 import { SITE_URL } from "@/lib/site"
 import { postPath, NOTE_LABELS } from "@/lib/url"
@@ -25,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const postRoutes: MetadataRoute.Sitemap = posts.map((p) => ({
     url: abs(postPath(p.slug, p.label)),
-    lastModified: new Date(p.publishedAt),
+    lastModified: new Date(p.updatedAt ?? p.publishedAt),
     changeFrequency: "monthly",
     priority: 0.7,
   }))
@@ -35,18 +37,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .flatMap((p) =>
       getBookNoteChapters(p.slug).map((ch) => ({
         url: abs(`/notes/${encodeURIComponent(p.slug)}/${encodeURIComponent(ch.slug)}`),
-        lastModified: new Date(p.publishedAt),
+        lastModified: new Date(p.updatedAt ?? p.publishedAt),
         changeFrequency: "monthly" as const,
         priority: 0.6,
       })),
     )
 
-  const creationRoutes: MetadataRoute.Sitemap = getAllCreations().map((c) => ({
+  const creations = getAllCreations()
+
+  const creationRoutes: MetadataRoute.Sitemap = creations.map((c) => ({
     url: abs(`/creations/${encodeURIComponent(c.slug)}`),
-    lastModified: new Date(c.publishedAt),
+    lastModified: new Date(c.updatedAt ?? c.publishedAt),
     changeFrequency: "monthly",
     priority: 0.7,
   }))
+
+  const projectLogRoutes: MetadataRoute.Sitemap = creations.flatMap((c) => {
+    const log = getProjectLog(c.slug)
+    if (!log) return []
+    return getProjectLogChapters(c.slug).map((ch) => ({
+      url: abs(`/creations/${encodeURIComponent(c.slug)}/log/${encodeURIComponent(ch.slug)}`),
+      lastModified: new Date(log.updatedAt ?? log.publishedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    }))
+  })
 
   const tagRoutes: MetadataRoute.Sitemap = getAllTagsUnified().map(({ tag }) => ({
     url: abs(`/tags/${encodeURIComponent(tag)}`),
@@ -60,6 +75,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...postRoutes,
     ...chapterRoutes,
     ...creationRoutes,
+    ...projectLogRoutes,
     ...tagRoutes,
   ]
 }

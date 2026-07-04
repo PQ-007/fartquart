@@ -21,16 +21,16 @@ A post's **`label`** decides where it appears and how it looks:
 | --- | --- | --- | --- |
 | `article` | `/blog` | `content/blog/*.md` | Single file |
 | `essay` | `/blog` | `content/blog/*.md` | Single file |
-| `project-log` | `/blog` | `content/blog/*.md` | Single file |
 | `internship` | `/blog` | `content/blog/*.md` | Single file |
 | `contest` | `/blog` | `content/blog/*.md` | Single file |
 | `book-review` | `/blog/[slug]` | `content/blog/*.md` | Single file, Goodreads-style page |
 | `book-note` | `/notes` | `content/book-notes/[book]/` | Folder: `index.md` + `1章 …` chapters |
 | `lesson-note` | `/notes` | `content/lesson-notes/[course]/` | Folder: `index.md` + lesson files |
+| `project-log` | `/creations/[slug]` | `content/project-notes/[project]/` | Folder: `index.md` + log-entry files, attached to a creation via `project-nickname` |
 
-Creations (apps/experiments) live in `content/creations/` and render at `/creations`.
+Creations (apps/experiments) live in `content/creations/` and render at `/creations`. A creation can optionally have an attached project-log (see above) — a chaptered build log that renders as a "Project Log" section on the creation's page, with each entry getting its own page at `/creations/[slug]/log/[entry]`.
 
-`/blog` renders in the order: article → essay → project-log → internship → contest. Notes and lessons are directory-based: the `index.md` is the cover/overview and each sibling `.md` is a chapter, with auto prev/next navigation and a chapter sidebar. Chapter files can declare `new-word` vocabulary, surfaced as a flip-to-reveal review widget.
+`/blog` renders in the order: article → essay → internship → contest. Notes, lessons, and project logs are directory-based: the `index.md` is the cover/overview and each sibling `.md` is a chapter, with auto prev/next navigation and a chapter sidebar. Chapter files can declare `new-word` vocabulary, surfaced as a flip-to-reveal review widget.
 
 **Authoring:** copy a file from [`content/templates/`](content/templates/) and fill it in. The full guide (in Mongolian) is `content/vault-guide.md`; the field reference is [`content/templates/README.md`](content/templates/README.md).
 
@@ -77,6 +77,8 @@ Files: [`src/lib/search-index.ts`](src/lib/search-index.ts) (records + Markdown�
 - **SEO** — `metadataBase`, per-page OpenGraph/Twitter cards, branded fallback share image (`/og` via `next/og`), `sitemap.xml`, `robots.txt`, `BlogPosting`/`WebSite` JSON-LD, RSS at `/feed.xml`
 - **Vault images** — `content/resources/` is synced into `public/resources/` at dev/build ([`scripts/copy-resources.mjs`](scripts/copy-resources.mjs)) so frontmatter covers like `resources/images/foo.jpg` and Obsidian `![[embed.png]]` ship as static assets on any host
 - **Background music** — an optional `music:` frontmatter field (a YouTube link or audio file) shows a minimal floating player on the post
+- **Project logs** — a chaptered build log (`content/project-notes/[project]/`) attaches to a creation via `project-nickname` and renders as a "Project Log" section + per-entry pages on `/creations/[slug]`
+- **Dates** — `createdAt` / `publishedAt` / `updatedAt` frontmatter (legacy single `date` still supported); `publishedAt` drives ordering, and `updatedAt` shows an "Updated" note next to the date when a post has been revised
 
 ## Routes
 
@@ -86,6 +88,7 @@ Files: [`src/lib/search-index.ts`](src/lib/search-index.ts) (records + Markdown�
 | `/blog`, `/blog/[slug]` | Writing, grouped by label; book-reviews get a Goodreads-style header |
 | `/notes`, `/notes/[slug]`, `/notes/[slug]/[chapter]` | Book & lesson notes (directory-based, chaptered) |
 | `/creations`, `/creations/[slug]` | Apps, tools, experiments (cover/YouTube/demo/repo) |
+| `/creations/[slug]/log/[chapter]` | Project-log entry (build-log chapter attached to a creation) |
 | `/about` | Bio, experience timeline |
 | `/tags`, `/tags/[tag]` | Interactive tag graph / posts by tag |
 | `/feed.xml`, `/sitemap.xml`, `/robots.txt`, `/og` | RSS, sitemap, robots, share image |
@@ -96,10 +99,11 @@ Files: [`src/lib/search-index.ts`](src/lib/search-index.ts) (records + Markdown�
 
 ```
 content/                 Obsidian vault (the CMS)
-  blog/                  → /blog        (article, essay, project-log, internship, contest, book-review)
+  blog/                  → /blog        (article, essay, internship, contest, book-review)
   book-notes/[book]/     → /notes       (index.md + 章 chapters)
   lesson-notes/[course]/ → /notes       (index.md + lesson files)
   creations/             → /creations
+  project-notes/[project]/ → attaches to /creations/[slug] via project-nickname (index.md + log entries)
   resources/images/      cover images, served via /resources
   templates/             copy-to-author starters (+ README field reference)
   featured.json          slugs featured on the home page
