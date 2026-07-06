@@ -4,8 +4,8 @@ createdAt: 2026-03-17
 publishedAt: 2026-03-17
 updatedAt:
 tags:
-  - Algorithm
-  - How
+  - algorithm
+  - how
 draft: true
 label: article
 ---

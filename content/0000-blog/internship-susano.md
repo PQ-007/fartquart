@@ -5,12 +5,11 @@ label: internship
 cover: resources/images/susano-internship/susano-internship-cover.jpg
 tags:
   - internship
-  - Csharp
-  - DotNet
+  - csharp
+  - dot-net
 createdAt: 2025-07-04
 publishedAt: 2025-07-04
 updatedAt:
-language: mn
 draft: false
 ---
 ***Дадлагын тайлан хамгаалалтанд ашигласан [слайд](https://canva.link/aq0u2wt6h9a6y6w)***

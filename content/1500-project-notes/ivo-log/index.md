@@ -8,9 +8,9 @@ cover: resources/images/covers/spinning-donut.gif
 label: project-log
 category: software
 tags:
-  - MobileApp
-  - Dictionary
-  - FlashcardApp
+  - mobile-app
+  - dictionary
+  - flashcard-app
 draft: false
 project-nickname: ivo
 ---

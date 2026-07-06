@@ -5,8 +5,8 @@ createdAt: 2026-06-20
 publishedAt: 2026-06-20
 updatedAt: 2026-07-04
 tags:
-  - MobileApp
-  - Dictionary
+  - mobile-app
+  - dictionary
 draft: false
 ---
 ## Юу шинээр нэмэгдэв

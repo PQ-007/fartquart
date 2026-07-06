@@ -8,6 +8,8 @@ new-word:
     definition: dynamic typed language
 draft: false
 cover: https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExODIzeXdra2FxaWc0eTVuanNmeWF4aGs0MTRka2ZycXU4bmo5NmVuMSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/coxQHKASG60HrHtvkt/giphy.gif
+tags:
+  - python
 ---
 ## Python とは
 

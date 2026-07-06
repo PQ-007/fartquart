@@ -9,7 +9,6 @@ updatedAt:
 tags:
   - internship
   - state-machine
-language: mn
 cover: resources/images/alten-japan-internship/cover.jpg
 music:
 ---

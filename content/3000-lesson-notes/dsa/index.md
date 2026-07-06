@@ -6,8 +6,8 @@ updatedAt:
 label: lesson-note
 description: DSA re-try
 tags:
-  - Algorithm
-  - DataStructures
+  - algorithm
+  - data-structures
 cover: https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcHdtcmN0YmFvdWplYzJlaTVoM2plbTAwYWF6dGxzcnJmcW5iMzVncyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/h5REkBSNmLTP2/giphy.gif
 draft: false
 ---

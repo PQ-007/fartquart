@@ -9,9 +9,10 @@ rating: 5
 genre: Deep Learning
 pages: 458
 tags:
-  - BookDeepLearning
-  - JP
+  - jp
   - python
+  - deep-learning
+  - zero-kara
 cover: resources/images/book/zero-karadp2.jpg
 ---
 Гүн сургалтын талаар тэгээс нь эхлээд сурах номны хоёр дахь цуврал.  

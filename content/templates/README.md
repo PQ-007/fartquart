@@ -1,6 +1,6 @@
 # Templates
 
-Copy a file from here into the right folder, then fill in the frontmatter. This file isn't published (only `blog/`, `book-notes/`, `lesson-notes/`, `project-notes/`, and `creations/` are scanned). The full walkthrough lives in `content/Агуулгын удирдамж.md`.
+Copy a file from here into the right folder, then fill in the frontmatter. This file isn't published (only `blog/`, `book-notes/`, `lesson-notes/`, `project-notes/`, and `creations/` are scanned). The full walkthrough lives in `content/vault-guide.md`.
 
 ## Which template?
 
@@ -13,6 +13,7 @@ Copy a file from here into the right folder, then fill in the frontmatter. This 
 | Book notes (chapters) | `book-note/` (whole folder) | `content/book-notes/[book]/` |
 | Course notes (lessons) | `lesson-note/` (whole folder) | `content/lesson-notes/[course]/` |
 | A project build log (chapters) | `project-note/` (whole folder) | `content/project-notes/[project]/` |
+| A creation (app, game, hardware build…) | `creation.md` | `content/creations/` |
 
 For folder types, rename the folder to the book/course/project title; keep `index.md` and add one file per chapter/lesson/log entry.
 
@@ -37,6 +38,8 @@ A project build log doesn't get its own page — its `project-nickname` field mu
 | `genre`, `pages` | book-review, book-note | Shown in the book header. |
 | `category` | creations, project-note index | One of `hardware`, `software`, `web`, `3dmodel`, `game`, `robot`, `iot` — shown as a pill and drives the filter on `/creations`. A project-log's `category` is inherited by its creation if the creation itself doesn't set one. |
 | `project-nickname` | project-note index | Must equal the slug of the creation this log attaches to. |
+| `demo`, `repo` | creations | Links to a live demo and the source repo, shown as buttons on the creation page. |
+| `youtube` | creations | YouTube video ID — shows an embedded player instead of `cover` on the creation page. |
 | `new-word` | chapter / lesson files | Vocabulary list → flip-to-reveal review widget in the sidebar. |
 | `music` | optional | Background track — a YouTube link or an audio file (`resources/audio/song.mp3`). |
 | `lang` | optional | Post language: `en` / `mn` / `ja`. Only needed when you write translations. |

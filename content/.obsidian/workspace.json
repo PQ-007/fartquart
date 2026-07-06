@@ -4,22 +4,39 @@
     "type": "split",
     "children": [
       {
-        "id": "81908fb7438c383c",
+        "id": "fd247e6885f8283d",
         "type": "tabs",
         "children": [
           {
-            "id": "db1f3dc5dd9793ad",
+            "id": "4a6df3d9d6560088",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "resources/images/covers/about-me-cover.jpg"
+                "file": "1000-creations/hanko.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "about-me-cover"
+              "icon": "lucide-file",
+              "title": "hanko"
+            }
+          },
+          {
+            "id": "22ed60927aaa5682",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "1500-project-notes/bullet-point-log/00-devlog.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "00-devlog"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -52,7 +69,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:supabase",
+                "query": "tag:top-down-game",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -139,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "blog/internship-alten-japan.md",
-                "followCursor": false,
-                "showSearch": false,
+                "file": "1500-project-notes/bullet-point-log/00-devlog.md",
+                "followCursor": true,
+                "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of internship-alten-japan"
+              "title": "Outline of 00-devlog"
             }
           },
           {
@@ -156,39 +173,6 @@
               "state": {},
               "icon": "git-pull-request",
               "title": "Source Control"
-            }
-          },
-          {
-            "id": "e65080a804815bcb",
-            "type": "leaf",
-            "state": {
-              "type": "backlink",
-              "state": {
-                "file": "3000-lesson-notes/dsa/02-data structure.md",
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical",
-                "showSearch": false,
-                "searchQuery": "",
-                "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-coming-in",
-              "title": "Backlinks for 02-data structure"
-            }
-          },
-          {
-            "id": "a69abb3382509eb4",
-            "type": "leaf",
-            "state": {
-              "type": "outgoing-link",
-              "state": {
-                "file": "3000-lesson-notes/dsa/02-data structure.md",
-                "linksCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-going-out",
-              "title": "Outgoing links from 02-data structure"
             }
           }
         ],
@@ -214,50 +198,49 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "4dfd1ae5b0a4e55d",
+  "active": "2658e34e1852a6c5",
   "lastOpenFiles": [
+    "1500-project-notes/ivo-log/00-devlog.md",
+    "1500-project-notes/ivo-log/01-devlog.md",
+    "1000-creations/bulet-point.md",
+    "1500-project-notes/bullet-point-log/index.md",
+    "1000-creations/ivo.md",
+    "1000-creations/chess.md",
     "1000-creations/hanko.md",
-    "resources/images/covers/about-me-cover.jpg",
-    "templates/README.md.tmp.37013.fc7305bb4c82",
-    "1000-creations/sudoku-solver-generator.md.tmp.37013.2a71d6627139",
-    "1500-project-notes/ivo-log/index.md.tmp.37013.99e0695aaf6a",
-    "1000-creations/hanko.md.tmp.37013.8ec7fe22d79d",
-    "1000-creations/chess.md.tmp.37013.7633b9a54ba4",
-    "1000-creations/hanko.md.tmp.37013.4ffa2b1a1504",
-    "1000-creations/chess.md.tmp.37013.059030db9682",
-    "0000-blog/essay-1.md.tmp.37013.bb90c11715cf",
-    "0000-blog/essay-1.md.tmp.37013.2f950402b0a5",
-    "1500-project-notes/ivo-log/02-devlog-1.md",
-    "1500-project-notes/ivo-log/02-devlog-1.md.tmp.37013.665182b4dec2",
-    "1500-project-notes/ivo-log/01-devlog-0.md",
+    "vault-guide.md.tmp.30434.f6ff3c579398",
+    "templates/README.md.tmp.30434.d3f15d9b7880",
+    "templates/README.md.tmp.30434.ea582a97652a",
+    "templates/creation.md",
+    "templates/creation.md.tmp.30434.86dd07aaf1e9",
+    "1500-project-notes/bullet-point-log/00-devlog.md",
+    "2000-book-notes/ゼロから作る Deep Learning 1/index.md",
+    "2000-book-notes/ゼロから作る Deep Learning 2/index.md",
+    "2000-book-notes/ゼロから作る Deep Learning 2/1章 ニューラルネットワークの復習.md",
+    "2000-book-notes/ゼロから作る Deep Learning 1/1章 Python 入門.md",
+    "2000-book-notes/ゼロから作る Deep Learning 1/2章 パーセプトロン.md",
+    "2000-book-notes/ゼロから作る Deep Learning 1/3章 ニューラルネットワーク.md",
+    "vault-guide.md.tmp.30434.bcc9c15aefde",
     "1500-project-notes/ivo-log/index.md",
-    "templates/project-note/project-log.md",
-    "1500-project-notes/chess-log/01-first-move.md",
-    "1500-project-notes/chess-log/index.md",
-    "templates/book-note/chapter-name.md",
-    "templates/lesson-note/01 lesson-name.md",
-    "templates/project-note/index.md",
-    "templates/internship.md",
-    "templates/contest.md",
-    "templates/essay.md",
-    "templates/article.md",
-    "templates/book-review.md",
+    "vault-guide.md",
+    "1500-project-notes/bullet-point-log",
+    "vault-guide.md.tmp.23297.a5fca783414c",
+    "vault-guide.md.tmp.23297.a2435c873ed7",
+    "vault-guide.md.tmp.23297.7fc8ca3fad82",
+    "templates/README.md.tmp.23297.40fd8d84be0e",
+    "3000-lesson-notes/dsa/00-beginning.md",
+    "3000-lesson-notes/dsa/index.md",
+    "3000-lesson-notes/dsa/02-data-structure.md",
+    "4000-private/Прогресс/2026/Нийтлэлүүд.md",
+    "4000-private/Зорилгууд/2026 оны зорилго.md",
+    "4000-private/Прогресс/2026/Хичээлийн тэмдэглэл.md",
+    "4000-private/tomore/idea.md",
+    "4000-private/Таван жилийн төлөвлөгөө.md",
+    "resources/images/covers/about-me-cover.jpg",
     "resources/images/covers/book-cover.png",
     "resources/images/covers/pixel-tide.png",
-    "4000-private/Прогресс/2026/Видеонууд.md",
     "resources/images/covers/great-tide.png",
     "resources/images/covers/spinning-donut.gif",
     "resources/images/covers/dsa-cover.png",
-    "2026-01-01.md",
-    "5000-videos/Integral and differential.md",
-    "3000-lesson-notes/dsa/02-data structure.md",
-    "3000-lesson-notes/dsa/index.md",
-    "3000-lesson-notes/dsa/00-beginning.md",
-    "3000-lesson-notes/dsa/Encapsulation.md",
-    "3000-lesson-notes/dsa/01-algorithm.md",
-    "3000-lesson-notes/dsa/Inheritance.md",
-    "3000-lesson-notes/n1/1st-day.md",
-    "4000-private/Дүгнэлтүүд/Жилийн/2026 оны дүгнэлт.md",
     "resources/images/hanko-cover.png",
     "resources/images/alten-japan-internship/window.jpg",
     "resources/images/alten-japan-internship/cover.jpg",

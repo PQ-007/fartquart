@@ -4,14 +4,13 @@ description: Компьютерын алгоритм хүний нийгэмд �
 cover: https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZGhwaDVoYXdsNWU2b2dremhmc2VvNjhyZ2hveGhkYTk3bTg4cWwzaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YHrQQb71BWx2k21w2N/giphy.gif
 label: lesson-note
 tags:
-  - Algorithm
-  - ComputerScience
-  - Linguistic
-  - Theory
+  - algorithm
+  - computer-science
+  - linguistic
+  - theory
 createdAt: 2024-12-21
 publishedAt: 2024-12-21
 updatedAt:
-language: mn
 ---
 _Энэхүү нийтлэлд_ **Компьютерын алгоритм** _сүүлийн жилүүдэд хүний нийгэмд хэрхэн яаж нөлөө үзүүлж буй талаар, мөн түүний ажиллах зарчим, түүхийн тухайд авч үзэх бөгөөд алгоритмаа зохиохдоо юуг анхаарах, хэрхэн үнэлэх, үр дүнтэй хэрэглэх зэргийг тусгах болно._
 

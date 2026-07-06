@@ -1,29 +1,52 @@
 ---
 title: Vault Guide
-date: 2026-06-14
+date: 2026-07-06
 label: article
-description: Сайтад агуулга нэмэх бүрэн заавар — директор, label, frontmatter, MDX компонент, ном ба хичээлийн тэмдэглэл.
+description: Сайтад агуулга нэмэх бүрэн заавар — директор, label, frontmatter, MDX компонент, ном, хичээл, project-log тэмдэглэл.
 tags:
-  - Meta
+  - meta
 draft: true
 ---
 
-> Энэ файл `content/` хавтасны үндэст байрладаг тул сайтад **нийтлэгдэхгүй** — зөвхөн өөрийн лавлах заавар. Шинэ агуулга үүсгэхдээ `content/templates/` доторх загвар файлыг хуулж аваад бөглө.
+> Энэ файл `content/` хавтасны үндэст байрладаг тул сайтад **нийтлэгдэхгүй** — зөвхөн өөрийн лавлах заавар. Шинэ агуулга үүсгэхдээ `content/templates/` доторх загвар файлыг хуулж аваад бөглө (тэнд бас богино `README.md` бий).
 
 ## Директорийн бүтэц
 
+Хавтасны нэрний өмнө дараалал заасан тоон угтвар (`0000-`, `1000-`, гэх мэт) байж болно — код автоматаар тайлж танина (жишээ нь `0000-blog` ч, зүгээр `blog` ч ажиллана). Одоогийн vault-д ийм угтвар ашигласан:
+
 ```
 content/
-  blog/                    → /blog дээр гарна
-  book-notes/[номын нэр]/   → /notes дээр гарна (бүлэгтэй)
-    index.md               → номын нүүр хуудас
-    1章 ....md             → бүлэг тус бүр
-  lesson-notes/[курсын нэр]/ → /notes дээр гарна (хичээлтэй)
-    index.md               → курсын нүүр хуудас
-    Хичээл нэр.md          → хичээл тус бүр
-  creations/               → /creations дээр гарна
-  resources/images/        → нүүр зургууд (cover) энд хадгална
+  0000-blog/                 → /blog дээр гарна
+  1000-creations/            → /creations дээр гарна
+  1500-project-notes/[нэр]/  → /creations/[slug] дээр "Project Log" болж хавсарна (өөрийн хуудасгүй)
+    index.md                 → project-nickname-аар creation-той холбогдоно
+    01-devlog-....md         → лог бичлэг тус бүр
+  2000-book-notes/[номын нэр]/ → /notes дээр гарна (бүлэгтэй)
+    index.md                 → номын нүүр хуудас
+    1章 ....md               → бүлэг тус бүр
+  3000-lesson-notes/[курсын нэр]/ → /notes дээр гарна (хичээлтэй)
+    index.md                 → курсын нүүр хуудас
+    01 Хичээл нэр.md         → хичээл тус бүр
+  resources/images/          → нүүр зургууд (cover) энд хадгална
+  templates/                 → хуулж ашиглах загвар файлууд
 ```
+
+`content/4000-private/`, `content/5000-videos/`, `content/archieve/`, `content/Excalidraw/`, `content/.trash/` зэрэг бусад хавтас нь Obsidian-ий дотоод хэрэглээ — сайтад ямар ч холбоогүй, скан хийгддэггүй.
+
+---
+
+## Огнооны талбарууд
+
+Хуучин файлууд ганцхан `date` талбар ашигладаг байсан бол одоо гурван талбартай:
+
+| Талбар | Утга |
+|---|---|
+| `createdAt` | Бичиж эхэлсэн огноо — зөвхөн мэдээллийн зорилготой |
+| `publishedAt` | Эрэмбэ болон харагдах огноог тодорхойлно; хоосон бол `createdAt`-аас авна |
+| `updatedAt` | Нийтэлсний дараа мэдэгдэхүйц засвар хийвэл тавина — огнооны хажууд "Updated" гэж гарна |
+| `date` | Хуучин формат — `createdAt`/`publishedAt`/`updatedAt` байхгүй үед nэн умчаар ашиглагдана, одоо ч бүрэн ажиллана |
+
+Шинэ файлд `createdAt` + `publishedAt` хосыг ашигла, `date`-ийг зөвхөн хуучин файлд хэвээр үлдээ.
 
 ---
 
@@ -35,14 +58,14 @@ content/
 |---|---|---|---|
 | `article` | /blog | `content/blog/` | Нэг файл |
 | `essay` | /blog | `content/blog/` | Нэг файл |
-| `project-log` | /blog | `content/blog/` | Нэг файл |
 | `internship` | /blog | `content/blog/` | Нэг файл |
 | `contest` | /blog | `content/blog/` | Нэг файл |
 | `book-review` | /blog/[slug] | `content/blog/` | Нэг файл, номын тусгай загвар |
 | `book-note` | /notes | `content/book-notes/[нэр]/` | Хавтас, бүлэгтэй |
 | `lesson-note` | /notes | `content/lesson-notes/[нэр]/` | Хавтас, хичээлтэй |
+| `project-log` | /creations/[slug] | `content/project-notes/[нэр]/` | Хавтас, creation-д хавсаргана (`/blog`-д гарахгүй) |
 
-`/blog` хуудас дараах дарааллаар эрэмбэлэгдэнэ: **article → essay → project-log → internship → contest**.
+`/blog` хуудас дараах дарааллаар эрэмбэлэгдэнэ: **article → essay → internship → contest**. (`project-log` нь `/blog`-д огт гарахгүй тул энэ жагсаалтад ороогүй.)
 
 ---
 
@@ -53,12 +76,17 @@ content/
 ```md
 ---
 title: Гарчиг
-date: 2026-01-15
-label: essay
 description: Товч тайлбар (карт дээр харагдана)
+createdAt: 2026-01-10
+publishedAt: 2026-01-15
+updatedAt:
+label: essay
 tags:
   - TagНэр
 cover: resources/images/folder/cover.jpg
+music:
+lang:
+translation-key:
 draft: false
 ---
 ```
@@ -66,6 +94,8 @@ draft: false
 - `draft: true` тавьвал сайтад **харагдахгүй** — бичиж байх үед тохиромжтой.
 - `cover` нь заавал биш. Тавихгүй бол өнгөт градиент автоматаар үүснэ.
 - `.gif` нүүр зураг дэмжигдэнэ.
+- `music` нь заавал биш — YouTube линк эсвэл аудио файл (`resources/audio/song.mp3`).
+- `lang` / `translation-key` нь орчуулгатай пост дээр ашиглана (доор тайлбарласан).
 
 ---
 
@@ -76,16 +106,17 @@ draft: false
 ```md
 ---
 title: Clean Code
-date: 2026-01-15
-label: book-review
+description: Товч тайлбар
 author: Robert C. Martin
 rating: 4
 genre: Software Engineering
 pages: 431
-description: Товч тайлбар
+createdAt: 2026-01-10
+publishedAt: 2026-01-15
+label: book-review
 cover: resources/images/book-covers/clean-code.jpg
 tags:
-  - Engineering
+  - engineering
 ---
 ```
 
@@ -102,17 +133,18 @@ tags:
 ```md
 ---
 title: ゼロから作る Deep Learning 1
-date: 2025-09-13
-label: book-note
+description: Номын тухай товч танилцуулга
 author: 斎藤 康毅
 rating: 5
 genre: Deep Learning
 pages: 318
-description: Номын тухай товч танилцуулга
+createdAt: 2025-09-10
+publishedAt: 2025-09-13
+label: book-note
 cover: resources/images/book-covers/deep-learning-1.jpg
 tags:
-  - Python
-  - JP
+  - python
+  - jp
 ---
 Номын тухай товч танилцуулга...
 ```
@@ -122,7 +154,8 @@ tags:
 ```md
 ---
 title: 1章 — Гарчиг
-date: 2025-10-01
+createdAt: 2025-09-28
+publishedAt: 2025-10-01
 new-word:
   - word: パーセプトロン
     definition: Хиймэл нейроны анхдагч алгоритм.
@@ -157,12 +190,13 @@ New Words хэсэгт үг дээр дарвал тодорхойлолт нь 
 ```md
 ---
 title: Object Oriented Programming
-date: 2026-02-01
-label: lesson-note
 description: OOP-ийн үндсэн ойлголтууд
+createdAt: 2026-01-28
+publishedAt: 2026-02-01
+label: lesson-note
 cover: resources/images/folder/cover.jpg
 tags:
-  - CS
+  - cs
 ---
 Курсын товч танилцуулга...
 ```
@@ -171,14 +205,57 @@ tags:
 
 ```md
 ---
-title: Inheritance
-date: 2026-02-03
+title: 01 — Inheritance
+createdAt: 2026-02-01
+publishedAt: 2026-02-03
 new-word:
   - word: 
     definition: 
 draft: false
 ---
 Хичээлийн агуулга...
+```
+
+---
+
+## Project log — бүтээлийн явцын тэмдэглэл (бүлэгтэй)
+
+Аль нэг creation-ийн хөгжүүлэлтийн явцыг бичих зориулалттай. `content/project-notes/[нэр]/` хавтас дотор байрлана.
+
+`index.md` нь **өөрийн хуудас (route) үүсгэдэггүй** — book-note/lesson-note-ийн `index.md`-ээс ялгаатай. Уншигчийн харах цорын ганц "нүүр" бол холбогдсон creation-ийн `/creations/[slug]` хуудас өөрөө — тэр хуудас нь мэдээж index. `project-notes`-ийн `index.md` нь зөвхөн (1) `project-nickname`-аар аль creation-той холбогдохыг заах, (2) `title`/`description`/`category`/`tags`-ыг тухайн creation рүү дамжуулах metadata файл. Ингэснээр `/creations/[slug]` дээр **"Project Log"** хэсэг гарч, лог бичлэг бүр `/creations/[slug]/log/[entry]` дээр өөрийн хуудастай болно.
+
+**`index.md`**:
+
+```md
+---
+title: Ivo — Build Log
+description: Ivo-г хөгжүүлж буй явцын тэмдэглэл
+createdAt: 2026-06-14
+publishedAt: 2026-06-14
+cover: resources/images/covers/spinning-donut.gif
+label: project-log
+category: software
+tags:
+  - mobile-app
+draft: false
+project-nickname: ivo
+---
+Товч танилцуулга...
+```
+
+- `project-nickname` нь `content/creations/` доторх аль нэг creation-ий **slug**-тай яг таарч байх ёстой (жишээ дээр `ivo.md` → slug `ivo`). Таарахгүй бол лог хаана ч гарахгүй.
+- `category` нь заавал биш — creation өөрөө `category` тавиагүй бол project-log-оос уламжлана.
+
+**Лог бичлэг** — `01-devlog-0.md` гэх мэт (файлын нэрээр эрэмбэлэгдэнэ, дараалал чухал бол тоогоор эхэл):
+
+```md
+---
+title: Devlog 0 — Setup
+createdAt: 2026-06-14
+publishedAt: 2026-06-14
+draft: false
+---
+Энэ удаагийн ахиц...
 ```
 
 ---
@@ -191,9 +268,11 @@ draft: false
 ---
 title: Ivo
 description: Японы толь бичиг апп
-date: 2026-06-01
+createdAt: 2026-05-28
+publishedAt: 2026-06-01
 tags: [mobile, swift, ios]
 cover: resources/images/folder/cover.jpg
+category: software
 demo: https://example.com
 repo: https://github.com/user/ivo
 youtube: dQw4w9WgXcQ
@@ -201,7 +280,31 @@ draft: false
 ---
 ```
 
-`youtube` талбар байвал нүүрэнд бичлэг тоглуулагч, байхгүй бол `cover` зураг харагдана.
+`youtube` талбар байвал нүүрэнд бичлэг тоглуулагч, байхгүй бол `cover` зураг харагдана. `category` нь `hardware`, `software`, `web`, `3dmodel`, `game`, `robot`, `iot` дундаас нэг байх ёстой — `/creations` хуудсан дээр шүүлтүүр, мөн пилл болж харагдана. Хавсаргасан project-log байвал түүний tag-ууд ч нэмэгдэнэ.
+
+`content/templates/creation.md`-г хуулж аваад бөглөнө.
+
+---
+
+## Орчуулга (Translations)
+
+Нэг постыг олон хэл дээр нийтлэхийн тулд **хэл тус бүрт тусдаа файл** үүсгэж, аль алинд нь **ижил `translation-key`** өгнө:
+
+```yaml
+# my-trip.md
+title: My Trip to Tokyo
+lang: en
+translation-key: tokyo-trip
+```
+
+```yaml
+# tokio-ayalal.md
+title: Токио аялал
+lang: mn
+translation-key: tokyo-trip
+```
+
+Сайт дээр эдгээр нь **нэг карт** болж харагдана (уншигчийн хэлэнд тохирох хувилбар, байхгүй бол эх хувилбар), постонд **"Also in: EN · МН"** сэлгэгч гарна. `translation-key`-гүй пост энгийнээрээ ажиллана — юу ч өөрчлөгдөхгүй.
 
 ---
 
@@ -272,14 +375,15 @@ cover: resources/images/folder/cover.jpg
 
 ## Tags
 
-`tags` массивын утга бүр `/tags` графт зангилаа болж харагдана. `label`-ийн нэр автоматаар tag-д тооцогдоно. Том/жижиг үсэг ялгана — `Engineering` ба `engineering` нь өөр tag.
+`tags` массивын утга бүр `/tags` графт зангилаа болж харагдана. `label`-ийн нэр автоматаар tag-д тооцогдоно. Том/жижиг үсэг ялгана — `Engineering` ба `engineering` нь өөр tag гэдгийг санаарай, тул tag бичихдээ **kebab-case** (жижиг үсэг, үг хооронд зураас, ж: `mobile-app`, `data-structures`) ашигла.
 
 ---
 
 ## Контент нэмэх товч дараалал
 
-1. `content/templates/` доторх тохирох загварыг хуулж, зөв хавтаст байрлуул.
-2. Frontmatter бөглө — `title`, `date`, `label`, `description` заавал.
+1. `content/templates/` доторх тохирох загварыг хуулж, зөв хавтаст байрлуул (creation-д загвар алга — шууд гараар бич).
+2. Frontmatter бөглө — `title`, `description`, `publishedAt` (эсвэл `date`), `label` (index/single файлд) заавал.
 3. `draft: true`-аар эхэл.
 4. Нүүр зургийг `resources/images/`-д хийж, `cover` замыг зөв зааж өг.
-5. Бичиж дуусаад `draft: false` болго.
+5. Project-log бичиж байгаа бол `project-nickname`-аа creation-ий slug-тай тааруул.
+6. Бичиж дуусаад `draft: false` болго.

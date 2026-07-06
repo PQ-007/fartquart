@@ -2,11 +2,9 @@
 title: Хэрэв AI таныг танаас илүү ойлгож байвал...
 description: Хэрэв AI таныг танаас илүү ойлгож байвал таны амьдралын чухал шийдвэрийг хэн гаргах ёстой вэ?
 label: essay
-language:
-  - mn
 tags:
-  - AI
-  - Thought
+  - ai
+  - thought
 createdAt: 2026-04-09
 publishedAt: 2026-04-09
 updatedAt: 2026-07-04

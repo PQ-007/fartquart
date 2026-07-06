@@ -3,9 +3,9 @@ title: Sudoku Solver and Generator
 description: Судоку үүсгэж автоматаар бөглөх — backtracking болон генерацийн зарчим.
 category: software
 tags:
-  - Algorithm
-  - Backtracking
-  - GameDev
+  - algorithm
+  - backtracking
+  - game-dev
 createdAt: 2026-05-07
 publishedAt: 2026-05-07
 updatedAt:

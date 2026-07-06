@@ -6,7 +6,7 @@ updatedAt:
 label: book-note
 description: Дархлааны системийн бүтэц, T-cell, B-cell, антиген-антибоди механизмын тухай тэмдэглэл.
 tags:
-  - Biology
-  - ImmuneSystem
+  - biology
+  - immune-system
 cover: resources/images/book/immune-system.jpg
 ---

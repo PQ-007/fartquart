@@ -10,7 +10,6 @@ tags:
 createdAt: 2023-06-23
 publishedAt: 2023-06-23
 updatedAt:
-mainVideo: projects/chess/chess-main-video
 demo: https://chess-in-3d.herokuapp.com/
 repo: https://github.com/joshwrn/3d-chess
 ---

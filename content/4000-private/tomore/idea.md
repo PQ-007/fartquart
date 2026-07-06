@@ -5,7 +5,7 @@ label: project-idea
 description: 3D visual novel story rich game
 tags:
   - 3d
-  - GameDev
+  - game-dev
 cover: resources/images/folder/cover.gif
 draft: true
 ---
