@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1500-project-notes/bullet-point-log/00-devlog.md",
+                "file": "2000-book-notes/ゼロから作る-deep-learning-1/01-basic-python.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "00-devlog"
+              "title": "01-basic-python"
             }
           }
         ],
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "1500-project-notes/bullet-point-log/00-devlog.md",
+                "file": "2000-book-notes/ゼロから作る-deep-learning-1/01-basic-python.md",
                 "followCursor": true,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 00-devlog"
+              "title": "Outline of 01-basic-python"
             }
           },
           {
@@ -174,13 +174,46 @@
               "icon": "git-pull-request",
               "title": "Source Control"
             }
+          },
+          {
+            "id": "7d48d2e264376e55",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "2000-book-notes/ゼロから作る-deep-learning-1/01-basic-python.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for 01-basic-python"
+            }
+          },
+          {
+            "id": "47edc99c2532577c",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "2000-book-notes/ゼロから作る-deep-learning-1/01-basic-python.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from 01-basic-python"
+            }
           }
         ],
         "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 336.5
+    "width": 277.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -200,6 +233,11 @@
   },
   "active": "2658e34e1852a6c5",
   "lastOpenFiles": [
+    "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
+    "2000-book-notes/ゼロから作る-deep-learning-1/01-basic-python.md",
+    "2000-book-notes/ゼロから作る-deep-learning-1/04-neural-network-learning.md",
+    "2000-book-notes/ゼロから作る-deep-learning-1/03-neural-network.md",
+    "1500-project-notes/bullet-point-log/00-devlog.md",
     "1500-project-notes/ivo-log/00-devlog.md",
     "1500-project-notes/ivo-log/01-devlog.md",
     "1000-creations/bulet-point.md",
@@ -212,13 +250,9 @@
     "templates/README.md.tmp.30434.ea582a97652a",
     "templates/creation.md",
     "templates/creation.md.tmp.30434.86dd07aaf1e9",
-    "1500-project-notes/bullet-point-log/00-devlog.md",
-    "2000-book-notes/ゼロから作る Deep Learning 1/index.md",
-    "2000-book-notes/ゼロから作る Deep Learning 2/index.md",
-    "2000-book-notes/ゼロから作る Deep Learning 2/1章 ニューラルネットワークの復習.md",
-    "2000-book-notes/ゼロから作る Deep Learning 1/1章 Python 入門.md",
-    "2000-book-notes/ゼロから作る Deep Learning 1/2章 パーセプトロン.md",
-    "2000-book-notes/ゼロから作る Deep Learning 1/3章 ニューラルネットワーク.md",
+    "2000-book-notes/ゼロから作る-deep-learning-1/index.md",
+    "2000-book-notes/ゼロから作る-deep-learning-2/index.md",
+    "2000-book-notes/ゼロから作る-deep-learning-2/1章 ニューラルネットワークの復習.md",
     "vault-guide.md.tmp.30434.bcc9c15aefde",
     "1500-project-notes/ivo-log/index.md",
     "vault-guide.md",
