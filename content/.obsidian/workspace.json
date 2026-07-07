@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2000-book-notes/ゼロから作る-deep-learning-1/01-basic-python.md",
+                "file": "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01-basic-python"
+              "title": "02-perceptron"
             }
           }
         ],
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "2000-book-notes/ゼロから作る-deep-learning-1/01-basic-python.md",
+                "file": "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
                 "followCursor": true,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 01-basic-python"
+              "title": "Outline of 02-perceptron"
             }
           },
           {
@@ -181,7 +181,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "2000-book-notes/ゼロから作る-deep-learning-1/01-basic-python.md",
+                "file": "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -191,7 +191,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 01-basic-python"
+              "title": "Backlinks for 02-perceptron"
             }
           },
           {
@@ -200,12 +200,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "2000-book-notes/ゼロから作る-deep-learning-1/01-basic-python.md",
+                "file": "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 01-basic-python"
+              "title": "Outgoing links from 02-perceptron"
             }
           }
         ],
@@ -231,12 +231,12 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "2658e34e1852a6c5",
+  "active": "22ed60927aaa5682",
   "lastOpenFiles": [
+    "2000-book-notes/ゼロから作る-deep-learning-1/03-neural-network.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/01-basic-python.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/04-neural-network-learning.md",
-    "2000-book-notes/ゼロから作る-deep-learning-1/03-neural-network.md",
     "1500-project-notes/bullet-point-log/00-devlog.md",
     "1500-project-notes/ivo-log/00-devlog.md",
     "1500-project-notes/ivo-log/01-devlog.md",
