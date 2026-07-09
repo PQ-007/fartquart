@@ -80,6 +80,146 @@
   font-style: italic;
 }
 
+/* ── Hero decorations ──────────────────────────────────────────────────── */
+
+/* Faint dot grid + accent glow behind the hero text (left half only). */
+.heroDecor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(var(--color-primary-rgb), 0.14) 1px, transparent 1.5px);
+  background-size: 26px 26px;
+  mask-image: radial-gradient(ellipse 52% 52% at 26% 52%, black, transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse 52% 52% at 26% 52%, black, transparent 72%);
+}
+
+.heroDecor::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 42% 46% at 24% 54%, rgba(59, 130, 246, 0.09), transparent 70%);
+}
+
+.text .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(var(--color-primary-rgb), 0.55);
+  margin-bottom: 4px;
+}
+
+.text .eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.heroStats {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.text .heroStat {
+  font-size: 14px;
+  color: rgba(var(--color-primary-rgb), 0.5);
+}
+
+.heroStat:not(:first-child)::before {
+  content: "·";
+  margin-right: 12px;
+  color: rgba(var(--color-primary-rgb), 0.3);
+}
+
+.text .heroStatNum {
+  font-size: 16px;
+  font-weight: 700;
+  color: rgba(var(--color-primary-rgb), 0.92);
+  font-variant-numeric: tabular-nums;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+  pointer-events: auto;
+}
+
+.heroCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-background);
+  background: var(--color-primary);
+  border: 1px solid transparent;
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+}
+
+.heroCta:hover {
+  transform: translateY(-2px);
+  opacity: 0.92;
+}
+
+.heroCtaArrow {
+  transition: transform 0.2s ease;
+}
+
+.heroCta:hover .heroCtaArrow {
+  transform: translateX(3px);
+}
+
+.heroCtaGhost {
+  color: rgba(var(--color-primary-rgb), 0.8);
+  background: transparent;
+  border-color: rgba(var(--color-primary-rgb), 0.25);
+}
+
+.heroCtaGhost:hover {
+  background: rgba(var(--color-primary-rgb), 0.06);
+}
+
+.scrollCue {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  z-index: 2;
+  color: var(--color-primary);
+  opacity: 0.4;
+  pointer-events: none;
+  animation: scrollBob 2.4s ease-in-out infinite;
+}
+
+@keyframes scrollBob {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, 8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollCue {
+    animation: none;
+    transform: translate(-50%, 0);
+  }
+}
+
 .name {
   display: inline-flex;
   gap: 12px;
@@ -186,5 +326,10 @@
 @media (max-width: 768px) {
   .text {
     width: 100%;
+  }
+
+  /* the full name must fit the viewport */
+  .name h1 {
+    font-size: clamp(38px, 11.5vw, 70px);
   }
 }

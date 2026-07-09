@@ -467,10 +467,9 @@ export const getAllTagsUnified = (): TagCount[] => {
     .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag))
 }
 
-// ── Graph data for the Obsidian-style node graph ───────────────────────────
-// Mirrors Obsidian's graph view: notes connect to each other via `[[wikilinks]]`
-// in their bodies, to their tags, and chaptered notes cluster around their
-// index. Hub nodes anchor the three site sections.
+// ── Vault link graph (wikilinks) ─────────────────────────────────────────────
+// One walk over every published document powers the Obsidian-style graph,
+// in-content wikilink rendering, and per-page backlinks.
 
 const NOTE_LABELS: readonly string[] = ["book-note", "lesson-note"]
 
@@ -490,92 +489,150 @@ const extractWikilinkTargets = (content: string): string[] => {
   return targets
 }
 
+type VaultDoc = {
+  id: string
+  type: GraphNode["type"]
+  title: string
+  href: string
+  basename: string
+  tags: string[]
+  hub?: string
+  parentId?: string
+  content: string
+}
+
+/**
+ * Every published document as a flat list: blog posts, note indexes, their
+ * chapters, creations (with their project log merged in — the log's index
+ * renders on the creation page), and project-log chapters.
+ * `collapse` picks one language variant per translation group.
+ */
+const getVaultDocs = (locale: string = defaultLocale, collapse = true): VaultDoc[] => {
+  const all = getAllBlogPosts()
+  const blogs = collapse ? collapseTranslations(all, locale) : all
+  const docs: VaultDoc[] = []
+
+  for (const p of blogs) {
+    const isNote = NOTE_LABELS.includes(p.label)
+    const id = `${isNote ? "note" : "blog"}:${p.slug}`
+    docs.push({
+      id,
+      type: isNote ? "note" : "blog",
+      title: p.title,
+      href: `${isNote ? "/notes" : "/blog"}/${encodeURIComponent(p.slug)}`,
+      basename: p.slug,
+      tags: [p.label, ...p.tags],
+      hub: isNote ? "hub:notes" : "hub:blog",
+      content: getBlogPost(p.slug)?.content ?? "",
+    })
+    if (!isNote) continue
+    for (const ch of getBookNoteChapters(p.slug)) {
+      const chapter = getBookChapter(p.slug, ch.slug)
+      docs.push({
+        id: `chapter:${p.slug}/${ch.slug}`,
+        type: "chapter",
+        title: ch.title,
+        href: `/notes/${encodeURIComponent(p.slug)}/${encodeURIComponent(ch.slug)}`,
+        basename: ch.slug,
+        tags: chapter?.tags ?? [],
+        parentId: id,
+        content: chapter?.content ?? "",
+      })
+    }
+  }
+
+  for (const c of getAllCreations()) {
+    const id = `creation:${c.slug}`
+    const log = getProjectLog(c.slug)
+    docs.push({
+      id,
+      type: "creation",
+      title: c.title,
+      href: `/creations/${encodeURIComponent(c.slug)}`,
+      basename: c.slug,
+      tags: creationTagsOf(c),
+      hub: "hub:creations",
+      content: [getCreation(c.slug)?.content, log?.content].filter(Boolean).join("\n"),
+    })
+    for (const ch of getProjectLogChapters(c.slug)) {
+      const chapter = getProjectLogChapter(c.slug, ch.slug)
+      docs.push({
+        id: `chapter:${c.slug}/${ch.slug}`,
+        type: "chapter",
+        title: ch.title,
+        href: `/creations/${encodeURIComponent(c.slug)}/log/${encodeURIComponent(ch.slug)}`,
+        basename: ch.slug,
+        tags: chapter?.tags ?? [],
+        parentId: id,
+        content: chapter?.content ?? "",
+      })
+    }
+  }
+
+  return docs
+}
+
+/** File basename (lowercased) → link target, for rendering `[[wikilinks]]`. */
+export const getWikilinkIndex = (): Map<string, { href: string; title: string }> => {
+  const map = new Map<string, { href: string; title: string }>()
+  for (const d of getVaultDocs(defaultLocale, false)) {
+    map.set(d.basename.toLowerCase(), { href: d.href, title: d.title })
+  }
+  return map
+}
+
+export type Backlink = { title: string; href: string; type: GraphNode["type"] }
+
+/**
+ * Documents whose body wikilinks point at `basename` (a page's own slug /
+ * chapter slug) — Obsidian's "linked mentions".
+ */
+export const getBacklinks = (basename: string): Backlink[] => {
+  const target = basename.trim().toLowerCase()
+  return getVaultDocs(defaultLocale, false)
+    .filter(
+      (d) =>
+        d.basename.toLowerCase() !== target &&
+        extractWikilinkTargets(d.content).includes(target),
+    )
+    .map((d) => ({ title: d.title, href: d.href, type: d.type }))
+}
+
+// ── Graph data for the Obsidian-style node graph ───────────────────────────
+// Mirrors Obsidian's graph view: notes connect to each other via `[[wikilinks]]`
+// in their bodies, to their tags, and chaptered notes cluster around their
+// index. Hub nodes anchor the three site sections.
+
 export const getGraphData = (locale: string = defaultLocale): GraphData => {
-  const blogs = collapseTranslations(getAllBlogPosts(), locale)
-  const creations = getAllCreations()
+  const docs = getVaultDocs(locale)
 
   const nodes: GraphNode[] = [
     { id: "hub:blog", type: "hub", label: "Blog", href: "/blog" },
     { id: "hub:notes", type: "hub", label: "Notes", href: "/notes" },
     { id: "hub:creations", type: "hub", label: "Creations", href: "/creations" },
+    ...docs.map((d) => ({ id: d.id, type: d.type, label: d.title, href: d.href })),
   ]
   const edges: GraphEdge[] = []
-  // file basename (lowercased) → node id, for wikilink resolution
-  const byBasename = new Map<string, string>()
-  // node id → wikilink targets found in its body
-  const outLinks = new Map<string, string[]>()
+  const byBasename = new Map(docs.map((d) => [d.basename.toLowerCase(), d.id]))
   const tagSet = new Set<string>()
   // chapter tag links are added only for tags that already exist on
   // posts/creations, so every tag node's /tags page is non-empty
   const pendingTagEdges: { source: string; tag: string }[] = []
 
-  const addNote = (
-    id: string,
-    type: GraphNode["type"],
-    label: string,
-    href: string,
-    basename: string,
-    content: string | undefined,
-  ) => {
-    nodes.push({ id, type, label, href })
-    byBasename.set(basename.toLowerCase(), id)
-    if (content) outLinks.set(id, extractWikilinkTargets(content))
-  }
-
-  for (const p of blogs) {
-    const isNote = NOTE_LABELS.includes(p.label)
-    const id = `${isNote ? "note" : "blog"}:${p.slug}`
-    const href = `${isNote ? "/notes" : "/blog"}/${encodeURIComponent(p.slug)}`
-    addNote(id, isNote ? "note" : "blog", p.title, href, p.slug, getBlogPost(p.slug)?.content)
-    edges.push({ source: isNote ? "hub:notes" : "hub:blog", target: id })
-    for (const t of [p.label, ...p.tags]) {
-      tagSet.add(t)
-      edges.push({ source: id, target: `tag:${t}` })
+  for (const d of docs) {
+    if (d.hub) edges.push({ source: d.hub, target: d.id })
+    if (d.parentId) edges.push({ source: d.parentId, target: d.id })
+    for (const t of d.tags) {
+      if (d.type === "chapter") {
+        pendingTagEdges.push({ source: d.id, tag: t })
+      } else {
+        tagSet.add(t)
+        edges.push({ source: d.id, target: `tag:${t}` })
+      }
     }
-
-    if (!isNote) continue
-    for (const ch of getBookNoteChapters(p.slug)) {
-      const chapter = getBookChapter(p.slug, ch.slug)
-      const chId = `chapter:${p.slug}/${ch.slug}`
-      addNote(
-        chId,
-        "chapter",
-        ch.title,
-        `/notes/${encodeURIComponent(p.slug)}/${encodeURIComponent(ch.slug)}`,
-        ch.slug,
-        chapter?.content,
-      )
-      edges.push({ source: id, target: chId })
-      for (const t of chapter?.tags ?? []) pendingTagEdges.push({ source: chId, tag: t })
-    }
-  }
-
-  for (const c of creations) {
-    const id = `creation:${c.slug}`
-    const log = getProjectLog(c.slug)
-    // the project log's index renders on the creation page, so its links count
-    // as the creation's
-    const content = [getCreation(c.slug)?.content, log?.content].filter(Boolean).join("\n")
-    addNote(id, "creation", c.title, `/creations/${encodeURIComponent(c.slug)}`, c.slug, content)
-    edges.push({ source: "hub:creations", target: id })
-    for (const t of creationTagsOf(c)) {
-      tagSet.add(t)
-      edges.push({ source: id, target: `tag:${t}` })
-    }
-
-    for (const ch of getProjectLogChapters(c.slug)) {
-      const chapter = getProjectLogChapter(c.slug, ch.slug)
-      const chId = `chapter:${c.slug}/${ch.slug}`
-      addNote(
-        chId,
-        "chapter",
-        ch.title,
-        `/creations/${encodeURIComponent(c.slug)}/log/${encodeURIComponent(ch.slug)}`,
-        ch.slug,
-        chapter?.content,
-      )
-      edges.push({ source: id, target: chId })
-      for (const t of chapter?.tags ?? []) pendingTagEdges.push({ source: chId, tag: t })
+    for (const basename of extractWikilinkTargets(d.content)) {
+      const target = byBasename.get(basename)
+      if (target && target !== d.id) edges.push({ source: d.id, target })
     }
   }
 
@@ -589,13 +646,6 @@ export const getGraphData = (locale: string = defaultLocale): GraphData => {
   }
   for (const { source, tag } of pendingTagEdges) {
     if (tagSet.has(tag)) edges.push({ source, target: `tag:${tag}` })
-  }
-
-  for (const [source, targets] of outLinks) {
-    for (const basename of targets) {
-      const target = byBasename.get(basename)
-      if (target && target !== source) edges.push({ source, target })
-    }
   }
 
   // Dedupe (the graph is undirected — a↔b duplicates collapse) and drop edges

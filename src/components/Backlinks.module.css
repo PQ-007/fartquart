@@ -1,0 +1,113 @@
+.outer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0 var(--main-padding-sides) 48px;
+  background: var(--color-background);
+}
+
+.inner {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(var(--color-primary-rgb), 0.85);
+  margin: 0 0 14px;
+  font-family: var(--font-neue), sans-serif;
+}
+
+.count {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(var(--color-primary-rgb), 0.45);
+  background: rgba(var(--color-primary-rgb), 0.07);
+  border-radius: 999px;
+  padding: 1px 8px;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(var(--color-primary-rgb), 0.08);
+  background: rgba(var(--color-primary-rgb), 0.03);
+  text-decoration: none;
+  font-family: var(--font-neue), sans-serif;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.item:hover {
+  background: rgba(var(--color-primary-rgb), 0.07);
+  border-color: rgba(var(--color-primary-rgb), 0.16);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot[data-type="blog"] {
+  background: rgba(226, 232, 240, 0.92);
+}
+
+.dot[data-type="note"] {
+  background: #059669;
+}
+
+.dot[data-type="chapter"] {
+  background: rgba(203, 213, 225, 0.55);
+}
+
+.dot[data-type="creation"] {
+  background: #d97706;
+}
+
+[data-theme="light"] .dot[data-type="blog"] {
+  background: rgba(63, 63, 70, 0.9);
+}
+
+[data-theme="light"] .dot[data-type="note"] {
+  background: #047857;
+}
+
+[data-theme="light"] .dot[data-type="chapter"] {
+  background: rgba(82, 82, 82, 0.55);
+}
+
+[data-theme="light"] .dot[data-type="creation"] {
+  background: #b45309;
+}
+
+.title {
+  font-size: 14px;
+  color: rgba(var(--color-primary-rgb), 0.85);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.type {
+  margin-left: auto;
+  font-size: 11px;
+  color: rgba(var(--color-primary-rgb), 0.4);
+  flex-shrink: 0;
+}

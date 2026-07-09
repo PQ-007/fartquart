@@ -42,6 +42,7 @@ const dict = {
       searchPlaceholder: "Search posts, notes, creations…",
       searchEmpty: "No results",
       searchHint: "↑↓ to navigate · ↵ to open · esc to close",
+      linkedMentions: "Linked Mentions",
     },
     blog: {
       "book-review": "Book Review",
@@ -55,7 +56,12 @@ const dict = {
     },
     home: {
       intro:
-        "Hi! This is a personal space for creations, writings, and things worth remembering.",
+        "There is no magic, just abstraction layers built on top of one another...",
+      eyebrow: "welcome",
+      statNotes: "notes",
+      statLinks: "links",
+      statTags: "tags",
+      exploreGraph: "Explore the graph",
     },
     about: {
       greeting: "Hello,",
@@ -126,6 +132,7 @@ const dict = {
       searchPlaceholder: "Пост, тэмдэглэл, бүтээл хайх…",
       searchEmpty: "Үр дүн алга",
       searchHint: "↑↓ сонгох · ↵ нээх · esc хаах",
+      linkedMentions: "Холбосон тэмдэглэлүүд",
     },
     blog: {
       "book-review": "Номын сэтгэгдэл",
@@ -140,6 +147,11 @@ const dict = {
     home: {
       intro:
         "There is no magic, just abstraction layers built on top of one another...",
+      eyebrow: "тавтай морил",
+      statNotes: "тэмдэглэл",
+      statLinks: "холбоос",
+      statTags: "таг",
+      exploreGraph: "Граф үзэх",
     },
     about: {
       greeting: "Сайн уу,",
@@ -210,6 +222,7 @@ const dict = {
       searchPlaceholder: "記事・ノート・制作物を検索…",
       searchEmpty: "結果なし",
       searchHint: "↑↓ で移動 · ↵ で開く · esc で閉じる",
+      linkedMentions: "リンク元",
     },
     blog: {
       "book-review": "書評",
@@ -223,7 +236,12 @@ const dict = {
     },
     home: {
       intro:
-        "この空間は、制作物・記事・記録をまとめた個人サイトです。",
+        "There is no magic, just abstraction layers built on top of one another...",
+      eyebrow: "ようこそ",
+      statNotes: "ノート",
+      statLinks: "リンク",
+      statTags: "タグ",
+      exploreGraph: "グラフを見る",
     },
     about: {
       greeting: "こんにちは、",

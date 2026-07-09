@@ -2,6 +2,7 @@ import remarkMath from "remark-math"
 import rehypeKatex from "rehype-katex"
 import type { MDXRemoteProps } from "next-mdx-remote/rsc"
 import { resolveResourceUrl } from "./resources"
+import { getWikilinkIndex } from "./content"
 
 export const mdxOptions: MDXRemoteProps["options"] = {
   blockJS: false,
@@ -67,6 +68,35 @@ const processEmbeds = (content: string): string =>
     return `![${alt}](${url})`
   })
 
-/** Normalize Obsidian-flavored Markdown (embeds, footnotes) for the MDX pipeline. */
+const LINK_MEDIA_EXT = /\.(png|jpe?g|gif|webp|avif|svg|mp4|webm|mov|m4v|mp3|wav|pdf|excalidraw)$/i
+
+/**
+ * Render Obsidian note links (`[[note]]`, `[[note|alias]]`, `[[note#heading]]`)
+ * as internal Markdown links, resolved by file basename like Obsidian does.
+ * Media targets link to their /resources URL; unresolved targets degrade to
+ * plain text (Obsidian's grayed-out unresolved link).
+ */
+const processWikilinks = (content: string): string => {
+  if (!content.includes("[[")) return content
+  const index = getWikilinkIndex()
+  return content.replace(WIKILINK_RE, (full, inner: string) => {
+    const [linkPart, ...aliasParts] = inner.split("|")
+    const target = linkPart.split("#")[0].trim()
+    if (!target) return full
+    const text = (aliasParts.join("|").trim() || target).replace(/([[\]])/g, "\\$1")
+
+    if (LINK_MEDIA_EXT.test(target)) {
+      const url = resolveResourceUrl(target)
+      return url ? `[${text}](${url})` : text
+    }
+    const entry = index.get(target.split("/").pop()!.trim().toLowerCase())
+    return entry ? `[${text}](${entry.href})` : text
+  })
+}
+
+// `(?<!!)` skips embeds — processEmbeds must have consumed them already.
+const WIKILINK_RE = /(?<!!)\[\[([^\]]+)\]\]/g
+
+/** Normalize Obsidian-flavored Markdown (embeds, note links, footnotes) for the MDX pipeline. */
 export const sanitizeMdx = (content: string): string =>
-  processFootnotes(processEmbeds(content))
+  processFootnotes(processWikilinks(processEmbeds(content)))

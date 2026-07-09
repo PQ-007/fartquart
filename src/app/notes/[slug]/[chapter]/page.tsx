@@ -9,7 +9,8 @@ import { mdxComponents } from "@/components/post/mdx-components"
 import { extractChapters } from "@/lib/toc"
 import { ChapterSidebar } from "@/components/post/ChapterSidebar"
 import { MusicPlayer } from "@/components/MusicPlayer"
-import { getAllBlogPosts, getBookChapter, getBookNoteChapters } from "@/lib/content"
+import { getAllBlogPosts, getBacklinks, getBookChapter, getBookNoteChapters } from "@/lib/content"
+import { Backlinks } from "@/components/Backlinks"
 import { mdxOptions, sanitizeMdx } from "@/lib/mdx-options"
 import { absoluteUrl, SITE_NAME, DEFAULT_OG_IMAGE } from "@/lib/site"
 import { coverUrl, isGif } from "@/lib/url"
@@ -164,6 +165,7 @@ export default async function BookChapterPage({
           />
         </main>
       </div>
+      <Backlinks items={getBacklinks(chapterSlug)} />
       <Footer />
     </>
   )

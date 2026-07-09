@@ -12,11 +12,13 @@ import type { Blog } from "@/lib/content"
 import {
   formatDate,
   getAllCreations,
+  getBacklinks,
   getCreation,
   getProjectLog,
   getProjectLogChapter,
   getProjectLogChapters,
 } from "@/lib/content"
+import { Backlinks } from "@/components/Backlinks"
 import { coverUrl } from "@/lib/url"
 import { buildPostMetadata } from "@/lib/seo"
 
@@ -125,6 +127,7 @@ export default async function CreationPage({
           />
         </main>
       </div>
+      <Backlinks items={getBacklinks(slug)} />
       <Footer />
     </>
   )
