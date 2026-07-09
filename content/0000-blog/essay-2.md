@@ -4,7 +4,7 @@ createdAt: 2026-07-09
 publishedAt: 2026-07-09
 updatedAt:
 label: essay
-description: хүсвэл унш
+description: хүсвэл унш, жоохон deterministic байх шүү
 tags:
   - over-automation
 cover: https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjVkd3g1dmNsdW54ajN6Y2kwd3hqZWVnbmg1dHNwenExbTdubGVjMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MCiOE6DBDNkjcA3xTj/giphy.gif
