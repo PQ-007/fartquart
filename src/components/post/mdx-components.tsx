@@ -1,5 +1,7 @@
 import type { ComponentPropsWithoutRef, ReactNode } from "react"
+import Image from "next/image"
 import type { MDXComponents } from "mdx/types"
+import { resourceDimensionsOf } from "@/lib/resources"
 import { CodeBlock } from "./CodeBlock"
 import { CodeSnippet } from "./CodeSnippet"
 import { CloudImage } from "./CloudImage"
@@ -45,6 +47,29 @@ const ExternalLink = ({
   </a>
 )
 
+// Vault images carry intrinsic dimensions in the resources manifest, so they
+// can go through next/image (responsive srcset, WebP, lazy loading) with no
+// layout shift. Anything else — remote URLs, images the manifest missed —
+// falls back to a plain lazy <img>. GIFs stay unoptimized to keep animating.
+const MdxImage = ({ src, alt, ...props }: ComponentPropsWithoutRef<"img">) => {
+  const dims = typeof src === "string" ? resourceDimensionsOf(src) : null
+  if (!dims) {
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img src={src as string} alt={alt ?? ""} loading="lazy" decoding="async" {...props} />
+  }
+  const [width, height] = dims
+  return (
+    <Image
+      src={src as string}
+      alt={alt ?? ""}
+      width={width}
+      height={height}
+      sizes="(max-width: 832px) 100vw, 800px"
+      unoptimized={/\.(gif)$/i.test(src as string)}
+    />
+  )
+}
+
 const Video = ({ src }: { src: string }) => (
   <video
     controls
@@ -72,6 +97,7 @@ export const mdxComponents: MDXComponents = {
   h2: heading("h2"),
   h3: heading("h3"),
   a: ExternalLink,
+  img: MdxImage,
   pre: CodeBlock,
   CodeSnippet,
   CloudImage,

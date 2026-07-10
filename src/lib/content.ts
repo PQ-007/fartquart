@@ -1,5 +1,6 @@
 import fs from "fs"
 import path from "path"
+import { cache } from "react"
 import matter from "gray-matter"
 import { defaultLocale } from "./i18n"
 import { localizePost, collapseTranslations } from "./translations"
@@ -108,6 +109,20 @@ export type GraphData = { nodes: GraphNode[]; edges: GraphEdge[] }
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
+// The vault ships inside the deployment, so parsed content is immutable for the
+// life of a production process — memoize every fs walk for the process lifetime
+// (this spans all pages of a `next build`, where the walkers are hottest). In
+// dev, React's cache() only dedupes within one render pass, so vault edits
+// still show up on the next refresh.
+const memo = <A extends unknown[], R>(fn: (...args: A) => R): ((...args: A) => R) => {
+  if (process.env.NODE_ENV !== "production") return cache(fn)
+  const store = new Map<string, R>()
+  return (...args: A) => {
+    const key = JSON.stringify(args)
+    if (!store.has(key)) store.set(key, fn(...args))
+    return store.get(key) as R
+  }
+}
 
 const normalizeDate = (raw: unknown): string => {
   if (raw instanceof Date) return raw.toISOString()
@@ -188,7 +203,7 @@ const toBlogMeta = (slug: string, data: Record<string, unknown>, content = ""): 
       : undefined,
 })
 
-export const getAllBlogPosts = (): BlogMeta[] =>
+export const getAllBlogPosts = memo((): BlogMeta[] =>
   ALL_BLOG_DIRS.flatMap((dir) =>
     readDir(dir).map((f) => {
       const slug = fileToSlug(f)
@@ -197,9 +212,9 @@ export const getAllBlogPosts = (): BlogMeta[] =>
     })
   )
   .filter((p) => !p.draft)
-  .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt))
+  .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt)))
 
-export const getBlogPost = (slug: string): Blog | null => {
+export const getBlogPost = memo((slug: string): Blog | null => {
   for (const dir of ALL_BLOG_DIRS) {
     for (const ext of [".md", ".mdx"]) {
       const file = path.join(dir, `${slug}${ext}`)
@@ -215,7 +230,7 @@ export const getBlogPost = (slug: string): Blog | null => {
     }
   }
   return null
-}
+})
 
 export const getBlogPostsByTag = (tag: string): BlogMeta[] =>
   getAllBlogPosts().filter((p) => p.label === tag || p.tags.includes(tag))
@@ -272,7 +287,7 @@ const findNoteDir = (bookSlug: string): string | null => {
   return null
 }
 
-export const getBookNoteChapters = (bookSlug: string): { slug: string; title: string }[] => {
+export const getBookNoteChapters = memo((bookSlug: string): { slug: string; title: string }[] => {
   const dir = findNoteDir(bookSlug)
   if (!dir) return []
   return fs
@@ -285,16 +300,16 @@ export const getBookNoteChapters = (bookSlug: string): { slug: string; title: st
       if (data.draft) return []
       return [{ slug: chSlug, title: String(data.title ?? chSlug) }]
     })
-}
+})
 
-export const getBookChapter = (bookSlug: string, chapterSlug: string): Blog | null => {
+export const getBookChapter = memo((bookSlug: string, chapterSlug: string): Blog | null => {
   const dir = findNoteDir(bookSlug)
   if (!dir) return null
   const file = path.join(dir, `${chapterSlug}.md`)
   if (!fs.existsSync(file)) return null
   const { data, content } = matter(fs.readFileSync(file, "utf8"))
   return { ...toBlogMeta(chapterSlug, data, content), content }
-}
+})
 
 // ── Creations ──────────────────────────────────────────────────────────────
 
@@ -318,7 +333,7 @@ const toCreationMeta = (slug: string, data: Record<string, unknown>): CreationMe
 const creationCategoryOf = (c: CreationMeta): CreationMeta["category"] =>
   c.category ?? getProjectLog(c.slug)?.category
 
-export const getAllCreations = (): CreationMeta[] =>
+export const getAllCreations = memo((): CreationMeta[] =>
   readDir(CREATIONS_DIR)
     .map((f) => {
       const slug = fileToSlug(f)
@@ -327,9 +342,9 @@ export const getAllCreations = (): CreationMeta[] =>
     })
     .filter((c) => !c.draft)
     .map((c) => ({ ...c, category: creationCategoryOf(c) }))
-    .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt))
+    .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt)))
 
-export const getCreation = (slug: string): Creation | null => {
+export const getCreation = memo((slug: string): Creation | null => {
   for (const ext of [".md", ".mdx"]) {
     const file = path.join(CREATIONS_DIR, `${slug}${ext}`)
     if (fs.existsSync(file)) {
@@ -339,7 +354,7 @@ export const getCreation = (slug: string): Creation | null => {
     }
   }
   return null
-}
+})
 
 export const getCreationsByTag = (tag: string): CreationMeta[] =>
   getAllCreations().filter((c) => creationTagsOf(c).includes(tag))
@@ -349,7 +364,7 @@ export const getCreationsByTag = (tag: string): CreationMeta[] =>
 // a creation via a `project-nickname` field matching the creation's slug —
 // it lives outside ALL_BLOG_DIRS so it never appears on /blog directly.
 
-const findProjectLogDir = (creationSlug: string): string | null => {
+const findProjectLogDir = memo((creationSlug: string): string | null => {
   if (!fs.existsSync(PROJECT_NOTES_DIR)) return null
   const dirs = fs
     .readdirSync(PROJECT_NOTES_DIR, { withFileTypes: true })
@@ -364,17 +379,17 @@ const findProjectLogDir = (creationSlug: string): string | null => {
     }
   }
   return null
-}
+})
 
-export const getProjectLog = (creationSlug: string): Blog | null => {
+export const getProjectLog = memo((creationSlug: string): Blog | null => {
   const dir = findProjectLogDir(creationSlug)
   if (!dir) return null
   const { data, content } = matter(fs.readFileSync(path.join(dir, "index.md"), "utf8"))
   if (data.draft) return null
   return { ...toBlogMeta(path.basename(dir), data, content), content }
-}
+})
 
-export const getProjectLogChapters = (creationSlug: string): { slug: string; title: string }[] => {
+export const getProjectLogChapters = memo((creationSlug: string): { slug: string; title: string }[] => {
   const dir = findProjectLogDir(creationSlug)
   if (!dir) return []
   return fs
@@ -387,16 +402,16 @@ export const getProjectLogChapters = (creationSlug: string): { slug: string; tit
       if (data.draft) return []
       return [{ slug: chSlug, title: String(data.title ?? chSlug) }]
     })
-}
+})
 
-export const getProjectLogChapter = (creationSlug: string, chapterSlug: string): Blog | null => {
+export const getProjectLogChapter = memo((creationSlug: string, chapterSlug: string): Blog | null => {
   const dir = findProjectLogDir(creationSlug)
   if (!dir) return null
   const file = path.join(dir, `${chapterSlug}.md`)
   if (!fs.existsSync(file)) return null
   const { data, content } = matter(fs.readFileSync(file, "utf8"))
   return { ...toBlogMeta(chapterSlug, data, content), content }
-}
+})
 
 /** A creation's own tags plus its attached project-log's tags, if any. */
 const creationTagsOf = (c: CreationMeta): string[] => {
@@ -507,7 +522,7 @@ type VaultDoc = {
  * renders on the creation page), and project-log chapters.
  * `collapse` picks one language variant per translation group.
  */
-const getVaultDocs = (locale: string = defaultLocale, collapse = true): VaultDoc[] => {
+const getVaultDocs = memo((locale: string = defaultLocale, collapse = true): VaultDoc[] => {
   const all = getAllBlogPosts()
   const blogs = collapse ? collapseTranslations(all, locale) : all
   const docs: VaultDoc[] = []
@@ -570,16 +585,16 @@ const getVaultDocs = (locale: string = defaultLocale, collapse = true): VaultDoc
   }
 
   return docs
-}
+})
 
 /** File basename (lowercased) → link target, for rendering `[[wikilinks]]`. */
-export const getWikilinkIndex = (): Map<string, { href: string; title: string }> => {
+export const getWikilinkIndex = memo((): Map<string, { href: string; title: string }> => {
   const map = new Map<string, { href: string; title: string }>()
   for (const d of getVaultDocs(defaultLocale, false)) {
     map.set(d.basename.toLowerCase(), { href: d.href, title: d.title })
   }
   return map
-}
+})
 
 export type Backlink = { title: string; href: string; type: GraphNode["type"] }
 
@@ -587,7 +602,7 @@ export type Backlink = { title: string; href: string; type: GraphNode["type"] }
  * Documents whose body wikilinks point at `basename` (a page's own slug /
  * chapter slug) — Obsidian's "linked mentions".
  */
-export const getBacklinks = (basename: string): Backlink[] => {
+export const getBacklinks = memo((basename: string): Backlink[] => {
   const target = basename.trim().toLowerCase()
   return getVaultDocs(defaultLocale, false)
     .filter(
@@ -596,14 +611,14 @@ export const getBacklinks = (basename: string): Backlink[] => {
         extractWikilinkTargets(d.content).includes(target),
     )
     .map((d) => ({ title: d.title, href: d.href, type: d.type }))
-}
+})
 
 // ── Graph data for the Obsidian-style node graph ───────────────────────────
 // Mirrors Obsidian's graph view: notes connect to each other via `[[wikilinks]]`
 // in their bodies, to their tags, and chaptered notes cluster around their
 // index. Hub nodes anchor the three site sections.
 
-export const getGraphData = (locale: string = defaultLocale): GraphData => {
+export const getGraphData = memo((locale: string = defaultLocale): GraphData => {
   const docs = getVaultDocs(locale)
 
   const nodes: GraphNode[] = [
@@ -661,4 +676,35 @@ export const getGraphData = (locale: string = defaultLocale): GraphData => {
   })
 
   return { nodes, edges: uniqueEdges }
+})
+
+// ── Local graph (per-page neighborhood) ──────────────────────────────────────
+
+/** Graph node ids as `getVaultDocs` assigns them, for pages to locate themselves. */
+export const vaultNodeId = {
+  post: (p: BlogMeta): string =>
+    `${NOTE_LABELS.includes(p.label) ? "note" : "blog"}:${p.slug}`,
+  creation: (slug: string): string => `creation:${slug}`,
+  chapter: (parentSlug: string, chapterSlug: string): string =>
+    `chapter:${parentSlug}/${chapterSlug}`,
 }
+
+/**
+ * Obsidian-style local graph: `id`, its direct neighbors (via wikilinks, tags,
+ * and chapter structure), and every edge among them. Hub nodes are dropped —
+ * they'd sit at the center of every local graph and say nothing.
+ */
+export const getLocalGraph = memo((id: string): GraphData => {
+  const { nodes, edges } = getGraphData()
+  const keep = new Set([id])
+  for (const e of edges) {
+    if (e.source === id) keep.add(e.target)
+    else if (e.target === id) keep.add(e.source)
+  }
+  const localNodes = nodes.filter((n) => keep.has(n.id) && n.type !== "hub")
+  const ids = new Set(localNodes.map((n) => n.id))
+  return {
+    nodes: localNodes,
+    edges: edges.filter((e) => ids.has(e.source) && ids.has(e.target)),
+  }
+})

@@ -14,11 +14,14 @@ import {
   getAllCreations,
   getBacklinks,
   getCreation,
+  getLocalGraph,
   getProjectLog,
   getProjectLogChapter,
   getProjectLogChapters,
+  vaultNodeId,
 } from "@/lib/content"
 import { Backlinks } from "@/components/Backlinks"
+import { LocalGraph } from "@/components/LocalGraph"
 import { coverUrl } from "@/lib/url"
 import { buildPostMetadata } from "@/lib/seo"
 
@@ -127,6 +130,7 @@ export default async function CreationPage({
           />
         </main>
       </div>
+      <LocalGraph data={getLocalGraph(vaultNodeId.creation(slug))} currentId={vaultNodeId.creation(slug)} />
       <Backlinks items={getBacklinks(slug)} />
       <Footer />
     </>

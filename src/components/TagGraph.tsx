@@ -65,10 +65,13 @@ const truncate = (s: string) => (s.length > LABEL_MAX ? `${s.slice(0, LABEL_MAX 
 export const TagGraph = ({
   data,
   hideOverlay = false,
+  currentId,
   className,
 }: {
   data: GraphData
   hideOverlay?: boolean
+  /** Highlight this node as "you are here" (used by the per-page local graph). */
+  currentId?: string
   className?: string
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -154,6 +157,7 @@ export const TagGraph = ({
 
     const simNodes: SimNode[] = data.nodes.map((n) => ({ ...n, r: radiusOf(n) }))
     const simEdges: SimEdge[] = data.edges.map((e) => ({ ...e }))
+    const current = currentId ? (simNodes.find((n) => n.id === currentId) ?? null) : null
 
     // ── Forces ──────────────────────────────────────────────────────────────
     const cx = w / 2
@@ -266,8 +270,9 @@ export const TagGraph = ({
       ctx.setTransform(dpr * zoom, 0, 0, dpr * zoom, dpr * panX, dpr * panY)
 
       // Labels fade in as you zoom, Obsidian-style. The embedded home graph is
-      // decorative, so it keeps labels hidden until hovered or zoomed further.
-      const labelFadeStart = hideOverlay ? 1.05 : 0.7
+      // decorative, so it keeps labels hidden until hovered or zoomed further —
+      // unless a current node is set (local graph), where labels are navigation.
+      const labelFadeStart = hideOverlay && !current ? 1.05 : 0.7
       const zoomLabelAlpha = Math.min(Math.max((zoom - labelFadeStart) / 0.55, 0), 1)
       const inFocus = (id: string) => !focusSet || focusSet.has(id)
 
@@ -297,10 +302,20 @@ export const TagGraph = ({
         if (n.x == null || n.y == null) continue
         const [color, baseAlpha] = colors.node[n.type]
         ctx.globalAlpha = inFocus(n.id) ? baseAlpha : baseAlpha * lerp(1, 0.35, fade)
-        ctx.fillStyle = n === hovered ? colors.accent : color
+        ctx.fillStyle = n === hovered || n === current ? colors.accent : color
         ctx.beginPath()
         ctx.arc(n.x, n.y, n.r, 0, 2 * Math.PI)
         ctx.fill()
+      }
+
+      // "You are here" ring on the current node
+      if (current && current.x != null && current.y != null) {
+        ctx.globalAlpha = 0.9
+        ctx.strokeStyle = colors.accent
+        ctx.lineWidth = 1.5 / zoom
+        ctx.beginPath()
+        ctx.arc(current.x, current.y, current.r + 3 / zoom, 0, 2 * Math.PI)
+        ctx.stroke()
       }
 
       // Hover ring
@@ -322,12 +337,13 @@ export const TagGraph = ({
         const isHub = n.type === "hub"
         const focused = hovered !== null && focusSet !== null && focusSet.has(n.id)
         let alpha = isHub ? Math.max(zoomLabelAlpha, 0.85) : zoomLabelAlpha * 0.8
+        if (n === current) alpha = Math.max(alpha, 0.9)
         if (hovered) {
           alpha = focused ? Math.max(alpha, fade) : alpha * lerp(1, 0.3, fade)
         }
         if (alpha < 0.02) continue
         ctx.globalAlpha = alpha
-        ctx.font = `${isHub || n === hovered ? "600 " : ""}${fontSize}px ${fontFamily}`
+        ctx.font = `${isHub || n === hovered || n === current ? "600 " : ""}${fontSize}px ${fontFamily}`
         ctx.fillStyle = n.type === "tag" ? colors.accent : colors.label
         ctx.fillText(truncate(n.label), n.x, n.y + n.r + fontSize + 3 / zoom)
       }
@@ -565,7 +581,7 @@ export const TagGraph = ({
       if (raf) cancelAnimationFrame(raf)
       sim.stop()
     }
-  }, [data, router, hideOverlay])
+  }, [data, router, hideOverlay, currentId])
 
   useEffect(() => buildGraph(), [buildGraph])
 

@@ -98,19 +98,50 @@ export const Background = () => {
 
     let frame = 0
     const start = performance.now()
-    const render = () => {
+    const renderAt = (time: number) => {
       const light =
         document.documentElement.getAttribute("data-theme") === "light"
       gl.uniform2f(uResolution, canvas.width, canvas.height)
-      gl.uniform1f(uTime, (performance.now() - start) / 1000)
+      gl.uniform1f(uTime, time)
       gl.uniform1f(uLight, light ? 1 : 0)
       gl.drawArrays(gl.TRIANGLES, 0, 3)
-      frame = requestAnimationFrame(render)
     }
-    frame = requestAnimationFrame(render)
+    const loop = () => {
+      renderAt((performance.now() - start) / 1000)
+      frame = requestAnimationFrame(loop)
+    }
+    // Reduced motion gets one frozen frame (a mid-drift time where the blobs
+    // are nicely spread); the loop also stops while the tab is hidden.
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const still = () => renderAt(40)
+    const apply = () => {
+      if (frame) cancelAnimationFrame(frame)
+      frame = 0
+      if (reduceMotion.matches) still()
+      else if (!document.hidden) frame = requestAnimationFrame(loop)
+    }
+    apply()
+    reduceMotion.addEventListener("change", apply)
+    document.addEventListener("visibilitychange", apply)
+    // The still frame reads the theme once, so repaint it when the theme flips.
+    const themeObserver = new MutationObserver(() => {
+      if (!frame) still()
+    })
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    })
+    const resizeStill = () => {
+      if (!frame) still()
+    }
+    window.addEventListener("resize", resizeStill)
 
     return () => {
-      cancelAnimationFrame(frame)
+      if (frame) cancelAnimationFrame(frame)
+      reduceMotion.removeEventListener("change", apply)
+      document.removeEventListener("visibilitychange", apply)
+      themeObserver.disconnect()
+      window.removeEventListener("resize", resizeStill)
       window.removeEventListener("resize", resize)
     }
   }, [])

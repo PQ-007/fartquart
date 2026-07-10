@@ -1,0 +1,47 @@
+.outer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0 var(--main-padding-sides) 40px;
+  background: var(--color-background);
+}
+
+.inner {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(var(--color-primary-rgb), 0.85);
+  margin: 0 0 14px;
+  font-family: var(--font-neue), sans-serif;
+}
+
+.count {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(var(--color-primary-rgb), 0.45);
+  background: rgba(var(--color-primary-rgb), 0.07);
+  border-radius: 999px;
+  padding: 1px 8px;
+}
+
+.frame {
+  height: clamp(260px, 40vh, 360px);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.08);
+  background: rgba(var(--color-primary-rgb), 0.03);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.graph {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}

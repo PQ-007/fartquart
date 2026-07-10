@@ -43,6 +43,7 @@ const dict = {
       searchEmpty: "No results",
       searchHint: "↑↓ to navigate · ↵ to open · esc to close",
       linkedMentions: "Linked Mentions",
+      localGraph: "Local Graph",
     },
     blog: {
       "book-review": "Book Review",
@@ -133,6 +134,7 @@ const dict = {
       searchEmpty: "Үр дүн алга",
       searchHint: "↑↓ сонгох · ↵ нээх · esc хаах",
       linkedMentions: "Холбосон тэмдэглэлүүд",
+      localGraph: "Локал граф",
     },
     blog: {
       "book-review": "Номын сэтгэгдэл",
@@ -223,6 +225,7 @@ const dict = {
       searchEmpty: "結果なし",
       searchHint: "↑↓ で移動 · ↵ で開く · esc で閉じる",
       linkedMentions: "リンク元",
+      localGraph: "ローカルグラフ",
     },
     blog: {
       "book-review": "書評",

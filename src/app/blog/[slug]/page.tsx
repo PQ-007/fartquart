@@ -8,8 +8,9 @@ import { Tag } from "@/components/Tag"
 import { Chapters } from "@/components/post/Chapters"
 import { mdxComponents } from "@/components/post/mdx-components"
 import { extractChapters } from "@/lib/toc"
-import { formatDate, getAllBlogPosts, getBacklinks, getBlogPost, getRelatedPosts, getTranslationSiblings } from "@/lib/content"
+import { formatDate, getAllBlogPosts, getBacklinks, getBlogPost, getLocalGraph, getRelatedPosts, getTranslationSiblings, vaultNodeId } from "@/lib/content"
 import { Backlinks } from "@/components/Backlinks"
+import { LocalGraph } from "@/components/LocalGraph"
 import { RelatedPosts } from "@/components/RelatedPosts"
 import { JsonLd } from "@/components/JsonLd"
 import { MusicPlayer } from "@/components/MusicPlayer"
@@ -176,6 +177,7 @@ export default async function BlogPostPage({
           <Chapters chapters={chapters} siblings={siblings} currentSlug={slug} />
         </main>
       </div>
+      <LocalGraph data={getLocalGraph(vaultNodeId.post(post))} currentId={vaultNodeId.post(post)} />
       <Backlinks items={getBacklinks(slug)} />
       <RelatedPosts posts={related} />
       <Footer />

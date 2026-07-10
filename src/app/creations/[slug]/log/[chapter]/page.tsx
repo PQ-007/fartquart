@@ -9,8 +9,9 @@ import { mdxComponents } from "@/components/post/mdx-components"
 import { extractChapters } from "@/lib/toc"
 import { ChapterSidebar } from "@/components/post/ChapterSidebar"
 import { MusicPlayer } from "@/components/MusicPlayer"
-import { getAllCreations, getBacklinks, getCreation, getProjectLogChapter, getProjectLogChapters } from "@/lib/content"
+import { getAllCreations, getBacklinks, getCreation, getLocalGraph, getProjectLogChapter, getProjectLogChapters, vaultNodeId } from "@/lib/content"
 import { Backlinks } from "@/components/Backlinks"
+import { LocalGraph } from "@/components/LocalGraph"
 import { mdxOptions, sanitizeMdx } from "@/lib/mdx-options"
 import { absoluteUrl, SITE_NAME, DEFAULT_OG_IMAGE } from "@/lib/site"
 import { coverUrl, isGif } from "@/lib/url"
@@ -164,6 +165,10 @@ export default async function ProjectLogChapterPage({
           />
         </main>
       </div>
+      <LocalGraph
+        data={getLocalGraph(vaultNodeId.chapter(creationSlug, chapterSlug))}
+        currentId={vaultNodeId.chapter(creationSlug, chapterSlug)}
+      />
       <Backlinks items={getBacklinks(chapterSlug)} />
       <Footer />
     </>
