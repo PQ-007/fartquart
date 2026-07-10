@@ -12,7 +12,7 @@ tags:
   - multiplayer
   - top-down
   - godot
-draft: true
+draft: false
 project-nickname: bupo
 demo:
 repo: https://github.com/PQ-007/bullet-point
