@@ -8,35 +8,20 @@
         "type": "tabs",
         "children": [
           {
-            "id": "4a6df3d9d6560088",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "1000-creations/hanko.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "hanko"
-            }
-          },
-          {
             "id": "9f459938b09beeea",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1000-creations/bulet-point.md",
+                "file": "archieve/yasuda-fund/応募者アンケート.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "bulet-point"
+              "title": "応募者アンケート"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -111,7 +96,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "9c2b4deb3c0bba09",
@@ -209,11 +194,11 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 277.5
+    "width": 205.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -233,10 +218,17 @@
   },
   "active": "9f459938b09beeea",
   "lastOpenFiles": [
-    "1500-project-notes/bullet-point-log/00-devlog.md",
-    "1000-creations/bulet-point.md",
-    "4000-private/Random/Үлгэрийн баатар.md",
+    "1000-creations/hanko.md",
+    "archieve/yasuda-fund/応募者アンケート.md",
+    "archieve/Nyuugaku/Асуулт хариулт.md",
+    "archieve/yasuda-fund/奨学生申込書.md",
+    "archieve/yasuda-fund/Untitled.md",
+    "archieve/yasuda-fund/志望理由書.md",
     "0000-blog/essay-2.md",
+    "0000-blog/hello-world.md",
+    "1000-creations/bulet-point.md",
+    "1500-project-notes/bullet-point-log/00-devlog.md",
+    "4000-private/Random/Үлгэрийн баатар.md",
     "0000-blog/kosen-grad.md",
     "0000-blog/search-enginie.md",
     "0000-blog/internship-susano.md",
@@ -248,17 +240,10 @@
     "3000-lesson-notes/dsa/00-beginning.md",
     "0000-blog/oop.md",
     "0000-blog/hello-world-en.md",
-    "0000-blog/hello-world.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
-    "1000-creations/hanko.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/03-neural-network.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/01-basic-python.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/04-neural-network-learning.md",
-    "1500-project-notes/ivo-log/00-devlog.md",
-    "1500-project-notes/ivo-log/01-devlog.md",
-    "1500-project-notes/bullet-point-log/index.md",
-    "1000-creations/ivo.md",
-    "1000-creations/chess.md",
     "vault-guide.md.tmp.30434.f6ff3c579398",
     "templates/README.md.tmp.30434.d3f15d9b7880",
     "templates/README.md.tmp.30434.ea582a97652a",
