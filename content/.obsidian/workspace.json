@@ -141,13 +141,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
+                "file": "archieve/yasuda-fund/応募者アンケート.md",
                 "followCursor": true,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 02-perceptron"
+              "title": "Outline of 応募者アンケート"
             }
           },
           {
@@ -194,7 +194,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -216,7 +216,7 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "9f459938b09beeea",
+  "active": "2658e34e1852a6c5",
   "lastOpenFiles": [
     "1000-creations/hanko.md",
     "archieve/yasuda-fund/応募者アンケート.md",
