@@ -3,7 +3,7 @@
   "autoCommitMessage": "week backup: {{date}}, changed files: {{numFiles}}",
   "commitMessageScript": "",
   "commitDateFormat": "YYYY-MM-DD HH:mm:ss",
-  "autoSaveInterval": 10080,
+  "autoSaveInterval": 1440,
   "autoPushInterval": 10080,
   "autoPullInterval": 0,
   "autoPullOnBoot": false,
