@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1500-project-notes/bullet-point-log/index.md",
+                "file": "1500-project-notes/bullet-point-log/00-devlog.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "00-devlog"
             }
           }
         ]
@@ -220,18 +220,18 @@
   },
   "active": "9f459938b09beeea",
   "lastOpenFiles": [
+    "4000-private/Прогресс/2026/Нийтлэлүүд.md",
+    "1500-project-notes/bullet-point-log/index.md",
     "1000-creations/retetion.md",
     "1500-project-notes/retention-log",
     "1500-project-notes/bullet-point-log/00-devlog.md",
     "1000-creations/bullet-point.md",
-    "1500-project-notes/bullet-point-log/index.md",
     "archieve/toji-project/Untitled.md",
     "archieve/yasuda-fund/応募者アンケート.md",
     "archieve/yasuda-fund/志望理由書.md",
     "archieve/yasuda-fund/奨学生申込書.md",
     "archieve/yasuda-fund/Untitled.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
-    "4000-private/Прогресс/2026/Нийтлэлүүд.md",
     "State machine.md",
     "1000-creations/hanko.md",
     "archieve/Nyuugaku/Асуулт хариулт.md",
