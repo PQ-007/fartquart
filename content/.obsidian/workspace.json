@@ -4,21 +4,33 @@
     "type": "split",
     "children": [
       {
-        "id": "fd247e6885f8283d",
+        "id": "58a89601148fab80",
         "type": "tabs",
         "children": [
           {
-            "id": "9f459938b09beeea",
+            "id": "b3c2b2a9cb2549b3",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1500-project-notes/bullet-point-log/00-devlog.md",
+                "file": "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "00-devlog"
+              "title": "02-perceptron"
+            }
+          },
+          {
+            "id": "b60291afbc9d439b",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "resources/images/book/zero-kara-dl-2/NumPy_implementation_on_NN.png"
+              },
+              "icon": "lucide-image",
+              "title": "NumPy_implementation_on_NN"
             }
           }
         ]
@@ -98,7 +110,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 256.5
+    "width": 200
   },
   "right": {
     "id": "9c2b4deb3c0bba09",
@@ -200,7 +212,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 305.5
+    "width": 305.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -218,20 +231,36 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "9f459938b09beeea",
+  "active": "b3c2b2a9cb2549b3",
   "lastOpenFiles": [
+    "resources/images/book/zero-kara-dl-1/or_truth_table.png",
+    "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
+    "resources/images/book/zero-kara-dl-1/nand_truth_table.png",
+    "resources/images/resu/N2_res.png",
+    "resources/images/book/zero-kara-dl-2/Perceptron with bias.png",
+    "resources/images/book/zero-kara-dl-2/Perceptron with activation function.png",
+    "resources/images/resu/Prism.png",
+    "resources/images/book/zero-kara-dl-2/ReLU.png",
+    "resources/images/resu/scicon_2026_after_event.png",
+    "resources/images/book/zero-kara-dl-1/perceptron_example.png",
+    "resources/images/book/zero-kara-dl-2/NumPy_implementation_on_NN.png",
+    "resources/images/resu",
+    "resources/images/book/immune-system",
+    "resources/images/book/dna-towa",
+    "templates/book-note/index.md",
+    "resources/images/book/zero-kara-dl-2",
+    "resources/images/book/zero-kara-dl-1",
     "4000-private/Прогресс/2026/Нийтлэлүүд.md",
+    "1500-project-notes/bullet-point-log/00-devlog.md",
     "1500-project-notes/bullet-point-log/index.md",
     "1000-creations/retetion.md",
     "1500-project-notes/retention-log",
-    "1500-project-notes/bullet-point-log/00-devlog.md",
     "1000-creations/bullet-point.md",
     "archieve/toji-project/Untitled.md",
     "archieve/yasuda-fund/応募者アンケート.md",
     "archieve/yasuda-fund/志望理由書.md",
     "archieve/yasuda-fund/奨学生申込書.md",
     "archieve/yasuda-fund/Untitled.md",
-    "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
     "State machine.md",
     "1000-creations/hanko.md",
     "archieve/Nyuugaku/Асуулт хариулт.md",
@@ -245,25 +274,9 @@
     "0000-blog/math-and-computer.md",
     "3000-lesson-notes/dsa/index.md",
     "3000-lesson-notes/dsa/02-data-structure.md",
-    "3000-lesson-notes/dsa/01-algorithm.md",
     "vault-guide.md.tmp.30434.f6ff3c579398",
     "templates/README.md.tmp.30434.d3f15d9b7880",
     "templates/README.md.tmp.30434.ea582a97652a",
-    "templates/creation.md.tmp.30434.86dd07aaf1e9",
-    "vault-guide.md.tmp.30434.bcc9c15aefde",
-    "1500-project-notes/bullet-point-log",
-    "vault-guide.md.tmp.23297.a5fca783414c",
-    "vault-guide.md.tmp.23297.a2435c873ed7",
-    "vault-guide.md.tmp.23297.7fc8ca3fad82",
-    "resources/images/covers/about-me-cover.jpg",
-    "resources/images/covers/book-cover.png",
-    "resources/images/covers/pixel-tide.png",
-    "resources/images/covers/great-tide.png",
-    "resources/images/covers/spinning-donut.gif",
-    "resources/images/covers/dsa-cover.png",
-    "resources/images/hanko-cover.png",
-    "resources/images/alten-japan-internship/window.jpg",
-    "resources/images/alten-japan-internship/cover.jpg",
-    "resources/images/alten-japan-internship/state-machine.png"
+    "templates/creation.md.tmp.30434.86dd07aaf1e9"
   ]
 }
