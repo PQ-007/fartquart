@@ -101,6 +101,8 @@ export type GraphNode = {
   type: "tag" | "blog" | "note" | "chapter" | "creation" | "hub"
   label: string
   href: string
+  /** ISO publish date — only set for doc nodes (blog/note/chapter/creation), used by the graph's timeline playback. */
+  date?: string
 }
 
 export type GraphEdge = { source: string; target: string }
@@ -514,6 +516,7 @@ type VaultDoc = {
   hub?: string
   parentId?: string
   content: string
+  publishedAt: string
 }
 
 /**
@@ -539,6 +542,7 @@ const getVaultDocs = memo((locale: string = defaultLocale, collapse = true): Vau
       tags: [p.label, ...p.tags],
       hub: isNote ? "hub:notes" : "hub:blog",
       content: getBlogPost(p.slug)?.content ?? "",
+      publishedAt: p.publishedAt,
     })
     if (!isNote) continue
     for (const ch of getBookNoteChapters(p.slug)) {
@@ -552,6 +556,7 @@ const getVaultDocs = memo((locale: string = defaultLocale, collapse = true): Vau
         tags: chapter?.tags ?? [],
         parentId: id,
         content: chapter?.content ?? "",
+        publishedAt: chapter?.publishedAt ?? p.publishedAt,
       })
     }
   }
@@ -568,6 +573,7 @@ const getVaultDocs = memo((locale: string = defaultLocale, collapse = true): Vau
       tags: creationTagsOf(c),
       hub: "hub:creations",
       content: [getCreation(c.slug)?.content, log?.content].filter(Boolean).join("\n"),
+      publishedAt: c.publishedAt,
     })
     for (const ch of getProjectLogChapters(c.slug)) {
       const chapter = getProjectLogChapter(c.slug, ch.slug)
@@ -580,6 +586,7 @@ const getVaultDocs = memo((locale: string = defaultLocale, collapse = true): Vau
         tags: chapter?.tags ?? [],
         parentId: id,
         content: chapter?.content ?? "",
+        publishedAt: chapter?.publishedAt ?? c.publishedAt,
       })
     }
   }
@@ -625,7 +632,7 @@ export const getGraphData = memo((locale: string = defaultLocale): GraphData => 
     { id: "hub:blog", type: "hub", label: "Blog", href: "/blog" },
     { id: "hub:notes", type: "hub", label: "Notes", href: "/notes" },
     { id: "hub:creations", type: "hub", label: "Creations", href: "/creations" },
-    ...docs.map((d) => ({ id: d.id, type: d.type, label: d.title, href: d.href })),
+    ...docs.map((d) => ({ id: d.id, type: d.type, label: d.title, href: d.href, date: d.publishedAt })),
   ]
   const edges: GraphEdge[] = []
   const byBasename = new Map(docs.map((d) => [d.basename.toLowerCase(), d.id]))
@@ -707,4 +714,55 @@ export const getLocalGraph = memo((id: string): GraphData => {
     nodes: localNodes,
     edges: edges.filter((e) => ids.has(e.source) && ids.has(e.target)),
   }
+})
+
+// ── Vault file tree (Obsidian-style explorer sidebar) ───────────────────────
+// Mirrors the site's own three sections rather than the raw content/ folder
+// names — a reader-facing tree, not a filesystem listing. Chapters nest under
+// their book/lesson-note index or their creation's project log.
+
+export type VaultTreeNode = {
+  id: string
+  title: string
+  href: string
+  type: GraphNode["type"]
+  children?: VaultTreeNode[]
+}
+
+export type VaultTreeGroup = {
+  id: string
+  label: string
+  href: string
+  children: VaultTreeNode[]
+}
+
+export const getVaultTree = memo((locale: string = defaultLocale): VaultTreeGroup[] => {
+  const docs = getVaultDocs(locale)
+  const byParent = new Map<string, VaultDoc[]>()
+  for (const d of docs) {
+    if (!d.parentId) continue
+    if (!byParent.has(d.parentId)) byParent.set(d.parentId, [])
+    byParent.get(d.parentId)!.push(d)
+  }
+  const toNode = (d: VaultDoc): VaultTreeNode => {
+    const kids = byParent.get(d.id)
+    return {
+      id: d.id,
+      title: d.title,
+      href: d.href,
+      type: d.type,
+      children: kids?.map(toNode),
+    }
+  }
+  const group = (id: string, label: string, href: string): VaultTreeGroup => ({
+    id,
+    label,
+    href,
+    children: docs.filter((d) => d.hub === id).map(toNode),
+  })
+  return [
+    group("hub:blog", "Blog", "/blog"),
+    group("hub:notes", "Notes", "/notes"),
+    group("hub:creations", "Creations", "/creations"),
+  ]
 })

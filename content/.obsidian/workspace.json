@@ -32,8 +32,19 @@
               "icon": "lucide-image",
               "title": "NumPy_implementation_on_NN"
             }
+          },
+          {
+            "id": "1c4832596c9c7a42",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -231,10 +242,12 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "b3c2b2a9cb2549b3",
+  "active": "1c4832596c9c7a42",
   "lastOpenFiles": [
-    "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
+    "resources/images/book/zero-kara-dl-2/NumPy_implementation_on_NN.png",
+    "Pasted image 20260325194219.png.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/03-neural-network.md",
+    "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
     "2000-book-notes/ゼロから作る-deep-learning-2/1章 ニューラルネットワークの復習.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/index.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/04-neural-network-learning.md",
@@ -245,7 +258,6 @@
     "2000-book-notes/ゼロから作る-deep-learning-2/index.md",
     "resources/images/book/zero-kara-dl-2/neural_network_example.png",
     "2025-10-01.md",
-    "resources/images/book/zero-kara-dl-2/NumPy_implementation_on_NN.png",
     "4000-private/Прогресс/2026/Нийтлэлүүд.md",
     "resources/images/book/zero-kara-dl-1/xor_truth_table.png",
     "resources/videos/xor.mp4",
@@ -274,8 +286,6 @@
     "State machine.md",
     "1000-creations/hanko.md",
     "archieve/Nyuugaku/Асуулт хариулт.md",
-    "0000-blog/essay-2.md",
-    "0000-blog/hello-world.md",
     "vault-guide.md.tmp.30434.f6ff3c579398",
     "templates/README.md.tmp.30434.d3f15d9b7880",
     "templates/README.md.tmp.30434.ea582a97652a"
