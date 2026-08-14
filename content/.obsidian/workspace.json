@@ -110,7 +110,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 299.2897148132324
   },
   "right": {
     "id": "9c2b4deb3c0bba09",
@@ -232,8 +232,9 @@
   },
   "active": "b3c2b2a9cb2549b3",
   "lastOpenFiles": [
-    "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
+    "resources/images/book/zero-kara-dl-2/neural_network_example.png",
     "2000-book-notes/ゼロから作る-deep-learning-1/03-neural-network.md",
+    "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
     "2025-10-01.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/01-basic-python.md",
     "resources/images/book/zero-kara-dl-2/NumPy_implementation_on_NN.png",
@@ -274,7 +275,6 @@
     "0000-blog/search-enginie.md",
     "0000-blog/internship-susano.md",
     "0000-blog/internship-tsh.md",
-    "0000-blog/math-and-computer.md",
     "vault-guide.md.tmp.30434.f6ff3c579398",
     "templates/README.md.tmp.30434.d3f15d9b7880",
     "templates/README.md.tmp.30434.ea582a97652a"
