@@ -5,6 +5,7 @@ publishedAt: 2025-10-15
 updatedAt:
 new-word:
 draft: false
+cover: https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dzY2ZnNqazVpdmFqc2txNm51M215eWUxMTR2Zm5saDV2bXQ0eXk4OCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/gLKVCVdLUXMTeIs6MD/giphy.gif
 ---
 
 Одоо жинхэнэ сургалтын (жин, bias-аа өгөгдлүүдээсээ автоматаар тохируулах) хэсэг рүүгээ орно. Энэхүү сургалтыг явуулахын тулд **алдааны функц (loss function)** гэдэг зүйл оруулж ирдэг. Энэ алдагдлын функцээ үнэлгээ болгон, энэ функцээс гарч ирэх утгыг багасгах жин, bias зэрэг параметруудыг олох нь сургалтын гол зорилго. Алдааны функцээс гарах утгыг чадах чинээгээрээ багасгах арга болгож **gradient-ын арга** гэдэг функцийн налууг ашигладаг аргыг судлана.

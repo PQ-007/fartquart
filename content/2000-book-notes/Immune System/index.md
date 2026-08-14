@@ -8,5 +8,5 @@ description: Дархлааны системийн бүтэц, T-cell, B-cell, �
 tags:
   - biology
   - immune-system
-cover: resources/images/book/immune-system.jpg
+cover: resources/images/book/immune-system/immune_system.jpg
 ---

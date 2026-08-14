@@ -7,7 +7,7 @@ new-word:
   - word: 動的型付き言語
     definition: dynamic typed language
 draft: false
-cover: https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWY3MWpqeGFlbDY1Z3h5eHI1eG84dDhrNGo2eTdmMzZvYWt4bGwxaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gG9fVWJdN41NeiHhzk/giphy.gif
+cover: https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWgxZWN3bzExMWphcTlua29qYjQyb2JjMXJ2ZGtycDF0ZTU1cXFzdyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/coxQHKASG60HrHtvkt/giphy.gif
 tags:
   - python
 ---

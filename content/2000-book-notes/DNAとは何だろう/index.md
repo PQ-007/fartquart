@@ -8,6 +8,6 @@ description: DNAの構造、遺伝子情報の伝達、タンパク質合成の�
 tags:
   - biology-dna
   - jp
-cover: resources/images/book/dna-towa.jpg
+cover: resources/images/book/dna-towa/dna_towa.jpg
 ---
 

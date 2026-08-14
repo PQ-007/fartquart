@@ -4,8 +4,9 @@ createdAt: 2025-10-07
 publishedAt: 2025-10-07
 updatedAt: 2026-08-14
 tags:
-  - perceptron
 new-word:
+cover: |
+  https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3bWlxeW9uM2JyeTM4ZXdvbXl1MmtlbWl1bjQ0cGZ3eHRhcjdxNTRidSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/bZ6XhrStNnLCic3wKd/giphy.gif
 ---
 
 ***Perceptron  ашиглахад***:

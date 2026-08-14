@@ -13,6 +13,6 @@ tags:
   - python
   - deep-learning
   - zero-kara
-cover: resources/images/book/zero-karadp2.jpg
+cover: resources/images/book/zero-kara-dl-2/zero-karadp2.jpg
 ---
 Гүн сургалтын талаар тэгээс нь эхлээд сурах номны хоёр дахь цуврал.  
