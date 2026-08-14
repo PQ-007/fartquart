@@ -1,5 +1,6 @@
 /* ── dark mode: barely elevated above the near-black page ─────────────────── */
 .wrapper {
+  position: relative;
   margin: 28px 0;
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 12px;
@@ -12,7 +13,7 @@
   align-items: center;
   justify-content: space-between;
   background: #0c0c0c;
-  padding: 5px 16px;
+  padding: 2px 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -39,17 +40,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-left: auto;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: none;
   color: rgba(255, 255, 255, 0.32);
-  transition: color 0.2s, border-color 0.2s;
+  transition: color 0.2s, background-color 0.2s;
 }
 
 .copyButton:hover {
   color: rgba(255, 255, 255, 0.8);
-  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Header-less blocks (bare language, no filename): the button floats over
+   the code instead of reserving a whole empty header bar for it. */
+.floatingCopy {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  background: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+[data-theme="light"] .floatingCopy {
+  background: rgba(28, 29, 42, 0.7);
 }
 
 .codeBody {

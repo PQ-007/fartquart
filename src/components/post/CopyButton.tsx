@@ -4,12 +4,12 @@ import { useState } from "react"
 import styles from "./CodeSnippet.module.css"
 import { CheckIcon, CopyIcon } from "../icons"
 
-export const CopyButton = ({ code }: { code: string }) => {
+export const CopyButton = ({ code, className }: { code: string; className?: string }) => {
   const [copied, setCopied] = useState(false)
 
   return (
     <button
-      className={styles.copyButton}
+      className={className ? `${styles.copyButton} ${className}` : styles.copyButton}
       aria-label="Copy code"
       onClick={() => {
         navigator.clipboard.writeText(code)

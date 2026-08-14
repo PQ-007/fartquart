@@ -9,13 +9,16 @@ const EXT_LANG: Record<string, string> = {
   rs: "rust", go: "go", java: "java", c: "c", cpp: "cpp", cc: "cpp",
 }
 
-const parseInfo = (info: string): { label: string; lang: string } => {
+// A fence info string is either a filename (`train.py`) or a bare language
+// (`python`). Only filenames — anything with an extension — get a header label;
+// a bare language just drives the syntax highlighting and shows no label.
+const parseInfo = (info: string): { label: string | null; lang: string } => {
   const dot = info.lastIndexOf(".")
   if (dot !== -1) {
     const ext = info.slice(dot + 1).toLowerCase()
     return { label: info, lang: EXT_LANG[ext] ?? ext }
   }
-  return { label: info, lang: info || "text" }
+  return { label: null, lang: info || "text" }
 }
 
 type CodeProps = { className?: string; children?: string }
@@ -33,12 +36,19 @@ export const CodeBlock = async ({ children, ...props }: ComponentPropsWithoutRef
 
   const html = await highlight(code.trimEnd(), lang)
 
+  // A bare language (no filename) has nothing to put in a header, so skip the
+  // header bar entirely rather than leaving an empty strip — the copy button
+  // floats over the code instead.
   return (
     <div className={`${styles.wrapper} codeWrapper`}>
-      <header className={styles.header}>
-        <p>{label || lang}</p>
-        <CopyButton code={code.trimEnd()} />
-      </header>
+      {label ? (
+        <header className={styles.header}>
+          <p>{label}</p>
+          <CopyButton code={code.trimEnd()} />
+        </header>
+      ) : (
+        <CopyButton code={code.trimEnd()} className={styles.floatingCopy} />
+      )}
       <div className={styles.codeBody} dangerouslySetInnerHTML={{ __html: html }} />
     </div>
   )

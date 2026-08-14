@@ -79,6 +79,12 @@
   padding: 14px 16px 18px;
 }
 
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .title {
   font-size: var(--font-0);
   font-weight: 600;

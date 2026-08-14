@@ -5,8 +5,7 @@ publishedAt: 2025-10-07
 updatedAt: 2026-08-14
 tags:
 new-word:
-cover: |
-  https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3bWlxeW9uM2JyeTM4ZXdvbXl1MmtlbWl1bjQ0cGZ3eHRhcjdxNTRidSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/bZ6XhrStNnLCic3wKd/giphy.gif
+cover: https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGc4bDl3b3A0bDA4aGw2dHBrYWZudzRuazNwbXh4NGl6a2l1Z2xweiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/OvOQJNNfKpwEMPy3Yl/giphy.gif
 ---
 
 ***Perceptron  ашиглахад***:

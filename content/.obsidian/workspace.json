@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2000-book-notes/ゼロから作る-deep-learning-2/1章 ニューラルネットワークの復習.md",
+                "file": "2000-book-notes/ゼロから作る-deep-learning-1/03-neural-network.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1章 ニューラルネットワークの復習"
+              "title": "03-neural-network"
             }
           },
           {
@@ -212,7 +212,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 305.5
+    "width": 289.2298583984375,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -232,9 +233,10 @@
   },
   "active": "b3c2b2a9cb2549b3",
   "lastOpenFiles": [
-    "2000-book-notes/ゼロから作る-deep-learning-1/index.md",
-    "2000-book-notes/ゼロから作る-deep-learning-1/03-neural-network.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
+    "2000-book-notes/ゼロから作る-deep-learning-1/03-neural-network.md",
+    "2000-book-notes/ゼロから作る-deep-learning-2/1章 ニューラルネットワークの復習.md",
+    "2000-book-notes/ゼロから作る-deep-learning-1/index.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/04-neural-network-learning.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/01-basic-python.md",
     "2000-book-notes/DNAとは何だろう/index.md",
@@ -274,7 +276,6 @@
     "archieve/Nyuugaku/Асуулт хариулт.md",
     "0000-blog/essay-2.md",
     "0000-blog/hello-world.md",
-    "4000-private/Random/Үлгэрийн баатар.md",
     "vault-guide.md.tmp.30434.f6ff3c579398",
     "templates/README.md.tmp.30434.d3f15d9b7880",
     "templates/README.md.tmp.30434.ea582a97652a"

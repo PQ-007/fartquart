@@ -16,12 +16,18 @@
   max-height: 70vh;
   display: flex;
   flex-direction: column;
-  background: var(--color-dropdown-list, rgba(18, 18, 18, 0.95));
+  background: rgba(18, 18, 18, 0.95);
   backdrop-filter: blur(20px);
   border: 1px solid var(--color-divider);
   border-radius: 16px;
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
   overflow: hidden;
+}
+
+[data-theme="light"] .panel {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
 }
 
 .inputRow {

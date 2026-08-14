@@ -59,9 +59,6 @@ const LIGHT: Palette = {
   label: "rgba(40,40,46,0.92)",
 }
 
-const LABEL_MAX = 32
-const truncate = (s: string) => (s.length > LABEL_MAX ? `${s.slice(0, LABEL_MAX - 1)}…` : s)
-
 export const TagGraph = ({
   data,
   hideOverlay = false,
@@ -217,14 +214,20 @@ export const TagGraph = ({
     let panY = 0
     let zoom = 1
 
+    // The embedded home graph is a right-weighted backdrop behind the hero
+    // text, so it frames into the right portion of the canvas; every other
+    // graph fills and centers the whole viewport.
+    const isHomeGraph = hideOverlay && !current
     const zoomToFit = () => {
       const xs = visNodes.map((n) => n.x!)
       const ys = visNodes.map((n) => n.y!)
       const pad = 48
       const bw = Math.max(...xs) - Math.min(...xs) + pad * 2
       const bh = Math.max(...ys) - Math.min(...ys) + pad * 2
-      zoom = Math.min(Math.max(Math.min(w / bw, h / bh), 0.3), 1.4)
-      panX = w / 2 - ((Math.max(...xs) + Math.min(...xs)) / 2) * zoom
+      const fitW = isHomeGraph ? w * 0.5 : w
+      const anchorX = isHomeGraph ? w * 0.74 : w / 2
+      zoom = Math.min(Math.max(Math.min(fitW / bw, h / bh), 0.3), 1.4)
+      panX = anchorX - ((Math.max(...xs) + Math.min(...xs)) / 2) * zoom
       panY = h / 2 - ((Math.max(...ys) + Math.min(...ys)) / 2) * zoom
     }
     zoomToFit()
@@ -259,6 +262,48 @@ export const TagGraph = ({
       }
       return null
     }
+
+    // ── Labels ────────────────────────────────────────────────────────────────
+    // Pre-wrap node labels into stacked lines so long names don't overrun their
+    // neighbours. Zoom-independent: measureText ignores the canvas transform, so
+    // wrapping at a fixed 11px reference matches the 11px-on-screen draw size at
+    // every zoom. Space-less names (CJK) and over-long tokens are char-broken.
+    const LABEL_WRAP_PX = 118
+    const LABEL_MAX_LINES = 3
+    const labelLines = new Map<string, string[]>()
+    ctx.font = `11px ${fontFamily}`
+    const measureLabel = (s: string) => ctx.measureText(s).width
+    const wrapLabel = (text: string): string[] => {
+      const lines: string[] = []
+      let line = ""
+      for (let word of text.split(/\s+/)) {
+        // Hard-break a single token that can't fit on a line (URLs, CJK runs).
+        while (word && measureLabel(word) > LABEL_WRAP_PX && word.length > 1) {
+          let i = 1
+          while (i < word.length && measureLabel(word.slice(0, i + 1)) <= LABEL_WRAP_PX) i++
+          if (line) { lines.push(line); line = "" }
+          lines.push(word.slice(0, i))
+          word = word.slice(i)
+        }
+        if (!word) continue
+        const candidate = line ? `${line} ${word}` : word
+        if (line && measureLabel(candidate) > LABEL_WRAP_PX) {
+          lines.push(line)
+          line = word
+        } else {
+          line = candidate
+        }
+      }
+      if (line) lines.push(line)
+      if (lines.length > LABEL_MAX_LINES) {
+        lines.length = LABEL_MAX_LINES
+        let last = lines[LABEL_MAX_LINES - 1]
+        while (last.length > 1 && measureLabel(`${last}…`) > LABEL_WRAP_PX) last = last.slice(0, -1)
+        lines[LABEL_MAX_LINES - 1] = `${last}…`
+      }
+      return lines.length ? lines : [text]
+    }
+    for (const n of simNodes) labelLines.set(n.id, wrapLabel(n.label))
 
     // ── Render ──────────────────────────────────────────────────────────────
     const lerp = (a: number, b: number, k: number) => a + (b - a) * k
@@ -345,7 +390,11 @@ export const TagGraph = ({
         ctx.globalAlpha = alpha
         ctx.font = `${isHub || n === hovered || n === current ? "600 " : ""}${fontSize}px ${fontFamily}`
         ctx.fillStyle = n.type === "tag" ? colors.accent : colors.label
-        ctx.fillText(truncate(n.label), n.x, n.y + n.r + fontSize + 3 / zoom)
+        let ly = n.y + n.r + fontSize + 3 / zoom
+        for (const line of labelLines.get(n.id) ?? [n.label]) {
+          ctx.fillText(line, n.x, ly)
+          ly += fontSize * 1.18
+        }
       }
       ctx.globalAlpha = 1
     }

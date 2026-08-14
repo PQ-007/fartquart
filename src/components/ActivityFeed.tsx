@@ -51,9 +51,11 @@ export const ActivityFeed = ({ posts }: Props) => (
               )}
             </div>
             <div className={styles.info}>
-              <Tag name={post.label} />
               <p className={styles.title}>{post.title}</p>
-              <p className={styles.date}>{formatDate(post.publishedAt)}</p>
+              <div className={styles.meta}>
+                <Tag name={post.label} />
+                <p className={styles.date}>{formatDate(post.publishedAt)}</p>
+              </div>
             </div>
           </Link>
         )
