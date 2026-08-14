@@ -195,6 +195,14 @@ export const TagGraph = ({
 
   const hasTimeline = useMemo(() => data.nodes.some((n) => n.date), [data])
 
+  // On phones the settings panel is a full-height drawer that would cover the
+  // whole graph, so start it collapsed there — the graph is the main content,
+  // and the floating button reopens the panel on demand. (Runs once on mount;
+  // starting `true` on both server and client avoids a hydration mismatch.)
+  useEffect(() => {
+    if (window.matchMedia("(max-width: 720px)").matches) setPanelOpen(false)
+  }, [])
+
   const toggleSection = (key: keyof typeof collapsed) =>
     setCollapsed((c) => ({ ...c, [key]: !c[key] }))
 

@@ -132,4 +132,11 @@
   .bottom > p:last-of-type {
     justify-content: flex-start;
   }
+  /* The email sits in a left-aligned column here, so a tooltip to its right
+     would run off narrow screens — drop it below the address instead. */
+  .copied {
+    left: 0;
+    top: calc(100% + 4px);
+    transform: none;
+  }
 }

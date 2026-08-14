@@ -422,12 +422,23 @@
 }
 
 @media (max-width: 720px) {
+  /* The panel becomes a right-side drawer that starts below the fixed mobile
+     nav bar (~56px) so its header/close button aren't hidden behind it. */
   .panel {
     position: absolute;
-    top: 0;
+    top: 56px;
     right: 0;
+    height: calc(100% - 56px);
     width: min(86vw, 320px);
     box-shadow: -16px 0 40px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Clear the fixed nav bar, and sit on the left so it never collides with the
+     hamburger button at the top-right. */
+  .reopenBtn {
+    top: 72px;
+    right: auto;
+    left: 16px;
   }
 
   .legend {

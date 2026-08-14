@@ -297,6 +297,17 @@ code {
   display: block;
   margin: 16px 0;
 }
+/* Third-party embeds (Imgur, etc.) inject iframes with a fixed pixel width —
+   cap them so they never push the article wider than the phone viewport. */
+.post-content iframe {
+  max-width: 100%;
+}
+/* Wide tables scroll inside their own box instead of stretching the page. */
+.post-content table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
 
 /* shiki */
 .post-content .shiki {
