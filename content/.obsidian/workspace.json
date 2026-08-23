@@ -43,8 +43,7 @@
               "title": "Graph view"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -241,11 +240,11 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "1c4832596c9c7a42",
+  "active": "2504bcca15056da1",
   "lastOpenFiles": [
+    "2000-book-notes/ゼロから作る-deep-learning-1/03-neural-network.md",
     "resources/images/book/zero-kara-dl-2/NumPy_implementation_on_NN.png",
     "Pasted image 20260325194219.png.md",
-    "2000-book-notes/ゼロから作る-deep-learning-1/03-neural-network.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
     "2000-book-notes/ゼロから作る-deep-learning-2/1章 ニューラルネットワークの復習.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/index.md",
