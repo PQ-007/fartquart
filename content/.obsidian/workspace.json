@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2000-book-notes/ゼロから作る-deep-learning-1/03-neural-network.md",
+                "file": "0000-blog/essay_3.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "03-neural-network"
+              "title": "essay_3"
             }
           },
           {
@@ -240,8 +240,14 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "2504bcca15056da1",
+  "active": "b3c2b2a9cb2549b3",
   "lastOpenFiles": [
+    "0000-blog/hello_world_ja.md",
+    "0000-blog/hello_world_en.md",
+    "0000-blog/hello_world.md",
+    "0000-blog/essay_2.md",
+    "0000-blog/essay_3.md",
+    "0000-blog/essay_1.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/03-neural-network.md",
     "resources/images/book/zero-kara-dl-2/NumPy_implementation_on_NN.png",
     "Pasted image 20260325194219.png.md",
@@ -279,11 +285,6 @@
     "archieve/toji-project/Untitled.md",
     "archieve/yasuda-fund/応募者アンケート.md",
     "archieve/yasuda-fund/志望理由書.md",
-    "archieve/yasuda-fund/奨学生申込書.md",
-    "archieve/yasuda-fund/Untitled.md",
-    "State machine.md",
-    "1000-creations/hanko.md",
-    "archieve/Nyuugaku/Асуулт хариулт.md",
     "vault-guide.md.tmp.30434.f6ff3c579398",
     "templates/README.md.tmp.30434.d3f15d9b7880",
     "templates/README.md.tmp.30434.ea582a97652a"
