@@ -11,12 +11,14 @@
             "id": "b60291afbc9d439b",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "resources/images/book/zero-kara-dl-2/NumPy_implementation_on_NN.png"
+                "file": "1000-creations/chess.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "NumPy_implementation_on_NN"
+              "icon": "lucide-file",
+              "title": "chess"
             }
           },
           {
@@ -226,17 +228,28 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "b60291afbc9d439b",
+  "active": "4dfd1ae5b0a4e55d",
   "lastOpenFiles": [
+    "4000-private/Random/Гоншигнуур.md",
+    "4000-private/Random/Сүүлийн үед.md",
     "0000-blog/essay_3.md",
+    "0000-blog/essay_1.md",
+    "0000-blog/essay_2.md",
+    "4000-private/Random/Үлгэрийн баатар.md",
+    "4000-private/Random/Эго ба Төөрөгдөл.md",
+    "4000-private/Дүгнэлтүүд/Долоо хоногийн/2026-7-1.md",
+    "0000-blog/hello_world.md",
+    "4000-private/Дүгнэлтүүд/Жилийн/2026 оны дүгнэлт.md",
+    "4000-private/Дүгнэлтүүд/Жилийн/2025 оны дүгнэлт.md",
+    "Messenger_creation_5D58A556-9603-45FC-90A3-2EE1EFE3812D.jpeg",
+    "Screenshot_20260719_102755_Substack (1).jpg",
+    "Screenshot_20260827_074646_Samsung Browser.jpg",
+    "Pasted image 20260325194219.png.md",
+    "Screenshot_20260719_102755_Substack.jpg",
+    "resources/images/book/zero-kara-dl-2/NumPy_implementation_on_NN.png",
     "0000-blog/hello_world_ja.md",
     "0000-blog/hello_world_en.md",
-    "0000-blog/hello_world.md",
-    "0000-blog/essay_2.md",
-    "0000-blog/essay_1.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/03-neural-network.md",
-    "resources/images/book/zero-kara-dl-2/NumPy_implementation_on_NN.png",
-    "Pasted image 20260325194219.png.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
     "2000-book-notes/ゼロから作る-deep-learning-2/1章 ニューラルネットワークの復習.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/index.md",
@@ -253,24 +266,13 @@
     "resources/videos/xor.mp4",
     "resources/images/book/zero-kara-dl-1/xor_graph.png",
     "resources/images/book/zero-kara-dl-1/or_truth_table.png",
-    "resources/images/book/zero-kara-dl-1/nand_truth_table.png",
-    "resources/images/resu/N2_res.png",
-    "resources/images/book/zero-kara-dl-2/Perceptron with bias.png",
-    "resources/images/book/zero-kara-dl-2/Perceptron with activation function.png",
     "resources/images/resu",
     "resources/images/book/immune-system",
     "resources/images/book/dna-towa",
     "templates/book-note/index.md",
     "resources/images/book/zero-kara-dl-2",
     "resources/images/book/zero-kara-dl-1",
-    "1500-project-notes/bullet-point-log/00-devlog.md",
-    "1500-project-notes/bullet-point-log/index.md",
-    "1000-creations/retetion.md",
     "1500-project-notes/retention-log",
-    "1000-creations/bullet-point.md",
-    "archieve/toji-project/Untitled.md",
-    "archieve/yasuda-fund/応募者アンケート.md",
-    "archieve/yasuda-fund/志望理由書.md",
     "vault-guide.md.tmp.30434.f6ff3c579398",
     "templates/README.md.tmp.30434.d3f15d9b7880",
     "templates/README.md.tmp.30434.ea582a97652a"
