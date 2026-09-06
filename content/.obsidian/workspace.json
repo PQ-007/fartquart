@@ -11,21 +11,14 @@
             "id": "d1c62bb5b88e072c",
             "type": "leaf",
             "state": {
-              "type": "kanban",
+              "type": "markdown",
               "state": {
-                "file": "4000-private/Прогресс/2026/Видеонууд.md",
-                "kanbanViewState": {
-                  "kanban-plugin": "board",
-                  "list-collapse": [
-                    false,
-                    false,
-                    false,
-                    false
-                  ]
-                }
+                "file": "5000-videos/Snake bot.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-trello",
-              "title": "Видеонууд"
+              "icon": "lucide-file",
+              "title": "Snake bot"
             }
           }
         ]
@@ -227,18 +220,24 @@
   },
   "active": "d1c62bb5b88e072c",
   "lastOpenFiles": [
-    "5000-videos/Untitled.md",
-    "5000-videos/Integral and differential.md",
+    "0000-blog/kosen-grad.md",
+    "0000-blog/internship-tsh.md",
+    "0000-blog/internship-susano.md",
+    "0000-blog/internship-co-graph.md",
+    "0000-blog/internship-alten-japan.md",
+    "0000-blog/search-engine.md",
+    "0000-blog/oop.md",
     "0000-blog/essay_4.md",
+    "0000-blog/essay_3.md",
+    "0000-blog/essay_2.md",
+    "4000-private/Прогресс/2026/Видеонууд.md",
+    "5000-videos/Snake bot.md",
+    "5000-videos/Integral and differential.md",
     "0000-blog/essay_1.md",
     "4000-private/Random/Гоншигнуур.md",
     "4000-private/Random/Сүүлийн үед.md",
     "4000-private/Random/Эго ба Төөрөгдөл.md",
-    "0000-blog/search-engine.md",
-    "0000-blog/oop.md",
-    "0000-blog/kosen-grad.md",
     "0000-blog/math-and-computer.md",
-    "0000-blog/essay_3.md",
     "2025-10-01.md",
     "resources/images/resu/Screenshot_20260827_074646_Samsung Browser.jpg",
     "resources/images/resu/Screenshot_20260719_102755_Substack (1).jpg",
@@ -251,18 +250,12 @@
     "resources/window.svg",
     "4000-private/Прогресс/2026/Номын тэмдэглэлүүд.md",
     "4000-private/Зорилгууд/2026 оны зорилго.md",
-    "0000-blog/essay_2.md",
     "1000-creations/chess.md",
     "4000-private/Random/Үлгэрийн баатар.md",
     "4000-private/Дүгнэлтүүд/Долоо хоногийн/2026-7-1.md",
     "0000-blog/hello_world.md",
-    "4000-private/Дүгнэлтүүд/Жилийн/2026 оны дүгнэлт.md",
-    "4000-private/Дүгнэлтүүд/Жилийн/2025 оны дүгнэлт.md",
-    "Pasted image 20260325194219.png.md",
     "Screenshot_20260719_102755_Substack.jpg",
     "resources/images/book/zero-kara-dl-2/NumPy_implementation_on_NN.png",
-    "0000-blog/hello_world_ja.md",
-    "0000-blog/hello_world_en.md",
     "resources/videos/xor.mp4",
     "resources/images/resu",
     "resources/images/book/immune-system",
