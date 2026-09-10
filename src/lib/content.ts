@@ -131,6 +131,16 @@ const normalizeDate = (raw: unknown): string => {
   return String(raw)
 }
 
+// A YAML list left as `tags:\n  - ` parses to `[null]`, and a bare `tags:` to
+// `null` — the templates ship that way, so coerce and drop the blanks here.
+const normalizeTags = (raw: unknown): string[] =>
+  Array.isArray(raw)
+    ? raw
+        .filter((t): t is string | number => t != null && t !== "")
+        .map((t) => String(t).trim())
+        .filter((t) => t.length > 0)
+    : []
+
 const readDir = (dir: string): string[] => {
   if (!fs.existsSync(dir)) return []
   const entries = fs.readdirSync(dir, { withFileTypes: true })
@@ -178,7 +188,7 @@ const toBlogMeta = (slug: string, data: Record<string, unknown>, content = ""): 
   title: String(data.title ?? ""),
   description: String(data.description ?? "").trim(),
   label: (data.label as BlogLabel) ?? "article",
-  tags: Array.isArray(data.tags) ? (data.tags as string[]) : [],
+  tags: normalizeTags(data.tags),
   createdAt: data.createdAt ? normalizeDate(data.createdAt) : undefined,
   publishedAt: normalizeDate(data.publishedAt ?? data.date ?? data.createdAt ?? new Date()),
   updatedAt: data.updatedAt ? normalizeDate(data.updatedAt) : undefined,
@@ -319,7 +329,7 @@ const toCreationMeta = (slug: string, data: Record<string, unknown>): CreationMe
   slug,
   title: String(data.title ?? ""),
   description: String(data.description ?? "").trim(),
-  tags: Array.isArray(data.tags) ? (data.tags as string[]) : [],
+  tags: normalizeTags(data.tags),
   createdAt: data.createdAt ? normalizeDate(data.createdAt) : undefined,
   publishedAt: normalizeDate(data.publishedAt ?? data.date ?? data.createdAt ?? new Date()),
   updatedAt: data.updatedAt ? normalizeDate(data.updatedAt) : undefined,
