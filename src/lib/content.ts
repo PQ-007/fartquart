@@ -60,6 +60,8 @@ export type BlogMeta = {
   publishedAt: string
   updatedAt?: string
   cover?: string
+  /** Looping MP4 the post page plays in place of `cover`, which is its poster. */
+  coverVideo?: string
   author?: string
   rating?: number
   pages?: number
@@ -85,6 +87,7 @@ export type CreationMeta = {
   publishedAt: string
   updatedAt?: string
   cover?: string
+  coverVideo?: string
   demo?: string
   repo?: string
   youtube?: string
@@ -193,6 +196,7 @@ const toBlogMeta = (slug: string, data: Record<string, unknown>, content = ""): 
   publishedAt: normalizeDate(data.publishedAt ?? data.date ?? data.createdAt ?? new Date()),
   updatedAt: data.updatedAt ? normalizeDate(data.updatedAt) : undefined,
   cover: data.cover ? String(data.cover) : undefined,
+  coverVideo: data.coverVideo ? String(data.coverVideo) : undefined,
   author: data.author ? String(data.author) : undefined,
   rating: data.rating != null ? Number(data.rating) : undefined,
   pages: data.pages ? Number(data.pages) : undefined,
@@ -334,6 +338,7 @@ const toCreationMeta = (slug: string, data: Record<string, unknown>): CreationMe
   publishedAt: normalizeDate(data.publishedAt ?? data.date ?? data.createdAt ?? new Date()),
   updatedAt: data.updatedAt ? normalizeDate(data.updatedAt) : undefined,
   cover: data.cover ? String(data.cover) : undefined,
+  coverVideo: data.coverVideo ? String(data.coverVideo) : undefined,
   demo: data.demo ? String(data.demo) : undefined,
   repo: data.repo ? String(data.repo) : undefined,
   youtube: data.youtube ? String(data.youtube) : undefined,

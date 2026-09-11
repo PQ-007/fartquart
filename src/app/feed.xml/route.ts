@@ -13,6 +13,10 @@ function escape(str: string) {
     .replace(/"/g, "&quot;")
 }
 
+// Built from the vault at build time, like /search-index.json — nothing here
+// varies per request, so it ships as a static CDN asset.
+export const dynamic = "force-static"
+
 export async function GET() {
   const allPosts = getAllBlogPosts()
   const posts = allPosts.slice(0, 20)

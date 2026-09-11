@@ -9,7 +9,8 @@ draft: false
 tags:
   - oop
   - theory
-cover: https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXRueXR3ODh6c2Rzc2k1NXpxZ2ZmaHQ1MWJ0cG52MzdtYnhhdTl6MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/2eKpcnPOHyb7YZ9jlG/giphy.gif
+cover: resources/images/covers/oop.webp
+coverVideo: resources/images/covers/oop.mp4
 ---
 _Энэхүү нийтлэл нь_ **Объект Хандлагат Програмчлал(OOP)-**_ын ач тус, хэрэглээ, үндсэн дөрвөн ойлголтууд,э тэдгээрийн ажиллах зарчим зэрэг ерөнхий зүйлсийг_ **Python** _хэл дээр танилцуулах зорилготой._
 

@@ -11,6 +11,7 @@ import { ChapterSidebar } from "@/components/post/ChapterSidebar"
 import { MusicPlayer } from "@/components/MusicPlayer"
 import { getAllBlogPosts, getBacklinks, getBookChapter, getBookNoteChapters, getLocalGraph, vaultNodeId } from "@/lib/content"
 import { Backlinks } from "@/components/Backlinks"
+import { VideoPlayer } from "@/components/VideoPlayer"
 import { LocalGraph } from "@/components/LocalGraph"
 import { mdxOptions, sanitizeMdx } from "@/lib/mdx-options"
 import { absoluteUrl, SITE_NAME, DEFAULT_OG_IMAGE } from "@/lib/site"
@@ -100,15 +101,22 @@ export default async function BookChapterPage({
             </header>
             {post.cover && (
               <div className={styles.cover}>
-                <Image
-                  src={coverUrl(post.cover)}
-                  alt={post.title}
-                  fill
-                  sizes="(max-width: 900px) 100vw, 800px"
-                  style={{ objectFit: "cover" }}
-                  priority
-                  unoptimized={isGif(post.cover)}
-                />
+                {post.coverVideo ? (
+                  <VideoPlayer
+                    src={coverUrl(post.coverVideo)}
+                    poster={coverUrl(post.cover)}
+                  />
+                ) : (
+                  <Image
+                    src={coverUrl(post.cover)}
+                    alt={post.title}
+                    fill
+                    sizes="(max-width: 900px) 100vw, 800px"
+                    style={{ objectFit: "cover" }}
+                    priority
+                    unoptimized={isGif(post.cover)}
+                  />
+                )}
               </div>
             )}
             {tocChapters.length > 0 && (

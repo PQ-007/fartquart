@@ -11,6 +11,7 @@ import { mdxComponents } from "@/components/post/mdx-components"
 import { extractChapters } from "@/lib/toc"
 import { formatDate, getAllBlogPosts, getBacklinks, getBlogPost, getBookNoteChapters, getLocalGraph, getRelatedPosts, getTranslationSiblings, vaultNodeId } from "@/lib/content"
 import { Backlinks } from "@/components/Backlinks"
+import { VideoPlayer } from "@/components/VideoPlayer"
 import { LocalGraph } from "@/components/LocalGraph"
 import { RelatedPosts } from "@/components/RelatedPosts"
 import { JsonLd } from "@/components/JsonLd"
@@ -98,7 +99,12 @@ export default async function NoteSlugPage({
             {isLessonNote ? (
               <>
                 <div className={styles.lessonCover}>
-                  {post.cover ? (
+                  {post.cover && post.coverVideo ? (
+                    <VideoPlayer
+                      src={coverUrl(post.coverVideo)}
+                      poster={coverUrl(post.cover)}
+                    />
+                  ) : post.cover ? (
                     <Image
                       src={coverUrl(post.cover)}
                       alt={post.title}

@@ -9,15 +9,17 @@ import { JsonLd } from "@/components/JsonLd"
 import { getFeaturedContent, getGraphData, getAllBlogPosts } from "@/lib/content"
 import { siteJsonLd } from "@/lib/seo"
 import { collapseTranslations } from "@/lib/translations"
-import { getServerLocale } from "@/lib/locale"
+import { defaultLocale } from "@/lib/i18n"
 
 const NOTE_TYPES = ["blog", "note", "chapter", "creation"]
 
-export default async function Home() {
-  const locale = await getServerLocale()
-  const { blogs, creations } = getFeaturedContent(locale)
-  const graphData = getGraphData(locale)
-  const latestPosts = collapseTranslations(getAllBlogPosts(), locale).slice(0, 8)
+// Rendered at the default locale so the page can prerender: reading the locale
+// cookie here would make this (and every other route) dynamic. Locale only
+// picks between translation variants, which the client providers still swap.
+export default function Home() {
+  const { blogs, creations } = getFeaturedContent(defaultLocale)
+  const graphData = getGraphData(defaultLocale)
+  const latestPosts = collapseTranslations(getAllBlogPosts(), defaultLocale).slice(0, 8)
   const heroStats = {
     notes: graphData.nodes.filter((n) => NOTE_TYPES.includes(n.type)).length,
     links: graphData.edges.length,

@@ -14,15 +14,16 @@ import { LocalGraph } from "@/components/LocalGraph"
 import { RelatedPosts } from "@/components/RelatedPosts"
 import { JsonLd } from "@/components/JsonLd"
 import { MusicPlayer } from "@/components/MusicPlayer"
+import { VideoPlayer } from "@/components/VideoPlayer"
 import { mdxOptions, sanitizeMdx } from "@/lib/mdx-options"
-import { coverUrl, isGif } from "@/lib/url"
+import { coverUrl, isGif, NOTE_LABELS } from "@/lib/url"
 import { buildPostMetadata, articleJsonLd, hreflangMap } from "@/lib/seo"
 
-const BLOG_LABELS = ["internship", "contest", "essay", "book-review"] as const
-
+// Everything that isn't a note renders here — including "article", which an
+// explicit allowlist kept missing, leaving those posts to render on demand.
 export const generateStaticParams = () =>
   getAllBlogPosts()
-    .filter((p) => (BLOG_LABELS as readonly string[]).includes(p.label))
+    .filter((p) => !(NOTE_LABELS as readonly string[]).includes(p.label))
     .map((p) => ({ slug: p.slug }))
 
 export const generateMetadata = async ({
@@ -140,15 +141,22 @@ export default async function BlogPostPage({
             {!isBookReview && post.cover && (
               <div className={styles.coverWrapper}>
                 <div className={styles.lightBorder}>
-                  <Image
-                    src={coverUrl(post.cover)}
-                    alt={post.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 800px"
-                    className={styles.coverImage}
-                    priority
-                    unoptimized={isGif(post.cover)}
-                  />
+                  {post.coverVideo ? (
+                    <VideoPlayer
+                      src={coverUrl(post.coverVideo)}
+                      poster={coverUrl(post.cover)}
+                    />
+                  ) : (
+                    <Image
+                      src={coverUrl(post.cover)}
+                      alt={post.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 800px"
+                      className={styles.coverImage}
+                      priority
+                      unoptimized={isGif(post.cover)}
+                    />
+                  )}
                 </div>
               </div>
             )}

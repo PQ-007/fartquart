@@ -59,6 +59,12 @@ const issues = []
 const report = (level, file, msg) =>
   issues.push({ level, file: path.relative(root, file), msg })
 
+// Mirrors normalizeTags() in src/lib/content.ts. A YAML list left as
+// `tags:\n  - ` parses to [null] and a bare `tags:` to null — the templates
+// ship exactly that, and the site silently drops the blanks.
+const listEntries = (raw) => (Array.isArray(raw) ? raw : [])
+const isBlank = (v) => String(v ?? "").trim() === ""
+
 const parseDoc = (file) => {
   try {
     return matter(fs.readFileSync(file, "utf8"))
@@ -204,6 +210,21 @@ for (const doc of docs) {
   if (kind !== "chapter" && kind !== "log-index" && !String(data.description ?? "").trim()) {
     report("warn", file, "missing description — card body and <meta description> are empty")
   }
+  for (const [field, raw] of [
+    ["tags", data.tags],
+    ["new-word", data["new-word"]],
+  ]) {
+    const blanks = listEntries(raw).filter(isBlank).length
+    if (blanks > 0) {
+      report(
+        "warn",
+        file,
+        `${blanks} blank ${blanks === 1 ? "entry" : "entries"} in ${field} — ` +
+          `a bare "- " placeholder from the template; ` +
+          `the site drops it, so fill it in or delete the line`,
+      )
+    }
+  }
   const rawDate = data.publishedAt ?? data.date ?? data.createdAt
   if (kind === "post" || kind === "creation") {
     if (rawDate == null) {
@@ -226,7 +247,8 @@ for (const doc of docs) {
         `label is "${data.label ?? "(none)"}" but the folder implies "${expected}" — it will render as a blog post, not a note`,
       )
     }
-    if (!Array.isArray(data.tags) || data.tags.length === 0) {
+    // Blank entries don't count — `tags: [null]` reaches the site as no tags.
+    if (listEntries(data.tags).every(isBlank)) {
       report("info", file, "no tags — the note won't connect to any tag in the graph")
     }
   }

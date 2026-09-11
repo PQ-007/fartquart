@@ -7,7 +7,8 @@ label: essay
 description: хүсвэл унш, жоохон deterministic байх шүү
 tags:
   - over-automation
-cover: https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjVkd3g1dmNsdW54ajN6Y2kwd3hqZWVnbmg1dHNwenExbTdubGVjMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MCiOE6DBDNkjcA3xTj/giphy.gif
+cover: resources/images/covers/essay_2.webp
+coverVideo: resources/images/covers/essay_2.mp4
 draft: false
 ---
 Энгийн бүхнээс эхлэе. Хүний амьдралд, тухайлбал амжилтанд гадны хүний өнцгөөс харвал тэр хүний өнөөдрийн байр суурь, хийж бүтээсэн зүйлс, орлого, шагнал, хүрсэн өндөрлөг, *зөвхөн өнөөгийн, одоогийн байдлаарх статистик* нь гол. Өөрөөр өнгөрсөнд хийсэн зүйлсийнх нь **үр дүн** чухал юм байнаа гэсэн дүгнэлтэнд хүрч болно. 

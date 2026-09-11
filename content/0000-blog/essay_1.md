@@ -9,7 +9,8 @@ createdAt: 2026-04-09
 publishedAt: 2026-04-09
 updatedAt: 2026-07-04
 draft: false
-cover: https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExeXc0c2d4amhyaGd2aHJtaXhhOGxzc3pzNjAxd25tdWd1MTJrZG44YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JC7og7gnjwCrS323BN/giphy.gif
+cover: resources/images/covers/essay_1.webp
+coverVideo: resources/images/covers/essay_1.mp4
 ---
 Юуны өмнө "**AI**" гэдэг үгнээс эхлэх хэрэгтэй байх. Хиймэл оюун гэдэг утгатай **Artificial Intelligence** гэдэг англи үгний товчлол. Хамрах хүрээ, судлагдахууны хувьд машид арвин салбар. XX зууны физикийн шинжлэх ухааны аугаа ололт (транзистор) электрон тооцоолуурыг үндэслэсэн бол, XXI зууны түүнд суурилсан дэвшилүүд (интернет, гар утас гэх мэт мэдээллийн технологи) энэхүү хиймэл оюун гэх ойлголтыг бүтээх, хөгжүүлэлтийг хурдасгах эхлэл нь болсон. 
 

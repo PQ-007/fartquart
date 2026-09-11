@@ -16,7 +16,8 @@ new-word:
     definition: Нейроны галлах хялбар байдлыг тохируулдаг нэмэлт утга. Threshold-ийг шилжүүлсэнтэй адил.
   - word: AND / OR / NAND ゲート
     definition: Perceptron-оор дуурайж болох үндсэн логик хэлхээнүүд. Жингийн утгыг өөрчилснөөр шилжиж болдог.
-cover: https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2s0ajRvbG00YnVkcXlkemRlazVyc3psODhvbHRpaW9udXJ2MGpudCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT9DPpf0zTqRASyzTi/giphy.gif
+cover: resources/images/covers/02-perceptron.webp
+coverVideo: resources/images/covers/02-perceptron.mp4
 ---
 *Perceptron нь 1957 онд Америкийн судлаач Розен Блаттын загварчилсан Neural Network-ийн 起源 (үндэс, эх болсон) алгоритм нь юм.*
 

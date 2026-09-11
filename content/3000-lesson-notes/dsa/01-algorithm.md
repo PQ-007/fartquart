@@ -1,7 +1,8 @@
 ---
 title: Алгоритм
 description: Компьютерын алгоритм хүний нийгэмд хэрхэн нөлөөлж буй, ажиллах зарчим, түүхийн тухай.
-cover: https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZGhwaDVoYXdsNWU2b2dremhmc2VvNjhyZ2hveGhkYTk3bTg4cWwzaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YHrQQb71BWx2k21w2N/giphy.gif
+cover: resources/images/covers/01-algorithm.webp
+coverVideo: resources/images/covers/01-algorithm.mp4
 label: lesson-note
 tags:
   - algorithm

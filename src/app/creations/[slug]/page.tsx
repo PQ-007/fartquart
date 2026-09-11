@@ -22,6 +22,7 @@ import {
 } from "@/lib/content"
 import { Backlinks } from "@/components/Backlinks"
 import { LocalGraph } from "@/components/LocalGraph"
+import { VideoPlayer } from "@/components/VideoPlayer"
 import { coverUrl } from "@/lib/url"
 import { buildPostMetadata } from "@/lib/seo"
 
@@ -93,6 +94,11 @@ export default async function CreationPage({
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     className={styles.youtube}
+                  />
+                ) : creation.cover && creation.coverVideo ? (
+                  <VideoPlayer
+                    src={coverUrl(creation.coverVideo)}
+                    poster={coverUrl(creation.cover)}
                   />
                 ) : creation.cover ? (
                   <Image

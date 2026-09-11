@@ -10,7 +10,8 @@ updatedAt:
 lang: ja
 translation-key: hello-world
 draft: false
-cover: https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmQ0Ymk2YnJtMG5weWttZnQ5Y2Nsa3RnZW9uejQ4MThtOWhoOWs2bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ns5g4tq7zof6DkQ4Vr/giphy.gif
+cover: resources/images/covers/hello_world.webp
+coverVideo: resources/images/covers/hello_world.mp4
 music: https://youtu.be/IyMszGI1M3k?si=h_GFRp-wS03HZLEu
 ---
 

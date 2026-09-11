@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { cookies } from "next/headers"
 import { Fraunces, Manrope, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import "katex/dist/katex.min.css"
@@ -10,7 +9,7 @@ import { Nav } from "@/components/Nav"
 import { PostImageLightbox } from "@/components/post/PostImageLightbox"
 import { SearchModal } from "@/components/SearchModal"
 import { SITE_URL, SITE_NAME, SITE_DESC, DEFAULT_OG_IMAGE } from "@/lib/site"
-import { defaultLocale as DEFAULT_LOCALE, locales as LOCALES, type Locale } from "@/lib/i18n"
+import { defaultLocale as DEFAULT_LOCALE, locales as LOCALES } from "@/lib/i18n"
 
 const serif = Fraunces({
   subsets: ["latin"],
@@ -58,23 +57,30 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function RootLayout({
+// Stamps the reader's stored theme/locale onto <html> before first paint.
+// Reading them on the server instead (cookies()) would opt every route in the
+// app into dynamic rendering, so this runs as a blocking inline script.
+const BOOTSTRAP = `(function(){try{var d=document.documentElement;\
+var t=localStorage.getItem("theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);\
+var l=localStorage.getItem("locale");if(${JSON.stringify(LOCALES)}.indexOf(l)>-1){\
+d.setAttribute("data-lang",l);d.setAttribute("lang",l)}}catch(e){}})()`
+
+export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const cookieStore = await cookies()
-  const theme = cookieStore.get("theme")?.value === "light" ? "light" : "dark"
-  const cookieLocale = cookieStore.get("locale")?.value
-  const locale = (LOCALES as readonly string[]).includes(cookieLocale ?? "")
-    ? (cookieLocale as Locale)
-    : DEFAULT_LOCALE
-
   return (
-    <html lang={locale} data-theme={theme} data-lang={locale} suppressHydrationWarning>
+    <html
+      lang={DEFAULT_LOCALE}
+      data-theme="dark"
+      data-lang={DEFAULT_LOCALE}
+      suppressHydrationWarning
+    >
       <body
         className={`${serif.variable} ${neue.variable} ${jetbrains.variable}`}
       >
+        <script dangerouslySetInnerHTML={{ __html: BOOTSTRAP }} />
         <ThemeProvider>
-          <LanguageProvider initialLocale={locale}>
+          <LanguageProvider>
             <Background />
             <div aria-hidden="true" className="grid-bg" />
             {children}

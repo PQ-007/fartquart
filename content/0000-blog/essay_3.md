@@ -4,7 +4,8 @@ description: Юмс хэрхэн  бүтсэн талаар, мөн бага з�
 createdAt: 2026-08-23
 publishedAt: 2026-08-29
 updatedAt:
-cover: https://media.giphy.com/media/l1Zx0GjghUUF6cGXFk/giphy.gif
+cover: resources/images/covers/essay_3.webp
+coverVideo: resources/images/covers/essay_3.mp4
 label: essay
 tags:
   - engineering
