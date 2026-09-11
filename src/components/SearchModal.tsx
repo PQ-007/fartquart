@@ -121,7 +121,7 @@ export const SearchModal = () => {
 
   if (!open) return null
 
-  let flatIndex = -1
+  const flatIndex = new Map(ordered.map((h, i) => [h, i]))
 
   return (
     <div className={styles.overlay} onClick={close}>
@@ -152,8 +152,7 @@ export const SearchModal = () => {
                 <section key={type} className={styles.group}>
                   <p className={styles.groupLabel}>{t(GROUP_KEY[type])}</p>
                   {group.map((hit) => {
-                    flatIndex += 1
-                    const idx = flatIndex
+                    const idx = flatIndex.get(hit)!
                     const r = hit.record
                     return (
                       <button

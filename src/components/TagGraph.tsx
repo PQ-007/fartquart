@@ -200,6 +200,9 @@ export const TagGraph = ({
   // and the floating button reopens the panel on demand. (Runs once on mount;
   // starting `true` on both server and client avoids a hydration mismatch.)
   useEffect(() => {
+    // Deliberate: the media query is client-only, and rendering `true` on both
+    // sides first is what avoids the hydration mismatch described above.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (window.matchMedia("(max-width: 720px)").matches) setPanelOpen(false)
   }, [])
 
@@ -213,6 +216,8 @@ export const TagGraph = ({
     if (!syncedOnce.current) {
       syncedOnce.current = true
       try {
+        // Deliberate: one-time reconcile with the persisted value after hydration.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setShowTags(localStorage.getItem(SHOW_TAGS_KEY) !== "0")
       } catch {}
       return

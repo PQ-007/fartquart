@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import styles from "./BookCard.module.css"
 import { coverUrl } from "@/lib/url"
@@ -39,8 +40,13 @@ export const BookCard = ({ post }: { post: BlogMeta }) => {
   <Link href={href} className={styles.card}>
     <div className={styles.cover}>
       {post.cover ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={coverUrl(post.cover)} alt={post.title} />
+        <Image
+          src={coverUrl(post.cover)}
+          alt={post.title}
+          fill
+          sizes="110px"
+          style={{ objectFit: "cover" }}
+        />
       ) : (
         <div className={styles.spine} style={{ background: spineColor(post.title) }}>
           <span className={styles.spineTitle}>{post.title}</span>

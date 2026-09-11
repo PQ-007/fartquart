@@ -4,12 +4,36 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
-  useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react"
 
 type Theme = "dark" | "light"
+
+const KEY = "theme"
+
+// localStorage is the source of truth; the layout's bootstrap script applies it
+// to <html> before first paint. Subscribing to it (rather than reading it in an
+// effect and calling setState) keeps React's copy in sync without the extra
+// render pass, and React swaps from the server snapshot after hydration.
+const listeners = new Set<() => void>()
+
+const subscribe = (onChange: () => void) => {
+  listeners.add(onChange)
+  window.addEventListener("storage", onChange)
+  return () => {
+    listeners.delete(onChange)
+    window.removeEventListener("storage", onChange)
+  }
+}
+
+const readTheme = (): Theme => {
+  try {
+    return localStorage.getItem(KEY) === "light" ? "light" : "dark"
+  } catch {
+    return "dark"
+  }
+}
 
 const ThemeContext = createContext<{
   theme: Theme
@@ -19,25 +43,18 @@ const ThemeContext = createContext<{
 export const useTheme = () => useContext(ThemeContext)
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState<Theme>("dark")
-
-  useEffect(() => {
-    const stored = localStorage.getItem("theme") as Theme | null
-    if (stored === "light" || stored === "dark") {
-      setTheme(stored)
-      document.documentElement.setAttribute("data-theme", stored)
-      document.cookie = `theme=${stored};path=/;max-age=31536000`
-    }
-  }, [])
+  const theme = useSyncExternalStore(subscribe, readTheme, () => "dark" as Theme)
 
   const toggleTheme = useCallback(() => {
-    setTheme((prev) => {
-      const next = prev === "dark" ? "light" : "dark"
-      localStorage.setItem("theme", next)
-      document.cookie = `theme=${next};path=/;max-age=31536000`
-      document.documentElement.setAttribute("data-theme", next)
-      return next
-    })
+    const next: Theme = readTheme() === "dark" ? "light" : "dark"
+    try {
+      localStorage.setItem(KEY, next)
+    } catch {
+      // private mode — the toggle still applies for this page view
+    }
+    document.cookie = `${KEY}=${next};path=/;max-age=31536000`
+    document.documentElement.setAttribute("data-theme", next)
+    for (const notify of listeners) notify()
   }, [])
 
   return (

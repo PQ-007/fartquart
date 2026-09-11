@@ -120,11 +120,13 @@ export const MusicPlayer = ({ src }: { src: string }) => {
     if (yt) {
       const p = ytRef.current
       if (!p) return
-      playing ? p.pauseVideo() : p.playVideo()
+      if (playing) p.pauseVideo()
+      else p.playVideo()
     } else {
       const a = audioRef.current
       if (!a) return
-      playing ? a.pause() : void a.play()
+      if (playing) a.pause()
+      else void a.play()
     }
   }, [yt, playing])
 

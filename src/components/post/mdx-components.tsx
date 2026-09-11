@@ -30,11 +30,13 @@ const textOf = (node: ReactNode): string => {
   return ""
 }
 
-const heading =
-  (Tag: "h2" | "h3") =>
-  ({ children }: { children?: ReactNode }) => (
+const heading = (Tag: "h2" | "h3") => {
+  const Heading = ({ children }: { children?: ReactNode }) => (
     <AnchorHeading tag={Tag} id={slugify(textOf(children))}>{children}</AnchorHeading>
   )
+  Heading.displayName = `Heading(${Tag})`
+  return Heading
+}
 
 const ExternalLink = ({
   href,
