@@ -8,8 +8,8 @@ description: DSA re-try
 tags:
   - algorithm
   - data-structures
-cover: resources/images/covers/dsa.webp
-coverVideo: resources/images/covers/dsa.mp4
+cover: cover_mp4/webp/dsa.webp
+coverVideo: cover_mp4/mp4/dsa.mp4
 draft: false
 ---
 

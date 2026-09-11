@@ -3,12 +3,18 @@
   width: 100%;
   aspect-ratio: 16 / 9;
   z-index: 1;
+  background: #000;
 }
 
 .wrapper video {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  /* Many cover loops are square in a 16/9 slot. `cover` scaled them up to fill
+     the width and cropped the top and bottom off; `contain` keeps the full
+     frame, fitting to the height and letterboxing the sides — against black,
+     so the bars read as framing rather than as a gap in the card. */
+  object-fit: contain;
+  background: #000;
   display: block;
   opacity: 0;
   transition: opacity 0.6s ease;

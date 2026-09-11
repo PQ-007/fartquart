@@ -9,8 +9,8 @@ tags:
   - math
   - computer-science
 draft: false
-cover: resources/images/covers/math-and-computer.webp
-coverVideo: resources/images/covers/math-and-computer.mp4
+cover: cover_mp4/webp/math-and-computer.webp
+coverVideo: cover_mp4/mp4/math-and-computer.mp4
 ---
 
 >ijdf

@@ -4,6 +4,7 @@ import Link from "next/link"
 import styles from "@/app/blog/page.module.css"
 import { PostPreview } from "./PostPreview"
 import { BookCard } from "./BookCard"
+import { Carousel } from "./Carousel"
 import { SlidingText } from "./SlidingText"
 import { Tag } from "./Tag"
 import { useT, useLanguage } from "./LanguageProvider"
@@ -24,7 +25,9 @@ export const BlogListing = ({ posts }: { posts: BlogMeta[] }) => {
   const t = useT()
   const { locale } = useLanguage()
 
-  const filtered = collapseTranslations(posts, locale)
+  const filtered = [...collapseTranslations(posts, locale)].sort(
+    (a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt),
+  )
 
   const labels = [
     ...LABEL_ORDER.filter((l) => filtered.some((p) => p.label === l)),
@@ -46,24 +49,18 @@ export const BlogListing = ({ posts }: { posts: BlogMeta[] }) => {
                 </Link>
               </header>
               {/* Book reviews carry cover/author/rating, so they get the
-                  portrait card grid instead of the wide preview. */}
-              {label === "book-review" ? (
-                <div className={styles.bookGrid}>
-                  {filtered
-                    .filter((p) => p.label === label)
-                    .map((p) => (
+                  portrait card instead of the wide preview. */}
+              <Carousel label={t(`blog.${label}`)}>
+                {filtered
+                  .filter((p) => p.label === label)
+                  .map((p) =>
+                    label === "book-review" ? (
                       <BookCard key={p.slug} post={p} />
-                    ))}
-                </div>
-              ) : (
-                <section className={styles.posts}>
-                  {filtered
-                    .filter((p) => p.label === label)
-                    .map((p) => (
+                    ) : (
                       <PostPreview key={p.slug} type="blog" post={p} />
-                    ))}
-                </section>
-              )}
+                    ),
+                  )}
+              </Carousel>
               <div className={styles.divider} />
             </section>
           ))}

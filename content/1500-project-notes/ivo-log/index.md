@@ -4,7 +4,7 @@ description: Progress notes while building Ivo, a Japanese dictionary and flashc
 createdAt: 2026-06-14
 publishedAt: 2026-06-14
 updatedAt:
-cover: resources/images/covers/spinning-donut.gif
+cover: cover_mp4/gif/spinning-donut.gif
 label: project-log
 category: software
 tags:

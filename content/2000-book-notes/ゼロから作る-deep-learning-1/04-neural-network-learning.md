@@ -5,8 +5,8 @@ publishedAt: 2025-10-15
 updatedAt:
 new-word:
 draft: false
-cover: resources/images/covers/04-neural-network-learning.webp
-coverVideo: resources/images/covers/04-neural-network-learning.mp4
+cover: cover_mp4/webp/04-neural-network-learning.webp
+coverVideo: cover_mp4/mp4/04-neural-network-learning.mp4
 ---
 
 Одоо жинхэнэ сургалтын (жин, bias-аа өгөгдлүүдээсээ автоматаар тохируулах) хэсэг рүүгээ орно. Энэхүү сургалтыг явуулахын тулд **алдааны функц (loss function)** гэдэг зүйл оруулж ирдэг. Энэ алдагдлын функцээ үнэлгээ болгон, энэ функцээс гарч ирэх утгыг багасгах жин, bias зэрэг параметруудыг олох нь сургалтын гол зорилго. Алдааны функцээс гарах утгыг чадах чинээгээрээ багасгах арга болгож **gradient-ын арга** гэдэг функцийн налууг ашигладаг аргыг судлана.

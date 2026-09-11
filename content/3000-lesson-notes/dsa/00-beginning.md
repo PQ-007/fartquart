@@ -1,7 +1,7 @@
 ---
 title: 01 — Эхлэл
-cover: resources/images/covers/00-beginning.webp
-coverVideo: resources/images/covers/00-beginning.mp4
+cover: cover_mp4/webp/00-beginning.webp
+coverVideo: cover_mp4/mp4/00-beginning.mp4
 label: lesson-note
 createdAt: 2026-01-01
 publishedAt: 2026-01-01

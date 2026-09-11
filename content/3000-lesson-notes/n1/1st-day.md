@@ -8,8 +8,8 @@ new-word:
     definition:
   - word:
     definition:
-cover: resources/images/covers/1st-day.webp
-coverVideo: resources/images/covers/1st-day.mp4
+cover: cover_mp4/webp/1st-day.webp
+coverVideo: cover_mp4/mp4/1st-day.mp4
 draft: false
 ---
 ## Дүрэм

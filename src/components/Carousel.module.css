@@ -1,0 +1,100 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.track {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  /* Room for the card's hover lift, which would otherwise clip against the
+     scroll container's edges. */
+  padding: 4px 0;
+  scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+/* flex-basis beats the child's own `width`, so cards keep their two-up size
+   without shrinking to fit the row. */
+.track > * {
+  flex: 0 0 calc(50% - 10px);
+  scroll-snap-align: start;
+}
+
+/* Netflix-style edge arrows: full-height strips that fade in on row hover and
+   page the track by one screenful. */
+.arrow {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(
+    to right,
+    rgba(var(--color-background-rgb), 0.92),
+    rgba(var(--color-background-rgb), 0.35)
+  );
+  color: var(--color-primary);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.25s ease, background 0.25s ease;
+}
+
+.next {
+  background: linear-gradient(
+    to left,
+    rgba(var(--color-background-rgb), 0.92),
+    rgba(var(--color-background-rgb), 0.35)
+  );
+}
+
+.wrapper:hover .arrow,
+.arrow:focus-visible {
+  opacity: 1;
+}
+
+.arrow:hover svg {
+  transform: scale(1.25);
+}
+
+.arrow svg {
+  transition: transform 0.2s ease;
+}
+
+/* Nothing to page toward — keep the edge clear. */
+.arrow:disabled {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+.prev {
+  left: 0;
+}
+
+.next {
+  right: 0;
+}
+
+/* Touch devices swipe; the arrows only cover content. */
+@media (hover: none) {
+  .arrow {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .track > * {
+    flex-basis: 100%;
+  }
+}

@@ -5,6 +5,7 @@ import { formatDate } from "@/lib/format"
 import { Tag } from "@/components/Tag"
 import { coverUrl, isGif, postPath } from "@/lib/url"
 import styles from "./ActivityFeed.module.css"
+import { VideoPlayer } from "./VideoPlayer"
 
 interface Props {
   posts: BlogMeta[]
@@ -31,7 +32,12 @@ export const ActivityFeed = ({ posts }: Props) => (
         return (
           <Link key={post.slug} href={href} className={styles.card}>
             <div className={styles.cover}>
-              {post.cover ? (
+              {post.coverVideo ? (
+                <VideoPlayer
+                  src={coverUrl(post.coverVideo)}
+                  poster={post.cover ? coverUrl(post.cover) : undefined}
+                />
+              ) : post.cover ? (
                 <Image
                   src={coverUrl(post.cover)}
                   alt={post.title}

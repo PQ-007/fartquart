@@ -7,8 +7,8 @@ new-word:
   - word: 動的型付き言語
     definition: dynamic typed language
 draft: false
-cover: resources/images/covers/01-basic-python.webp
-coverVideo: resources/images/covers/01-basic-python.mp4
+cover: cover_mp4/webp/01-basic-python.webp
+coverVideo: cover_mp4/mp4/01-basic-python.mp4
 tags:
   - python
 ---

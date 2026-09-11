@@ -10,6 +10,7 @@ import { useT, useLanguage } from "@/components/LanguageProvider"
 import { collapseTranslations } from "@/lib/translations"
 import card from "./ActivityFeed.module.css"
 import styles from "./RelatedPosts.module.css"
+import { VideoPlayer } from "./VideoPlayer"
 
 const GRADIENTS = [
   "linear-gradient(135deg, #0f1f3d, #1e3a5f)",
@@ -36,7 +37,12 @@ export const RelatedPosts = ({ posts }: { posts: BlogMeta[] }) => {
           {shown.map((post) => (
             <Link key={post.slug} href={postPath(post.slug, post.label)} className={card.card}>
               <div className={card.cover}>
-                {post.cover ? (
+                {post.coverVideo ? (
+                  <VideoPlayer
+                    src={coverUrl(post.coverVideo)}
+                    poster={post.cover ? coverUrl(post.cover) : undefined}
+                  />
+                ) : post.cover ? (
                   <Image
                     src={coverUrl(post.cover)}
                     alt={post.title}

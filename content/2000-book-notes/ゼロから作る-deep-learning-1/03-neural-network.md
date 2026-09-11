@@ -5,8 +5,8 @@ publishedAt: 2025-10-07
 updatedAt: 2026-08-14
 tags:
 new-word:
-cover: resources/images/covers/03-neural-network.webp
-coverVideo: resources/images/covers/03-neural-network.mp4
+cover: cover_mp4/webp/03-neural-network.webp
+coverVideo: cover_mp4/mp4/03-neural-network.mp4
 ---
 
 ***Perceptron  ашиглахад***:

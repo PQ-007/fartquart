@@ -10,8 +10,8 @@ updatedAt:
 lang: mn
 translation-key: hello-world
 draft: false
-cover: resources/images/covers/hello_world.webp
-coverVideo: resources/images/covers/hello_world.mp4
+cover: cover_mp4/webp/hello_world.webp
+coverVideo: cover_mp4/mp4/hello_world.mp4
 music: https://youtu.be/IyMszGI1M3k?si=h_GFRp-wS03HZLEu
 ---
 

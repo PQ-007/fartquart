@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import styles from "./LessonCard.module.css"
+import { VideoPlayer } from "./VideoPlayer"
 import { coverUrl, isGif } from "@/lib/url"
 import type { BlogMeta } from "@/lib/content"
 
@@ -24,7 +25,12 @@ export const LessonCard = ({ post }: { post: BlogMeta }) => {
   return (
     <Link href={href} className={styles.card}>
       <div className={styles.cover}>
-        {post.cover ? (
+        {post.coverVideo ? (
+          <VideoPlayer
+            src={coverUrl(post.coverVideo)}
+            poster={post.cover ? coverUrl(post.cover) : undefined}
+          />
+        ) : post.cover ? (
           <Image
             src={coverUrl(post.cover)}
             alt={post.title}

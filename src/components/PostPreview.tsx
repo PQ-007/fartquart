@@ -27,6 +27,7 @@ type PostPreviewProps =
 const MediaSlot = ({
   mainVideo,
   cover,
+  coverVideo,
   youtube,
   href,
   label,
@@ -34,6 +35,7 @@ const MediaSlot = ({
 }: {
   mainVideo?: string
   cover?: string
+  coverVideo?: string
   youtube?: string
   href: string
   label: string
@@ -48,6 +50,11 @@ const MediaSlot = ({
         <Link href={href} className={styles.videoLink}>
           {mainVideo ? (
             <VideoPlayer src={videoUrl(mainVideo)} />
+          ) : coverVideo ? (
+            <VideoPlayer
+              src={coverUrl(coverVideo)}
+              poster={cover ? coverUrl(cover) : undefined}
+            />
           ) : cover ? (
             <Image
               src={coverUrl(cover)}
@@ -87,6 +94,7 @@ export const PostPreview = ({ type = "post", post }: PostPreviewProps) => {
       <div className={styles.container}>
         <MediaSlot
           cover={blog.cover}
+          coverVideo={blog.coverVideo}
           href={`/blog/${blog.slug}`}
           label={blog.title}
           viewText={t("ui.view")}
@@ -118,6 +126,7 @@ export const PostPreview = ({ type = "post", post }: PostPreviewProps) => {
       <div className={styles.container}>
         <MediaSlot
           cover={creation.cover}
+          coverVideo={creation.coverVideo}
           youtube={creation.youtube}
           href={`/creations/${creation.slug}`}
           label={creation.title}

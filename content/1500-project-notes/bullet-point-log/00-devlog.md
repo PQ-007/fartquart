@@ -4,8 +4,8 @@ description:
 createdAt: 2026-07-06
 publishedAt: 2026-07-06
 updatedAt:
-cover: resources/images/covers/00-devlog.webp
-coverVideo: resources/images/covers/00-devlog.mp4
+cover: cover_mp4/webp/00-devlog.webp
+coverVideo: cover_mp4/mp4/00-devlog.mp4
 label: project-log
 tags:
 draft: false

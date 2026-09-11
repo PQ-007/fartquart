@@ -232,7 +232,7 @@ title: Ivo — Build Log
 description: Ivo-г хөгжүүлж буй явцын тэмдэглэл
 createdAt: 2026-06-14
 publishedAt: 2026-06-14
-cover: resources/images/covers/spinning-donut.gif
+cover: cover_mp4/gif/spinning-donut.gif
 label: project-log
 category: software
 tags:

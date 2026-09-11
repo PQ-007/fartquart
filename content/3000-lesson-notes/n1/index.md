@@ -9,8 +9,8 @@ tags:
   - japanese
   - jlpt
   - training
-cover: resources/images/covers/n1.webp
-coverVideo: resources/images/covers/n1.mp4
+cover: cover_mp4/webp/n1.webp
+coverVideo: cover_mp4/mp4/n1.mp4
 draft: true
 ---
  7 сарын шалгалт хүртэл 20 өдөр

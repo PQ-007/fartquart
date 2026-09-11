@@ -4,7 +4,7 @@ description: 2D top-down, multiplayer тоглоом хөгжүүлэлт
 createdAt: 2026-07-06
 publishedAt: 2026-07-06
 updatedAt:
-cover: resources/images/covers/spinning-donut.gif
+cover: cover_mp4/gif/spinning-donut.gif
 label: project-log
 category: game
 tags:

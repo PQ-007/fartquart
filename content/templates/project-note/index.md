@@ -4,7 +4,7 @@ description:
 createdAt: 2026-07-04
 publishedAt:
 updatedAt:
-cover: resources/images/covers/spinning-donut.gif
+cover: cover_mp4/gif/spinning-donut.gif
 label: project-log
 category:
 tags:
