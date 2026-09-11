@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link"
+import { useState } from "react"
 import styles from "@/app/blog/page.module.css"
 import { PostPreview } from "./PostPreview"
 import { BookCard } from "./BookCard"
@@ -24,6 +24,16 @@ const LABEL_ORDER: BlogLabel[] = [
 export const BlogListing = ({ posts }: { posts: BlogMeta[] }) => {
   const t = useT()
   const { locale } = useLanguage()
+  // Rows a reader has expanded out of the carousel into a full grid.
+  const [expanded, setExpanded] = useState<Set<string>>(new Set())
+
+  const toggle = (label: string) =>
+    setExpanded((prev) => {
+      const next = new Set(prev)
+      if (next.has(label)) next.delete(label)
+      else next.add(label)
+      return next
+    })
 
   const filtered = [...collapseTranslations(posts, locale)].sort(
     (a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt),
@@ -40,30 +50,41 @@ export const BlogListing = ({ posts }: { posts: BlogMeta[] }) => {
     <div className={styles.outer}>
       <div className={styles.wrapper}>
         <div className={styles.inner}>
-          {labels.map((label) => (
-            <section key={label} className={styles.categorySection}>
-              <header className={styles.header}>
-                <Tag name={t(`blog.${label}`)} />
-                <Link href="/tags">
-                  <SlidingText text={t("ui.allTags")} arrow />
-                </Link>
-              </header>
-              {/* Book reviews carry cover/author/rating, so they get the
-                  portrait card instead of the wide preview. */}
-              <Carousel label={t(`blog.${label}`)}>
-                {filtered
-                  .filter((p) => p.label === label)
-                  .map((p) =>
-                    label === "book-review" ? (
-                      <BookCard key={p.slug} post={p} />
-                    ) : (
-                      <PostPreview key={p.slug} type="blog" post={p} />
-                    ),
+          {labels.map((label) => {
+            // Book reviews carry cover/author/rating, so they get the portrait
+            // card instead of the wide preview.
+            const cards = filtered
+              .filter((p) => p.label === label)
+              .map((p) =>
+                label === "book-review" ? (
+                  <BookCard key={p.slug} post={p} />
+                ) : (
+                  <PostPreview key={p.slug} type="blog" post={p} />
+                ),
+              )
+            const isOpen = expanded.has(label)
+            return (
+              <section key={label} className={styles.categorySection}>
+                <header className={styles.header}>
+                  <Tag name={t(`blog.${label}`)} />
+                  {cards.length > 2 && (
+                    <SlidingText
+                      text={isOpen ? t("ui.showLess") : `${t("ui.seeAll")} (${cards.length})`}
+                      arrow
+                      onClick={() => toggle(label)}
+                      expanded={isOpen}
+                    />
                   )}
-              </Carousel>
-              <div className={styles.divider} />
-            </section>
-          ))}
+                </header>
+                {isOpen ? (
+                  <section className={styles.posts}>{cards}</section>
+                ) : (
+                  <Carousel label={t(`blog.${label}`)}>{cards}</Carousel>
+                )}
+                <div className={styles.divider} />
+              </section>
+            )
+          })}
         </div>
       </div>
     </div>

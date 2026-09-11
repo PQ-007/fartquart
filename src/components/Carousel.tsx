@@ -1,6 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react"
+import type React from "react"
 import styles from "./Carousel.module.css"
 
 const Chevron = ({ dir }: { dir: "prev" | "next" }) => (
@@ -34,6 +35,9 @@ export const Carousel = ({
   const trackRef = useRef<HTMLDivElement>(null)
   const [canPrev, setCanPrev] = useState(false)
   const [canNext, setCanNext] = useState(false)
+  // Box of the card artwork, so the arrows sit centred on the frame rather
+  // than on the whole card (whose title and date sit well below it).
+  const [frame, setFrame] = useState<{ top: number; height: number } | null>(null)
 
   const sync = useCallback(() => {
     const el = trackRef.current
@@ -41,6 +45,12 @@ export const Carousel = ({
     const max = el.scrollWidth - el.clientWidth
     setCanPrev(el.scrollLeft > 1)
     setCanNext(el.scrollLeft < max - 1)
+
+    const media = el.querySelector("img, video")
+    if (!media) return
+    const m = media.getBoundingClientRect()
+    const t = el.getBoundingClientRect()
+    if (m.height > 0) setFrame({ top: Math.max(0, m.top - t.top), height: m.height })
   }, [])
 
   useEffect(() => {
@@ -65,8 +75,15 @@ export const Carousel = ({
     el.scrollBy({ left: dir * el.clientWidth, behavior: "smooth" })
   }
 
+  const frameVars = frame
+    ? ({
+        "--frame-top": `${frame.top}px`,
+        "--frame-height": `${frame.height}px`,
+      } as React.CSSProperties)
+    : undefined
+
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} style={frameVars}>
       <button
         type="button"
         className={`${styles.arrow} ${styles.prev}`}
@@ -74,7 +91,9 @@ export const Carousel = ({
         disabled={!canPrev}
         aria-label={`Scroll ${label} backward`}
       >
-        <Chevron dir="prev" />
+        <span className={styles.knob}>
+          <Chevron dir="prev" />
+        </span>
       </button>
       <div
         ref={trackRef}
@@ -92,7 +111,9 @@ export const Carousel = ({
         disabled={!canNext}
         aria-label={`Scroll ${label} forward`}
       >
-        <Chevron dir="next" />
+        <span className={styles.knob}>
+          <Chevron dir="next" />
+        </span>
       </button>
     </div>
   )

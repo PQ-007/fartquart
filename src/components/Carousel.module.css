@@ -27,54 +27,63 @@
   scroll-snap-align: start;
 }
 
-/* Netflix-style edge arrows: full-height strips that fade in on row hover and
-   page the track by one screenful. */
+/* Edge arrows: a full-height scrim to lift the control off whatever cover art
+   sits underneath, plus a solid knob so the affordance is legible at a glance.
+   Always visible while there is somewhere to page — hover only strengthens it. */
 .arrow {
   position: absolute;
-  top: 4px;
-  bottom: 4px;
+  /* Spans the artwork only (measured in Carousel.tsx), so the knob lands on the
+     middle of the frame instead of the middle of the card. */
+  top: var(--frame-top, 4px);
+  height: var(--frame-height, calc(100% - 8px));
   z-index: 3;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
+  width: 64px;
   border: none;
   border-radius: 12px;
   background: linear-gradient(
     to right,
-    rgba(var(--color-background-rgb), 0.92),
-    rgba(var(--color-background-rgb), 0.35)
+    rgba(var(--color-background-rgb), 0.85),
+    rgba(var(--color-background-rgb), 0)
   );
   color: var(--color-primary);
   cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.25s ease, background 0.25s ease;
+  opacity: 1;
+  transition: background 0.25s ease;
 }
 
 .next {
   background: linear-gradient(
     to left,
-    rgba(var(--color-background-rgb), 0.92),
-    rgba(var(--color-background-rgb), 0.35)
+    rgba(var(--color-background-rgb), 0.85),
+    rgba(var(--color-background-rgb), 0)
   );
 }
 
-.wrapper:hover .arrow,
-.arrow:focus-visible {
-  opacity: 1;
+.knob {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-divider);
+  background: var(--color-background);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
-.arrow:hover svg {
-  transform: scale(1.25);
-}
-
-.arrow svg {
-  transition: transform 0.2s ease;
+.arrow:hover .knob,
+.arrow:focus-visible .knob {
+  transform: scale(1.12);
+  background: rgba(var(--color-primary-rgb), 0.1);
 }
 
 /* Nothing to page toward — keep the edge clear. */
 .arrow:disabled {
-  opacity: 0 !important;
+  opacity: 0;
   pointer-events: none;
 }
 

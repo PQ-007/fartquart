@@ -20,6 +20,8 @@ const dict = {
     ui: {
       all: "All",
       allTags: "All Tags",
+      seeAll: "See All",
+      showLess: "Show Less",
       readPost: "Read Post",
       viewCreation: "View Creation",
       continueReading: "Continue Reading",
@@ -129,6 +131,8 @@ const dict = {
     ui: {
       all: "Бүгд",
       allTags: "Бүх таг",
+      seeAll: "Бүгдийг харах",
+      showLess: "Хураах",
       readPost: "Унших",
       viewCreation: "Харах",
       continueReading: "Үргэлжлүүлэх",
@@ -238,6 +242,8 @@ const dict = {
     ui: {
       all: "すべて",
       allTags: "全タグ",
+      seeAll: "すべて表示",
+      showLess: "折りたたむ",
       readPost: "読む",
       viewCreation: "見る",
       continueReading: "続きを読む",
