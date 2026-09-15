@@ -138,37 +138,12 @@
             }
           },
           {
-            "id": "57d6c8bb7bc6d918",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
-                "followCursor": true,
-                "showSearch": true,
-                "searchQuery": ""
-              },
-              "icon": "lucide-list",
-              "title": "Outline of 02-perceptron"
-            }
-          },
-          {
-            "id": "2658e34e1852a6c5",
-            "type": "leaf",
-            "state": {
-              "type": "git-view",
-              "state": {},
-              "icon": "git-pull-request",
-              "title": "Source Control"
-            }
-          },
-          {
-            "id": "7d48d2e264376e55",
+            "id": "5bb451214768456d",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
+                "file": "0000-blog/essay_3.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -178,25 +153,40 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 02-perceptron"
+              "title": "Backlinks"
             }
           },
           {
-            "id": "47edc99c2532577c",
+            "id": "12f4ea500af214d4",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "2000-book-notes/ゼロから作る-deep-learning-1/02-perceptron.md",
+                "file": "0000-blog/essay_3.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 02-perceptron"
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "925be1359c6f1778",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "0000-blog/essay_3.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -218,7 +208,7 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "d1c62bb5b88e072c",
+  "active": "408bc4028c727a89",
   "lastOpenFiles": [
     "0000-blog/essay_4.md",
     "0000-blog/essay_2.md",
