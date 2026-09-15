@@ -72,6 +72,8 @@ export type BlogMeta = {
   lang?: string
   translationKey?: string
   draft?: boolean
+  /** Held at the top of the home feed, above the latest posts. */
+  pinned?: boolean
   category?: CreationCategory
   projectNickname?: string
 }
@@ -211,6 +213,7 @@ const toBlogMeta = (slug: string, data: Record<string, unknown>, content = ""): 
       ? String(data.translationKey)
       : undefined,
   draft: Boolean(data.draft),
+  pinned: Boolean(data.pinned),
   category: data.category ? (String(data.category) as BlogMeta["category"]) : undefined,
   projectNickname: data["project-nickname"]
     ? String(data["project-nickname"])

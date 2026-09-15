@@ -6,7 +6,9 @@
   max-width: 900px;
   margin: 0 auto;
   padding: 60px var(--main-padding-sides) 0;
-  background: var(--color-background);
+  /* Transparent so the background bubbles carry on through this column — an
+     opaque fill here reads as a black box cut out of them. */
+  background: transparent;
 }
 
 /* Steam-profile-style hero banner: a full-bleed cover image behind the

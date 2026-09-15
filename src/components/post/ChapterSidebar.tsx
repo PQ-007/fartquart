@@ -49,18 +49,19 @@ export const ChapterSidebar = ({ bookSlug, bookHref, chapters, newWords, sources
           ↑ {bookSlug}
         </Link>
 
-        <div className={styles.slider}>
-          <div className={styles.sliderFill} style={{ transform: `scaleX(${progress})` }} />
-        </div>
-
         {chapters.length > 0 && (
-          <ul ref={listRef} className={styles.list}>
-            {chapters.map((ch) => (
-              <li key={ch.id} data-active={activeId === ch.id} data-level={ch.level}>
-                <a href={`#${ch.id}`}>{ch.title}</a>
-              </li>
-            ))}
-          </ul>
+          <div className={styles.tocRow}>
+            <div className={styles.slider}>
+              <div className={styles.sliderFill} style={{ transform: `scaleY(${progress})` }} />
+            </div>
+            <ul ref={listRef} className={styles.list}>
+              {chapters.map((ch) => (
+                <li key={ch.id} data-active={activeId === ch.id} data-level={ch.level}>
+                  <a href={`#${ch.id}`}>{ch.title}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
 
         {newWords && newWords.length > 0 && <VocabReview words={newWords} />}

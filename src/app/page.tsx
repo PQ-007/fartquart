@@ -19,7 +19,9 @@ const NOTE_TYPES = ["blog", "note", "chapter", "creation"]
 export default function Home() {
   const { blogs, creations } = getFeaturedContent(defaultLocale)
   const graphData = getGraphData(defaultLocale)
-  const latestPosts = collapseTranslations(getAllBlogPosts(), defaultLocale).slice(0, 8)
+  const allPosts = collapseTranslations(getAllBlogPosts(), defaultLocale)
+  const pinnedPost = allPosts.find((p) => p.pinned)
+  const latestPosts = allPosts.filter((p) => !p.pinned).slice(0, 8)
   const heroStats = {
     notes: graphData.nodes.filter((n) => NOTE_TYPES.includes(n.type)).length,
     links: graphData.edges.length,
@@ -66,7 +68,7 @@ export default function Home() {
           <div className={styles.divider} />
           <div className={styles.projectsInnerWrapper}>
             <div className={styles.projectsInner}>
-              <ActivityFeed posts={latestPosts} />
+              <ActivityFeed posts={latestPosts} pinned={pinnedPost} />
             </div>
           </div>
         </div>

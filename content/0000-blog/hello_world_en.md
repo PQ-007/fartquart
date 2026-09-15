@@ -10,6 +10,7 @@ updatedAt:
 lang: en
 translation-key: hello-world
 draft: false
+pinned: true
 cover: cover_mp4/webp/hello_world.webp
 coverVideo: cover_mp4/mp4/hello_world.mp4
 music: https://youtu.be/IyMszGI1M3k?si=h_GFRp-wS03HZLEu

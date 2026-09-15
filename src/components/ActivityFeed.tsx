@@ -9,6 +9,8 @@ import { VideoPlayer } from "./VideoPlayer"
 
 interface Props {
   posts: BlogMeta[]
+  /** Held above the latest list in its own section. */
+  pinned?: BlogMeta
 }
 
 const GRADIENTS = [
@@ -23,49 +25,58 @@ const GRADIENTS = [
 const gradientFor = (slug: string) =>
   GRADIENTS[[...slug].reduce((a, c) => a + c.charCodeAt(0), 0) % GRADIENTS.length]
 
-export const ActivityFeed = ({ posts }: Props) => (
+const Card = ({ post }: { post: BlogMeta }) => (
+  <Link href={postPath(post.slug, post.label)} className={styles.card}>
+    <div className={styles.cover}>
+      {post.coverVideo ? (
+        <VideoPlayer
+          src={coverUrl(post.coverVideo)}
+          poster={post.cover ? coverUrl(post.cover) : undefined}
+        />
+      ) : post.cover ? (
+        <Image
+          src={coverUrl(post.cover)}
+          alt={post.title}
+          fill
+          sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw"
+          style={{ objectFit: "cover" }}
+          unoptimized={isGif(post.cover)}
+        />
+      ) : (
+        <div
+          className={styles.placeholder}
+          style={{ background: gradientFor(post.slug) }}
+        >
+          <span className={styles.placeholderLabel}>{post.label.replace("-", " ")}</span>
+          <span className={styles.placeholderTitle}>{post.title}</span>
+        </div>
+      )}
+    </div>
+    <div className={styles.info}>
+      <p className={styles.title}>{post.title}</p>
+      <div className={styles.meta}>
+        <Tag name={post.label} />
+        <p className={styles.date}>{formatDate(post.publishedAt)}</p>
+      </div>
+    </div>
+  </Link>
+)
+
+export const ActivityFeed = ({ posts, pinned }: Props) => (
   <div className={styles.feed}>
+    {pinned && (
+      <section className={styles.pinned}>
+        <h2 className={styles.heading}>Pinned</h2>
+        <div className={styles.grid}>
+          <Card post={pinned} />
+        </div>
+      </section>
+    )}
     <h2 className={styles.heading}>Latest</h2>
     <div className={styles.grid}>
-      {posts.map((post) => {
-        const href = postPath(post.slug, post.label)
-        return (
-          <Link key={post.slug} href={href} className={styles.card}>
-            <div className={styles.cover}>
-              {post.coverVideo ? (
-                <VideoPlayer
-                  src={coverUrl(post.coverVideo)}
-                  poster={post.cover ? coverUrl(post.cover) : undefined}
-                />
-              ) : post.cover ? (
-                <Image
-                  src={coverUrl(post.cover)}
-                  alt={post.title}
-                  fill
-                  sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw"
-                  style={{ objectFit: "cover" }}
-                  unoptimized={isGif(post.cover)}
-                />
-              ) : (
-                <div
-                  className={styles.placeholder}
-                  style={{ background: gradientFor(post.slug) }}
-                >
-                  <span className={styles.placeholderLabel}>{post.label.replace("-", " ")}</span>
-                  <span className={styles.placeholderTitle}>{post.title}</span>
-                </div>
-              )}
-            </div>
-            <div className={styles.info}>
-              <p className={styles.title}>{post.title}</p>
-              <div className={styles.meta}>
-                <Tag name={post.label} />
-                <p className={styles.date}>{formatDate(post.publishedAt)}</p>
-              </div>
-            </div>
-          </Link>
-        )
-      })}
+      {posts.map((post) => (
+        <Card key={post.slug} post={post} />
+      ))}
     </div>
   </div>
 )
