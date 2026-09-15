@@ -22,14 +22,12 @@ interface Props {
 
 export const ChapterSidebar = ({ bookSlug, bookHref, chapters, newWords, sources }: Props) => {
   const [activeId, setActiveId] = useState<string | null>(null)
-  const [progress, setProgress] = useState(0)
+  const [marker, setMarker] = useState<{ top: number; height: number } | null>(null)
   const listRef = useRef<HTMLUListElement>(null)
+  const railRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const onScroll = () => {
-      const doc = document.documentElement
-      const max = doc.scrollHeight - window.innerHeight
-      setProgress(max > 0 ? Math.min(window.scrollY / max, 1) : 0)
       let current: string | null = null
       for (const ch of chapters) {
         const el = document.getElementById(ch.id)
@@ -42,6 +40,26 @@ export const ChapterSidebar = ({ bookSlug, bookHref, chapters, newWords, sources
     return () => window.removeEventListener("scroll", onScroll)
   }, [chapters])
 
+  // The rail marks where the active entry sits in the list. Deriving it from
+  // page scroll instead would drift away from that entry on any page whose
+  // sections aren't all the same length.
+  useEffect(() => {
+    const measure = () => {
+      const list = listRef.current
+      const rail = railRef.current
+      const index = chapters.findIndex((c) => c.id === activeId)
+      if (!list || !rail || index < 0) return setMarker(null)
+      const li = list.children[index] as HTMLElement | undefined
+      if (!li) return setMarker(null)
+      const a = li.getBoundingClientRect()
+      const b = rail.getBoundingClientRect()
+      setMarker({ top: a.top - b.top, height: a.height })
+    }
+    measure()
+    window.addEventListener("resize", measure)
+    return () => window.removeEventListener("resize", measure)
+  }, [activeId, chapters])
+
   return (
     <aside className={styles.sidebar}>
       <div className={styles.inner}>
@@ -51,8 +69,11 @@ export const ChapterSidebar = ({ bookSlug, bookHref, chapters, newWords, sources
 
         {chapters.length > 0 && (
           <div className={styles.tocRow}>
-            <div className={styles.slider}>
-              <div className={styles.sliderFill} style={{ transform: `scaleY(${progress})` }} />
+            <div className={styles.slider} ref={railRef}>
+              <div
+                className={styles.sliderFill}
+                style={marker ? { top: marker.top, height: marker.height } : { height: 0 }}
+              />
             </div>
             <ul ref={listRef} className={styles.list}>
               {chapters.map((ch) => (

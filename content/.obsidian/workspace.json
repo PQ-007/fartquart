@@ -192,6 +192,8 @@
   },
   "active": "4dfd1ae5b0a4e55d",
   "lastOpenFiles": [
+    "0000-blog/sed3milUA",
+    "0000-blog/zz_cover_test.md",
     "templates/book-note/chapter-name.md.tmp.9194.cc5cae0cac8a",
     "3000-lesson-notes/n1/1st-day.md",
     "2000-book-notes/ゼロから作る-deep-learning-2/00_neural_network_revision.md",
@@ -217,7 +219,6 @@
     "3000-lesson-notes/comp-arch/00_big_picture.md",
     "3000-lesson-notes/comp-arch/Untitled.md",
     "3000-lesson-notes/comp-arch/index.md",
-    "0000-blog/essay_3.md",
     "resources/cover_mp4/gif/spinning-donut.gif",
     "resources/cover_mp4/webp/oop.webp",
     "resources/cover_mp4/webp/n1.webp",
@@ -236,7 +237,6 @@
     "resources/cover_mp4/mp4/essay_2.mp4",
     "resources/cover_mp4/mp4/essay_1.mp4",
     "resources/cover_mp4/mp4/dsa.mp4",
-    "resources/cover_mp4/mp4/blender.mp4",
-    "resources/cover_mp4/mp4/1章-ニューラルネットワークの復習.mp4"
+    "resources/cover_mp4/mp4/blender.mp4"
   ]
 }

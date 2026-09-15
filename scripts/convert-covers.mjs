@@ -77,6 +77,23 @@ const probe = (target) => {
   }
 }
 
+// A still cover (jpg/png/webp, or a one-frame gif) gets a poster and nothing
+// else — encoding a single frame as a video would be pure waste, and the post
+// would then claim a `coverVideo:` that never moves.
+const isAnimated = (file) => {
+  try {
+    const out = execFileSync(
+      "ffprobe",
+      ["-v", "error", "-select_streams", "v:0", "-count_frames",
+       "-show_entries", "stream=nb_read_frames", "-of", "csv=p=0", file],
+      { encoding: "utf8", timeout: 60000, stdio: ["ignore", "pipe", "ignore"] },
+    ).trim()
+    return Number(out) > 1
+  } catch {
+    return false
+  }
+}
+
 /**
  * Giphy serves `giphy-hd.mp4` for some uploads — often 1080p where the GIF is
  * 480p. Returns whichever rendition has more pixels; a few GIFs are already
@@ -136,10 +153,13 @@ for (const t of targets) {
 
 let before = 0
 let after = 0
+// Which slugs ended up with a video, so the frontmatter rewrite knows whether
+// to add a `coverVideo:` line.
+const animatedSlugs = new Set()
 
 for (const [url, slug] of byUrl) {
   const best = bestSource(url)
-  const gif = path.join(tmp, `${slug}.${best.ext}`)
+  const src = path.join(tmp, `${slug}.${best.ext}`)
   const mp4 = path.join(OUT_DIR, "mp4", `${slug}.mp4`)
   const webp = path.join(OUT_DIR, "webp", `${slug}.webp`)
 
@@ -148,30 +168,40 @@ for (const [url, slug] of byUrl) {
     console.error(`[convert-covers] ${slug}: HTTP ${res.status} for ${best.url}`)
     process.exit(1)
   }
-  fs.writeFileSync(gif, Buffer.from(await res.arrayBuffer()))
+  fs.writeFileSync(src, Buffer.from(await res.arrayBuffer()))
 
-  // h264 needs even dimensions; faststart puts the moov atom up front so the
-  // first frames play before the whole file lands.
-  ffmpeg([
-    "-i", gif,
-    "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2:flags=lanczos",
-    // Quality is worth bytes here, but a few grainy loops encode enormously at
-    // a flat CRF — hence the ceiling, scaled to the source resolution.
-    "-c:v", "libx264", "-crf", "22", "-preset", "slow",
-    "-maxrate", best.w >= 720 ? "2000k" : "1200k",
-    "-bufsize", best.w >= 720 ? "4000k" : "2400k",
-    "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-an",
-    mp4,
-  ])
-  ffmpeg(["-i", gif, "-frames:v", "1", "-c:v", "libwebp", "-quality", "92", webp])
+  const animated = isAnimated(src)
+  ffmpeg(["-i", src, "-frames:v", "1", "-c:v", "libwebp", "-quality", "92", webp])
 
-  before += fs.statSync(gif).size
-  after += fs.statSync(mp4).size + fs.statSync(webp).size
-  const out = probe(mp4)
+  if (animated) {
+    animatedSlugs.add(slug)
+    // h264 needs even dimensions; faststart puts the moov atom up front so the
+    // first frames play before the whole file lands.
+    ffmpeg([
+      "-i", src,
+      "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2:flags=lanczos",
+      // Quality is worth bytes here, but a few grainy loops encode enormously at
+      // a flat CRF — hence the ceiling, scaled to the source resolution.
+      "-c:v", "libx264", "-crf", "22", "-preset", "slow",
+      "-maxrate", best.w >= 720 ? "2000k" : "1200k",
+      "-bufsize", best.w >= 720 ? "4000k" : "2400k",
+      "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-an",
+      mp4,
+    ])
+  } else if (fs.existsSync(mp4)) {
+    // A cover that used to be animated and is now a still — drop the stale video.
+    fs.rmSync(mp4)
+  }
+
+  before += fs.statSync(src).size
+  after += fs.statSync(webp).size + (animated ? fs.statSync(mp4).size : 0)
+  const out = probe(animated ? mp4 : webp)
   console.log(
     `  ${slug.padEnd(28)} ${best.ext === "mp4" ? "hd" : "  "} ` +
       `${best.w}x${best.h} → ${out?.w}x${out?.h}  ` +
-      `${mb(mp4)} MB mp4 + ${mb(webp)} MB poster`,
+      (animated
+        ? `${mb(mp4)} MB mp4 + ${mb(webp)} MB poster`
+        : `${mb(webp)} MB still`),
   )
 }
 
@@ -182,7 +212,9 @@ for (const { file, line, url } of targets) {
   const slug = byUrl.get(url)
   const lines = fs.readFileSync(file, "utf8").split("\n")
   lines[line] = `cover: ${OUT_REL}/webp/${slug}.webp`
-  lines.splice(line + 1, 0, `coverVideo: ${OUT_REL}/mp4/${slug}.mp4`)
+  if (animatedSlugs.has(slug)) {
+    lines.splice(line + 1, 0, `coverVideo: ${OUT_REL}/mp4/${slug}.mp4`)
+  }
   fs.writeFileSync(file, lines.join("\n"))
 }
 

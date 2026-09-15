@@ -35,10 +35,10 @@
 
 .sliderFill {
   position: absolute;
-  inset: 0;
+  left: 0;
+  width: 100%;
   background: var(--color-accent);
-  transform-origin: top;
-  transform: scaleY(0);
+  transition: top 0.2s ease, height 0.2s ease;
 }
 
 .list {

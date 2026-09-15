@@ -1,0 +1,44 @@
+#!/bin/sh
+# Turn remote cover URLs into self-hosted assets before they reach a commit.
+#
+# Paste `cover: https://…` into a note's frontmatter and commit: the image or
+# GIF is downloaded, converted (see scripts/convert-covers.mjs), the frontmatter
+# is rewritten to the local path, and the generated files are staged alongside.
+#
+# Installed via `git config core.hooksPath .githooks`.
+
+# Staged markdown under content/ — nothing else can carry a cover.
+files=$(git diff --cached --name-only --diff-filter=ACM -- content | grep '\.md$')
+if [ -z "$files" ]; then
+  exit 0
+fi
+
+# Bail out before spending anything unless a staged note really has a remote
+# cover; every ordinary commit takes this path.
+hits=$(printf '%s\n' "$files" | tr '\n' '\0' |
+  xargs -0 -r grep -lE '^cover:[[:space:]]*https?://' 2>/dev/null)
+if [ -z "$hits" ]; then
+  exit 0
+fi
+
+if ! command -v ffmpeg >/dev/null 2>&1; then
+  echo "[covers] ffmpeg not found — committing the remote URL as-is." >&2
+  exit 0
+fi
+
+echo "[covers] remote cover found, downloading and converting…"
+
+# A download can fail for reasons that have nothing to do with this commit
+# (offline, dead link). The URL stays in the frontmatter, so the next commit
+# retries — better than blocking a vault backup.
+if ! node scripts/convert-covers.mjs; then
+  echo "[covers] conversion failed — the remote URL is committed unchanged." >&2
+  echo "[covers] re-run 'npm run covers' once you are online." >&2
+  exit 0
+fi
+
+# Re-stage the rewritten frontmatter plus the generated assets.
+printf '%s\n' "$hits" | tr '\n' '\0' | xargs -0 -r git add --
+git add -- public/cover_mp4 scripts/cover-sources.json
+
+exit 0
