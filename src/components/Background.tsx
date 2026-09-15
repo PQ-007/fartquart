@@ -15,37 +15,40 @@ uniform vec2 u_resolution;
 uniform float u_time;
 uniform float u_light;
 
-float blob(vec2 uv, vec2 center, float radius) {
+// a soft round bubble — dense in the middle, falling off to nothing at the rim
+float bubble(vec2 uv, vec2 center, float radius) {
   float d = length(uv - center);
-  return smoothstep(radius, 0.0, d);
+  return smoothstep(radius, radius * 0.30, d);
 }
 
 void main() {
   vec2 uv = gl_FragCoord.xy / u_resolution.xy;
   uv.x *= u_resolution.x / u_resolution.y;
-  float t = u_time * 0.12;
 
-  vec2 c1 = vec2(0.85 + 0.25 * sin(t * 0.9), 0.75 + 0.2 * cos(t * 0.7));
-  vec2 c2 = vec2(0.35 + 0.3 * cos(t * 0.6 + 2.0), 0.25 + 0.25 * sin(t * 0.8 + 1.0));
-  vec2 c3 = vec2(1.25 + 0.3 * sin(t * 0.5 + 4.0), 0.2 + 0.3 * cos(t * 0.9 + 3.0));
-
-  vec3 deep  = vec3(0.02, 0.05, 0.22);
-  vec3 ocean = vec3(0.04, 0.10, 0.35);
-  vec3 blue  = vec3(0.06, 0.15, 0.42);
-
-  vec3 color = vec3(0.0);
-  color += deep  * blob(uv, c1, 0.85) * 0.9;
-  color += ocean * blob(uv, c2, 0.75) * 0.8;
-  color += blue  * blob(uv, c3, 0.9)  * 0.7;
-
-  // subtle grain to avoid banding
-  float grain = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);
-  color += (grain - 0.5) * 0.015;
-
-  if (u_light > 0.5) {
-    float lum = dot(color, vec3(0.333));
-    color = vec3(1.0) - lum * vec3(0.03, 0.06, 0.20);
+  // blue bubbles, each on its own slow loop so they never travel as a pack
+  float bubbles = 0.0;
+  for (int i = 0; i < 4; i++) {
+    float fi = float(i);
+    vec2 c = vec2(
+      0.80 + 0.80 * sin(u_time * 0.043 * (0.55 + fi * 0.13) + fi * 1.7),
+      0.50 + 0.44 * cos(u_time * 0.037 * (0.70 + fi * 0.11) + fi * 2.3));
+    float r = 0.042 + 0.030 * fract(fi * 0.613 + 0.2);
+    bubbles += bubble(uv, c, r);
   }
+  bubbles = clamp(bubbles, 0.0, 1.0);
+
+  // The ground is flat — pure black or pure white — so it matches
+  // --color-background exactly; only the bubbles carry any colour.
+  vec3 color;
+  if (u_light > 0.5) {
+    color = mix(vec3(1.0), vec3(0.25, 0.55, 1.0), bubbles * 0.50);
+  } else {
+    color = vec3(0.16, 0.45, 1.0) * bubbles * 0.62;
+  }
+
+  // grain only inside the bubbles, to break banding on their falloff
+  float grain = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);
+  color += (grain - 0.5) * 0.02 * bubbles;
 
   gl_FragColor = vec4(color, 1.0);
 }`
@@ -110,7 +113,7 @@ export const Background = () => {
       renderAt((performance.now() - start) / 1000)
       frame = requestAnimationFrame(loop)
     }
-    // Reduced motion gets one frozen frame (a mid-drift time where the blobs
+    // Reduced motion gets one frozen frame (a mid-drift time where the bubbles
     // are nicely spread); the loop also stops while the tab is hidden.
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)")
     const still = () => renderAt(40)

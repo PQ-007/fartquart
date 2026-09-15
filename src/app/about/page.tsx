@@ -18,7 +18,6 @@ export default function AboutPage() {
   return (
     <>
       <section className={styles.heroBanner}>
-        <div className={styles.heroOverlay} />
         <div className={styles.lightning} />
         <div className={styles.heroInner}>
           <div className={styles.about}>

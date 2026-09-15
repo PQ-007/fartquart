@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useSyncExternalStore,
   type ReactNode,
 } from "react"
@@ -44,6 +45,13 @@ export const useTheme = () => useContext(ThemeContext)
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const theme = useSyncExternalStore(subscribe, readTheme, () => "dark" as Theme)
+
+  // The favicon tracks the site's own theme, which prefers-color-scheme (the
+  // OS setting) knows nothing about, so the link has to be swapped by hand.
+  useEffect(() => {
+    const link = document.querySelector<HTMLLinkElement>('link[rel="icon"]')
+    if (link) link.href = theme === "light" ? "/favicon-light.png" : "/favicon-dark.png"
+  }, [theme])
 
   const toggleTheme = useCallback(() => {
     const next: Theme = readTheme() === "dark" ? "light" : "dark"

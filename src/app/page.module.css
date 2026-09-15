@@ -76,9 +76,8 @@
   font-style: italic;
 }
 
-/* ── Hero decorations ──────────────────────────────────────────────────── */
-
-/* Faint dot grid + accent glow behind the hero text (left half only). */
+/* Faint dot grid behind the hero text (left half only). Deliberately no
+   colour glow with it — the ground stays flat. */
 .heroDecor {
   position: absolute;
   inset: 0;
@@ -88,13 +87,6 @@
   background-size: 26px 26px;
   mask-image: radial-gradient(ellipse 52% 52% at 26% 52%, black, transparent 72%);
   -webkit-mask-image: radial-gradient(ellipse 52% 52% at 26% 52%, black, transparent 72%);
-}
-
-.heroDecor::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 42% 46% at 24% 54%, rgba(59, 130, 246, 0.09), transparent 70%);
 }
 
 .text .eyebrow {

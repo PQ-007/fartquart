@@ -11,7 +11,7 @@
 
 /* Steam-profile-style hero banner: a full-bleed cover image behind the
    profile/intro, with a periodic lightning flash as a nod to White Scars.
-   Fixed dark overlay regardless of site theme, so it always pops. */
+   The cover is shown raw — no tint over it. */
 .heroBanner {
   position: relative;
   left: 50%;
@@ -33,18 +33,6 @@
 :global(html[data-theme="light"]) .heroBanner {
   background-color: #dce3ea;
   background-image: url("/resources/images/covers/about-me-cover-light.jpg");
-}
-
-.heroOverlay {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(5, 9, 18, 0.35) 0%,
-    rgba(5, 9, 18, 0.55) 55%,
-    rgba(5, 9, 18, 0.9) 100%
-  );
 }
 
 .lightning {
@@ -84,6 +72,16 @@
   gap: 50px;
   align-items: center;
   color: #eef3ff;
+  /* The cover is shown untinted, so the text carries its own contrast
+     against whatever it happens to sit on. */
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.85), 0 0 3px rgba(0, 0, 0, 0.7);
+}
+
+/* The light cover is bright where the dark one is near-black, so the text
+   flips rather than putting a tint back over the image. */
+:global(html[data-theme="light"]) .about {
+  color: #14181f;
+  text-shadow: 0 1px 12px rgba(255, 255, 255, 0.9), 0 0 3px rgba(255, 255, 255, 0.8);
 }
 
 .about h1,

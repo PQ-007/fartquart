@@ -40,14 +40,12 @@ export const metadata: Metadata = {
     canonical: "/",
     types: { "application/rss+xml": "/feed.xml" },
   },
-  // Config-based so the favicon can swap on prefers-color-scheme; a file-based
-  // icon in app/ would override this whole field.
+  // Theme here is the site's own toggle, not prefers-color-scheme, so the icon
+  // can't be chosen with a media query — ThemeProvider swaps this href. The
+  // default matches the default theme (dark). A file-based icon in app/ would
+  // override this whole field.
   icons: {
-    icon: [
-      { url: "/favicon-light.png", media: "(prefers-color-scheme: light)" },
-      { url: "/favicon-dark.png", media: "(prefers-color-scheme: dark)" },
-    ],
-    shortcut: "/favicon.ico",
+    icon: "/favicon-dark.png",
     apple: "/apple-touch-icon.png",
   },
   openGraph: {
@@ -92,7 +90,6 @@ export default function RootLayout({
         <ThemeProvider>
           <LanguageProvider>
             <Background />
-            <div aria-hidden="true" className="grid-bg" />
             {children}
             <Nav />
             <SearchModal />
