@@ -8,7 +8,7 @@ updatedAt:
 tags:
   - math
   - computer-science
-draft: false
+draft: true
 cover: cover_mp4/webp/math-and-computer.webp
 coverVideo: cover_mp4/mp4/math-and-computer.mp4
 ---

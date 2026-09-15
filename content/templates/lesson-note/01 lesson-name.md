@@ -2,7 +2,7 @@
 # One file per lesson. Files sort by filename, so either name them by topic
 # (Inheritance.md) or prefix with 01, 02 … when order matters. No `label` needed.
 title: 01 — Lesson Name
-createdAt: 2026-07-04
+createdAt: {{date:YYYY-MM-DD}}
 publishedAt:
 updatedAt:
 new-word:

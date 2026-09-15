@@ -1,7 +1,7 @@
 ---
 title:
 description:
-createdAt: 2026-07-04
+createdAt: {{date:YYYY-MM-DD}}
 publishedAt:
 updatedAt:
 cover: cover_mp4/gif/spinning-donut.gif

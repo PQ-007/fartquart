@@ -1,9 +1,11 @@
 ---
-title: — Chapter Name
-createdAt: {{date:YYYY-MM-DD}}
+title:
+createdAt: 2026-07-04
 publishedAt:
 updatedAt:
 new-word:
+  - word:
+    definition:
   - word:
     definition:
 draft: false
@@ -14,3 +16,9 @@ draft: false
 > connect the chapters. Delete this note.
 
 Chapter notes here.
+
+> Your notes for this lesson. `## Headings` feed the in-lesson sidebar; external
+> links you cite show up under "Sources". Auto ← Prev / Next → links connect the
+> lessons. Delete this note.
+
+Lesson notes here.
