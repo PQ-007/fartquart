@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3000-lesson-notes/comp-arch/index.md",
+                "file": "0000-blog/essay_1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "essay_1"
             }
           }
         ],
@@ -249,9 +249,9 @@
   },
   "active": "ef43257e12145c7a",
   "lastOpenFiles": [
+    "3000-lesson-notes/comp-arch/index.md",
     "3000-lesson-notes/blender/index.md",
     "3000-lesson-notes/dsa/index.md",
-    "3000-lesson-notes/comp-arch/index.md",
     "3000-lesson-notes/n1/1st-day.md",
     "1000-creations/sudoku_solver_generator.md",
     "1000-creations/hanko.md",
