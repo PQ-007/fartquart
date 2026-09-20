@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1000-creations/sudoku_solver_generator.md",
+                "file": "3000-lesson-notes/comp-arch/index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "sudoku_solver_generator"
+              "title": "index"
             }
           }
         ],
@@ -247,8 +247,13 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "e47f161d564c2924",
+  "active": "ef43257e12145c7a",
   "lastOpenFiles": [
+    "3000-lesson-notes/blender/index.md",
+    "3000-lesson-notes/dsa/index.md",
+    "3000-lesson-notes/comp-arch/index.md",
+    "3000-lesson-notes/n1/1st-day.md",
+    "1000-creations/sudoku_solver_generator.md",
     "1000-creations/hanko.md",
     "1000-creations/bullet_point.md",
     "1000-creations/chess.md",
@@ -259,7 +264,6 @@
     "0000-blog/sed3milUA",
     "0000-blog/zz_cover_test.md",
     "templates/book-note/chapter-name.md.tmp.9194.cc5cae0cac8a",
-    "3000-lesson-notes/n1/1st-day.md",
     "2000-book-notes/ゼロから作る-deep-learning-2/00_neural_network_revision.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/04_neural_network_learning.md",
     "2000-book-notes/ゼロから作る-deep-learning-1/03_neural_network.md",
@@ -267,16 +271,12 @@
     "2000-book-notes/ゼロから作る-deep-learning-1/01_basic_python.md",
     "1500-project-notes/ivo-log/00_devlog.md",
     "1500-project-notes/bullet-point-log/00_devlog.md",
-    "1000-creations/sudoku_solver_generator.md",
     "0000-blog/oop.md",
     "0000-blog/search-engine.md",
     "0000-blog/math_and_computer.md",
     "0000-blog/kosen_grad.md",
     "0000-blog/internship_tsh.md",
     "0000-blog/internship_susano.md",
-    "0000-blog/internship_co_graph.md",
-    "0000-blog/internship_alten_japan.md",
-    "3000-lesson-notes/dsa/02_data_structure.md",
     "resources/cover_mp4/gif/spinning-donut.gif",
     "resources/cover_mp4/webp/oop.webp",
     "resources/cover_mp4/webp/n1.webp",
