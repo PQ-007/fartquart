@@ -1,5 +1,5 @@
 ---
-title: Bits & Logic
+title: Boolean Logic
 createdAt: 2026-09-16
 publishedAt:
 updatedAt:
