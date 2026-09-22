@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3000-lesson-notes/comp-arch/12_operating_system.md",
+                "file": "3000-lesson-notes/comp-arch/index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "12_operating_system"
+              "title": "index"
             }
           }
         ],
@@ -249,9 +249,11 @@
   },
   "active": "65d64c27fff11313",
   "lastOpenFiles": [
+    "3000-lesson-notes/comp-arch/01_boolean_logic.md",
+    "3000-lesson-notes/comp-arch/03_memory.md",
+    "3000-lesson-notes/comp-arch/12_operating_system.md",
     "3000-lesson-notes/comp-arch/index.md",
     "3000-lesson-notes/comp-arch/11_compiler_code_generation.md",
-    "3000-lesson-notes/comp-arch/12_operating_system.md",
     "3000-lesson-notes/comp-arch/10_compiler_parsing.md",
     "3000-lesson-notes/comp-arch/08_vm_program_control.md",
     "3000-lesson-notes/comp-arch/09_high_level_language.md",
@@ -260,9 +262,7 @@
     "3000-lesson-notes/comp-arch/06_assembler.md",
     "3000-lesson-notes/comp-arch/05_computer_architecture.md",
     "3000-lesson-notes/comp-arch/Untitled 2.md",
-    "3000-lesson-notes/comp-arch/03_memory.md",
     "3000-lesson-notes/comp-arch/02_boolean_arithmetic.md",
-    "3000-lesson-notes/comp-arch/01_boolean_logic.md",
     "3000-lesson-notes/comp-arch/Untitled 8.md",
     "3000-lesson-notes/comp-arch/Untitled 7.md",
     "3000-lesson-notes/comp-arch/Untitled 6.md",
