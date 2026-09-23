@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3000-lesson-notes/comp-arch/index.md",
+                "file": "3000-lesson-notes/comp-arch/01_boolean_logic.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "01_boolean_logic"
             }
           }
         ],
@@ -249,10 +249,12 @@
   },
   "active": "65d64c27fff11313",
   "lastOpenFiles": [
+    "1000-creations/ivo.md.tmp.7474.b85a14ca9835",
+    "1000-creations/hanko.md.tmp.7474.4de6e205a75a",
+    "3000-lesson-notes/comp-arch/index.md",
     "3000-lesson-notes/comp-arch/01_boolean_logic.md",
     "3000-lesson-notes/comp-arch/03_memory.md",
     "3000-lesson-notes/comp-arch/12_operating_system.md",
-    "3000-lesson-notes/comp-arch/index.md",
     "3000-lesson-notes/comp-arch/11_compiler_code_generation.md",
     "3000-lesson-notes/comp-arch/10_compiler_parsing.md",
     "3000-lesson-notes/comp-arch/08_vm_program_control.md",
@@ -274,7 +276,6 @@
     "3000-lesson-notes/blender/index.md",
     "3000-lesson-notes/dsa/index.md",
     "3000-lesson-notes/n1/1st-day.md",
-    "1000-creations/sudoku_solver_generator.md",
     "0000-blog/sed3milUA",
     "templates/book-note/chapter-name.md.tmp.9194.cc5cae0cac8a",
     "resources/cover_mp4/gif/spinning-donut.gif",
@@ -293,7 +294,6 @@
     "resources/cover_mp4/mp4/hello_world.mp4",
     "resources/cover_mp4/mp4/essay_3.mp4",
     "resources/cover_mp4/mp4/essay_2.mp4",
-    "resources/cover_mp4/mp4/essay_1.mp4",
-    "resources/cover_mp4/mp4/dsa.mp4"
+    "resources/cover_mp4/mp4/essay_1.mp4"
   ]
 }

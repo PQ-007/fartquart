@@ -8,16 +8,12 @@ import { Tag } from "@/components/Tag"
 import { Chapters } from "@/components/post/Chapters"
 import { mdxComponents } from "@/components/post/mdx-components"
 import { extractChapters } from "@/lib/toc"
-import type { Blog } from "@/lib/content"
 import {
   formatDate,
   getAllCreations,
   getBacklinks,
   getCreation,
   getLocalGraph,
-  getProjectLog,
-  getProjectLogChapter,
-  getProjectLogChapters,
   vaultNodeId,
 } from "@/lib/content"
 import { Backlinks } from "@/components/Backlinks"
@@ -57,12 +53,6 @@ export default async function CreationPage({
   if (!creation) notFound()
 
   const chapters = extractChapters(creation.content)
-  const log = getProjectLog(slug)
-  const logChapters = log
-    ? getProjectLogChapters(slug)
-        .map((ch) => getProjectLogChapter(slug, ch.slug))
-        .filter((c): c is Blog => Boolean(c))
-    : []
 
   return (
     <>
@@ -130,9 +120,6 @@ export default async function CreationPage({
             chapters={chapters}
             demo={creation.demo}
             repo={creation.repo}
-            logs={logChapters}
-            logCategory={log?.category}
-            creationSlug={slug}
           />
         </main>
       </div>

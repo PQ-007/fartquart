@@ -13,7 +13,7 @@ publishedAt: 2026-06-21
 updatedAt:
 demo: https://hanko-amber.vercel.app
 repo: https://github.com/PQ-007/hanko
-cover: resources/images/hanko-cover.png
+cover: resources/images/covers/hanko-cover.png
 ---
 ## Хийх сэдэл
 

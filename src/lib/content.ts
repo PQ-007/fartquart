@@ -34,7 +34,6 @@ const BOOK_NOTES_DIR = contentDir("book-notes")
 const LESSON_NOTES_DIR = contentDir("lesson-notes")
 const ALL_BLOG_DIRS = [BLOG_DIR, BOOK_NOTES_DIR, LESSON_NOTES_DIR]
 const CREATIONS_DIR = contentDir("creations")
-const PROJECT_NOTES_DIR = contentDir("project-notes")
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -75,7 +74,6 @@ export type BlogMeta = {
   /** Held at the top of the home feed, above the latest posts. */
   pinned?: boolean
   category?: CreationCategory
-  projectNickname?: string
 }
 
 export type Blog = BlogMeta & { content: string }
@@ -215,11 +213,6 @@ const toBlogMeta = (slug: string, data: Record<string, unknown>, content = ""): 
   draft: Boolean(data.draft),
   pinned: Boolean(data.pinned),
   category: data.category ? (String(data.category) as BlogMeta["category"]) : undefined,
-  projectNickname: data["project-nickname"]
-    ? String(data["project-nickname"])
-    : data.projectNickname
-      ? String(data.projectNickname)
-      : undefined,
 })
 
 export const getAllBlogPosts = memo((): BlogMeta[] =>
@@ -349,10 +342,6 @@ const toCreationMeta = (slug: string, data: Record<string, unknown>): CreationMe
   category: data.category ? (String(data.category) as CreationMeta["category"]) : undefined,
 })
 
-/** A creation's own `category`, falling back to its attached project-log's `category`. */
-const creationCategoryOf = (c: CreationMeta): CreationMeta["category"] =>
-  c.category ?? getProjectLog(c.slug)?.category
-
 export const getAllCreations = memo((): CreationMeta[] =>
   readDir(CREATIONS_DIR)
     .map((f) => {
@@ -361,7 +350,6 @@ export const getAllCreations = memo((): CreationMeta[] =>
       return toCreationMeta(slug, data)
     })
     .filter((c) => !c.draft)
-    .map((c) => ({ ...c, category: creationCategoryOf(c) }))
     .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt)))
 
 export const getCreation = memo((slug: string): Creation | null => {
@@ -369,75 +357,14 @@ export const getCreation = memo((slug: string): Creation | null => {
     const file = path.join(CREATIONS_DIR, `${slug}${ext}`)
     if (fs.existsSync(file)) {
       const { data, content } = matter(fs.readFileSync(file, "utf8"))
-      const meta = toCreationMeta(slug, data)
-      return { ...meta, category: creationCategoryOf(meta), content }
+      return { ...toCreationMeta(slug, data), content }
     }
   }
   return null
 })
 
 export const getCreationsByTag = (tag: string): CreationMeta[] =>
-  getAllCreations().filter((c) => creationTagsOf(c).includes(tag))
-
-// ── Project logs ─────────────────────────────────────────────────────────────
-// A project-log is a chaptered folder (index.md + entry files) that attaches to
-// a creation via a `project-nickname` field matching the creation's slug —
-// it lives outside ALL_BLOG_DIRS so it never appears on /blog directly.
-
-const findProjectLogDir = memo((creationSlug: string): string | null => {
-  if (!fs.existsSync(PROJECT_NOTES_DIR)) return null
-  const dirs = fs
-    .readdirSync(PROJECT_NOTES_DIR, { withFileTypes: true })
-    .filter((e) => e.isDirectory())
-  for (const d of dirs) {
-    const indexFile = path.join(PROJECT_NOTES_DIR, d.name, "index.md")
-    if (!fs.existsSync(indexFile)) continue
-    const { data } = matter(fs.readFileSync(indexFile, "utf8"))
-    const nickname = data["project-nickname"] ?? data.projectNickname
-    if (nickname && String(nickname) === creationSlug) {
-      return path.join(PROJECT_NOTES_DIR, d.name)
-    }
-  }
-  return null
-})
-
-export const getProjectLog = memo((creationSlug: string): Blog | null => {
-  const dir = findProjectLogDir(creationSlug)
-  if (!dir) return null
-  const { data, content } = matter(fs.readFileSync(path.join(dir, "index.md"), "utf8"))
-  if (data.draft) return null
-  return { ...toBlogMeta(path.basename(dir), data, content), content }
-})
-
-export const getProjectLogChapters = memo((creationSlug: string): { slug: string; title: string }[] => {
-  const dir = findProjectLogDir(creationSlug)
-  if (!dir) return []
-  return fs
-    .readdirSync(dir)
-    .filter((f) => f.endsWith(".md") && f !== "index.md")
-    .sort()
-    .flatMap((f) => {
-      const chSlug = f.replace(/\.md$/, "")
-      const { data } = matter(fs.readFileSync(path.join(dir, f), "utf8"))
-      if (data.draft) return []
-      return [{ slug: chSlug, title: String(data.title ?? chSlug) }]
-    })
-})
-
-export const getProjectLogChapter = memo((creationSlug: string, chapterSlug: string): Blog | null => {
-  const dir = findProjectLogDir(creationSlug)
-  if (!dir) return null
-  const file = path.join(dir, `${chapterSlug}.md`)
-  if (!fs.existsSync(file)) return null
-  const { data, content } = matter(fs.readFileSync(file, "utf8"))
-  return { ...toBlogMeta(chapterSlug, data, content), content }
-})
-
-/** A creation's own tags plus its attached project-log's tags, if any. */
-const creationTagsOf = (c: CreationMeta): string[] => {
-  const log = getProjectLog(c.slug)
-  return [...new Set([...c.tags, ...(log?.tags ?? [])])]
-}
+  getAllCreations().filter((c) => c.tags.includes(tag))
 
 // ── Featured ───────────────────────────────────────────────────────────────
 
@@ -485,7 +412,7 @@ export const getAllBlogTags = (): TagCount[] => {
 export const getAllCreationTags = (): TagCount[] => {
   const counts = new Map<string, number>()
   for (const creation of getAllCreations()) {
-    for (const tag of creationTagsOf(creation)) {
+    for (const tag of creation.tags) {
       counts.set(tag, (counts.get(tag) ?? 0) + 1)
     }
   }
@@ -539,8 +466,7 @@ type VaultDoc = {
 
 /**
  * Every published document as a flat list: blog posts, note indexes, their
- * chapters, creations (with their project log merged in — the log's index
- * renders on the creation page), and project-log chapters.
+ * chapters, and creations.
  * `collapse` picks one language variant per translation group.
  */
 const getVaultDocs = memo((locale: string = defaultLocale, collapse = true): VaultDoc[] => {
@@ -580,33 +506,17 @@ const getVaultDocs = memo((locale: string = defaultLocale, collapse = true): Vau
   }
 
   for (const c of getAllCreations()) {
-    const id = `creation:${c.slug}`
-    const log = getProjectLog(c.slug)
     docs.push({
-      id,
+      id: `creation:${c.slug}`,
       type: "creation",
       title: c.title,
       href: `/creations/${encodeURIComponent(c.slug)}`,
       basename: c.slug,
-      tags: creationTagsOf(c),
+      tags: c.tags,
       hub: "hub:creations",
-      content: [getCreation(c.slug)?.content, log?.content].filter(Boolean).join("\n"),
+      content: getCreation(c.slug)?.content ?? "",
       publishedAt: c.publishedAt,
     })
-    for (const ch of getProjectLogChapters(c.slug)) {
-      const chapter = getProjectLogChapter(c.slug, ch.slug)
-      docs.push({
-        id: `chapter:${c.slug}/${ch.slug}`,
-        type: "chapter",
-        title: ch.title,
-        href: `/creations/${encodeURIComponent(c.slug)}/log/${encodeURIComponent(ch.slug)}`,
-        basename: ch.slug,
-        tags: chapter?.tags ?? [],
-        parentId: id,
-        content: chapter?.content ?? "",
-        publishedAt: chapter?.publishedAt ?? c.publishedAt,
-      })
-    }
   }
 
   return docs
