@@ -1,43 +1,26 @@
 "use client"
 
-import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import styles from "./Chapters.module.css"
-import { SlidingText } from "../SlidingText"
 import { TranslationSwitcher } from "../TranslationSwitcher"
-import { useT } from "../LanguageProvider"
 import type { Chapter } from "@/lib/toc"
 import type { BlogMeta } from "@/lib/content"
-import { CREATION_CATEGORY_LABEL, type CreationCategory } from "@/lib/categories"
 
 export type { Chapter }
 
-export type LogEntry = { slug: string; title: string }
-
 export const Chapters = ({
   chapters,
-  demo,
-  repo,
   siblings,
   currentSlug,
-  logs,
-  logCategory,
-  creationSlug,
 }: {
   chapters: Chapter[]
-  demo?: string
-  repo?: string
   siblings?: BlogMeta[]
   currentSlug?: string
-  logs?: LogEntry[]
-  logCategory?: CreationCategory
-  creationSlug?: string
 }) => {
   const [activeId, setActiveId] = useState<string | null>(null)
   const [marker, setMarker] = useState<{ top: number; height: number } | null>(null)
   const listRef = useRef<HTMLUListElement>(null)
   const railRef = useRef<HTMLDivElement>(null)
-  const t = useT()
 
   useEffect(() => {
     const onScroll = () => {
@@ -81,18 +64,6 @@ export const Chapters = ({
         {siblings && currentSlug && (
           <TranslationSwitcher siblings={siblings} currentSlug={currentSlug} />
         )}
-        <div className={styles.buttonWrapper}>
-          {demo && (
-            <a href={demo} rel="noopener noreferrer" target="_blank">
-              <SlidingText text={t("ui.liveDemo")} arrow />
-            </a>
-          )}
-          {repo && (
-            <a href={repo} rel="noopener noreferrer" target="_blank">
-              <SlidingText text={t("ui.sourceCode")} arrow />
-            </a>
-          )}
-        </div>
         {chapters.length > 0 && (
           <div className={styles.tocRow}>
             <div className={styles.slider} ref={railRef}>
@@ -109,25 +80,6 @@ export const Chapters = ({
                   data-level={chapter.level}
                 >
                   <a href={`#${chapter.id}`}>{chapter.title}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {logs && logs.length > 0 && creationSlug && (
-          <div className={styles.logsSection}>
-            <div className={styles.logsHeading}>
-              <p>Project Log</p>
-              {logCategory && (
-                <span className={styles.logsCategory}>{CREATION_CATEGORY_LABEL[logCategory]}</span>
-              )}
-            </div>
-            <ul className={styles.logsList}>
-              {logs.map((entry) => (
-                <li key={entry.slug}>
-                  <Link href={`/creations/${encodeURIComponent(creationSlug)}/log/${encodeURIComponent(entry.slug)}`}>
-                    {entry.title}
-                  </Link>
                 </li>
               ))}
             </ul>

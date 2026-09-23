@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react"
 import Image from "next/image"
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
@@ -5,6 +6,7 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import styles from "./page.module.css"
 import { Footer } from "@/components/Footer"
 import { Tag } from "@/components/Tag"
+import { CreationLinks } from "@/components/post/CreationLinks"
 import { Chapters } from "@/components/post/Chapters"
 import { mdxComponents } from "@/components/post/mdx-components"
 import { extractChapters } from "@/lib/toc"
@@ -21,6 +23,7 @@ import { LocalGraph } from "@/components/LocalGraph"
 import { VideoPlayer } from "@/components/VideoPlayer"
 import { coverUrl } from "@/lib/url"
 import { buildPostMetadata } from "@/lib/seo"
+import { CREATION_CATEGORY_COLOR, CREATION_CATEGORY_LABEL } from "@/lib/categories"
 
 const youtubeId = (str: string): string => {
   const match = str.match(/(?:youtu\.be\/|[?&]v=)([A-Za-z0-9_-]{11})/)
@@ -70,10 +73,19 @@ export default async function CreationPage({
                 </p>
               </div>
               <div className={styles.tags}>
+                {creation.category && (
+                  <span
+                    className={styles.categoryBadge}
+                    style={{ "--badge-color": CREATION_CATEGORY_COLOR[creation.category] } as CSSProperties}
+                  >
+                    {CREATION_CATEGORY_LABEL[creation.category]}
+                  </span>
+                )}
                 {creation.tags.map((tag) => (
                   <Tag key={tag} name={tag} href={`/tags/${encodeURIComponent(tag)}`} />
                 ))}
               </div>
+              <CreationLinks demo={creation.demo} repo={creation.repo} />
             </header>
             <div className={styles.mediaWrapper}>
               <div className={styles.lightBorder}>
@@ -100,7 +112,18 @@ export default async function CreationPage({
                     priority
                   />
                 ) : (
-                  <div className={styles.placeholder} />
+                  <div
+                    className={styles.placeholder}
+                    style={
+                      creation.category
+                        ? ({ "--placeholder-tint": `${CREATION_CATEGORY_COLOR[creation.category]}26` } as CSSProperties)
+                        : undefined
+                    }
+                  >
+                    {creation.category && (
+                      <span className={styles.placeholderLabel}>{CREATION_CATEGORY_LABEL[creation.category]}</span>
+                    )}
+                  </div>
                 )}
               </div>
             </div>
@@ -116,11 +139,7 @@ export default async function CreationPage({
               />
             </div>
           </article>
-          <Chapters
-            chapters={chapters}
-            demo={creation.demo}
-            repo={creation.repo}
-          />
+          <Chapters chapters={chapters} />
         </main>
       </div>
       <LocalGraph data={getLocalGraph(vaultNodeId.creation(slug))} currentId={vaultNodeId.creation(slug)} />

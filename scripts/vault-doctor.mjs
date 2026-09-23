@@ -8,9 +8,8 @@
 //   warning  missing description, missing date (publishedAt falls back to the
 //            build timestamp, so the post re-dates itself every deploy),
 //            `[[wikilinks]]` that render as plain text (target is a draft,
-//            a private note, or doesn't exist), notes whose label doesn't
-//            match their folder, and project logs whose `project-nickname`
-//            matches no creation
+//            a private note, or doesn't exist), and notes whose label doesn't
+//            match their folder
 //   info     orphaned notes (no wikilinks in or out) and untagged documents
 //
 // Exits 1 when any error is found (warnings/info never fail), so CI catches
@@ -45,7 +44,6 @@ const BLOG_DIR = contentDir("blog")
 const BOOK_NOTES_DIR = contentDir("book-notes")
 const LESSON_NOTES_DIR = contentDir("lesson-notes")
 const CREATIONS_DIR = contentDir("creations")
-const PROJECT_NOTES_DIR = contentDir("project-notes")
 const RESOURCES_DIR = contentDir("resources")
 
 const WIKILINK_RE = /(?<!!)\[\[([^\]]+)\]\]/g
@@ -113,42 +111,10 @@ collectFlatAndFolders(BOOK_NOTES_DIR, "post")
 collectFlatAndFolders(LESSON_NOTES_DIR, "post")
 collectFlatAndFolders(CREATIONS_DIR, "creation")
 
-// Project logs publish only through the creation whose slug their
-// `project-nickname` names; the log index's content merges into that page.
-const creationSlugs = new Set(docs.filter((d) => d.kind === "creation").map((d) => d.slug))
-if (fs.existsSync(PROJECT_NOTES_DIR)) {
-  for (const e of fs.readdirSync(PROJECT_NOTES_DIR, { withFileTypes: true })) {
-    if (!e.isDirectory()) continue
-    const indexFile = path.join(PROJECT_NOTES_DIR, e.name, "index.md")
-    if (!fs.existsSync(indexFile)) continue
-    const parsed = parseDoc(indexFile)
-    if (!parsed || parsed.data.draft) continue
-    const nickname = parsed.data["project-nickname"] ?? parsed.data.projectNickname
-    if (!nickname) {
-      report("warn", indexFile, "project log has no project-nickname — it is never published")
-      continue
-    }
-    if (!creationSlugs.has(String(nickname))) {
-      report(
-        "warn",
-        indexFile,
-        `project-nickname "${nickname}" matches no creation — the log is never published`,
-      )
-      continue
-    }
-    // The index body renders on the creation page; chapters get their own pages.
-    docs.push({ file: indexFile, slug: `${e.name}#log-index`, kind: "log-index", dir: PROJECT_NOTES_DIR, ...parsed })
-    collectChapters(path.join(PROJECT_NOTES_DIR, e.name))
-  }
-}
-
 // ── Link targets ────────────────────────────────────────────────────────────
 
-// Basenames the site can resolve (getWikilinkIndex over all published docs;
-// log indexes are excluded — their basename never enters the index).
-const publishedBasenames = new Set(
-  docs.filter((d) => d.kind !== "log-index").map((d) => d.slug.toLowerCase()),
-)
+// Basenames the site can resolve (getWikilinkIndex over all published docs).
+const publishedBasenames = new Set(docs.map((d) => d.slug.toLowerCase()))
 
 // Every markdown basename anywhere in the vault (drafts, private, templates,
 // archive) — used to tell "links to something unpublished" from "typo".
@@ -207,7 +173,7 @@ for (const doc of docs) {
   if (!String(data.title ?? "").trim()) {
     report("error", file, "missing title — the page renders with an empty heading")
   }
-  if (kind !== "chapter" && kind !== "log-index" && !String(data.description ?? "").trim()) {
+  if (kind !== "chapter" && !String(data.description ?? "").trim()) {
     report("warn", file, "missing description — card body and <meta description> are empty")
   }
   for (const [field, raw] of [
@@ -281,7 +247,7 @@ for (const doc of docs) {
 // Orphans — posts/creations with no resolved wikilinks in either direction
 // (chapters are structurally linked to their index, so they're skipped).
 for (const doc of docs) {
-  if (doc.kind === "chapter" || doc.kind === "log-index") continue
+  if (doc.kind === "chapter") continue
   const slug = doc.slug.toLowerCase()
   if ((outboundResolved.get(slug) ?? 0) === 0 && !inbound.has(slug)) {
     report("info", doc.file, "orphan — no wikilinks in or out")

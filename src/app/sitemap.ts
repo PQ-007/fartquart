@@ -4,8 +4,6 @@ import {
   getAllCreations,
   getBookNoteChapters,
   getAllTagsUnified,
-  getProjectLog,
-  getProjectLogChapters,
 } from "@/lib/content"
 import { SITE_URL } from "@/lib/site"
 import { postPath, NOTE_LABELS } from "@/lib/url"
@@ -52,17 +50,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  const projectLogRoutes: MetadataRoute.Sitemap = creations.flatMap((c) => {
-    const log = getProjectLog(c.slug)
-    if (!log) return []
-    return getProjectLogChapters(c.slug).map((ch) => ({
-      url: abs(`/creations/${encodeURIComponent(c.slug)}/log/${encodeURIComponent(ch.slug)}`),
-      lastModified: new Date(log.updatedAt ?? log.publishedAt),
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    }))
-  })
-
   const tagRoutes: MetadataRoute.Sitemap = getAllTagsUnified().map(({ tag }) => ({
     url: abs(`/tags/${encodeURIComponent(tag)}`),
     lastModified: now,
@@ -75,7 +62,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...postRoutes,
     ...chapterRoutes,
     ...creationRoutes,
-    ...projectLogRoutes,
     ...tagRoutes,
   ]
 }

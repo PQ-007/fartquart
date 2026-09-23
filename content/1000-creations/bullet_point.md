@@ -13,7 +13,6 @@ tags:
   - top-down
   - godot
 draft: true
-project-nickname: bupo
 demo:
 repo: https://github.com/PQ-007/bullet-point
 ---

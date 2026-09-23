@@ -1,5 +1,6 @@
 "use client"
 
+import type { CSSProperties } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import styles from "./PostPreview.module.css"
@@ -10,6 +11,7 @@ import type { PostMeta } from "@/lib/posts"
 import type { BlogMeta, CreationMeta } from "@/lib/content"
 import { formatDate } from "@/lib/format"
 import { coverUrl, isGif } from "@/lib/url"
+import { CREATION_CATEGORY_COLOR, CREATION_CATEGORY_LABEL, type CreationCategory } from "@/lib/categories"
 
 const CDN = "https://d4frua9bq45mo.cloudfront.net"
 const videoUrl = (mainVideo: string) => `${CDN}/${mainVideo}.mp4`
@@ -29,6 +31,7 @@ const MediaSlot = ({
   cover,
   coverVideo,
   youtube,
+  category,
   href,
   label,
   viewText,
@@ -37,6 +40,7 @@ const MediaSlot = ({
   cover?: string
   coverVideo?: string
   youtube?: string
+  category?: CreationCategory
   href: string
   label: string
   viewText: string
@@ -74,7 +78,12 @@ const MediaSlot = ({
               unoptimized
             />
           ) : (
-            <div className={styles.placeholder} />
+            <div
+              className={styles.placeholder}
+              style={category ? ({ "--placeholder-tint": `${CREATION_CATEGORY_COLOR[category]}26` } as CSSProperties) : undefined}
+            >
+              {category && <span className={styles.placeholderLabel}>{CREATION_CATEGORY_LABEL[category]}</span>}
+            </div>
           )}
           <section className={styles.overlay}>
             <h3>{viewText}</h3>
@@ -128,12 +137,21 @@ export const PostPreview = ({ type = "post", post }: PostPreviewProps) => {
           cover={creation.cover}
           coverVideo={creation.coverVideo}
           youtube={creation.youtube}
+          category={creation.category}
           href={`/creations/${creation.slug}`}
           label={creation.title}
           viewText={t("ui.view")}
         />
         <div className={styles.inner}>
           <div>
+            {creation.category && (
+              <span
+                className={styles.categoryBadge}
+                style={{ "--badge-color": CREATION_CATEGORY_COLOR[creation.category] } as CSSProperties}
+              >
+                {CREATION_CATEGORY_LABEL[creation.category]}
+              </span>
+            )}
             <h1>{creation.title}</h1>
             <p className={styles.description}>{creation.description}</p>
           </div>
