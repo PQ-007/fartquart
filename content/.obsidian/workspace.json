@@ -25,14 +25,10 @@
             "id": "c600ae4bad8dc463",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3000-lesson-notes/comp-arch/00_big_picture.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "00_big_picture"
+              "title": "New tab"
             }
           },
           {
@@ -50,7 +46,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -247,10 +243,10 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "65d64c27fff11313",
+  "active": "c600ae4bad8dc463",
   "lastOpenFiles": [
-    "0000-blog/essay_5.md",
     "4000-private/Random/Чиглэл.md",
+    "0000-blog/essay_5.md",
     "0000-blog/essay_4.md",
     "3000-lesson-notes/comp-arch/01_boolean_logic.md",
     "1000-creations/bullet_point.md.tmp.7474.8636e1d05d54",
