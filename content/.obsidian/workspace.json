@@ -50,27 +50,27 @@
             }
           },
           {
-            "id": "b75b4be1c441d562",
+            "id": "5ddf56f0d4b6b38f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "4000-private/Дараагийн 5 жилийн төлөвлөгөө.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Дараагийн 5 жилийн төлөвлөгөө"
+            }
+          },
+          {
+            "id": "0c5d71317a43f715",
             "type": "leaf",
             "state": {
               "type": "mandala-chart-view",
               "state": {},
               "icon": "layout-grid",
               "title": "Mandala Chart"
-            }
-          },
-          {
-            "id": "5ddf56f0d4b6b38f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "State machine.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "State machine"
             }
           }
         ],
@@ -196,7 +196,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "1000-creations/sudoku_solver_generator.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -235,7 +234,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "1000-creations/sudoku_solver_generator.md",
+                "file": "4000-private/Дараагийн 5 жилийн төлөвлөгөө.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -247,14 +246,25 @@
               "icon": "links-coming-in",
               "title": "Backlinks"
             }
+          },
+          {
+            "id": "c7e12694ad6420a0",
+            "type": "leaf",
+            "state": {
+              "type": "file-properties",
+              "state": {
+                "file": "4000-private/Дараагийн 5 жилийн төлөвлөгөө.md"
+              },
+              "icon": "lucide-info",
+              "title": "File properties"
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
-    "width": 289.2298583984375,
-    "collapsed": true
+    "width": 289.2298583984375
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -273,8 +283,9 @@
       "mandala-chart:Open Mandala Chart": false
     }
   },
-  "active": "5ddf56f0d4b6b38f",
+  "active": "0c5d71317a43f715",
   "lastOpenFiles": [
+    "State machine.md",
     "4000-private/Дараагийн 5 жилийн төлөвлөгөө.md",
     "4000-private/Ирэх 10 жилийн зорилго (2036 он хүртэл).md",
     "4000-private/Random/Чиглэл.md",
@@ -283,7 +294,6 @@
     "3000-lesson-notes/comp-arch/03_memory.md",
     "3000-lesson-notes/comp-arch/02_boolean_arithmetic.md",
     "3000-lesson-notes/comp-arch/01_boolean_logic.md",
-    "State machine.md",
     "4000-private/Random/Гоншигнуур.md",
     "0000-blog/essay_5.md",
     "0000-blog/essay_4.md",
