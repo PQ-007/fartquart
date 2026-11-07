@@ -62,19 +62,9 @@
               "icon": "lucide-file",
               "title": "Дараагийн 5 жилийн төлөвлөгөө"
             }
-          },
-          {
-            "id": "0c5d71317a43f715",
-            "type": "leaf",
-            "state": {
-              "type": "mandala-chart-view",
-              "state": {},
-              "icon": "layout-grid",
-              "title": "Mandala Chart"
-            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -196,6 +186,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "4000-private/Дараагийн 5 жилийн төлөвлөгөө.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -283,7 +274,7 @@
       "mandala-chart:Open Mandala Chart": false
     }
   },
-  "active": "0c5d71317a43f715",
+  "active": "5ddf56f0d4b6b38f",
   "lastOpenFiles": [
     "State machine.md",
     "4000-private/Дараагийн 5 жилийн төлөвлөгөө.md",
