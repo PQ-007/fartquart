@@ -64,7 +64,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -186,7 +186,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "4000-private/Зорилгууд/2026 оны зорилго.md",
+                "file": "4000-private/Дараагийн 5 жилийн төлөвлөгөө.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -274,8 +274,9 @@
       "mandala-chart:Open Mandala Chart": false
     }
   },
-  "active": "5ddf56f0d4b6b38f",
+  "active": "65d64c27fff11313",
   "lastOpenFiles": [
+    "4000-private/Зорилгууд/2026 оны зорилго.md",
     "4000-private/Прогресс/2026/Номын тэмдэглэлүүд.md",
     "4000-private/Прогресс/2026/Нийтлэлүүд.md",
     "4000-private/Прогресс/2026/Видеонууд.md",
@@ -283,7 +284,6 @@
     "State machine.md",
     "4000-private/Ирэх 10 жилийн зорилго (2036 он хүртэл).md",
     "4000-private/Random/Чиглэл.md",
-    "4000-private/Зорилгууд/2026 оны зорилго.md",
     "3000-lesson-notes/comp-arch/05_computer_architecture.md",
     "3000-lesson-notes/comp-arch/03_memory.md",
     "3000-lesson-notes/comp-arch/02_boolean_arithmetic.md",

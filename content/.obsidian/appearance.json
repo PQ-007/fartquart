@@ -1,5 +1,6 @@
 {
   "cssTheme": "AnuPpuccin",
   "theme": "system",
-  "accentColor": "#5cb2f5"
+  "accentColor": "#5cb2f5",
+  "showRibbon": true
 }
